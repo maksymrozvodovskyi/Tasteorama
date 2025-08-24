@@ -1,15 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-const rootReducer = (state, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+import authReducer from "../features/auth/authSlice";
 
 export const store = configureStore({
-  reducer: rootReducer,
-  /* reducer: {
-    Таска: ТаскаReducer,
-  } */
+  reducer: {
+    auth: authReducer,
+  },
 });
