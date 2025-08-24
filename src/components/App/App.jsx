@@ -6,6 +6,7 @@ import RecipeDetailsPage from "../../pages/RecipeDetailsPage/RecipeDetailsPage";
 import FavoritesPage from "../../pages/FavoritesPage/FavoritesPage";
 import MyRecipesPage from "../../pages/MyRecipesPage/MyRecipesPage";
 import AddRecipePage from "../../pages/AddRecipePage/AddRecipePage";
+import RecipePage from "../../pages/RecipePage/RecipePage";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/recipes" element={<RecipePage />} />
       <Route path="/recipes/:id" element={<RecipeDetailsPage />} />
 
       {/* приватні роути */}
