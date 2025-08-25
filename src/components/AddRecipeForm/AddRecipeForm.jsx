@@ -6,7 +6,7 @@ import { addRecipe } from "../../redux/addRecipe/operations";
 
 // Схема валідації
 const AddRecipeSchema = Yup.object().shape({
-  title: Yup.string().required("Введите название рецепта"),
+  title: Yup.string().required("Recipe Title"),
   description: Yup.string().required("Введите описание"),
   time: Yup.number().required("Введите время приготовления"),
   calories: Yup.string().required("Введите калории"),
@@ -42,7 +42,7 @@ const AddRecipeForm = () => {
           }
         });
 
-        dispatch(addRecipe(formData)); // 👈 відправляємо в Redux
+        dispatch(addRecipe(formData)); // відправляємо в Redux
         resetForm();
       }}
     >
@@ -61,13 +61,14 @@ const AddRecipeForm = () => {
 
           {/* General Information */}
           <h3>General Information</h3>
+          <h4>Recipe Title</h4>
           <Field
             name="title"
             placeholder="Enter the name of your recipe"
             className={styles.input}
           />
           <ErrorMessage name="title" component="div" className={styles.error} />
-
+          <h4>Recipe Description</h4>
           <Field
             as="textarea"
             name="description"
@@ -79,7 +80,7 @@ const AddRecipeForm = () => {
             component="div"
             className={styles.error}
           />
-
+          <h4>Cooking time in minutes</h4>
           <Field
             name="time"
             type="number"
@@ -88,6 +89,7 @@ const AddRecipeForm = () => {
           />
           <ErrorMessage name="time" component="div" className={styles.error} />
 
+          <h4>Calories</h4>
           <Field
             name="calories"
             placeholder="Calories"
@@ -98,11 +100,15 @@ const AddRecipeForm = () => {
             component="div"
             className={styles.error}
           />
-
+          <h4>Category</h4>
           <Field as="select" name="category" className={styles.select}>
             <option value="">Select category</option>
-            <option value="soup">Soup</option>
-            <option value="salad">Salad</option>
+            <option value="option1">Option1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+            <option value="option4">Option 4</option>
+            <option value="option5">Option 5</option>
+            <option value="option6">Option 6</option>
           </Field>
           <ErrorMessage
             name="category"
