@@ -1,0 +1,176 @@
+.wraper {
+    background-color: #3d2218;
+    position: relative;
+    padding: 14px;
+}
+
+.wraper button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+a {
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav {
+    background-color: #3d2218;
+    display: flex;
+    align-items: center;
+    transition: all 1s ease;
+}
+
+.burgerBtn {
+    display: none;
+    cursor: pointer;
+    
+}
+
+.burgerBtn .icon {
+    width: 32px;
+    height: 32px;
+}
+
+.navItems {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+
+.modalLogoWraper {
+    width: 100%;
+    display: none;
+}
+
+.btn {
+    background-color: #9b6c43;
+    padding: 12px 16px;
+    border-radius: 8px;
+    order: 1;
+}
+
+.userNav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    order: 2;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.userIcon {
+    background-color: #9b6c43;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.br {
+    width: 1px;
+    height: 28px;
+    background-color: #fff;
+}
+
+.icon {
+    display: block;
+    width: 24px;
+    height: 28px;
+    stroke: #fff;
+    fill: none;
+}
+
+.active {
+    text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+    .header a:first-child {
+        flex-grow: 1;
+    }
+
+    .nav {
+        background-color: #3d2218;
+        flex-direction: column;
+        padding: 14px 18px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .menuOpen {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .menuClose {
+        transform: translateY(-200%);
+    }
+
+    .navItems {
+        width: 100%;
+        gap: 32px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navItems a:last-child {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .burgerBtn {
+        display: block;
+    }
+
+    .burgerHidden {
+        display: none;
+    }
+
+    .modalLogoWraper {
+        max-width: 300px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .closeModalMenu {
+        width: 32px;
+        height: 32px;
+        padding: 6px;
+    }
+
+    .closeModalMenu svg {
+        display: block;
+        border: 2px solid #fff;
+        border-radius: 100%;
+        width: 100%;
+        height: 100%;
+        stroke: #fff;
+    }
+
+    .btn {
+        order: 2;
+    }
+
+    .userNav {
+        order: 1;
+    }
+}

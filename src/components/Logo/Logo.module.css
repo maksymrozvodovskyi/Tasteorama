@@ -1,0 +1,30 @@
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 46px;
+    justify-content: center;
+}
+
+.iconBox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoIcon {
+    color: #fff;
+    width: 32px;
+    height: 30px;
+}
+
+.logoText {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    transition: letter-spacing 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+}

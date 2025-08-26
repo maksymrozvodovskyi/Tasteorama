@@ -1,15 +1,14 @@
-// Приклад:
-// import { createAsyncThunk } from "@reduxjs/toolkit";
-// import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-// export const fetchContacts = createAsyncThunk(
-//   "contacts/fetchAll",
-//   async (_, thunkAPI) => {
-//     try {
-//       const response = await axios.get("/contacts");
-//       return response.data; // payload
-//     } catch {
-//       return thunkAPI.rejectWithValue(404);
-//     }
-//   }
-// );
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+    console.log("LogoutOp");
+    try {
+        await axios.post('/api/auth/logout');
+        axios.defaults.headers.common["Authorization"] = "";
+    } catch (error) {
+        console.log(error.message);
+        return thunkAPI.rejectWithValue(error.message);
+    }
+});
+
