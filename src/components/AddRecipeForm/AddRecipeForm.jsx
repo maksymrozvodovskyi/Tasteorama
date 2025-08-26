@@ -1,18 +1,18 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import styles from "./AddRecipeForm.module.css";
+import "./AddRecipeForm.styles.css";
 import { useDispatch } from "react-redux";
 import { addRecipe } from "../../redux/addRecipe/operations";
 
 // Схема валідації
 const AddRecipeSchema = Yup.object().shape({
-  title: Yup.string().required("Recipe Title"),
-  description: Yup.string().required("Введите описание"),
-  time: Yup.number().required("Введите время приготовления"),
-  calories: Yup.string().required("Введите калории"),
-  category: Yup.string().required("Выберите категорию"),
-  instructions: Yup.string().required("Введите инструкцию"),
-  ingredients: Yup.array().min(1, "Добавьте хотя бы один ингредиент"),
+  title: Yup.string().min(3).max(30).required("Recipe Title"),
+  description: Yup.string().min(10).max(250).required("Add description"),
+  time: Yup.number().required("Enter the cooking time"),
+  calories: Yup.string().required("Enter callories"),
+  category: Yup.string().required("Select a category"),
+  instructions: Yup.string().required("Enter the instruction"),
+  ingredients: Yup.array().min(1, "Add at least one ingredient"),
 });
 
 const AddRecipeForm = () => {
@@ -47,16 +47,25 @@ const AddRecipeForm = () => {
       }}
     >
       {({ values, setFieldValue }) => (
-        <Form className={styles.form}>
+        <Form className="form">
           {/* Upload Photo */}
-          <div className={styles.upload}>
-            <label htmlFor="photo">Upload Photo</label>
+          <div className="upload">
+            <h3 className="uploadPhoto">Upload photo</h3>
+            <label htmlFor="photo" className="uploadLabel">
+              <img
+                src="/src/assets/icons/photo.svg" // твоя картинка-заглушка
+                alt="Upload"
+                className="uploadImage"
+              />
+            </label>
             <input
               id="photo"
               name="photo"
               type="file"
+              accept="image/*"
+              style={{ display: "none" }} // ховаємо стандартний інпут
               onChange={(e) => setFieldValue("photo", e.currentTarget.files[0])}
-            />
+            />{" "}
           </div>
 
           {/* General Information */}
@@ -65,43 +74,31 @@ const AddRecipeForm = () => {
           <Field
             name="title"
             placeholder="Enter the name of your recipe"
-            className={styles.input}
+            className="input"
           />
-          <ErrorMessage name="title" component="div" className={styles.error} />
+          <ErrorMessage name="title" component="div" className="error" />
           <h4>Recipe Description</h4>
           <Field
             as="textarea"
             name="description"
             placeholder="Enter a brief description"
-            className={styles.textarea}
+            className="textarea"
           />
-          <ErrorMessage
-            name="description"
-            component="div"
-            className={styles.error}
-          />
+          <ErrorMessage name="description" component="div" className="error" />
           <h4>Cooking time in minutes</h4>
           <Field
             name="time"
             type="number"
             placeholder="Cooking time in minutes"
-            className={styles.input}
+            className="input"
           />
-          <ErrorMessage name="time" component="div" className={styles.error} />
+          <ErrorMessage name="time" component="div" className="error" />
 
           <h4>Calories</h4>
-          <Field
-            name="calories"
-            placeholder="Calories"
-            className={styles.input}
-          />
-          <ErrorMessage
-            name="calories"
-            component="div"
-            className={styles.error}
-          />
+          <Field name="calories" placeholder="Calories" className="input" />
+          <ErrorMessage name="calories" component="div" className="error" />
           <h4>Category</h4>
-          <Field as="select" name="category" className={styles.select}>
+          <Field as="select" name="category" className="select">
             <option value="">Select category</option>
             <option value="option1">Option1</option>
             <option value="option2">Option 2</option>
@@ -110,15 +107,11 @@ const AddRecipeForm = () => {
             <option value="option5">Option 5</option>
             <option value="option6">Option 6</option>
           </Field>
-          <ErrorMessage
-            name="category"
-            component="div"
-            className={styles.error}
-          />
+          <ErrorMessage name="category" component="div" className="error" />
 
           {/* Ingredients */}
           <h3>Ingredients</h3>
-          <div className={styles.ingredients}>
+          <div className="ingredients">
             <input
               type="text"
               placeholder="Ingredient name"
@@ -135,9 +128,9 @@ const AddRecipeForm = () => {
                 }
               }}
             />
-            <ul className={styles.ingredientsList}>
+            <ul className="ingredientsList">
               {values.ingredients.map((ing, i) => (
-                <li key={i} className={styles.ingredientItem}>
+                <li key={i} className="ingredientItem">
                   {ing}
                   <button
                     type="button"
@@ -156,7 +149,7 @@ const AddRecipeForm = () => {
             <ErrorMessage
               name="ingredients"
               component="div"
-              className={styles.error}
+              className="error"
             />
           </div>
 
@@ -166,16 +159,12 @@ const AddRecipeForm = () => {
             as="textarea"
             name="instructions"
             placeholder="Enter a text"
-            className={styles.textarea}
+            className="textarea"
           />
-          <ErrorMessage
-            name="instructions"
-            component="div"
-            className={styles.error}
-          />
+          <ErrorMessage name="instructions" component="div" className="error" />
 
           {/* Submit */}
-          <button type="submit" className={styles.submitBtn}>
+          <button type="submit" className="submitBtn">
             Publish Recipe
           </button>
         </Form>
