@@ -49,7 +49,7 @@ const Header = () => {
                         ) : (
                             <NavLink className={({ isActive }) => (isActive ? css.active : "")}
                                 onClick={() => setIsMenuOpen(false)}
-                                to={"/auth/login"}
+                                to={"/login"}
                             >
                                 Log in
                             </NavLink>
@@ -66,7 +66,7 @@ const Header = () => {
                             <NavLink className={({ isActive }) => `${isActive && css.active} ${css.btn}`
                             }
                                 onClick={() => setIsMenuOpen(false)}
-                                to={"/auth/register"}
+                                to={"/register"}
                             >
                                 Register
                             </NavLink>
