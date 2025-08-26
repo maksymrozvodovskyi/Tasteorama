@@ -1,0 +1,124 @@
+.footer {
+  background-color: #3d2218;
+  color: #fff;
+  padding: 24px 0;
+  position: relative;
+}
+
+.container {
+  align-items: center;
+}
+
+.copyright {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 46px;
+  justify-content: center;
+  color: #fff;
+}
+
+.copyright {
+  font-size: 12px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  font-weight: 600;
+}
+
+.link {
+  color: #fff;
+  height: 24px;
+}
+
+.link {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  padding: 2px 4px;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+
+.link:hover::after,
+.link:focus::after,
+.link:focus-visible::after {
+  width: 100%;
+}
+
+.iconBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoIcon {
+  color: #fff;
+  width: 32px;
+  height: 30px;
+}
+
+.logoText {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  transition: letter-spacing 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+    margin: 0 auto;
+  }
+
+  .nav {
+    flex-direction: row;
+    justify-content: center;
+    gap: 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    display: flex;
+    max-width: 1440px;
+    padding: 0 108px;
+    flex-direction: row;
+    gap: 305px;
+  }
+
+  .copyright {
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .nav {
+    flex-direction: row;
+  }
+}
