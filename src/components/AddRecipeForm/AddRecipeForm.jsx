@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "./AddRecipeForm.styles.css";
+import styles from "./AddRecipeForm.module.css";
 import { useDispatch } from "react-redux";
 import { addRecipe } from "../../redux/addRecipe/operations";
 
@@ -47,71 +47,99 @@ const AddRecipeForm = () => {
       }}
     >
       {({ values, setFieldValue }) => (
-        <Form className="form">
+        <Form className={styles.form}>
           {/* Upload Photo */}
-          <div className="upload">
-            <h3 className="uploadPhoto">Upload photo</h3>
-            <label htmlFor="photo" className="uploadLabel">
+          <div className={styles.upload}>
+            <h3 className={styles.titleSection}>Upload photo</h3>
+            <label htmlFor="photo" className={styles.uploadLabel}>
               <img
-                src="/src/assets/icons/photo.svg" // твоя картинка-заглушка
+                src="/src/assets/icons/photo.svg"
                 alt="Upload"
-                className="uploadImage"
+                className={styles.uploadImage}
               />
             </label>
             <input
+              className={styles.inputPhoto}
               id="photo"
               name="photo"
               type="file"
               accept="image/*"
-              style={{ display: "none" }} // ховаємо стандартний інпут
+              style={{ display: "none" }}
               onChange={(e) => setFieldValue("photo", e.currentTarget.files[0])}
-            />{" "}
+            />
           </div>
 
           {/* General Information */}
-          <h3>General Information</h3>
-          <h4>Recipe Title</h4>
+          <h3 className={styles.titleSection}>General Information</h3>
+          <h4 className={styles.titlePart}>Recipe Title</h4>
           <Field
             name="title"
+            type="input"
             placeholder="Enter the name of your recipe"
-            className="input"
+            className={styles.inputTitle}
           />
-          <ErrorMessage name="title" component="div" className="error" />
-          <h4>Recipe Description</h4>
+          <ErrorMessage name="title" component="div" className={styles.error} />
+          <h4 className={styles.titlePart}>Recipe Description</h4>
           <Field
             as="textarea"
             name="description"
             placeholder="Enter a brief description"
-            className="textarea"
+            className={styles.textarea}
           />
-          <ErrorMessage name="description" component="div" className="error" />
-          <h4>Cooking time in minutes</h4>
+          <ErrorMessage
+            name="description"
+            component="div"
+            className={styles.error}
+          />
+
+          <h4 className={styles.titlePart}>Cooking time in minutes</h4>
           <Field
             name="time"
             type="number"
             placeholder="Cooking time in minutes"
-            className="input"
+            className={styles.inputTitle}
           />
-          <ErrorMessage name="time" component="div" className="error" />
+          <ErrorMessage name="time" component="div" className={styles.error} />
 
-          <h4>Calories</h4>
-          <Field name="calories" placeholder="Calories" className="input" />
-          <ErrorMessage name="calories" component="div" className="error" />
-          <h4>Category</h4>
-          <Field as="select" name="category" className="select">
-            <option value="">Select category</option>
-            <option value="option1">Option1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-            <option value="option4">Option 4</option>
-            <option value="option5">Option 5</option>
-            <option value="option6">Option 6</option>
-          </Field>
-          <ErrorMessage name="category" component="div" className="error" />
+          <div className={styles.fieldGroup}>
+            <div className={styles.fieldItem}>
+              <h4 className={styles.titlePart}>Calories</h4>
+              <div className={styles.inputWrapper}>
+                <Field
+                  name="calories"
+                  type="number"
+                  placeholder="150"
+                  className={styles.input}
+                />
+                <span className={styles.inputSuffix}>cals</span>
+              </div>
+              <ErrorMessage
+                name="calories"
+                component="div"
+                className={styles.error}
+              />
+            </div>
+            <div className={styles.fieldItem}>
+              <h4 className={styles.titlePart}>Category</h4>
+              <Field as="select" name="category" className={styles.select}>
+                <option value="option1">Option1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+                <option value="option4">Option 4</option>
+                <option value="option5">Option 5</option>
+                <option value="option6">Option 6</option>
+              </Field>
+              <ErrorMessage
+                name="category"
+                component="div"
+                className={styles.error}
+              />
+            </div>
+          </div>
 
           {/* Ingredients */}
-          <h3>Ingredients</h3>
-          <div className="ingredients">
+          <h3 className={styles.titleSection}>Ingredients</h3>
+          <div className={styles.ingredients}>
             <input
               type="text"
               placeholder="Ingredient name"
@@ -128,9 +156,9 @@ const AddRecipeForm = () => {
                 }
               }}
             />
-            <ul className="ingredientsList">
+            <ul className={styles.ingredientsList}>
               {values.ingredients.map((ing, i) => (
-                <li key={i} className="ingredientItem">
+                <li key={i} className={styles.ingredientItem}>
                   {ing}
                   <button
                     type="button"
@@ -149,22 +177,26 @@ const AddRecipeForm = () => {
             <ErrorMessage
               name="ingredients"
               component="div"
-              className="error"
+              className={styles.error}
             />
           </div>
 
           {/* Instructions */}
-          <h3>Instructions</h3>
+          <h3 className={styles.titleSection}>Instructions</h3>
           <Field
             as="textarea"
             name="instructions"
             placeholder="Enter a text"
-            className="textarea"
+            className={styles.textarea}
           />
-          <ErrorMessage name="instructions" component="div" className="error" />
+          <ErrorMessage
+            name="instructions"
+            component="div"
+            className={styles.error}
+          />
 
           {/* Submit */}
-          <button type="submit" className="submitBtn">
+          <button type="submit" className={styles.submitBtn}>
             Publish Recipe
           </button>
         </Form>

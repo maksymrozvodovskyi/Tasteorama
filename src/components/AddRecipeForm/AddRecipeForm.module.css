@@ -1,0 +1,72 @@
+.upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.titleSection {
+  font-size: 24px;
+  justify-content: left;
+  font-weight: 600;
+}
+
+.uploadLabel {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed #ccc;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+.uploadLabel:hover {
+  border-color: #666;
+}
+
+.inputPhoto {
+  display: none; /* ховаємо стандартний інпут */
+}
+
+.titlePart {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.fieldGroup {
+  display: flex;
+  gap: 20px; /* відстань між блоками */
+  margin-bottom: 20px;
+}
+
+.fieldItem {
+  flex: 1; /* щоб обидва займали однакову ширину */
+  display: flex;
+  flex-direction: column;
+}
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  padding-right: 50px; /* щоб не налазив текст "cals" */
+}
+.inputTitle {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+}
+
+.inputSuffix {
+  position: absolute;
+  right: 10px;
+  color: #666;
+  font-size: 14px;
+  pointer-events: none; /* щоб текст не заважав кліку */
+}

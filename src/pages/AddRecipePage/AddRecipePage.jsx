@@ -1,10 +1,10 @@
 import AddRecipeForm from "../../components/AddRecipeForm/AddRecipeForm.jsx";
-import "./AddRecipePage.styles.css";
+import css from "./AddRecipePage.module.css";
 
 export default function AddRecipePage() {
   return (
-    <div className="container">
-      <h1 className="titlePage">Add Recipe</h1>
+    <div className={css.container}>
+      <h1 className={css.titlePage}>Add Recipe</h1>
       <AddRecipeForm />
     </div>
   );
