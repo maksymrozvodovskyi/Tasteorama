@@ -1,0 +1,85 @@
+.hiddenTitle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #3e2723;
+}
+
+.info {
+  font-size: 0.95rem;
+  color: #5d4037;
+  margin-bottom: 20px;
+}
+
+.description {
+  margin-bottom: 20px;
+}
+
+.ingredients ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+.instructions {
+  margin: 20px 0;
+  line-height: 1.6;
+}
+
+.saveButton {
+  background-color: #6d4c41;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.saveButton:hover {
+  background-color: #4e342e;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 30px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Адаптивність */
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .saveButton {
+    width: 100%;
+  }
+}
