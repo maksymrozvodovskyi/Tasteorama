@@ -86,7 +86,6 @@
   letter-spacing: -0.03em;
   transition: letter-spacing 0.3s ease;
   position: relative;
-  overflow: hidden;
   color: #fff;
 }
 
