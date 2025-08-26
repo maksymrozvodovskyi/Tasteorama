@@ -1,20 +1,14 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
 import Logo from "../Logo/Logo";
 import css from "./Footer.module.css";
 
 const Footer = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const user = useSelector(selectUser);
   const isAuth = Boolean(user);
 
-  const handleProfileClick = () => {
-    if (!isAuth) {
-      navigate("/login"); // перенаправляємо на сторінку логіну
-    }
-  };
   const hideAccountLink = ["/login", "/register"].includes(location.pathname);
 
   return (
@@ -29,11 +23,7 @@ const Footer = () => {
             Recipes
           </Link>
           {!hideAccountLink && (
-            <Link
-              to={isAuth ? "/profile" : "/login"}
-              className={css.link}
-              onClick={handleProfileClick}
-            >
+            <Link to={isAuth ? "/profile" : "/login"} className={css.link}>
               Account
             </Link>
           )}
