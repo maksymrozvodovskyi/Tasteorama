@@ -1,0 +1,82 @@
+*{
+    box-sizing: border-box;
+}
+
+.card{
+    width: 288px;
+    height: 431px;
+    border-radius: 16px;
+    background-color: #FAF3E0;
+    padding: 12px;
+}
+
+.img{
+    width: 264px;
+    height: 178px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.header{
+    width: 264px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.title{
+    width: 203px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+}
+
+.timeBox{
+    height: 28px;
+    border-radius: 8px;
+    padding: 2px 8px 2px 4.5px;
+    display: flex;
+    align-items: center;
+    gap: 4.5px;
+    background-color: #ffffff;
+}
+
+.time{
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.desBox{
+    height: 83px;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.btnBox{
+    height: 40px;
+    display: flex;
+    gap: 8px;
+}
+
+.moreBtn{
+    width: 216px;
+    background-color: inherit;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #000000;
+    cursor: pointer;
+    text-align: center;
+    align-content: center;
+}
+
+.saveBtn{
+    width: 40px;
+    background-color: inherit;
+        border: 1px solid #000000;
+        border-radius: 8px;
+}
