@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "../../pages/HomePage/HomePage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
-import RecipeDetailsPage from "../../pages/RecipeDetailsPage/RecipeViewPage";
+import RecipeDetailsPage from "../../pages/RecipeViewPage/RecipeViewPage";
 import FavoritesPage from "../../pages/FavoritesPage/FavoritesPage";
 import MyRecipesPage from "../../pages/MyRecipesPage/MyRecipesPage";
 import AddRecipePage from "../../pages/AddRecipePage/AddRecipePage";
@@ -18,7 +18,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/recipes" element={<RecipePage />} />
-        <Route path="/recipes/:id" element={<RecipeDetailsPage />} />
+        <Route path="/recipes/:id" element={<RecipeViewPage />} />
 
         {/* приватні роути */}
         <Route path="/my-recipes" element={<MyRecipesPage />} />
