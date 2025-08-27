@@ -9,11 +9,11 @@ import AddRecipePage from "../../pages/AddRecipePage/AddRecipePage";
 import RecipePage from "../../pages/RecipePage/RecipePage";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import Footer from "../Footer/Footer";
-import AuthModal from "../ErrorWhileSaving/ErrorWhileSaving";
 
 function App() {
   return (
     <>
+      /* <ModalAuthentication /> */
       {/* <AuthModal /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
