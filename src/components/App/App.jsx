@@ -11,9 +11,11 @@ import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 
 import Footer from "../Footer/Footer";
 
+
 function App() {
   return (
     <>
+     
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
