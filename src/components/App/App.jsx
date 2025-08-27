@@ -16,7 +16,7 @@ import AuthModal from "../ErrorWhileSaving/ErrorWhileSaving";
 function App() {
   return (
     <>
-      <AuthModal onClose={() => console.log("Modal closed")} />
+      {/* <AuthModal /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
