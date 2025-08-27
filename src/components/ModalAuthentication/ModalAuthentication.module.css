@@ -48,8 +48,8 @@
 }
 
 .closeIcon {
-  width: 16px;
-  height: 15px;
+  width: 24px;
+  height: 24px;
   stroke: #000;
   stroke-width: 2;
   fill: none;
@@ -141,12 +141,6 @@
     right: 32px;
   }
 
-  .closeIcon {
-    height: 16px;
-  }
 }
-@media (min-width: 1440px) {
-  .closeIcon {
-    height: 15px;
-  }
-}
+
+@media (min-width: 1440px) {}
