@@ -7,7 +7,7 @@ import FavoritesPage from "../../pages/FavoritesPage/FavoritesPage";
 import MyRecipesPage from "../../pages/MyRecipesPage/MyRecipesPage";
 import AddRecipePage from "../../pages/AddRecipePage/AddRecipePage";
 import RecipePage from "../../pages/RecipePage/RecipePage";
-import ErrorPage from "../../pages/ErrorPage/ErrorPage";
+// import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 
 import Footer from "../Footer/Footer";
 
@@ -27,7 +27,7 @@ function App() {
         <Route path="/favorites" element={<FavoritesPage />} />
 
         {/* ерор пейдж 404 */}
-        <Route path="*" element={<ErrorPage />} />
+        {/* <Route path="*" element={<ErrorPage />} /> */}
       </Routes>
       <Footer />
     </>
