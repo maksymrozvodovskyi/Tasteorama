@@ -11,9 +11,12 @@ import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 
 import Footer from "../Footer/Footer";
 
+import AuthModal from "../ErrorWhileSaving/ErrorWhileSaving";
+
 function App() {
   return (
     <>
+      <AuthModal onClose={() => console.log("Modal closed")} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
