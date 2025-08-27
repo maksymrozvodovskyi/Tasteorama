@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { useEffect } from "react";
-import css from "./ModalAuthentication.module.css";
+import css from "./ErrorWhileSaving.module.css";
 
-export default function ModalAuthentication({ onClose }) {
+export default function AuthModal({ onClose }) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,14 +19,16 @@ export default function ModalAuthentication({ onClose }) {
   return createPortal(
     <div className={css.overlay} onClick={handleOverlayClick}>
       <div className={css.modal}>
-        <button className={css.closeBtn} onClick={onClose}>
+        <button type="button" className={css.closeBtn} onClick={onClose}>
           <svg className={css.closeIcon}>
             <use href="/icons.svg#icon-close" />
           </svg>
         </button>
         <div className={css.content}>
-          <h2 className={css.title}>Unautorized</h2>
-          <p className={css.text}>Please log in or register to continue.</p>
+          <h2 className={css.title}>Error while saving</h2>
+          <p className={css.text}>
+            To save this recipe, you need to authorize first
+          </p>
           <div className={css.actions}>
             <button className={css.loginBtn} onClick={() => navigate("/login")}>
               Log in
