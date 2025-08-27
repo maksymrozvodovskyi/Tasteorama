@@ -19,6 +19,7 @@
   align-items: center;
   cursor: pointer;
   transition: border-color 0.3s;
+  aspect-ratio: 1 / 1;
 }
 
 .uploadLabel:hover {
@@ -29,6 +30,10 @@
   display: none; /* ховаємо стандартний інпут */
 }
 
+.uploadImage {
+  color: #070707; /* колір обрису */
+  stroke-width: 2px;
+}
 .titlePart {
   font-weight: 400;
   font-size: 18px;
@@ -66,6 +71,7 @@
   width: 100%;
   font-size: 18px;
   color: #595d62;
+  box-sizing: border-box;
 }
 
 .inputSuffix {
@@ -79,9 +85,71 @@
   border-radius: 8px;
   padding: 12px;
   width: 100%;
+  min-height: 144px;
   background: #fff;
   font-weight: 400;
   font-size: 18px;
   color: #595d62;
   border: 1px solid #d9d9d9;
+  box-sizing: border-box;
+}
+
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inputsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputsRow input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.addBtn {
+  background-color: #a66b44;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+
+.addBtn:hover {
+  background-color: #8b5737;
+}
+
+.ingredientsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+.ingredientsTable th,
+.ingredientsTable td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.ingredientsTable th {
+  font-weight: 600;
+}
+
+.ingredientsTable button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
 }

@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import styles from "./AddRecipeForm.module.css";
 import { useDispatch } from "react-redux";
 import { addRecipe } from "../../redux/addRecipe/operations";
-
+import { useState } from "react";
 // Схема валідації
 const AddRecipeSchema = Yup.object().shape({
   title: Yup.string().min(3).max(30).required("Recipe Title"),
@@ -17,6 +17,8 @@ const AddRecipeSchema = Yup.object().shape({
 
 const AddRecipeForm = () => {
   const dispatch = useDispatch();
+  const [ingredientName, setIngredientName] = useState("");
+  const [ingredientAmount, setIngredientAmount] = useState("");
 
   return (
     <Formik
@@ -52,11 +54,14 @@ const AddRecipeForm = () => {
           <h3 className={styles.titleSection}>Upload photo</h3>
           <div className={styles.upload}>
             <label htmlFor="photo" className={styles.uploadLabel}>
-              <img
-                src="/src/assets/icons/photo.svg"
-                alt="Upload"
+              <svg
+                width="52"
+                height="52"
                 className={styles.uploadImage}
-              />
+                aria-hidden="true"
+              >
+                <use href="/public/icons.svg#icon-photo" />
+              </svg>
             </label>
             <input
               className={styles.inputPhoto}
@@ -96,7 +101,7 @@ const AddRecipeForm = () => {
           <Field
             name="time"
             type="number"
-            placeholder="Cooking time in minutes"
+            placeholder="10"
             className={styles.inputTitle}
           />
           <ErrorMessage name="time" component="div" className={styles.error} />
@@ -139,40 +144,74 @@ const AddRecipeForm = () => {
           {/* Ingredients */}
           <h3 className={styles.titleSection}>Ingredients</h3>
           <div className={styles.ingredients}>
-            <input
-              type="text"
-              placeholder="Ingredient name"
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  if (e.target.value.trim()) {
-                    setFieldValue("ingredients", [
-                      ...values.ingredients,
-                      e.target.value.trim(),
-                    ]);
-                    e.target.value = "";
-                  }
+            <div className={styles.inputsRow}>
+              <input
+                type="text"
+                placeholder="Name"
+                value={ingredientName}
+                onChange={(e) => setIngredientName(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Amount"
+                value={ingredientAmount}
+                onChange={(e) => setIngredientAmount(e.target.value)}
+              />
+            </div>
+
+            <button
+              type="button"
+              className={styles.addBtn}
+              onClick={() => {
+                if (ingredientName.trim() && ingredientAmount.trim()) {
+                  setFieldValue("ingredients", [
+                    ...values.ingredients,
+                    {
+                      name: ingredientName.trim(),
+                      amount: ingredientAmount.trim(),
+                    },
+                  ]);
+                  setIngredientName("");
+                  setIngredientAmount("");
                 }
               }}
-            />
-            <ul className={styles.ingredientsList}>
-              {values.ingredients.map((ing, i) => (
-                <li key={i} className={styles.ingredientItem}>
-                  {ing}
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFieldValue(
-                        "ingredients",
-                        values.ingredients.filter((_, idx) => idx !== i)
-                      )
-                    }
-                  >
-                    ×
-                  </button>
-                </li>
-              ))}
-            </ul>
+            >
+              Add new Ingredient
+            </button>
+
+            {values.ingredients.length > 0 && (
+              <table className={styles.ingredientsTable}>
+                <thead>
+                  <tr>
+                    <th>Name:</th>
+                    <th>Amount:</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {values.ingredients.map((ing, i) => (
+                    <tr key={i}>
+                      <td>{ing.name}</td>
+                      <td>{ing.amount}</td>
+                      <td>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setFieldValue(
+                              "ingredients",
+                              values.ingredients.filter((_, idx) => idx !== i)
+                            )
+                          }
+                        >
+                          🗑️
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+
             <ErrorMessage
               name="ingredients"
               component="div"
