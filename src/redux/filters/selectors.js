@@ -1,3 +1,3 @@
 export const selectTitle = ({ filters }) => filters.title;
-export const selectCategory = ({ filters }) => filters.category;
+export const selectCategories = ({ filters }) => filters.categories;
 export const selectIngredients = ({ filters }) => filters.ingredients;
