@@ -25,7 +25,7 @@ export default function ModalAuthentication({ onClose }) {
           </svg>
         </button>
         <div className={css.content}>
-          <h2 className={css.title}>Authentication</h2>
+          <h2 className={css.title}>Unautorized</h2>
           <p className={css.text}>Please log in or register to continue.</p>
           <div className={css.actions}>
             <button className={css.loginBtn} onClick={() => navigate("/login")}>
