@@ -19,7 +19,7 @@ export default function AuthModal({ onClose }) {
   return createPortal(
     <div className={css.overlay} onClick={handleOverlayClick}>
       <div className={css.modal}>
-        <button className={css.closeBtn} onClick={onClose}>
+        <button type="button" className={css.closeBtn} onClick={onClose}>
           <svg className={css.closeIcon}>
             <use href="/icons.svg#icon-close" />
           </svg>
