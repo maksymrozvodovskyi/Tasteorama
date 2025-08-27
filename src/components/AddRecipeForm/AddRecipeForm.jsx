@@ -49,8 +49,8 @@ const AddRecipeForm = () => {
       {({ values, setFieldValue }) => (
         <Form className={styles.form}>
           {/* Upload Photo */}
+          <h3 className={styles.titleSection}>Upload photo</h3>
           <div className={styles.upload}>
-            <h3 className={styles.titleSection}>Upload photo</h3>
             <label htmlFor="photo" className={styles.uploadLabel}>
               <img
                 src="/src/assets/icons/photo.svg"
@@ -83,7 +83,7 @@ const AddRecipeForm = () => {
           <Field
             as="textarea"
             name="description"
-            placeholder="Enter a brief description"
+            placeholder="Enter a brief description of your recipe"
             className={styles.textarea}
           />
           <ErrorMessage
@@ -108,10 +108,9 @@ const AddRecipeForm = () => {
                 <Field
                   name="calories"
                   type="number"
-                  placeholder="150"
+                  placeholder="150 cals"
                   className={styles.input}
                 />
-                <span className={styles.inputSuffix}>cals</span>
               </div>
               <ErrorMessage
                 name="calories"
@@ -121,7 +120,7 @@ const AddRecipeForm = () => {
             </div>
             <div className={styles.fieldItem}>
               <h4 className={styles.titlePart}>Category</h4>
-              <Field as="select" name="category" className={styles.select}>
+              <Field as="select" name="category" className={styles.input}>
                 <option value="option1">Option1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
