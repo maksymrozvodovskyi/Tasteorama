@@ -1,0 +1,134 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal {
+  position: relative;
+  background-color: #faf3e0;
+  border-radius: 24px;
+  padding: 56px 24px 32px 24px;
+  width: 100%;
+  min-width: 320px;
+  max-width: 393px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-direction: column;
+  width: 314px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+}
+
+.closeIcon {
+  width: 16px;
+  height: 15px;
+  stroke: #000;
+  stroke-width: 2;
+  fill: none;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #000;
+}
+
+.text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  width: 314px;
+}
+
+.loginBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 16px;
+  background: none;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.registerBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+  background: none;
+  border-radius: 8px;
+  padding: 16px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.registerBtn:hover,
+.registerBtn:focus,
+.loginBtn:hover,
+.loginBtn:focus {
+  background-color: #6d554b;
+  color: #fff;
+  border: none;
+}
+
+.registerBtn:active,
+.loginBtn:active {
+  background-color: #9b6c43;
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+}
+
+.registerBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+  background-color: #9b6c43;
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    padding: 56px 0;
+  }
+
+  .actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .loginBtn,
+  .registerBtn {
+    padding: 12px 24px;
+
+    width: 164px;
+    height: 36px;
+  }
+}

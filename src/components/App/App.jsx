@@ -8,7 +8,6 @@ import MyRecipesPage from "../../pages/MyRecipesPage/MyRecipesPage";
 import AddRecipePage from "../../pages/AddRecipePage/AddRecipePage";
 import RecipePage from "../../pages/RecipePage/RecipePage";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
-
 import Footer from "../Footer/Footer";
 
 function App() {
