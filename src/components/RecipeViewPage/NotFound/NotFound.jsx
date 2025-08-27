@@ -1,7 +1,7 @@
 import styles from "./NotFound.module.css";
 import { Link } from "react-router-dom";
 
-const NotFound = ({ code = 404, message = "Page not found" }) => {
+const NotFound = ({ code = 404, message = "Recipe not found" }) => {
   return (
     <div className={styles.notFoundContainer}>
       <h2 className={styles.notfoundtitle}>{code}</h2>
