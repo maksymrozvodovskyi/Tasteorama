@@ -9,11 +9,11 @@ export function setAuthToken(token) {
 }
 
 export async function addToFavorites(id) {
-    await api.post(`/favorites/${id}`);
-    return id;
+    const res = await api.post(`/favorites/${id}`);
+    return res.data;
 };
 
 export async function removeFromFavorites(id) {
-    await api.delete(`/favorites/${id}`);
-    return id;
+    const res = await api.delete(`/favorites/${id}`);
+    return res.data;
 };
