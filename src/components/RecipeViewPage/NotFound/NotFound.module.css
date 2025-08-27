@@ -1,0 +1,59 @@
+.notFoundContainer {
+  max-width: 600;
+  margin: "0 auto";
+  text-align: "center";
+}
+
+.notfoundtitle {
+  font-size: 60px;
+  color: #4d50ff;
+  text-align: center;
+  margin-top: 20px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.notfoundMessage {
+  font-size: 24px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.backButton {
+  display: inline-block;
+  margin: 32px 16px 79px 16px;
+  width: 361px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: #9b6c43;
+  color: #ffffff;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.backButton:hover,
+.backButton:focus {
+  background-color: #6d554b;
+}
+
+.backButton:active {
+  box-shadow: 0px 0px 0px 6px #4e46b41f;
+  box-shadow: 0px 0px 0px 2px #ffffff;
+}
+
+.backButton:disabled {
+  opacity: 0.3;
+  box-shadow: 0px 0px 0px 6px #4e46b41f;
+  box-shadow: 0px 0px 0px 2px #ffffff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
