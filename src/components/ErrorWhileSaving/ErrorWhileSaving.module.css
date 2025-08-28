@@ -85,9 +85,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #000;
-  background: none;
+  color: #fff;
+  background: #9b6c43;
   border-radius: 8px;
+  border: none;
   padding: 16px;
   font-weight: 600;
   font-size: 18px;
@@ -140,7 +141,7 @@
   .closeBtn {
     right: 32px;
   }
-
 }
 
-@media (min-width: 1440px) {}
+@media (min-width: 1440px) {
+}
