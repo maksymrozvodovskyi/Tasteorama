@@ -6,7 +6,8 @@ import {
 } from "../auth/operations";
 
 const initialState = {
-  accessToken: localStorage.getItem("accessToken") || null,
+  accessToken: null,
+  // accessToken: localStorage.getItem("accessToken") || null,
   user: null,
   isLoading: false,
   error: null,
@@ -39,7 +40,7 @@ const slice = createSlice({
         state.user = { name: payload.name, email: payload.email };
         state.isLoading = false;
         state.error = null;
-        localStorage.setItem("accessToken", payload.accessToken);
+        // localStorage.setItem("accessToken", payload.accessToken);
       })
       .addCase(loginUserThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
