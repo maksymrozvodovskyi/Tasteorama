@@ -7,7 +7,7 @@
   background-size: cover;
   background-position: center;
 
-  padding: 128px 16px 98px 16px;
+  /* padding: 128px 16px 98px 16px; */
 
 }
 
@@ -82,6 +82,7 @@
     text-align: left;
     padding-right: 665px;
   }
+
   .title {
     font-size: 48px;
     line-height: 1.1;
