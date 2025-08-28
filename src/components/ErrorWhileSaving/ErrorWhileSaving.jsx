@@ -27,15 +27,24 @@ export default function AuthModal({ onClose }) {
         <div className={css.content}>
           <h2 className={css.title}>Error while saving</h2>
           <p className={css.text}>
-            To save this recipe, you need to authorize first
+            To save this recipe, you need to <br /> authorize first
           </p>
           <div className={css.actions}>
-            <button className={css.loginBtn} onClick={() => navigate("/login")}>
+            <button
+              className={css.loginBtn}
+              onClick={() => {
+                onClose();
+                navigate("/login");
+              }}
+            >
               Log in
             </button>
             <button
               className={css.registerBtn}
-              onClick={() => navigate("/register")}
+              onClick={() => {
+                onClose();
+                navigate("/register");
+              }}
             >
               Register
             </button>

@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { useEffect } from "react";
 import css from "./ModalAuthentication.module.css";
 
-export default function ModalAuthentication({ onClose }) {
+export default function ModalAuthentication({ onClose = () => {} }) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,12 +28,21 @@ export default function ModalAuthentication({ onClose }) {
           <h2 className={css.title}>Unautorized</h2>
           <p className={css.text}>Please log in or register to continue.</p>
           <div className={css.actions}>
-            <button className={css.loginBtn} onClick={() => navigate("/login")}>
+            <button
+              className={css.loginBtn}
+              onClick={() => {
+                onClose();
+                navigate("/login");
+              }}
+            >
               Log in
             </button>
             <button
               className={css.registerBtn}
-              onClick={() => navigate("/register")}
+              onClick={() => {
+                onClose();
+                navigate("/register");
+              }}
             >
               Register
             </button>
