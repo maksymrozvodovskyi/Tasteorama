@@ -21,15 +21,17 @@ const RecipesList = () => {
   }
 
   return (
+
     <ul className={styles.list}>
       {recipes.map((recipe) => (
         <li key={recipe._id}>
-          {recipe.title}
+          
           <RecipeCard recipe={recipe} mode="default" />
-          {/* <RecipeCard recipe={recipe} /> */}
+          
         </li>
       ))}
     </ul>
+ 
   );
 };
 
