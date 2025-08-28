@@ -1,5 +1,5 @@
 import Filters from "../../components/Filters/Filters";
-import RecipesList from "../../components/RecipeList/RecipeList";
+import RecipesList from "../../components/RecipeList/recipeList";
 
 export default function HomePage() {
   return (

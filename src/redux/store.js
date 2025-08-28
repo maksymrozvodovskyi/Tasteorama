@@ -7,13 +7,41 @@ import ingredientsReducer from "./ingredients/slice.js";
 import favReducer from "../redux/favourite/slice";
 
 
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const persistConfig = {
+  key: "accessToken",
+  storage,
+  whitelist: ["accessToken"],
+};
+
+const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+
 export const store = configureStore({
   reducer: {
+    auth: persistedAuthReducer,
+    recipes: recipesSlice,
     categories: categoriesReducer,
     ingredients: ingredientsReducer,
     filters: filterReducer,
-    auth: authReducer,
-    recipes: recipesSlice, 
     favorites: favReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
+
+export const persistor = persistStore(store);
