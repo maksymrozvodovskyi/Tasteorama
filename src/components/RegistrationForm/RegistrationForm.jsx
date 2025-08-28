@@ -1,6 +1,6 @@
 import css from "./RegistrationForm.module.css";
 import { initialValues, registerSchema } from "../../formSchema";
-import { registerUserThunk } from "../../redux/auth/operations";
+import { registerUserThunk, loginUserThunk } from "../../redux/auth/operations";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
@@ -66,8 +66,13 @@ export const RegistrationForm = () => {
         })
       ).unwrap();
 
-      toast.success("Registration successful! Please log in.");
-      navigate("/auth/login");
+      toast.success("Registration successful!");
+
+      await dispatch(
+          loginUserThunk({ email: values.email, password: values.password })
+        ).unwrap();
+      toast.success("Login successful!");
+      navigate("/");
     } catch (error) {
       toast.error(error.message || "Registration failed");
     } finally {

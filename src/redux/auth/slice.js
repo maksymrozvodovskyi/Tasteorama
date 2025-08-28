@@ -8,7 +8,7 @@ import {
 const initialState = {
   accessToken: null,
   // accessToken: localStorage.getItem("accessToken") || null,
-  user: null,
+  // user: null,
   isLoading: false,
   error: null,
 };
@@ -22,10 +22,10 @@ const slice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(registerUserThunk.fulfilled, (state, { payload }) => {
+      .addCase(registerUserThunk.fulfilled, (state) => {
         state.isLoading = false;
         state.error = null;
-        state.user = { name: payload.name, email: payload.email };
+        // state.user = { name: payload.name, email: payload.email };
       })
       .addCase(registerUserThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -37,7 +37,7 @@ const slice = createSlice({
       })
       .addCase(loginUserThunk.fulfilled, (state, { payload }) => {
         state.accessToken = payload.accessToken;
-        state.user = { name: payload.name, email: payload.email };
+        // state.user = { name: payload.name, email: payload.email };
         state.isLoading = false;
         state.error = null;
         // localStorage.setItem("accessToken", payload.accessToken);

@@ -6,6 +6,7 @@ import css from "./LoginForm.module.css";
 import { useState } from "react";
 import eyeOpenSvg from "../../assets/icons/eye.svg";
 import eyeClosedSvg from "../../assets/icons/eye-crossed.svg";
+// import icons from "../../../public/icons.svg";
 import { loginUserThunk } from "../../redux/auth/operations";
 import { loginSchema } from "../../formSchema";
 
@@ -34,6 +35,13 @@ const PasswordField = ({ field, form }) => {
         tabIndex={0}
         onKeyDown={(evt) => evt.key === "Enter" && togglePasswordVisibility()}
       >
+        {/* <svg width="24" height="24">
+          <use
+            href={`${icons}#${
+              showPassword ? "icon-eye-open" : "icon-eye-crossed"
+            }`}
+          />
+        </svg> */}
         <img
           src={showPassword ? eyeOpenSvg : eyeClosedSvg}
           alt={showPassword ? "Hide password" : "Show password"}
