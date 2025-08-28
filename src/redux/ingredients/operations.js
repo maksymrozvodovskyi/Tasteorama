@@ -13,15 +13,3 @@ export const fetchIngredients = createAsyncThunk(
     }
   }
 );
-
-export const fetchCategories = createAsyncThunk(
-  "/categories/fetchAll",
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get("/api/categories");
-      return response.data.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);

@@ -2,14 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectTotalRecipes } from "../../redux/recipesList/selectors";
 import { useEffect } from "react";
 import Select from "react-select";
-import {
-  fetchCategories,
-  fetchIngredients,
-} from "../../redux/filters/operations";
-import {
-  selectCategories,
-  selectIngredients,
-} from "../../redux/filters/selectors";
+
+import { selectCategories } from "../../redux/categories/selectors";
+import { selectIngredients } from "../../redux/ingredients/selectors";
+import { fetchIngredients } from "../../redux/ingredients/operations";
+import { fetchCategories } from "../../redux/categories/operations";
 
 const Filters = () => {
   const dispatch = useDispatch();
@@ -42,8 +39,8 @@ const Filters = () => {
         <button type="button" onClick={handleResetFilters}>
           Reset filters
         </button>
-        <Select options={ingredientsOptions} />
         <Select options={categoriesOptions} />
+        <Select options={ingredientsOptions} />
       </div>
     </div>
   );
