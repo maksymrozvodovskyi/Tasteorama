@@ -4,6 +4,8 @@ import filterReducer from "../redux/filters/slice";
 import recipesSlice from "./recipesList/slice.js";
 import categoriesReducer from "./categories/slice.js";
 import ingredientsReducer from "./ingredients/slice.js";
+import favReducer from "../redux/favourite/slice";
+
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +13,7 @@ export const store = configureStore({
     ingredients: ingredientsReducer,
     filters: filterReducer,
     auth: authReducer,
-    recipes: recipesSlice,
+    recipes: recipesSlice, 
+    favorites: favReducer,
   },
 });
