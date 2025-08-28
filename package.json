@@ -23,6 +23,7 @@
     "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
     "react-select": "^5.10.2",
+    "react-toastify": "^11.0.5",
     "yup": "^1.7.0"
   },
   "devDependencies": {

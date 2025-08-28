@@ -37,7 +37,7 @@ const slice = createSlice({
       })
       .addCase(loginUserThunk.fulfilled, (state, { payload }) => {
         state.accessToken = payload.accessToken;
-        // state.user = { name: payload.name, email: payload.email };
+        state.user = { name: payload.name, email: payload.email };
         state.isLoading = false;
         state.error = null;
         // localStorage.setItem("accessToken", payload.accessToken);
