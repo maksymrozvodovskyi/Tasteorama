@@ -18,8 +18,9 @@ export const fetchRecipes = createAsyncThunk(
           query += `category=${category}&`;
         }
         if (ingredients && ingredients.length > 0) {
+          query += `ingredients=`;
           ingredients.forEach((ingredient) => {
-            query += `ingredients=${ingredient}&`;
+            query += `${ingredient},`;
           });
         }
         const response = await axios.get(query.slice(0, -1));
