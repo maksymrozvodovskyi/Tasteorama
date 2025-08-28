@@ -1,0 +1,97 @@
+.hero {
+  position: relative;
+  width: 100%;
+  /* height: 513px; */
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  padding: 128px 16px 98px 16px;
+
+}
+
+.title {
+  font-weight: 600;
+  font-size: 40px;
+  color: #fff;
+  /* line-height: 1.1; */
+  margin-bottom: 24px;
+}
+
+/* ----------  Mobile до 393px ---------- */
+@media (max-width: 393px) {
+  .hero {
+    background-image: url("../../img/HeroSearchBox/banner-mob.jpg");
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    width: 100%;
+    /* max-width: 329px; */
+  }
+
+  /* retina */
+  @media only screen and (max-width: 393px) and (min-resolution: 192dpi) and (min-resolution: 2dppx) {
+    .hero {
+      background-image: url("../../img/HeroSearchBox/banner-mob@2x.jpg");
+    }
+  }
+}
+
+/* ----------  Tablet 394–768px ---------- */
+@media (min-width: 394px) {
+  .hero {
+    background-image: url("../../img/HeroSearchBox/banner-tablet.jpg");
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    padding-right: 49px;
+    padding-bottom: 128px;
+  }
+
+  /* retina */
+  @media only screen and (min-width: 394px) and (min-resolution: 192dpi) and (min-resolution: 2dppx) {
+    .hero {
+      background-image: url("../../img/HeroSearchBox/banner-tablet@2x.jpg");
+    }
+  }
+
+  .title {
+    font-size: 48px;
+    line-height: 1.1;
+    width: 493px;
+  }
+}
+
+/* ----------  Desktop 769–1440px ---------- */
+@media (min-width: 769px) {
+  .hero {
+    background-image: url("../../img/HeroSearchBox/banner-desktop.jpg");
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    padding-right: 665px;
+  }
+  .title {
+    font-size: 48px;
+    line-height: 1.1;
+    width: 493px;
+  }
+
+  /* retina */
+  @media only screen and (min-width: 769px) and (min-resolution: 192dpi) and (min-resolution: 2dppx) {
+    .hero {
+      background-image: url("../../img/HeroSearchBox/banner-desktop@2x.jpg");
+    }
+  }
+}
