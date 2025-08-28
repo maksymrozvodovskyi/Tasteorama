@@ -85,8 +85,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #000;
-  background: none;
+  border: none;
+  background-color: #9b6c43;
+  color: #fff;
   border-radius: 8px;
   padding: 16px;
   font-weight: 600;
@@ -96,17 +97,18 @@
 }
 
 .registerBtn:hover,
-.registerBtn:focus,
-.loginBtn:hover,
-.loginBtn:focus {
-  background-color: #6d554b;
+.registerBtn:focus {
+  background-color: #9b6c43;
   color: #fff;
   border: none;
 }
 
-.registerBtn:active,
-.loginBtn:active {
+.registerBtn:active {
   background-color: #9b6c43;
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+}
+
+.loginBtn:active {
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
 }
 
@@ -140,7 +142,7 @@
   .closeBtn {
     right: 32px;
   }
-
 }
 
-@media (min-width: 1440px) {}
+@media (min-width: 1440px) {
+}
