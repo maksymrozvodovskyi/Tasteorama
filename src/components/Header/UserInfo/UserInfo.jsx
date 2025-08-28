@@ -1,16 +1,15 @@
 import { useState } from "react";
 import css from "./UserInfo.module.css";
 import ConfirmLogoutModal from "../ConfirmLogoutModal/ConfirmLogoutModal";
-import { selectUser } from "../../../redux/auth/selectors";
-import { useSelector } from "react-redux";
 
 export default function UserInfo({ userName = "User", onLogout, className }) {
   const [showModal, setShowModal] = useState(false);
-  const user = useSelector(selectUser);
 
   return (
     <div className={`${css.wrapper} ${className}`}>
-      <div className={css.avatar}>{user.name || "?"}</div>
+      <div className={css.avatar}>
+        {userName?.charAt(0).toUpperCase() || "?"}
+      </div>
       <span className={css.name}>{userName}</span>
       <div className={css.divider}></div>
       <button

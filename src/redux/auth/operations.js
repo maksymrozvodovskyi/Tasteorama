@@ -23,16 +23,12 @@ export const loginUserThunk = createAsyncThunk(
   "auth/login",
   async (credentials, thunkApi) => {
     try {
-      const response = await axios.post(
-        "api/auth/login",
-        credentials
-      );
+      const response = await axios.post("api/auth/login", credentials);
       const data = response.data.data;
       const accessToken = data.accessToken;
-      console.log("data", data);
-      
-      if (!accessToken)
-        throw new Error("No access token in response");
+      console.log("data from login", data);
+
+      if (!accessToken) throw new Error("No access token in response");
       setAuthHeader(accessToken);
       return data;
     } catch (error) {
@@ -44,7 +40,16 @@ export const loginUserThunk = createAsyncThunk(
 export const logoutUserThunk = createAsyncThunk(
   "auth/logout",
   async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.auth.accessToken;
+    console.log("Token before logout:", token);
+
+    if (!token) {
+      return thunkAPI.rejectWithValue("No access token, cannot logout");
+    }
+
     try {
+      setAuthHeader(token);
       await axios.post("api/auth/logout");
       setAuthHeader("");
     } catch (error) {

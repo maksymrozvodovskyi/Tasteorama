@@ -37,7 +37,7 @@ const slice = createSlice({
       })
       .addCase(loginUserThunk.fulfilled, (state, { payload }) => {
         state.accessToken = payload.accessToken;
-        state.user = { name: payload.name, email: payload.email };
+        // state.user = { name: payload.name, email: payload.email };
         state.isLoading = false;
         state.error = null;
         // localStorage.setItem("accessToken", payload.accessToken);
@@ -46,7 +46,8 @@ const slice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
-      .addCase(logoutUserThunk.fulfilled, (state) => {
+      .addCase(logoutUserThunk.fulfilled, (state, { payload }) => {
+        console.log("Logged out token:", payload);
         state.accessToken = null;
         state.user = null;
         state.isLoading = false;
