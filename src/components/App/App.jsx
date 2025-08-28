@@ -15,7 +15,6 @@ function App() {
   return (
     <>
       <ModalAuthentication />
-      {/* <AuthModal /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
