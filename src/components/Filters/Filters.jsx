@@ -13,11 +13,13 @@ import {
   resetFilters,
 } from "../../redux/filters/slice";
 import { fetchRecipes } from "../../redux/recipesList/operations";
+import css from "./Filters.module.css";
 
 const Filters = () => {
   const dispatch = useDispatch();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const recipesAmount = useSelector(selectTotalRecipes);
   const ingredients = useSelector(selectIngredients);
@@ -72,30 +74,62 @@ const Filters = () => {
     );
   };
 
+  const toggleFilters = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
+
   const animatedComponents = makeAnimated();
   return (
-    <div>
-      <p>{recipesAmount} recipes</p>
-      <div>
-        <button type="button" onClick={handleResetFilters}>
+    <div className={css.filtersSection}>
+      <h2 className={css.title}>Recipes</h2>
+      <div className={css.filtersContainer}>
+        <p className={css.recipesCount}>{recipesAmount} recipes</p>
+
+        <button type="button" className={css.toggleBtn} onClick={toggleFilters}>
+          Filters
+          <svg className={css.filtersIcon}>
+            {isFilterOpen ? (
+              <use href="/public/icons.svg#icon-close" />
+            ) : (
+              <use href="/public/icons.svg#icon-filter" />
+            )}
+          </svg>
+        </button>
+      </div>
+
+      <div
+        className={`${css.filtersContent} ${
+          isFilterOpen ? css.open : css.hidden
+        }`}
+      >
+        <div className={css.selectContainer}>
+          <Select
+            components={animatedComponents}
+            options={categoriesOptions}
+            value={selectedCategory}
+            onChange={onCategoryChange}
+            placeholder="Category"
+            isClearable
+          />
+        </div>
+
+        <div className={css.selectContainer}>
+          <Select
+            components={animatedComponents}
+            options={ingredientsOptions}
+            value={selectedIngredients}
+            onChange={onIngredientsChange}
+            placeholder="Ingredient"
+            isMulti
+          />
+        </div>
+        <button
+          type="button"
+          onClick={handleResetFilters}
+          className={css.resetButton}
+        >
           Reset filters
         </button>
-        <Select
-          components={animatedComponents}
-          options={categoriesOptions}
-          value={selectedCategory}
-          onChange={onCategoryChange}
-          placeholder="Category"
-          isClearable
-        />
-        <Select
-          components={animatedComponents}
-          options={ingredientsOptions}
-          value={selectedIngredients}
-          onChange={onIngredientsChange}
-          placeholder="Ingredient"
-          isMulti
-        />
       </div>
     </div>
   );
