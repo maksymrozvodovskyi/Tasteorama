@@ -7,12 +7,30 @@ import { useState, useEffect } from "react";
 
 // Схема валідації
 const AddRecipeSchema = Yup.object().shape({
-  title: Yup.string().min(3).max(30).required("Recipe Title"),
-  description: Yup.string().min(10).max(250).required("Add description"),
-  time: Yup.number().required("Enter the cooking time"),
-  calories: Yup.string().required("Enter calories"),
+  title: Yup.string()
+    .min(3)
+    .max(30)
+    .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]+$/, "Use only letters ")
+    .required("Recipe Title"),
+  description: Yup.string()
+    .min(10)
+    .max(250)
+    .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s.,!?()-]+$/, "Only text")
+    .required("Add description"),
+  time: Yup.number()
+    .typeError("Enter only number")
+    .positive("Time must be greater than 0")
+    .integer("Only whole numbers")
+    .required("Enter the cooking time"),
+  calories: Yup.number()
+    .typeError("Enter only number")
+    .positive("Time must be greater than 0")
+    .integer("Only whole numbers")
+    .required("Enter calories"),
   category: Yup.string().required("Select a category"),
-  instructions: Yup.string().required("Enter the instruction"),
+  instructions: Yup.string()
+    .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s.,!?()-]+$/, "Only text")
+    .required("Enter the instruction"),
   ingredients: Yup.array().min(1, "Add at least one ingredient"),
 });
 
@@ -23,6 +41,9 @@ const AddRecipeForm = () => {
   const [ingredientAmount, setIngredientAmount] = useState("");
   const [categories, setCategories] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [showList, setShowList] = useState(false);
+  const [preview, setPreview] = useState(null);
 
   // Підтягування категорій
   useEffect(() => {
@@ -32,7 +53,7 @@ const AddRecipeForm = () => {
           "https://tasteoramaapi.onrender.com/api/categories"
         );
         const result = await res.json();
-        setCategories(result.data); // ✅ беремо саме масив
+        setCategories(result.data || []);
       } catch (err) {
         console.error("Помилка завантаження категорій:", err);
       }
@@ -48,7 +69,7 @@ const AddRecipeForm = () => {
           "https://tasteoramaapi.onrender.com/api/ingredients"
         );
         const result = await res.json();
-        setIngredients(result.data); // ✅ беремо саме масив
+        setIngredients(result.data || []);
       } catch (err) {
         console.error("Error loading ingredients:", err);
       }
@@ -74,6 +95,10 @@ const AddRecipeForm = () => {
         Object.keys(values).forEach((key) => {
           if (key === "ingredients") {
             formData.append(key, JSON.stringify(values[key]));
+          } else if (key === "photo") {
+            if (values.photo) {
+              formData.append("photo", values.photo);
+            }
           } else {
             formData.append(key, values[key]);
           }
@@ -105,8 +130,23 @@ const AddRecipeForm = () => {
               type="file"
               accept="image/*"
               style={{ display: "none" }}
-              onChange={(e) => setFieldValue("photo", e.currentTarget.files[0])}
+              onChange={(e) => {
+                const file = e.currentTarget.files[0];
+                if (file) {
+                  setFieldValue("photo", file); // додаємо у Formik
+                  setPreview(URL.createObjectURL(file)); // робимо превʼю
+                }
+              }}
             />
+            {preview && (
+              <div className={styles.previewWrapper}>
+                <img
+                  src={preview}
+                  alt="Preview"
+                  className={styles.previewImage}
+                />
+              </div>
+            )}
           </div>
 
           {/* General Information */}
@@ -114,7 +154,7 @@ const AddRecipeForm = () => {
           <h4 className={styles.titlePart}>Recipe Title</h4>
           <Field
             name="title"
-            type="input"
+            type="text"
             placeholder="Enter the name of your recipe"
             className={styles.inputTitle}
           />
@@ -149,7 +189,7 @@ const AddRecipeForm = () => {
                 <Field
                   name="calories"
                   type="number"
-                  placeholder="150 cals"
+                  placeholder="150"
                   className={styles.input}
                 />
               </div>
@@ -186,18 +226,52 @@ const AddRecipeForm = () => {
             <div className={styles.inputsRow}>
               <h4 className={styles.titlePart}>Name</h4>
               <div className={styles.selectWrapper}>
-                <select
+                <input
+                  type="text"
                   className={styles.inputTitle}
+                  placeholder="Search ingredient..."
                   value={ingredientName}
-                  onChange={(e) => setIngredientName(e.target.value)}
-                >
-                  <option value="">Select ingredient</option>
-                  {ingredients.map((ing) => (
-                    <option key={ing._id} value={ing.name}>
-                      {ing.name}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setIngredientName(value);
+
+                    // показати фільтрований список
+                    if (value.trim().length > 0) {
+                      const results = ingredients.filter((ing) =>
+                        ing.name.toLowerCase().includes(value.toLowerCase())
+                      );
+                      setFiltered(results);
+                      setShowList(true);
+                    } else {
+                      setFiltered([]);
+                      setShowList(false);
+                    }
+                  }}
+                  onFocus={() => {
+                    if (ingredientName.trim().length > 0) setShowList(true);
+                  }}
+                  onBlur={() => {
+                    // невелика затримка щоб встигти клікнути по елементу
+                    setTimeout(() => setShowList(false), 250);
+                  }}
+                />
+
+                {showList && filtered.length > 0 && (
+                  <ul className={styles.dropdown}>
+                    {filtered.map((ing) => (
+                      <li
+                        key={ing._id}
+                        className={styles.dropdownItem}
+                        onClick={() => {
+                          setIngredientName(ing.name);
+                          setShowList(false);
+                        }}
+                      >
+                        {ing.name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
 
               <h4 className={styles.titlePart}>Amount</h4>
