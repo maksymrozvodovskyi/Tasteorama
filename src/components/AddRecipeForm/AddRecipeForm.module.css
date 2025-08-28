@@ -10,6 +10,7 @@
   font-size: 24px;
   justify-content: left;
   font-weight: 600;
+  padding-top: 24px;
 }
 
 .uploadLabel {
@@ -31,24 +32,25 @@
 }
 
 .uploadImage {
-  color: #070707; /* колір обрису */
-  stroke-width: 2px;
+  color: #070707;
+  stroke-width: 1px;
+  stroke: currentColor;
 }
+
 .titlePart {
   font-weight: 400;
   font-size: 18px;
   padding-top: 8px;
-  padding-bottom: 8px;
 }
 
 .fieldGroup {
   display: flex;
-  gap: 16px; /* відстань між блоками */
+  gap: 16px;
   margin-bottom: 20px;
 }
 
 .fieldItem {
-  flex: 1; /* щоб обидва займали однакову ширину */
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
@@ -106,14 +108,6 @@
   gap: 8px;
 }
 
-.inputsRow input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-}
-
 .addBtn {
   background-color: #a66b44;
   color: #fff;
@@ -152,4 +146,34 @@
   border: none;
   cursor: pointer;
   font-size: 16px;
+}
+.selectWrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  color: #070707;
+  stroke: currentColor;
+}
+
+.selectWrapper select {
+  appearance: none; /* прибираємо стандартну стрілку */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  width: 100%;
+  padding-right: 40px; /* щоб вистачило місця для svg */
+}
+
+.selectWrapper::after {
+  content: "";
+  position: absolute;
+
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+
+  background: url("/icons.svg#icon-arrow-down") no-repeat center;
+  background-size: contain;
+  pointer-events: none;
 }

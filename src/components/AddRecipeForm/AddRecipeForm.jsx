@@ -3,13 +3,14 @@ import * as Yup from "yup";
 import styles from "./AddRecipeForm.module.css";
 import { useDispatch } from "react-redux";
 import { addRecipe } from "../../redux/addRecipe/operations";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 // Схема валідації
 const AddRecipeSchema = Yup.object().shape({
   title: Yup.string().min(3).max(30).required("Recipe Title"),
   description: Yup.string().min(10).max(250).required("Add description"),
   time: Yup.number().required("Enter the cooking time"),
-  calories: Yup.string().required("Enter callories"),
+  calories: Yup.string().required("Enter calories"),
   category: Yup.string().required("Select a category"),
   instructions: Yup.string().required("Enter the instruction"),
   ingredients: Yup.array().min(1, "Add at least one ingredient"),
@@ -17,8 +18,43 @@ const AddRecipeSchema = Yup.object().shape({
 
 const AddRecipeForm = () => {
   const dispatch = useDispatch();
+
   const [ingredientName, setIngredientName] = useState("");
   const [ingredientAmount, setIngredientAmount] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
+
+  // Підтягування категорій
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const res = await fetch(
+          "https://tasteoramaapi.onrender.com/api/categories"
+        );
+        const result = await res.json();
+        setCategories(result.data); // ✅ беремо саме масив
+      } catch (err) {
+        console.error("Помилка завантаження категорій:", err);
+      }
+    }
+    fetchCategories();
+  }, []);
+
+  // Підтягування інгредієнтів
+  useEffect(() => {
+    async function fetchIngredients() {
+      try {
+        const res = await fetch(
+          "https://tasteoramaapi.onrender.com/api/ingredients"
+        );
+        const result = await res.json();
+        setIngredients(result.data); // ✅ беремо саме масив
+      } catch (err) {
+        console.error("Error loading ingredients:", err);
+      }
+    }
+    fetchIngredients();
+  }, []);
 
   return (
     <Formik
@@ -34,7 +70,6 @@ const AddRecipeForm = () => {
       }}
       validationSchema={AddRecipeSchema}
       onSubmit={(values, { resetForm }) => {
-        // Створюємо FormData (якщо треба фото)
         const formData = new FormData();
         Object.keys(values).forEach((key) => {
           if (key === "ingredients") {
@@ -44,7 +79,7 @@ const AddRecipeForm = () => {
           }
         });
 
-        dispatch(addRecipe(formData)); // відправляємо в Redux
+        dispatch(addRecipe(formData));
         resetForm();
       }}
     >
@@ -60,7 +95,7 @@ const AddRecipeForm = () => {
                 className={styles.uploadImage}
                 aria-hidden="true"
               >
-                <use href="/public/icons.svg#icon-photo" />
+                <use href="/icons.svg#icon-photo" />
               </svg>
             </label>
             <input
@@ -84,6 +119,7 @@ const AddRecipeForm = () => {
             className={styles.inputTitle}
           />
           <ErrorMessage name="title" component="div" className={styles.error} />
+
           <h4 className={styles.titlePart}>Recipe Description</h4>
           <Field
             as="textarea"
@@ -123,16 +159,19 @@ const AddRecipeForm = () => {
                 className={styles.error}
               />
             </div>
+
             <div className={styles.fieldItem}>
               <h4 className={styles.titlePart}>Category</h4>
-              <Field as="select" name="category" className={styles.input}>
-                <option value="option1">Option1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-                <option value="option4">Option 4</option>
-                <option value="option5">Option 5</option>
-                <option value="option6">Option 6</option>
-              </Field>
+              <div className={styles.selectWrapper}>
+                <Field as="select" name="category" className={styles.input}>
+                  {categories.map((cat) => (
+                    <option key={cat._id} value={cat.name}>
+                      {cat.name}
+                    </option>
+                  ))}
+                </Field>
+              </div>
+
               <ErrorMessage
                 name="category"
                 component="div"
@@ -145,15 +184,27 @@ const AddRecipeForm = () => {
           <h3 className={styles.titleSection}>Ingredients</h3>
           <div className={styles.ingredients}>
             <div className={styles.inputsRow}>
+              <h4 className={styles.titlePart}>Name</h4>
+              <div className={styles.selectWrapper}>
+                <select
+                  className={styles.inputTitle}
+                  value={ingredientName}
+                  onChange={(e) => setIngredientName(e.target.value)}
+                >
+                  <option value="">Select ingredient</option>
+                  {ingredients.map((ing) => (
+                    <option key={ing._id} value={ing.name}>
+                      {ing.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <h4 className={styles.titlePart}>Amount</h4>
               <input
+                className={styles.inputTitle}
                 type="text"
-                placeholder="Name"
-                value={ingredientName}
-                onChange={(e) => setIngredientName(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Amount"
+                placeholder="100g"
                 value={ingredientAmount}
                 onChange={(e) => setIngredientAmount(e.target.value)}
               />
@@ -203,7 +254,14 @@ const AddRecipeForm = () => {
                             )
                           }
                         >
-                          🗑️
+                          <svg
+                            width="24"
+                            height="24"
+                            className={styles.uploadImage}
+                            aria-hidden="true"
+                          >
+                            <use href="/icons.svg#icon-delete" />
+                          </svg>
                         </button>
                       </td>
                     </tr>
