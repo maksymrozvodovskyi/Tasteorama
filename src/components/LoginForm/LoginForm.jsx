@@ -52,18 +52,18 @@ export const LoginForm = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     const { email, password } = values;
 
-    if (!email.trim() || !password.trim()) {
-      toast.error("All fields must be filled");
-      setSubmitting(false);
-      return;
-    }
+    // if (!email.trim() || !password.trim()) {
+    //   toast.error("All fields must be filled");
+    //   setSubmitting(false);
+    //   return;
+    // }
 
     try {
       const loginResult = await dispatch(
         loginUserThunk({ email, password })
       ).unwrap();
-      console.log("loginResult:", loginResult);
 
+      console.log("loginResult:", loginResult);
 
       toast.success("Login successful!");
       navigate("/");
@@ -88,63 +88,50 @@ export const LoginForm = () => {
         validateOnChange={false}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, values, submitForm }) => {
-          const { email, password } = values;
+        {({ isSubmitting }) => (
+          <Form className={css.form}>
+            {isSubmitting && <div className={css.loader}></div>}
 
-          const handleManualSubmit = () => {
-            if (!email.trim() || !password.trim()) {
-              toast.error("All fields must be filled");
-              return;
-            }
+            <div className={`${css.fieldGroup} ${css.mb}`}>
+              <label htmlFor="email" className={css.label}>
+                Enter your email address
+              </label>
+              <Field
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                className={css.input}
+                autoComplete="off"
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className={css.error}
+              />
+            </div>
 
-            submitForm();
-          };
+            <div className={css.fieldGroup}>
+              <label htmlFor="password" className={css.label}>
+                Enter your password
+              </label>
+              <Field name="password" component={PasswordField} />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className={css.error}
+              />
+            </div>
 
-          return (
-            <Form className={css.form}>
-              {isSubmitting && <div className={css.loader}></div>}
-
-              <div className={`${css.fieldGroup} ${css.mb}`}>
-                <label htmlFor="email" className={css.label}>
-                  Enter your email address
-                </label>
-                <Field
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  className={css.input}
-                  autoComplete="off"
-                />
-                <ErrorMessage
-                  name="email"
-                  component="div"
-                  className={css.error}
-                />
-              </div>
-
-              <div className={css.fieldGroup}>
-                <label htmlFor="password" className={css.label}>
-                  Enter your password
-                </label>
-                <Field name="password" component={PasswordField} />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className={css.error}
-                />
-              </div>
-
-              <button
-                type="button"
-                className={css.button}
-                onClick={handleManualSubmit}
-              >
-                Log In
-              </button>
-            </Form>
-          );
-        }}
+            <button
+              type="submit"
+              className={css.button}
+              disabled={isSubmitting}
+            >
+              Log In
+            </button>
+          </Form>
+        )}
       </Formik>
 
       <div className={css.registerwrapp}>
@@ -156,4 +143,3 @@ export const LoginForm = () => {
     </div>
   );
 };
-

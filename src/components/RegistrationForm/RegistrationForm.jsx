@@ -60,7 +60,7 @@ export const RegistrationForm = () => {
         console.log("Submitting", values);
       await dispatch(
         registerUserThunk({
-          name: values.name,
+          name: values.name.trim(),
           email: values.email,
           password: values.password,
         })
@@ -69,7 +69,7 @@ export const RegistrationForm = () => {
       toast.success("Registration successful! Please log in.");
       navigate("/auth/login");
     } catch (error) {
-      toast.error(error || "Registration failed");
+      toast.error(error.message || "Registration failed");
     } finally {
       setSubmitting(false);
     }

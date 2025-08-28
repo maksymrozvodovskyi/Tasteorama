@@ -20,8 +20,8 @@ export const registerUserThunk = createAsyncThunk(
       }
       setAuthHeader(response.data.accessToken);
       return response.data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -31,8 +31,10 @@ export const loginUserThunk = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const response = await axios.post("/auth/login", credentials);
-      const data = response.data.data;
+      const data = response.data;
       const accessToken = data.accessToken;
+      if (!accessToken || typeof accessToken !== "string")
+        throw new Error("No access token in response or invalid token");
       setAuthHeader(accessToken);
       return data;
     } catch (error) {
@@ -47,7 +49,6 @@ export const logoutUserThunk = createAsyncThunk(
     try {
       await axios.post("/auth/logout");
       setAuthHeader("");
-      console.log("Authorization", axios.defaults.headers.common.Authorization);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
