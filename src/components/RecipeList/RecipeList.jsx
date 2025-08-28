@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./RecipeList.module.css";
 import { selectRecipes } from "../../redux/recipesList/selectors";
 import { fetchRecipes } from "../../redux/recipesList/operations";
-import Filters from "../Filters/Filters";
 import RecipeCard from "../RecipeCard/RecipeCard";
 
 const RecipesList = () => {
@@ -21,17 +20,15 @@ const RecipesList = () => {
   }
 
   return (
-
     <ul className={styles.list}>
       {recipes.map((recipe) => (
         <li key={recipe._id}>
-          
+          {/* {recipe.title} */}
           <RecipeCard recipe={recipe} mode="default" />
-          
+          {/* <RecipeCard recipe={recipe} /> */}
         </li>
       ))}
     </ul>
- 
   );
 };
 
