@@ -27,6 +27,11 @@ const slice = createSlice({
   },
 });
 
-export const { setTitleFilter, setCategoryFilter, setIngredientsFilter, resetFilters } = slice.actions;
+export const {
+  setTitleFilter,
+  setCategoryFilter,
+  setIngredientsFilter,
+  resetFilters,
+} = slice.actions;
 
 export default slice.reducer;

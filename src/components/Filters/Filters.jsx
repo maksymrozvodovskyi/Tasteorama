@@ -12,6 +12,7 @@ import {
   setIngredientsFilter,
   resetFilters,
 } from "../../redux/filters/slice";
+import { fetchRecipes } from "../../redux/recipesList/operations";
 
 const Filters = () => {
   const dispatch = useDispatch();
@@ -41,11 +42,19 @@ const Filters = () => {
     dispatch(resetFilters());
     setSelectedCategory(null);
     setSelectedIngredients([]);
+    dispatch(fetchRecipes({ title: "", category: "", ingredients: [] }));
   };
 
   const onCategoryChange = (selectedOption) => {
     setSelectedCategory(selectedOption);
     dispatch(setCategoryFilter(selectedOption ? selectedOption.value : ""));
+    dispatch(
+      fetchRecipes({
+        title: "",
+        category: selectedOption ? selectedOption.value : "",
+        ingredients: selectedIngredients.map((option) => option.value),
+      })
+    );
   };
 
   const onIngredientsChange = (selectedOptions) => {
@@ -54,6 +63,13 @@ const Filters = () => {
       ? selectedOptions.map((option) => option.value)
       : [];
     dispatch(setIngredientsFilter(ingredientValues));
+    dispatch(
+      fetchRecipes({
+        title: "",
+        category: selectedCategory ? selectedCategory.value : "",
+        ingredients: ingredientValues,
+      })
+    );
   };
 
   const animatedComponents = makeAnimated();

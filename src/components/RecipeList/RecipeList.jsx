@@ -21,7 +21,6 @@ const RecipesList = () => {
 
   return (
     <>
-      <Filters />
       <ul className={styles.list}>
         {recipes.map((recipe) => (
           <li key={recipe._id}>
