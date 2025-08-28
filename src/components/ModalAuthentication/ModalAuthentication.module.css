@@ -16,9 +16,8 @@
   background-color: #faf3e0;
   border-radius: 24px;
   padding: 56px 24px 32px 24px;
-  width: 100%;
-  min-width: 320px;
-  max-width: 393px;
+  max-width: 80%;
+  width: 314px;
   text-align: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
@@ -36,7 +35,8 @@
   gap: 16px;
   justify-content: center;
   flex-direction: column;
-  width: 314px;
+  width: 100%;
+  align-items: center;
 }
 
 .closeBtn {
@@ -48,8 +48,8 @@
 }
 
 .closeIcon {
-  width: 16px;
-  height: 15px;
+  width: 24px;
+  height: 24px;
   stroke: #000;
   stroke-width: 2;
   fill: none;
@@ -64,8 +64,7 @@
 .text {
   font-size: 16px;
   font-weight: 400;
-  line-height: 1.6;
-  width: 314px;
+  line-height: 1.55;
 }
 
 .loginBtn {
@@ -78,32 +77,38 @@
   background: none;
   font-weight: 600;
   font-size: 18px;
+  max-width: 320px;
+  width: 100%;
 }
 
 .registerBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #000;
-  background: none;
+  border: none;
+  background-color: #9b6c43;
+  color: #fff;
   border-radius: 8px;
   padding: 16px;
   font-weight: 600;
   font-size: 18px;
+  max-width: 320px;
+  width: 100%;
 }
 
 .registerBtn:hover,
-.registerBtn:focus,
-.loginBtn:hover,
-.loginBtn:focus {
-  background-color: #6d554b;
+.registerBtn:focus {
+  background-color: #9b6c43;
   color: #fff;
   border: none;
 }
 
-.registerBtn:active,
-.loginBtn:active {
+.registerBtn:active {
   background-color: #9b6c43;
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+}
+
+.loginBtn:active {
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
 }
 
@@ -116,19 +121,28 @@
 
 @media screen and (min-width: 768px) {
   .modal {
-    padding: 56px 0;
+    padding: 56px 32px;
+    width: 356px;
   }
 
   .actions {
     flex-direction: row;
     justify-content: center;
+    gap: 27px;
   }
 
   .loginBtn,
   .registerBtn {
-    padding: 12px 24px;
-
+    padding: 8px;
+    font-size: 16px;
     width: 164px;
     height: 36px;
   }
+
+  .closeBtn {
+    right: 32px;
+  }
+}
+
+@media (min-width: 1440px) {
 }
