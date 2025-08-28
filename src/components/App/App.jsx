@@ -14,7 +14,6 @@ import ModalAuthentication from "../ModalAuthentication/ModalAuthentication";
 function App() {
   return (
     <>
-      <ModalAuthentication />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
