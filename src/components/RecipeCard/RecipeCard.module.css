@@ -1,0 +1,224 @@
+*{
+    box-sizing: border-box;
+}
+
+.card{
+    width: 100%;
+    border-radius: 16px;
+    background-color: #FAF3E0;
+    padding: 8px;
+}
+
+.img{
+    width: 100%;
+    height: 230px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.title {
+    width: 203px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+}
+
+.timeBox {
+    height: 28px;
+    border-radius: 8px;
+    padding: 2px 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #ffffff;
+}
+
+.time {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.desBox {
+    height: 83px;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.desBox p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 155%;
+}
+
+.btnBox {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 2.7%;
+}
+
+.moreBtn {
+    display: block;
+    width: 83%;
+    height: 40px;
+    background-color: inherit;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #000000;
+    cursor: pointer;
+    text-align: center;
+    align-content: center;
+}
+
+.moreBtnFull{
+    display: block;
+    width: 100% !important;
+}
+
+.moreBtn:hover,
+.saveBtn:hover{
+    background-color: #9B6C43;
+    border-color: #9B6C43;
+    color: #ffffff;
+}
+
+.moreBtn:active,
+.saveBtn:active{
+    background-color: #9B6C43;
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 
+        0px 0px 0px 6px #4E46B41F,
+        0px 0px 0px 2px #FFFFFF;
+}
+
+.saveBtn {
+    width: 14%;
+    background-color: inherit;
+    border: 1px solid #000000;
+    border-radius: 8px;
+}
+
+.icon {
+    fill: currentColor;
+}
+
+.saveBtn.active{
+    background-color: #9B6C43;
+    border: none;
+    color: #FFFFFF;
+}
+
+.removeBtn:hover,
+.removeBtn:active{
+    background-color: #C80000;
+        border-color: #C80000;
+}
+
+
+@media screen and (min-width: 393px) {
+    .card{
+        width: 361px;
+        height: 483px;
+        padding: 12px;
+    }
+
+    .img{
+        width: 337px;
+        height: 230px;
+    }
+
+    .header{
+        width: 337px;
+        height: 58px;
+        gap: 8px;
+    }
+
+    .title{
+        width: 276px;
+    }
+
+    .timeBox{
+        width: 53px;
+        height: 28px;
+
+    }
+
+    .btnBox{
+        gap: 8px;
+    }
+
+    .moreBtn{
+        width: 289px;
+    }
+
+    .saveBtn{
+        width: 40px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .card{
+        width: 339px;
+    }
+
+    .img{
+        width: 315px;
+    }
+
+    .header{
+        width: 315px;
+    }
+
+    .title{
+        width: 253px;
+    }
+
+    .moreBtn{
+        width: 267px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .card{
+        width: 288px;
+        height: 431px;
+    }
+
+    .img{
+        width: 264px;
+        height: 178px;
+    }
+
+    .header{
+        width: 264px;
+    }
+
+    .title{
+        width: 203px;
+    }
+
+    .btnBox{
+        width: 264px;
+    }
+
+    .moreBtn{
+        width: 216px;
+    }
+}
