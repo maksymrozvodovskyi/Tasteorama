@@ -5,6 +5,8 @@ import { selectRecipes, selectTotalPages, selectCurrentPage } from "../../redux/
 import { fetchRecipes } from "../../redux/recipesList/operations";
 import { nextPage } from "../../redux/recipesList/slice";
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
+import Filters from "../Filters/Filters";
+import RecipeCard from "../RecipeCard/RecipeCard";
 
 const RecipesList = () => {
   const dispatch = useDispatch();
@@ -29,11 +31,11 @@ const RecipesList = () => {
         {recipes.map((recipe) => (
           <li key={recipe._id}>
             {recipe.title}
-            {/*<RecipeCard recipe={recipe} />*/}
+            <RecipeCard recipe={recipe} mode="default" />
           </li>
         ))}
       </ul>
-      {totalPages>0 && currentPage<totalPages &&<LoadMoreBtn currentPage={currentPage} nextPage={nextPage} fetchAction={fetchRecipes} />}
+      {totalPages>0 && currentPage<totalPages &&<LoadMoreBtn nextPage={nextPage} fetchAction={fetchRecipes} />}
     </>
   );
 };
