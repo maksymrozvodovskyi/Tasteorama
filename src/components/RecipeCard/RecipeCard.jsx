@@ -7,6 +7,7 @@ import { useState } from "react";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import ErrorWhileSaving from "../ErrorWhileSaving/ErrorWhileSaving";
+import { setAuthToken } from "../../services/favoritesAPI";
 
 export default function RecipeCard({ recipe, mode = "default" }) {
   const [showModal, setShowModal] = useState(false);
@@ -28,10 +29,12 @@ export default function RecipeCard({ recipe, mode = "default" }) {
       return;
     }
 
+    setAuthToken(token);
+
     if (isFavorite) {
       dispatch(removeFavorite(_id));
     } else {
-      const resultAction = dispatch(addFavorite(_id));
+      const resultAction = await dispatch(addFavorite(_id));
 
       if (addFavorite.fulfilled.match(resultAction)) {
         navigate(`/recipes/${_id}`);
@@ -41,6 +44,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
 
   const handleRemoveFav = async () => {
     try {
+      setAuthToken(token);
       await dispatch(removeFavorite(_id)).unwrap();
     } catch {
       iziToast.error({
@@ -59,7 +63,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
         <div className={css.header}>
           <h3>{title}</h3>
           <span className={css.timeBox}>
-            <svg width="14.25" height="14.25">
+            <svg width="24" height="24">
               <use href="/icons.svg#icon-clock" />
             </svg>
             <p className={css.time}>{time ? `${time}` : "—"}</p>
