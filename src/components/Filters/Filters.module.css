@@ -58,6 +58,7 @@
     font-size: 12px;
     text-decoration: underline;
     margin-right: auto;
+    font-family: var(--font-family);
 }
 
 .filtersContent {

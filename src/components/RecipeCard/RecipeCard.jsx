@@ -19,7 +19,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
     state.favorites.items.some((item) => item._id === _id)
   );
 
-  const token = useSelector((state) => state.auth.token);
+  const token = useSelector((state) => state.auth.accessToken);
   const isLoggedIn = Boolean(token);
 
   const handleToggleFav = async () => {
