@@ -10,10 +10,12 @@ import RecipePage from "../../pages/RecipePage/RecipePage";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import Footer from "../Footer/Footer";
 import ModalAuthentication from "../ModalAuthentication/ModalAuthentication";
+import Header from "../Header/Header";
 
 function App() {
   return (
     <>
+      <Header/>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />

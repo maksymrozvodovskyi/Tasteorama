@@ -47,7 +47,8 @@ const slice = createSlice({
         state.isLoading = false;
         state.error = payload.response.data;
       })
-      .addCase(logoutUserThunk.fulfilled, (state) => {
+      .addCase(logoutUserThunk.fulfilled, (state, { payload }) => {
+        console.log("Logged out token:", payload);
         state.accessToken = null;
         state.userName = null;
         state.isLoading = false;
