@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectTotalRecipes } from "../../redux/recipesList/selectors";
+import {
+  selectRecipes,
+  selectTotalRecipes,
+} from "../../redux/recipesList/selectors";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
@@ -143,6 +146,20 @@ const Filters = () => {
           </button>
         </div>
       </div>
+      {recipesAmount === 0 && (
+        <div className={css.noRecipesContainer}>
+          <h3 className={css.noRecipesTitle}>
+            We’re sorry! We were not able to find a match.
+          </h3>
+          <button
+            type="button"
+            className={css.noRecipesResetBtn}
+            onClick={handleResetFilters}
+          >
+            Reset search and filters
+          </button>
+        </div>
+      )}
     </div>
   );
 };
