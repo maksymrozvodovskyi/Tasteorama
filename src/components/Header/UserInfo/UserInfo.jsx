@@ -10,7 +10,11 @@ export default function UserInfo({ onLogout, className }) {
 
   return (
     <div className={`${css.wrapper} ${className}`}>
-      <div className={css.avatar}>{name.charAt(0).toUpperCase() || "?"}</div>
+      <div className={css.avatar}>
+        {typeof name === "string" && name.length > 0
+          ? name.charAt(0).toUpperCase()
+          : "?"}
+      </div>
       <span className={css.name}>{name}</span>
       <div className={css.divider}></div>
       <button
