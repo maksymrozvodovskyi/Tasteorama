@@ -8,9 +8,9 @@ export const addFavorite = createAsyncThunk(
     const result = await addToFavorites(id);
     return result; 
   } catch (err) {
-    console.error("addFavorite failed:", err.response?.data || err.message);
-    return thunkAPI.rejectWithValue(err.response?.data || "Unknown error");
-  }
+  console.error("addFavorite failed:", err.response?.status, err.response?.data || err.message);
+  return thunkAPI.rejectWithValue(err.response?.data || "Unknown error");
+}
 });
 
 
