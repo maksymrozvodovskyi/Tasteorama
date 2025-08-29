@@ -1,14 +1,35 @@
+/* Styles for Mobile devices */
+.container {
+  min-width: 320px;
+  /* max-width: 393px; */
+  padding: 0 16px;
+  margin: 0 auto;
+}
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+  }
+}
+
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+    padding: 0 575px 0 0;
+  }
+}
+
 .hero {
   position: relative;
   width: 100%;
-  /* height: 513px; */
-
+  height: 513px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-
-  padding: 128px 16px 98px 16px;
-
+  /* padding: 128px 16px 98px 16px; */
 }
 
 .title {
@@ -35,6 +56,7 @@
     align-items: flex-start;
     text-align: left;
     width: 100%;
+    padding: 0 16px;
     /* max-width: 329px; */
   }
 
@@ -54,8 +76,9 @@
     justify-content: flex-start;
     align-items: center;
     text-align: left;
-    padding-right: 49px;
-    padding-bottom: 128px;
+    /* padding-right: 49px; */
+    /* padding-bottom: 128px; */
+    height: 443px;
   }
 
   /* retina */
@@ -68,7 +91,11 @@
   .title {
     font-size: 48px;
     line-height: 1.1;
-    width: 493px;
+    max-width: 493px;
+  }
+
+  .content {
+    padding: 0 16px;
   }
 }
 
@@ -76,15 +103,25 @@
 @media (min-width: 769px) {
   .hero {
     background-image: url("../../img/HeroSearchBox/banner-desktop.jpg");
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: left;
-    padding-right: 665px;
+    background-size: contain;
+    /* display: flex; */
+    /* justify-content: flex-start; */
+    /* align-items: center; */
+    /* text-align: left; */
+    /* padding-right: 665px; */
+    max-width: 1440px;
+    margin: 0 auto;
+    background-size: cover;
+    /* можна лишити */
   }
+
+  .content {
+    padding: 0;
+  }
+
   .title {
-    font-size: 48px;
-    line-height: 1.1;
+    /* font-size: 48px; */
+    /* line-height: 1.1; */
     width: 493px;
   }
 
