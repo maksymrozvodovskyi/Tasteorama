@@ -5,11 +5,12 @@ import ConfirmLogoutModal from "../ConfirmLogoutModal/ConfirmLogoutModal";
 export default function UserInfo({ userName = "User", onLogout, className }) {
   const [showModal, setShowModal] = useState(false);
 
+  const state = JSON.parse(localStorage.getItem("persist:accessToken"));
+  const name = JSON.parse(state.userName);
+
   return (
     <div className={`${css.wrapper} ${className}`}>
-      <div className={css.avatar}>
-        {userName?.charAt(0).toUpperCase() || "?"}
-      </div>
+      <div className={css.avatar}>{name.charAt(0).toUpperCase() || "?"}</div>
       <span className={css.name}>{userName}</span>
       <div className={css.divider}></div>
       <button
