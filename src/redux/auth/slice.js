@@ -12,6 +12,7 @@ const initialState = {
   userName: null,
   isLoading: false,
   error: null,
+  hasAvatar: false,
 };
 
 const slice = createSlice({
@@ -51,6 +52,7 @@ const slice = createSlice({
         console.log("Logged out token:", payload);
         state.accessToken = null;
         state.userName = null;
+        state.hasAvatar = false;
         state.isLoading = false;
         state.error = null;
       })
@@ -64,6 +66,7 @@ const slice = createSlice({
       .addCase(fetchCurrentUser.fulfilled, (state, { payload }) => {
         state.userName = payload.data.name;
         state.isLoading = false;
+        state.hasAvatar = true;
       })
       .addCase(fetchCurrentUser.rejected, (state, { payload }) => {
         state.isLoading = false;
