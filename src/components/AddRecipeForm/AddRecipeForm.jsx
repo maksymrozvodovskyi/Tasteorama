@@ -9,29 +9,32 @@ import { useState, useEffect } from "react";
 const AddRecipeSchema = Yup.object().shape({
   title: Yup.string()
     .min(3)
-    .max(30)
+    .max(64)
     .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]+$/, "Use only letters ")
     .required("Recipe Title"),
   description: Yup.string()
-    .min(10)
-    .max(250)
+    .max(200)
     .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s.,!?()-]+$/, "Only text")
     .required("Add description"),
   time: Yup.number()
+    .max(360)
     .typeError("Enter only number")
     .positive("Time must be greater than 0")
     .integer("Only whole numbers")
     .required("Enter the cooking time"),
   calories: Yup.number()
+    .min(1)
+    .max(10000)
     .typeError("Enter only number")
     .positive("Time must be greater than 0")
     .integer("Only whole numbers")
     .required("Enter calories"),
   category: Yup.string().required("Select a category"),
   instructions: Yup.string()
+    .max(1200)
     .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s.,!?()-]+$/, "Only text")
     .required("Enter the instruction"),
-  ingredients: Yup.array().min(1, "Add at least one ingredient"),
+  ingredients: Yup.array().min(2, "Add at least two ingredient"),
 });
 
 const AddRecipeForm = () => {
