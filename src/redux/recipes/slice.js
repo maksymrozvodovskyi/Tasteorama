@@ -1,16 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchRecipeById } from "./operations.js";
-
 import { handleError } from "../../utils/reduxUtils.js";
 
-const recipesSlice = createSlice({
+const recipesSliceById = createSlice({
   name: "recipes",
   initialState: {
     currentRecipe: null,
     isLoadingCurrentRecipe: false,
     error: null,
   },
-  reducers: {},
   extraReducers: (builder) =>
     builder
       .addCase(fetchRecipeById.pending, (state) => {
@@ -28,4 +26,4 @@ const recipesSlice = createSlice({
       }),
 });
 
-export default recipesSlice.reducer;
+export default recipesSliceById.reducer;

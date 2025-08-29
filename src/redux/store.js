@@ -1,12 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../redux/auth/slice";
-
 import filterReducer from "../redux/filters/slice";
 import recipesSlice from "./recipesList/slice.js";
+import recipesSliceById from "./recipes/slice.js";
 import categoriesReducer from "./categories/slice.js";
 import ingredientsReducer from "./ingredients/slice.js";
 import favReducer from "../redux/favourite/slice";
-
 
 import {
   persistStore,
@@ -32,6 +31,7 @@ export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     recipes: recipesSlice,
+    recipesSliceById: recipesSliceById,
     categories: categoriesReducer,
     ingredients: ingredientsReducer,
     filters: filterReducer,

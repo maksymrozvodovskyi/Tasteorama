@@ -21,6 +21,8 @@ const RecipeDetails = () => {
   const ingredientsList = useSelector(selectIngredients) || [];
   const recipe = useSelector(selectCurrentRecipes);
 
+  console.log(recipe);
+
   useEffect(() => {
     if (!Array.isArray(ingredientsList) || ingredientsList.length === 0) {
       dispatch(fetchIngredients());

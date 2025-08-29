@@ -1,7 +1,8 @@
-export const selectRecipesItems = ({ recipes }) => recipes.items;
-export const selectCurrentRecipes = ({ recipes }) => recipes.currentRecipe;
+export const selectRecipesItems = (state) => state.recipesSliceById.items;
+export const selectCurrentRecipes = (state) =>
+  state.recipesSliceById.currentRecipe;
 
-export const selectRecipesIsLoadingCurrentRecipe = ({ recipes }) =>
-  recipes.isLoadingCurrentRecipe;
+export const selectRecipesIsLoadingCurrentRecipe = (state) =>
+  state.recipesSliceById.isLoadingCurrentRecipe;
 
-export const selectRecipesError = ({ recipes }) => recipes.error;
+export const selectRecipesError = (state) => state.recipesSliceById.error;
