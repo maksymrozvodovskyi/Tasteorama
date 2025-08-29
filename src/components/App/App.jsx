@@ -7,8 +7,8 @@ import FavoritesPage from "../../pages/FavoritesPage/FavoritesPage";
 import MyRecipesPage from "../../pages/MyRecipesPage/MyRecipesPage";
 import AddRecipePage from "../../pages/AddRecipePage/AddRecipePage";
 import RecipePage from "../../pages/RecipePage/RecipePage";
-import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import Footer from "../Footer/Footer";
+import NotFound from "../RecipeViewPage/NotFound/NotFound";
 import ModalAuthentication from "../ModalAuthentication/ModalAuthentication";
 import Header from "../Header/Header";
 
@@ -29,7 +29,7 @@ function App() {
         <Route path="/favorites" element={<FavoritesPage />} />
 
         {/* ерор пейдж 404 */}
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </>
