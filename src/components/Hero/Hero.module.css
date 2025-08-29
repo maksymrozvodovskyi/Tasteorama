@@ -18,11 +18,9 @@
 @media only screen and (min-width: 1440px) {
   .container {
     max-width: 1440px;
-    padding: 0 107px;
+    padding: 0 575px 0 0;
   }
 }
-
-
 
 .hero {
   position: relative;
@@ -111,6 +109,14 @@
     /* align-items: center; */
     /* text-align: left; */
     /* padding-right: 665px; */
+    max-width: 1440px;
+    margin: 0 auto;
+    background-size: cover;
+    /* можна лишити */
+  }
+
+  .content {
+    padding: 0;
   }
 
   .title {
