@@ -7,22 +7,22 @@ const initialState = {
   loading: true,
   error: null,
   currentPage: 1,
-  totalPages: null
+  totalPages: null,
 };
 
 const recipesSlice = createSlice({
-   name: 'recipes',
-   initialState,
-   reducers: {
+  name: "recipes",
+  initialState,
+  reducers: {
     nextPage: (state) => {
       state.currentPage += 1;
-     },
-     clearitems: (state) => {
-       state.items = [];
-       state.currentPage = 1;
-    }
+    },
+    clearitems: (state) => {
+      state.items = [];
+      state.currentPage = 1;
+    },
   },
-   extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(fetchRecipes.pending, (state) => {
         state.loading = true;
