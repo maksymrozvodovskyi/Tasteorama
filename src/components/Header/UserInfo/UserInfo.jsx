@@ -2,7 +2,7 @@ import { useState } from "react";
 import css from "./UserInfo.module.css";
 import ConfirmLogoutModal from "../ConfirmLogoutModal/ConfirmLogoutModal";
 
-export default function UserInfo({ userName = "User", onLogout, className }) {
+export default function UserInfo({ onLogout, className }) {
   const [showModal, setShowModal] = useState(false);
 
   const state = JSON.parse(localStorage.getItem("persist:accessToken"));
@@ -11,7 +11,7 @@ export default function UserInfo({ userName = "User", onLogout, className }) {
   return (
     <div className={`${css.wrapper} ${className}`}>
       <div className={css.avatar}>{name.charAt(0).toUpperCase() || "?"}</div>
-      <span className={css.name}>{userName}</span>
+      <span className={css.name}>{name}</span>
       <div className={css.divider}></div>
       <button
         className={css.logoutBtn}

@@ -6,17 +6,14 @@ import BurgerMenu from "./BurgerMenu/BurgerMenu.jsx";
 import Navigation from "./Navigation/Navigation.jsx";
 import css from "./Header.module.css";
 import { toast } from "react-toastify";
-import {
-  selectAuthIsLoggedIn,
-  selectUser,
-} from "../../redux/auth/selectors.js";
+import { selectAuthIsLoggedIn } from "../../redux/auth/selectors.js";
 import { logoutUserThunk } from "../../redux/auth/operations.js";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const isLoggedIn = useSelector(selectAuthIsLoggedIn);
-  const user = useSelector(selectUser);
-  const userName = user?.name;
+  const state = JSON.parse(localStorage.getItem("persist:accessToken"));
+  const name = JSON.parse(state.userName);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,7 +40,7 @@ export default function Header() {
           <Navigation
             isLoggedIn={isLoggedIn}
             closeMenu={() => {}}
-            userName={userName}
+            userName={name}
             onLogout={handleLogout}
             isMobile={false}
           />
@@ -55,7 +52,7 @@ export default function Header() {
           <Navigation
             isLoggedIn={isLoggedIn}
             closeMenu={() => setMenuOpen(false)}
-            userName={userName}
+            userName={name}
             onLogout={handleLogout}
             isMobile={true}
           />
