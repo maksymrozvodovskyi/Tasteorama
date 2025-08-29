@@ -1,8 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectRecipes,
-  selectTotalRecipes,
-} from "../../redux/recipesList/selectors";
+import { selectTotalRecipes } from "../../redux/recipesList/selectors";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
@@ -18,6 +15,7 @@ import {
 import { fetchRecipes } from "../../redux/recipesList/operations";
 import css from "./Filters.module.css";
 import { clearitems } from "../../redux/recipesList/slice";
+import { selectFilterTitle } from "../../redux/filters/selectors";
 
 const Filters = () => {
   const dispatch = useDispatch();
@@ -28,6 +26,7 @@ const Filters = () => {
   const recipesAmount = useSelector(selectTotalRecipes);
   const ingredients = useSelector(selectIngredients);
   const categories = useSelector(selectCategories);
+  const title = useSelector(selectFilterTitle);
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -90,7 +89,9 @@ const Filters = () => {
   const animatedComponents = makeAnimated();
   return (
     <div className={css.filtersSection}>
-      <h2 className={css.title}>Recipes</h2>
+      <h2 className={css.title}>
+        {title ? `Search Results for “${title}”` : "Recipes"}
+      </h2>
       <div className={css.filtersContainerWrapper}>
         <div className={css.filtersContainer}>
           <p className={css.recipesCount}>{recipesAmount} recipes</p>
