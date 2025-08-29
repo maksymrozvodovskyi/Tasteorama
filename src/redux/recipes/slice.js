@@ -17,7 +17,7 @@ const recipesSliceById = createSlice({
       })
       .addCase(fetchRecipeById.fulfilled, (state, { payload }) => {
         state.error = null;
-        state.currentRecipe = payload;
+        state.currentRecipe = payload.data;
         state.isLoadingCurrentRecipe = false;
       })
       .addCase(fetchRecipeById.rejected, (state, action) => {
