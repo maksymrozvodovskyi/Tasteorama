@@ -1,37 +1,39 @@
 import { useState } from "react";
 import Hero from "../../components/Hero/Hero.jsx";
-// import RecipeList from "../components/RecipeList/RecipeList";
-// import { fetchRecipes } from "../services/api";
-// import toast from "react-hot-toast";
+import { handleRecipeSearch } from "../../utils/searchHandler";
+import { useDispatch, useSelector } from "react-redux";
+
+import Filters from "../../components/Filters/Filters";
+import RecipesList from "../../components/RecipeList/RecipeList";
+import {
+  selectFilterCategory,
+  selectFilterIngredients,
+} from "../../redux/filters/selectors";
+import { setTitleFilter } from "../../redux/filters/slice";
+
+
 
 export default function HomePage() {
-  const [recipes, setRecipes] = useState([]);
+ const dispatch = useDispatch();
+  const category = useSelector(selectFilterCategory);
+  const ingredients = useSelector(selectFilterIngredients);
 
-  const handleSearch = async (query, filters) => {
-  //   if (!query.trim()) {
-  //     toast.error("Введіть назву рецепту!");
-  //     return;
-  //   }
-
-  //   try {
-  //     const data = await fetchRecipes(query, filters);
-
-  //     if (data.length === 0) {
-  //       setRecipes([]);
-  //       toast("Рецептів за цим запитом не знайдено!");
-  //       return;
-  //     }
-
-  //     setRecipes(data);
-  //   } catch (error) {
-  //     toast.error("Сталася помилка при завантаженні рецептів.");
-  //   }
+  const handleSearch = (query) => {
+    dispatch(setTitleFilter(query));
+    handleRecipeSearch(query, { category, ingredients }, dispatch);
   };
+
+
+
 
   return (
     <>
       <Hero onSearch={handleSearch} />
-      {/* <RecipeList recipes={recipes} /> */}
+      
+
+      <h1>HomePage</h1>
+      <Filters />
+      <RecipesList />
     </>
   );
 }

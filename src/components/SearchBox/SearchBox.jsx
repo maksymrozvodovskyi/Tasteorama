@@ -8,9 +8,9 @@ export default function SearchBox({ onSearch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!searchQuery.trim()) {
-      toast.error("Введіть назву рецепту");
+      toast.error("Please enter a recipe name!");
       return;
     }
 
