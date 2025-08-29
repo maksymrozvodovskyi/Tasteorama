@@ -7,6 +7,12 @@
     flex-direction: column;
 }
 
+.filtersContainerWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 29px;
+}
+
 .filtersContainer {
     display: flex;
     justify-content: space-between;
@@ -66,4 +72,42 @@
 
 .selectContainer {
     margin-bottom: 16px;
+}
+
+@media only screen and (min-width: 1440px) {
+    .filtersContainerWrapper {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .toggleBtn {
+        display: none;
+    }
+
+    .filtersContent.hidden,
+    .filtersContent {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .selectContainer {
+        margin-bottom: 0;
+        margin-left: 16px;
+        min-width: 180px;
+    }
+
+    .resetButton {
+        order: 1;
+    }
+
+    .selectContainer:first-child {
+        order: 2;
+    }
+
+    .selectContainer:last-of-type {
+        order: 3;
+    }
 }

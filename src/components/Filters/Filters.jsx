@@ -70,58 +70,78 @@ const Filters = () => {
     setIsFilterOpen(!isFilterOpen);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1440) setIsFilterOpen(false);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const animatedComponents = makeAnimated();
   return (
     <div className={css.filtersSection}>
       <h2 className={css.title}>Recipes</h2>
-      <div className={css.filtersContainer}>
-        <p className={css.recipesCount}>{recipesAmount} recipes</p>
+      <div className={css.filtersContainerWrapper}>
+        <div className={css.filtersContainer}>
+          <p className={css.recipesCount}>{recipesAmount} recipes</p>
 
-        <button type="button" className={css.toggleBtn} onClick={toggleFilters}>
-          Filters
-          <svg className={css.filtersIcon}>
-            {isFilterOpen ? (
-              <use href="/public/icons.svg#icon-close" />
-            ) : (
-              <use href="/public/icons.svg#icon-filter" />
-            )}
-          </svg>
-        </button>
-      </div>
-
-      <div
-        className={`${css.filtersContent} ${
-          isFilterOpen ? css.open : css.hidden
-        }`}
-      >
-        <div className={css.selectContainer}>
-          <Select
-            components={animatedComponents}
-            options={categoriesOptions}
-            value={selectedCategory}
-            onChange={onCategoryChange}
-            placeholder="Category"
-            isClearable
-          />
+          <button
+            type="button"
+            className={css.toggleBtn}
+            onClick={toggleFilters}
+          >
+            Filters
+            <svg className={css.filtersIcon}>
+              {isFilterOpen ? (
+                <use href="/public/icons.svg#icon-close" />
+              ) : (
+                <use href="/public/icons.svg#icon-filter" />
+              )}
+            </svg>
+          </button>
         </div>
 
-        <div className={css.selectContainer}>
-          <Select
-            components={animatedComponents}
-            options={ingredientsOptions}
-            value={selectedIngredients}
-            onChange={onIngredientsChange}
-            placeholder="Ingredient"
-            isMulti
-          />
-        </div>
-        <button
-          type="button"
-          onClick={handleResetFilters}
-          className={css.resetButton}
+        <div
+          className={`${css.filtersContent} ${
+            isFilterOpen ? css.open : css.hidden
+          }`}
         >
-          Reset filters
-        </button>
+          <div className={css.selectContainer}>
+            <Select
+              components={animatedComponents}
+              options={categoriesOptions}
+              value={selectedCategory}
+              onChange={onCategoryChange}
+              placeholder="Category"
+              isClearable
+            />
+          </div>
+
+          <div className={css.selectContainer}>
+            <Select
+              components={animatedComponents}
+              options={ingredientsOptions}
+              value={selectedIngredients}
+              onChange={onIngredientsChange}
+              placeholder="Ingredient"
+              isMulti
+            />
+          </div>
+          <button
+            type="button"
+            onClick={handleResetFilters}
+            className={css.resetButton}
+          >
+            Reset filters
+          </button>
+        </div>
       </div>
     </div>
   );
