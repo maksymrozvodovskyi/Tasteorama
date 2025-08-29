@@ -15,7 +15,7 @@ import Header from "../Header/Header";
 function App() {
   return (
     <>
-      <Header/>
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />

@@ -5,7 +5,7 @@ import { selectCurrentRecipes } from "../../../redux/recipes/selectors.js";
 import {
   fetchAddRecipesToFavorite,
   fetchDeleteRecipesFromFavorite,
-} from "../../../redux/recipes/operations.js"; // тут потрібно логіку дописати
+} from "../../../redux/recipes/operations.js";
 import styles from "./RecipeDetails.module.css";
 import clsx from "clsx";
 import NotFound from "../NotFound/NotFound.jsx";
@@ -18,14 +18,14 @@ const RecipeDetails = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
-  const ingredientsList = useSelector(selectIngredients);
+  const ingredientsList = useSelector(selectIngredients) || [];
   const recipe = useSelector(selectCurrentRecipes);
 
   useEffect(() => {
-    if (ingredientsList.length === 0) {
+    if (!Array.isArray(ingredientsList) || ingredientsList.length === 0) {
       dispatch(fetchIngredients());
     }
-  }, [dispatch, ingredientsList.length]);
+  }, [dispatch, ingredientsList]);
 
   // Якщо рецепт не завантажився — NotFound
   if (!recipe) return <NotFound />;
@@ -39,9 +39,9 @@ const RecipeDetails = () => {
       return;
     }
     if (isFavorite) {
-      dispatch(fetchDeleteRecipesFromFavorite(recipe._id)); // тут потрібно логіку дописати
+      dispatch(fetchDeleteRecipesFromFavorite(recipe._id));
     } else {
-      dispatch(fetchAddRecipesToFavorite(recipe._id)); // тут потрібно логіку дописати
+      dispatch(fetchAddRecipesToFavorite(recipe._id));
     }
   };
 

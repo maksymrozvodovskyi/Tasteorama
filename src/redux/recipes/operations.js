@@ -1,14 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { apiBack } from "../../api/api.js";
+import axios from "axios";
 
-export const fetchRecipesById = createAsyncThunk(
-  "recipes/fetchRecipesById",
+axios.defaults.baseURL = "https://tasteoramaapi.onrender.com";
+
+export const fetchRecipeById = createAsyncThunk(
+  "recipes/fetchRecipeById",
   async (recipeId, thunkAPI) => {
     try {
-      const { data } = await apiBack.get(`/recipes/${recipeId}`);
+      const { data } = await axios.get(`/api/recipes/${recipeId}`);
       return data.data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err);
+      return thunkAPI.rejectWithValue({
+        message: err.response?.data?.message || err.message,
+        status: err.response?.status,
+      });
     }
   }
 );
