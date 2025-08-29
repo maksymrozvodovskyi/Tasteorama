@@ -7,6 +7,7 @@ import ingredientsReducer from "./ingredients/slice.js";
 import favReducer from "../redux/favourite/slice";
 import recipesReducer from "./addRecipe/slice.js";
 
+
 import {
   persistStore,
   persistReducer,
@@ -22,7 +23,7 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "accessToken",
   storage,
-  whitelist: ["accessToken"],
+  whitelist: ["accessToken", "hasAvatar", "userName"],
 };
 
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);
