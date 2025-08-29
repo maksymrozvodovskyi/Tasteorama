@@ -5,6 +5,8 @@ import recipesSlice from "./recipesList/slice.js";
 import categoriesReducer from "./categories/slice.js";
 import ingredientsReducer from "./ingredients/slice.js";
 import favReducer from "../redux/favourite/slice";
+import recipesReducer from "./addRecipe/slice.js";
+
 
 import {
   persistStore,
@@ -34,6 +36,7 @@ export const store = configureStore({
     ingredients: ingredientsReducer,
     filters: filterReducer,
     favorites: favReducer,
+    addRecipe: recipesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
