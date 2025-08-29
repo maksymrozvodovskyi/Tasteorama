@@ -251,7 +251,6 @@ const AddRecipeForm = () => {
                     if (ingredientName.trim().length > 0) setShowList(true);
                   }}
                   onBlur={() => {
-                    // невелика затримка щоб встигти клікнути по елементу
                     setTimeout(() => setShowList(false), 250);
                   }}
                 />
