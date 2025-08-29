@@ -1,0 +1,133 @@
+.navGroup  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.link {
+    position: relative;
+    padding-bottom: 4px;
+    text-decoration: none;
+    color: white;
+    transition: all 200ms ease-in-out;
+}
+
+.link:hover {
+    color: #e3caa5;
+}
+
+.link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+.link.active::after {
+    width: 100%;
+}
+
+.linkBtn {
+    background-color: #9b6c43;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 16px;
+    width: 100%;
+    text-align: center;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+}
+
+.linkBtn:hover {
+    background-color: #6d554b;
+}
+
+.linkBtn:focus {
+    background-color: #9b6c43;
+    box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px white;
+}
+
+.linkBtn:focus:hover {
+    background-color: #9b6c43;
+}
+
+.userInfo {
+    order: 2;
+    align-self: center;
+}
+
+.navGroup>.recipes {
+    order: 0;
+}
+
+.navGroup>.profile {
+    order: 1;
+}
+
+.navGroup>.userInfo {
+    order: 2;
+}
+
+.navGroup>.addRecipe {
+    order: 3;
+}
+
+@media (min-width: 768px) {
+    .navGroup {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        flex-wrap: nowrap;
+        font-size: 12px;
+    }
+
+    .linkBtn {
+        width: auto;
+        white-space: nowrap;
+    }
+
+    .link {
+        white-space: nowrap;
+    }
+
+    .navGroup>.userInfo {
+        margin-left: auto;
+        align-self: center;
+    }
+
+    .navGroup>.recipes {
+        order: 0;
+    }
+
+    .navGroup>.profile {
+        order: 1;
+    }
+
+    .navGroup>.addRecipe {
+        order: 2;
+    }
+
+    .navGroup>.userInfo {
+        order: 3;
+        margin-left: auto;
+        align-self: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 0 108px;
+    }
+}
