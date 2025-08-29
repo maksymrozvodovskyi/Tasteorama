@@ -44,6 +44,7 @@ const AddRecipeForm = () => {
   const [filtered, setFiltered] = useState([]);
   const [showList, setShowList] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [ingredientId, setIngredientId] = useState("");
 
   // Підтягування категорій
   useEffect(() => {
@@ -104,6 +105,7 @@ const AddRecipeForm = () => {
           }
         });
 
+        console.log([...formData.entries()]);
         dispatch(addRecipe(formData));
         resetForm();
       }}
@@ -263,6 +265,7 @@ const AddRecipeForm = () => {
                         className={styles.dropdownItem}
                         onClick={() => {
                           setIngredientName(ing.name);
+                          setIngredientId(ing._id);
                           setShowList(false);
                         }}
                       >
@@ -293,6 +296,7 @@ const AddRecipeForm = () => {
                     {
                       name: ingredientName.trim(),
                       amount: ingredientAmount.trim(),
+                      id: ingredientId,
                     },
                   ]);
                   setIngredientName("");
