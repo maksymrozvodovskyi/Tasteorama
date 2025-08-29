@@ -1,14 +1,16 @@
 .notFoundContainer {
   max-width: 600;
-  margin: "0 auto";
-  text-align: "center";
+  margin: 0 auto;
+  text-align: center;
 }
 
 .notfoundtitle {
-  font-size: 60px;
-  color: #4d50ff;
+  font-size: 48px;
+  font-weight: 600;
+  color: #000000;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 32px;
+  margin-bottom: 16px;
   animation: fadeIn 0.6s ease-in-out;
 }
 
@@ -16,6 +18,7 @@
   font-size: 24px;
   font-weight: 400;
   color: #000000;
+  text-align: center;
 }
 
 .backButton {
@@ -28,6 +31,7 @@
   color: #ffffff;
   border-radius: 16px;
   text-decoration: none;
+  text-align: center;
   transition: background 0.3s;
 }
 

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, lazy, Suspense } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchRecipesById } from "../../redux/recipes/operations.js";
+import { fetchRecipeById } from "../../redux/recipes/operations.js";
 import {
   selectRecipesError,
   selectRecipesIsLoadingCurrentRecipe,
@@ -14,21 +14,21 @@ const RecipeDetails = lazy(() =>
 );
 
 const RecipeViewPage = () => {
-  const { recipeId } = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
 
   const error = useSelector(selectRecipesError);
   const isLoading = useSelector(selectRecipesIsLoadingCurrentRecipe);
 
   useEffect(() => {
-    if (recipeId) {
-      dispatch(fetchRecipesById(recipeId));
+    if (id) {
+      dispatch(fetchRecipeById(id));
     }
-  }, [dispatch, recipeId]);
+  }, [dispatch, id]);
 
   if (isLoading) return <p>Loading recipe...</p>;
 
-  if (error) return <NotFound />;
+  if (error?.status === 404) return <NotFound />;
 
   return (
     <Suspense fallback={<p>Loading recipe...</p>}>
