@@ -65,9 +65,9 @@
 
 @media (min-width: 769px) {
   .form {
-    flex-direction: row;
+    /* flex-direction: row; */
     gap: 12px;
-    width: 661px;
+    /* width: 661px; */
   }
 
   .input {

@@ -105,16 +105,17 @@
 @media (min-width: 769px) {
   .hero {
     background-image: url("../../img/HeroSearchBox/banner-desktop.jpg");
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: left;
-    padding-right: 665px;
+    background-size: contain;
+    /* display: flex; */
+    /* justify-content: flex-start; */
+    /* align-items: center; */
+    /* text-align: left; */
+    /* padding-right: 665px; */
   }
 
   .title {
-    font-size: 48px;
-    line-height: 1.1;
+    /* font-size: 48px; */
+    /* line-height: 1.1; */
     width: 493px;
   }
 
