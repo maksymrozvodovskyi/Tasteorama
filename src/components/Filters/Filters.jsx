@@ -14,6 +14,7 @@ import {
 } from "../../redux/filters/slice";
 import { fetchRecipes } from "../../redux/recipesList/operations";
 import css from "./Filters.module.css";
+import { clearitems } from "../../redux/recipesList/slice";
 
 const Filters = () => {
   const dispatch = useDispatch();
@@ -41,22 +42,18 @@ const Filters = () => {
   }));
 
   const handleResetFilters = () => {
+    dispatch(clearitems());
     dispatch(resetFilters());
     setSelectedCategory(null);
     setSelectedIngredients([]);
-    dispatch(fetchRecipes({ title: "", category: "", ingredients: [] }));
+    dispatch(fetchRecipes());
   };
 
   const onCategoryChange = (selectedOption) => {
     setSelectedCategory(selectedOption);
     dispatch(setCategoryFilter(selectedOption ? selectedOption.value : ""));
-    dispatch(
-      fetchRecipes({
-        title: "",
-        category: selectedOption ? selectedOption.value : "",
-        ingredients: selectedIngredients.map((option) => option.value),
-      })
-    );
+    dispatch(clearitems());
+    dispatch(fetchRecipes());
   };
 
   const onIngredientsChange = (selectedOptions) => {
@@ -65,13 +62,8 @@ const Filters = () => {
       ? selectedOptions.map((option) => option.value)
       : [];
     dispatch(setIngredientsFilter(ingredientValues));
-    dispatch(
-      fetchRecipes({
-        title: "",
-        category: selectedCategory ? selectedCategory.value : "",
-        ingredients: ingredientValues,
-      })
-    );
+    dispatch(clearitems());
+    dispatch(fetchRecipes());
   };
 
   const toggleFilters = () => {
