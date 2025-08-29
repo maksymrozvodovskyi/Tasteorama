@@ -1,0 +1,30 @@
+.btn {
+    text-align: center;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 0;
+    padding: 16px;
+    width: 100%;
+    max-width: 372px;
+    background-color: #9B6C43 ;
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
+}
+
+.container {
+    text-align: center;
+    align-items: center;
+}
+
+@media only screen and (min-width: 768px) {
+    .btn {
+            width: 338px;
+        }
+}
+
+@media only screen and (min-width: 1440px) {
+    .btn {
+            width: 289px;
+        }
+}

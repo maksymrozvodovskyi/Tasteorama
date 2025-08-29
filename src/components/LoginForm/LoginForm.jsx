@@ -7,7 +7,7 @@ import { useState } from "react";
 import eyeOpenSvg from "../../assets/icons/eye.svg";
 import eyeClosedSvg from "../../assets/icons/eye-crossed.svg";
 // import icons from "../../../public/icons.svg";
-import { loginUserThunk } from "../../redux/auth/operations";
+import { loginUserThunk, fetchCurrentUser } from "../../redux/auth/operations";
 import { loginSchema } from "../../formSchema";
 
 const PasswordField = ({ field, form }) => {
@@ -67,16 +67,14 @@ export const LoginForm = () => {
     // }
 
     try {
-      const loginResult = await dispatch(
-        loginUserThunk({ email, password })
-      ).unwrap();
-
-      console.log("loginResult:", loginResult);
-
+      await dispatch(loginUserThunk({ email, password })).unwrap();
       toast.success("Login successful!");
+      
+      await dispatch(fetchCurrentUser()).unwrap();
+      // console.log("currentUserName:", currentUser.data.name);
+
       navigate("/");
-    } catch (error) {
-      console.error("Login failed:", error);
+    } catch {    
       toast.error("Incorrect email or password");
     } finally {
       setSubmitting(false);
