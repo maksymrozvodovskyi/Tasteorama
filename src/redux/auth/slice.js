@@ -3,12 +3,13 @@ import {
   registerUserThunk,
   loginUserThunk,
   logoutUserThunk,
+  fetchCurrentUser,
 } from "../auth/operations";
 
 const initialState = {
   accessToken: null,
   // accessToken: localStorage.getItem("accessToken") || null,
-  // user: null,
+  userName: null,
   isLoading: false,
   error: null,
 };
@@ -22,14 +23,14 @@ const slice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(registerUserThunk.fulfilled, (state) => {
+      .addCase(registerUserThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        // state.user = { name: payload.name, email: payload.email };
+        state.userName = payload.user.name;
       })
       .addCase(registerUserThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.error = payload;
+        state.error = payload.response.data;
       })
       .addCase(loginUserThunk.pending, (state) => {
         state.isLoading = true;
@@ -44,17 +45,28 @@ const slice = createSlice({
       })
       .addCase(loginUserThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.error = payload;
+        state.error = payload.response.data;
       })
       .addCase(logoutUserThunk.fulfilled, (state) => {
         state.accessToken = null;
-        state.user = null;
+        state.userName = null;
         state.isLoading = false;
         state.error = null;
       })
       .addCase(logoutUserThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.error = payload;
+        state.error = payload.response.data;
+      })
+      .addCase(fetchCurrentUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchCurrentUser.fulfilled, (state, { payload }) => {
+        state.userName = payload.data.name;
+        state.isLoading = false;
+      })
+      .addCase(fetchCurrentUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload?.response?.data || payload;
       }),
 });
 
