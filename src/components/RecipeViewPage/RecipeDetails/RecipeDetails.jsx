@@ -1,20 +1,25 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../../redux/auth/selectors.js";
 import { selectCurrentRecipes } from "../../../redux/recipes/selectors.js";
 import {
-  fetchAddRecipesToFavorite,
-  fetchDeleteRecipesFromFavorite,
-} from "../../../redux/recipes/operations.js";
+  addFavorite,
+  removeFavorite,
+} from "../../../redux/favourite/operations.js";
 import styles from "./RecipeDetails.module.css";
 import clsx from "clsx";
 import NotFound from "../NotFound/NotFound.jsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchIngredients } from "../../../redux/ingredients/operations";
 import { selectIngredients } from "../../../redux/ingredients/selectors";
+import ErrorWhileSaving from "../../ErrorWhileSaving/ErrorWhileSaving.jsx";
+// пуш повідомлення
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const RecipeDetails = () => {
-  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
@@ -35,15 +40,30 @@ const RecipeDetails = () => {
   const isAuth = Boolean(user);
   const isFavorite = user?.favorites?.includes(recipe._id);
 
-  const handleFavoriteClick = () => {
+  const handleFavoriteClick = async () => {
     if (!isAuth) {
-      navigate("/login");
+      // navigate("/login");
+      // return;
+      setShowModal(true);
       return;
     }
+
+    try {
+      if (isFavorite) {
+        await dispatch(removeFavorite(recipe._id)).unwrap();
+        toast.success("Recipe removed from favorites ✅");
+      } else {
+        await dispatch(addFavorite(recipe._id)).unwrap();
+        toast.success("Recipe added to favorites ❤️");
+      }
+    } catch (error) {
+      toast.error(error?.message || "Something went wrong while saving ❌");
+    }
+
     if (isFavorite) {
-      dispatch(fetchDeleteRecipesFromFavorite(recipe._id));
+      dispatch(removeFavorite(recipe._id));
     } else {
-      dispatch(fetchAddRecipesToFavorite(recipe._id));
+      dispatch(addFavorite(recipe._id));
     }
   };
 
@@ -165,6 +185,7 @@ const RecipeDetails = () => {
           </section>
         </div>
       </div>
+      {showModal && <ErrorWhileSaving onClose={() => setShowModal(false)} />}
     </div>
   );
 };

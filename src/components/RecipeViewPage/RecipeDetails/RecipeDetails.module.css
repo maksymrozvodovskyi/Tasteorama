@@ -55,15 +55,22 @@ h2 {
   margin-bottom: 24px;
   border: none;
 }
-/* .icon {
-  width: 20px;
-  height: 20px;
-  fill: transparent;
-  stroke: var(--white);
+
+.saveButton:hover,
+.saveButton:focus {
+  background-color: #6d554b;
 }
-.iconSaveFavorite {
-  fill: var(--white);
-} */
+
+.saveButton:active {
+  box-shadow: 0px 0px 0px 6px #4e46b41f;
+  box-shadow: 0px 0px 0px 2px #ffffff;
+}
+
+.saveButton:disabled {
+  opacity: 0.3;
+  box-shadow: 0px 0px 0px 6px #4e46b41f;
+  box-shadow: 0px 0px 0px 2px #ffffff;
+}
 
 .flagIconSave {
   width: 24px;
