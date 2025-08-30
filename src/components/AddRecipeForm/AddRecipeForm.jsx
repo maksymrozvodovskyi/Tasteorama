@@ -139,8 +139,8 @@ const AddRecipeForm = () => {
 
               <input
                 className={styles.inputPhoto}
-                id="photo"
-                name="photo"
+                id="thumb"
+                name="thumb"
                 type="file"
                 accept="image/*"
                 style={{ display: "none" }}
