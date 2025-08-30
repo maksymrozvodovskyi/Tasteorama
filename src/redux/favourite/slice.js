@@ -14,9 +14,9 @@ const favoriteSlice = createSlice({
       .addCase(addFavorite.fulfilled, (state, action) => {
         if (action.payload.favoritesRecipes) {
           const unique = [
-              ...new Map(
-              action.payload.favoritesRecipes.map(item => [item._id, item])
-            ).values()
+            ...new Map(
+              action.payload.favoritesRecipes.map((item) => [item._id, item])
+            ).values(),
           ];
           state.items = unique;
         }
@@ -24,7 +24,7 @@ const favoriteSlice = createSlice({
       .addCase(removeFavorite.fulfilled, (state, action) => {
         state.items = state.items.filter(
           (item) => item._id !== action.meta.arg
-        )
+        );
       })
       .addCase(addFavorite.rejected, (state, action) => {
         console.error("addFavorite rejected:", action.payload);

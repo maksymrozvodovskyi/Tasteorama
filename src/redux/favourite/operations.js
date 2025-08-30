@@ -2,9 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addToFavorites,
   removeFromFavorites,
-  fetchFavorites,
+  getFavorites,
 } from "../../services/favoritesAPI";
 
+// Додати улюблене
 export const addFavorite = createAsyncThunk(
   "favorites/add",
   async (id, thunkAPI) => {
@@ -12,12 +13,17 @@ export const addFavorite = createAsyncThunk(
       const result = await addToFavorites(id);
       return result;
     } catch (err) {
-      console.error("addFavorite failed:", err.response?.data || err.message);
+      console.error(
+        "addFavorite failed:",
+        err.response?.status,
+        err.response?.data || err.message
+      );
       return thunkAPI.rejectWithValue(err.response?.data || "Unknown error");
     }
   }
 );
 
+// Видалити з улюблених
 export const removeFavorite = createAsyncThunk(
   "favorites/remove",
   async (id, thunkAPI) => {
@@ -30,11 +36,14 @@ export const removeFavorite = createAsyncThunk(
   }
 );
 
-export const fetchFavoriteRecipes = createAsyncThunk(
-  "favorites/fetch",
+// Отримати всі улюблені рецепти
+export const fetchFavorites = createAsyncThunk(
+  "favorites/fetchAll",
   async (_, thunkAPI) => {
     try {
-      return await fetchFavorites();
+      const res = await getFavorites();
+      console.log(res);
+      return res.data.data.recipes;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || "Unknown error");
     }
