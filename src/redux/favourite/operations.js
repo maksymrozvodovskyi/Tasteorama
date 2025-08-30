@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addToFavorites, removeFromFavorites } from "../../services/favoritesAPI";
+import { addToFavorites, getFavorites, removeFromFavorites } from "../../services/favoritesAPI";
 
 export const addFavorite = createAsyncThunk(
   "favorites/add",
@@ -25,4 +25,16 @@ export const removeFavorite = createAsyncThunk(
         return thunkAPI.rejectWithValue(err.response?.data || "Unknown error");
       }
     }
+);
+
+export const fetchFavorites = createAsyncThunk(
+  "favorites/fetchAll",
+  async (_, thunkAPI) => {
+    try {
+      const res = await getFavorites();
+      return res.data.data.recipes;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response?.data || "Unknown error");
+    }
+  }
 );

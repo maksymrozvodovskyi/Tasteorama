@@ -16,9 +16,8 @@ export default function RecipeCard({ recipe, mode = "default" }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const isFavorite = useSelector((state) =>
-    state.favorites.items.some((item) => item._id === _id)
-  );
+  const favorites = useSelector((state) => state.favorites.items) || [];
+  const isFavorite = favorites.some((item) => item._id === _id);
 
   const token = useSelector((state) => state.auth.accessToken);
   const isLoggedIn = Boolean(token);
@@ -29,16 +28,26 @@ export default function RecipeCard({ recipe, mode = "default" }) {
       return;
     }
 
-    setAuthToken(token);
+    try {
+      setAuthToken(token);
 
-    if (isFavorite) {
-      dispatch(removeFavorite(_id));
-    } else {
-      const resultAction = await dispatch(addFavorite(_id));
+      if (isFavorite) {
+        await dispatch(removeFavorite(_id)).unwrap();
+        iziToast.info({
+          message: "Recipe removed from favorites",
+          position: "topRight",
+        });
+      } else {
+        await dispatch(addFavorite(_id)).unwrap();
 
-      if (addFavorite.fulfilled.match(resultAction)) {
         navigate(`/recipes/${_id}`);
       }
+    } catch {
+      iziToast.error({
+        title: "Error",
+        message: "Failed to update favorites",
+        position: "topRight",
+      });
     }
   };
 
