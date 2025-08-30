@@ -4,9 +4,15 @@
 }
 @media only screen and (min-width: 1440px) {
   .form {
+    display: flex;
     flex-direction: row-reverse;
     gap: 24px;
   }
+}
+.fieldPhoto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .upload {
@@ -14,9 +20,9 @@
   flex-direction: column;
   justify-content: center;
 }
-
 .titleSection {
   font-size: 24px;
+  justify-content: left;
   font-weight: 600;
   padding-top: 24px;
 }
@@ -25,7 +31,6 @@
     font-size: 32px;
   }
 }
-
 .uploadLabel {
   border-radius: 16px;
   display: flex;
@@ -34,6 +39,7 @@
   cursor: pointer;
   transition: border-color 0.3s;
   aspect-ratio: 1 / 1;
+  border-radius: 16px;
   width: 100%;
   background: #9f9f9f;
 }
@@ -47,50 +53,77 @@
     width: 391px;
     aspect-ratio: 1/1;
   }
+  .fieldPhoto {
+    flex: 1; /* фото займає менше */
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start; /* по вертикалі вгору */
+  }
 }
 .uploadLabel:hover {
   border-color: #666;
 }
-
 .inputPhoto {
   display: none; /* ховаємо стандартний інпут */
 }
-
 .uploadImage {
-  stroke: currentColor;
-  stroke-width: 1px;
   color: #070707;
+  stroke-width: 1px;
+  stroke: currentColor;
 }
-
 .titlePart {
   font-weight: 400;
   font-size: 18px;
   padding-top: 8px;
 }
-
-/* ====== INPUTS ====== */
-.inputBase {
-  width: 100%;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
-  padding: 12px;
-  font-size: 18px;
-  color: #595d62;
-  box-sizing: border-box;
+.fieldGroup {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
 }
-
-.inputBase::placeholder {
-  color: #595d62;
-  font-family: inherit;
-  font-size: inherit;
+.fieldItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
-
+.fieldForm {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+@media only screen and (min-width: 1440px) {
+  .fieldForm {
+    flex: 2; /* форма займає більше */
+  }
+}
 .inputWrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
-
+.input {
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 12px;
+}
+.input::placeholder,
+.inputTitle::placeholder,
+.textarea::placeholder {
+  font-family: inherit;
+  font-size: inherit;
+  color: #595d62;
+  font-size: 18px;
+}
+.inputTitle {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  font-size: 18px;
+  color: #595d62;
+  box-sizing: border-box;
+}
 .inputSuffix {
   position: absolute;
   right: 10px;
@@ -98,33 +131,23 @@
   font-size: 14px;
   pointer-events: none;
 }
-
 .textarea {
-  @extend .inputBase;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
   min-height: 144px;
+  background: #fff;
+  font-weight: 400;
+  font-size: 18px;
+  border: 1px solid #d9d9d9;
+  box-sizing: border-box;
   margin-top: 8px;
-  resize: vertical;
 }
-
-.fieldGroup {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.fieldItem {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ====== INGREDIENTS ====== */
 .ingredients {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-
 .inputsRow {
   display: flex;
   flex-direction: column;
@@ -132,11 +155,38 @@
 }
 @media only screen and (min-width: 768px) {
   .inputsRow {
+    display: flex;
     flex-direction: row;
     gap: 24px;
   }
 }
-
+.addBtn {
+  background-color: #9b6c43;
+  color: #fff;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+@media only screen and (min-width: 768px) {
+  .addBtn {
+    width: 249px;
+    margin-left: auto;
+    display: block;
+  }
+}
+.addBtn:hover,
+.addBtn:focus {
+  background-color: #6d554b;
+}
+.addBtn:active {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+  background: #9b6c43;
+}
 .ingredientsTable {
   width: 100%;
   border-collapse: collapse;
@@ -157,53 +207,50 @@
   cursor: pointer;
   font-size: 16px;
 }
-.ingredientsTable button:hover {
-  opacity: 0.7;
+.selectWrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
-
-/* ====== BUTTONS ====== */
-.addBtn,
+.selectWrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding-right: 40px;
+}
+.selectWrapper::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: url("/icons.svg#icon-arrow-down") no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+}
 .submitBtn {
-  background-color: #9b6c43;
-  color: #fff;
-  border: none;
-  padding: 12px 16px;
   border-radius: 8px;
+  padding: 12px 16px;
+  width: 100%;
+  height: 44px;
+  background: #9b6c43;
   font-weight: 600;
   font-size: 16px;
-  cursor: pointer;
-  transition: background 0.2s ease;
+  color: #fff;
+  border: none;
+  margin-top: 40px;
+  margin-bottom: 48px;
 }
-.addBtn:hover,
-.addBtn:focus,
 .submitBtn:hover,
 .submitBtn:focus {
   background-color: #6d554b;
 }
-.addBtn:active,
 .submitBtn:active {
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
   background: #9b6c43;
 }
-
-.addBtn {
-  width: 100%;
-}
-@media only screen and (min-width: 768px) {
-  .addBtn {
-    width: 249px;
-    margin-left: auto;
-    display: block;
-  }
-}
-
-.submitBtn {
-  width: 100%;
-  height: 44px;
-  margin: 40px 0 48px;
-}
-
-/* ====== AUTOCOMPLETE DROPDOWN ====== */
 .dropdown {
   position: absolute;
   top: 100%;

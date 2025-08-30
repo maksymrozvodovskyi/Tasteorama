@@ -26,7 +26,7 @@ const AddRecipeSchema = Yup.object().shape({
     .min(1)
     .max(10000)
     .typeError("Enter only number")
-    .positive("Time must be greater than 0")
+    .positive("Calories must be greater than 0")
     .integer("Only whole numbers")
     .required("Enter calories"),
   category: Yup.string().required("Select a category"),
@@ -116,19 +116,28 @@ const AddRecipeForm = () => {
       {({ values, setFieldValue }) => (
         <Form className={styles.form}>
           {/* Upload Photo */}
-          <div className={styles.fieldItem}>
+          <div className={styles.fieldPhoto}>
             <h3 className={styles.titleSection}>Upload photo</h3>
             <div className={styles.upload}>
               <label htmlFor="photo" className={styles.uploadLabel}>
-                <svg
-                  width="52"
-                  height="52"
-                  className={styles.uploadImage}
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#icon-photo" />
-                </svg>
+                {preview ? (
+                  <img
+                    src={preview}
+                    alt="Preview"
+                    className={styles.previewImage}
+                  />
+                ) : (
+                  <svg
+                    width="52"
+                    height="52"
+                    className={styles.uploadImage}
+                    aria-hidden="true"
+                  >
+                    <use href="/icons.svg#icon-photo" />
+                  </svg>
+                )}
               </label>
+
               <input
                 className={styles.inputPhoto}
                 id="photo"
@@ -139,24 +148,16 @@ const AddRecipeForm = () => {
                 onChange={(e) => {
                   const file = e.currentTarget.files[0];
                   if (file) {
-                    setFieldValue("photo", file); // додаємо у Formik
-                    setPreview(URL.createObjectURL(file)); // робимо превʼю
+                    setFieldValue("photo", file);
+                    setPreview(URL.createObjectURL(file));
                   }
                 }}
               />
-              {preview && (
-                <div className={styles.previewWrapper}>
-                  <img
-                    src={preview}
-                    alt="Preview"
-                    className={styles.previewImage}
-                  />
-                </div>
-              )}
             </div>
           </div>
-          <div className={styles.fieldItem}>
-            {/* General Information */}
+
+          {/* General Information */}
+          <div className={styles.fieldForm}>
             <h3 className={styles.titleSection}>General Information</h3>
             <h4 className={styles.titlePart}>Recipe Title</h4>
             <Field
@@ -170,6 +171,7 @@ const AddRecipeForm = () => {
               component="div"
               className={styles.error}
             />
+
             <h4 className={styles.titlePart}>Recipe Description</h4>
             <Field
               as="textarea"
@@ -182,6 +184,7 @@ const AddRecipeForm = () => {
               component="div"
               className={styles.error}
             />
+
             <h4 className={styles.titlePart}>Cooking time in minutes</h4>
             <Field
               name="time"
@@ -194,6 +197,7 @@ const AddRecipeForm = () => {
               component="div"
               className={styles.error}
             />
+
             <div className={styles.fieldGroup}>
               <div className={styles.fieldItem}>
                 <h4 className={styles.titlePart}>Calories</h4>
@@ -216,6 +220,7 @@ const AddRecipeForm = () => {
                 <h4 className={styles.titlePart}>Category</h4>
                 <div className={styles.selectWrapper}>
                   <Field as="select" name="category" className={styles.input}>
+                    <option value="">Select category</option>
                     {categories.map((cat) => (
                       <option key={cat._id} value={cat.name}>
                         {cat.name}
@@ -223,7 +228,6 @@ const AddRecipeForm = () => {
                     ))}
                   </Field>
                 </div>
-
                 <ErrorMessage
                   name="category"
                   component="div"
@@ -248,7 +252,6 @@ const AddRecipeForm = () => {
                         const value = e.target.value;
                         setIngredientName(value);
 
-                        // показати фільтрований список
                         if (value.trim().length > 0) {
                           const results = ingredients.filter((ing) =>
                             ing.name.toLowerCase().includes(value.toLowerCase())
@@ -360,7 +363,6 @@ const AddRecipeForm = () => {
                   </tbody>
                 </table>
               )}
-
               <ErrorMessage
                 name="ingredients"
                 component="div"
@@ -381,6 +383,7 @@ const AddRecipeForm = () => {
               component="div"
               className={styles.error}
             />
+
             {/* Submit */}
             <button type="submit" className={styles.submitBtn}>
               Publish Recipe
