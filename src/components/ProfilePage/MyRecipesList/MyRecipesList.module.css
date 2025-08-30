@@ -1,0 +1,14 @@
+.recipesCount {
+  margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #000;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1440px) {
+  .recipesCount {
+    margin-bottom: 24px;
+  }
+}

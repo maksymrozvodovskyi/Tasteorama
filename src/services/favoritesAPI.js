@@ -17,3 +17,8 @@ export async function removeFromFavorites(id) {
     const res = await api.delete(`/favorites/${id}`);
     return res.data;
 };
+
+export async function fetchFavorites() {
+  const res = await api.get("/favorites");
+  return res.data;
+}
