@@ -6,6 +6,7 @@ import { addFavorite, removeFavorite } from "../../redux/favourite/operations";
 import { useState } from "react";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+import ErrorWhileSaving from "../ErrorWhileSaving/ErrorWhileSaving";
 
 export default function RecipeCard({ recipe, mode = "default" }) {
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +19,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
     state.favorites.items.some((item) => item._id === _id)
   );
 
-  const token = useSelector((state) => state.auth.token);
+  const token = useSelector((state) => state.auth.accessToken);
   const isLoggedIn = Boolean(token);
 
   const handleToggleFav = async () => {
@@ -30,7 +31,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
     if (isFavorite) {
       dispatch(removeFavorite(_id));
     } else {
-      const resultAction = await dispatch(addFavorite(_id));
+      const resultAction = dispatch(addFavorite(_id));
 
       if (addFavorite.fulfilled.match(resultAction)) {
         navigate(`/recipes/${_id}`);
@@ -105,7 +106,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
             </button>
           )}
         </div>
-        {showModal && ""}
+        {showModal && <ErrorWhileSaving onClose={() => setShowModal(false)} />}
       </div>
     </div>
   );

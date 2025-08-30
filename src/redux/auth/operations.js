@@ -14,7 +14,7 @@ export const registerUserThunk = createAsyncThunk(
       const response = await axios.post("api/auth/register", newUser);
       return response.data.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -23,20 +23,15 @@ export const loginUserThunk = createAsyncThunk(
   "auth/login",
   async (credentials, thunkApi) => {
     try {
-      const response = await axios.post(
-        "api/auth/login",
-        credentials
-      );
+      const response = await axios.post("api/auth/login", credentials);
       const data = response.data.data;
       const accessToken = data.accessToken;
-      console.log("data", data);
-      
-      if (!accessToken)
-        throw new Error("No access token in response");
+
+      if (!accessToken) throw new Error("No access token in response");
       setAuthHeader(accessToken);
       return data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error);
     }
   }
 );
@@ -44,11 +39,42 @@ export const loginUserThunk = createAsyncThunk(
 export const logoutUserThunk = createAsyncThunk(
   "auth/logout",
   async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.auth.accessToken;
+    console.log("Token before logout:", token);
+
+    if (!token) {
+      return thunkAPI.rejectWithValue("No access token, cannot logout");
+    }
+
     try {
+      setAuthHeader(token);
       await axios.post("api/auth/logout");
       setAuthHeader("");
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchCurrentUser = createAsyncThunk(
+  "auth/user",
+  async (_, thunkApi) => {
+    const state = thunkApi.getState();
+    const token = state.auth.accessToken;
+    if (!token) {
+      return thunkApi.rejectWithValue("No access token");
+    }
+     const config = {
+       headers: {
+         Authorization: `Bearer ${token}`,
+       },
+     };
+    try {
+      const response = await axios.get("api/users", config);
+      return response.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
     }
   }
 );

@@ -6,11 +6,22 @@ const initialState = {
   total: 0,
   loading: true,
   error: null,
+  currentPage: 1,
+  totalPages: null,
 };
 
 const recipesSlice = createSlice({
   name: "recipes",
   initialState,
+  reducers: {
+    nextPage: (state) => {
+      state.currentPage += 1;
+    },
+    clearitems: (state) => {
+      state.items = [];
+      state.currentPage = 1;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchRecipes.pending, (state) => {
@@ -20,7 +31,12 @@ const recipesSlice = createSlice({
       .addCase(fetchRecipes.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.items = action.payload.recipes;
+        if (state.currentPage > 1) {
+          state.items = [...state.items, ...action.payload.recipes];
+        } else {
+          state.items = action.payload.recipes;
+        }
+        state.totalPages = action.payload.totalPages;
         state.total = action.payload.totalResults;
       })
       .addCase(fetchRecipes.rejected, (state, action) => {
@@ -29,5 +45,5 @@ const recipesSlice = createSlice({
       });
   },
 });
-
+export const { nextPage, clearitems } = recipesSlice.actions;
 export default recipesSlice.reducer;

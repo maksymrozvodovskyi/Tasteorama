@@ -9,29 +9,32 @@ import { useState, useEffect } from "react";
 const AddRecipeSchema = Yup.object().shape({
   title: Yup.string()
     .min(3)
-    .max(30)
+    .max(64)
     .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]+$/, "Use only letters ")
     .required("Recipe Title"),
   description: Yup.string()
-    .min(10)
-    .max(250)
+    .max(200)
     .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s.,!?()-]+$/, "Only text")
     .required("Add description"),
   time: Yup.number()
+    .max(360)
     .typeError("Enter only number")
     .positive("Time must be greater than 0")
     .integer("Only whole numbers")
     .required("Enter the cooking time"),
   calories: Yup.number()
+    .min(1)
+    .max(10000)
     .typeError("Enter only number")
     .positive("Time must be greater than 0")
     .integer("Only whole numbers")
     .required("Enter calories"),
   category: Yup.string().required("Select a category"),
   instructions: Yup.string()
+    .max(1200)
     .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s.,!?()-]+$/, "Only text")
     .required("Enter the instruction"),
-  ingredients: Yup.array().min(1, "Add at least one ingredient"),
+  ingredients: Yup.array().min(2, "Add at least two ingredient"),
 });
 
 const AddRecipeForm = () => {
@@ -44,6 +47,7 @@ const AddRecipeForm = () => {
   const [filtered, setFiltered] = useState([]);
   const [showList, setShowList] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [ingredientId, setIngredientId] = useState("");
 
   // Підтягування категорій
   useEffect(() => {
@@ -104,6 +108,7 @@ const AddRecipeForm = () => {
           }
         });
 
+        console.log([...formData.entries()]);
         dispatch(addRecipe(formData));
         resetForm();
       }}
@@ -281,6 +286,24 @@ const AddRecipeForm = () => {
                     )}
                   </div>
                 </div>
+                {showList && filtered.length > 0 && (
+                  <ul className={styles.dropdown}>
+                    {filtered.map((ing) => (
+                      <li
+                        key={ing._id}
+                        className={styles.dropdownItem}
+                        onClick={() => {
+                          setIngredientName(ing.name);
+                          setIngredientId(ing._id);
+                          setShowList(false);
+                        }}
+                      >
+                        {ing.name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
 
                 <div className={styles.fieldItem}>
                   <h4 className={styles.titlePart}>Amount</h4>
@@ -313,6 +336,26 @@ const AddRecipeForm = () => {
               >
                 Add new Ingredient
               </button>
+            <button
+              type="button"
+              className={styles.addBtn}
+              onClick={() => {
+                if (ingredientName.trim() && ingredientAmount.trim()) {
+                  setFieldValue("ingredients", [
+                    ...values.ingredients,
+                    {
+                      name: ingredientName.trim(),
+                      amount: ingredientAmount.trim(),
+                      id: ingredientId,
+                    },
+                  ]);
+                  setIngredientName("");
+                  setIngredientAmount("");
+                }
+              }}
+            >
+              Add new Ingredient
+            </button>
 
               {values.ingredients.length > 0 && (
                 <table className={styles.ingredientsTable}>

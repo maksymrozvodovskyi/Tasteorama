@@ -28,7 +28,8 @@
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width=".667" d="M16 10.154v6.577l4.385 3.654M25.5 16c0 5.247-4.253 9.5-9.5 9.5S6.5 21.247 6.5 16s4.253-9.5 9.5-9.5 9.5 4.253 9.5 9.5z"/>
     </symbol>
     <symbol id="icon-close" viewBox="0 0 32 32">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.28" d="M7.36 7.36 16 16m0 0-8.64 8.64M16 16l8.64 8.64M16 16l8.64-8.64"/>
+      <path stroke-width="1.3333" stroke-miterlimit="4" stroke-linecap="butt"  stroke-linejoin="miter" d="M25.5 16c0 5.247-4.253 9.5-9.5 9.5s-9.5-4.253-9.5-9.5c0-5.247 4.253-9.5 9.5-9.5s9.5 4.253 9.5 9.5z"></path>
+      <path stroke-width="1.3333" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="miter" d="M19.699 12.346l-3.699 3.699M16 16.045l-3.699 3.699M16 16.045l3.699 3.699M16 16.045l-3.699-3.699"></path>
     </symbol>
     <symbol id="icon-delete" viewBox="0 0 32 32">
       <path   stroke-linecap="round" stroke="currentColor" stroke-linejoin="round" stroke-width="1.333" d="M16 21.846v-8.769M6.5 9.423h2.192m16.808 0h-2.192m-3.654 0h-7.308m7.308 0V7.961c0-.807-.654-1.462-1.462-1.462h-4.385c-.807 0-1.462.654-1.462 1.462v1.462m7.309 0h3.654m-10.962 0H8.692m14.616 0v13.154a2.923 2.923 0 0 1-2.923 2.923h-8.769a2.923 2.923 0 0 1-2.923-2.923V9.423"/>
