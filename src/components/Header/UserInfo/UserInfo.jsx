@@ -1,17 +1,21 @@
 import { useState } from "react";
 import css from "./UserInfo.module.css";
 import ConfirmLogoutModal from "../ConfirmLogoutModal/ConfirmLogoutModal";
+import { selectUserName } from "../../../redux/auth/selectors";
+import { useSelector } from "react-redux";
+import { selectAvatar } from "../../../redux/auth/selectors";
 
 export default function UserInfo({ onLogout, className }) {
   const [showModal, setShowModal] = useState(false);
-
-  const state = JSON.parse(localStorage.getItem("persist:accessToken"));
-  const name = JSON.parse(state.userName);
+  const hasAvatar = useSelector(selectAvatar);
+  const userName = useSelector(selectUserName);
 
   return (
     <div className={`${css.wrapper} ${className}`}>
-      <div className={css.avatar}>{name.charAt(0).toUpperCase() || "?"}</div>
-      <span className={css.name}>{name}</span>
+      <div className={css.avatar}>
+        {hasAvatar ? userName?.charAt(0).toUpperCase() : "?"}
+      </div>
+      <span className={css.name}>{userName}</span>
       <div className={css.divider}></div>
       <button
         className={css.logoutBtn}

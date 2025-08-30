@@ -9,7 +9,6 @@ import {
 import { fetchRecipes } from "../../redux/recipesList/operations";
 import { nextPage } from "../../redux/recipesList/slice";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
-import Filters from "../Filters/Filters";
 import RecipeCard from "../RecipeCard/RecipeCard";
 
 const RecipesList = () => {
@@ -24,10 +23,6 @@ const RecipesList = () => {
   const totalPages = useSelector(selectTotalPages);
 
   console.log("Виклик тут", recipes);
-
-  if (recipes.length === 0) {
-    return <p>No recipes found</p>; // тут треба викликати модалку "We’re sorry! We were not able to find a match."
-  }
 
   return (
     <>

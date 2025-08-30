@@ -6,6 +6,7 @@ import recipesSliceById from "./recipes/slice.js";
 import categoriesReducer from "./categories/slice.js";
 import ingredientsReducer from "./ingredients/slice.js";
 import favReducer from "../redux/favourite/slice";
+import recipesReducer from "./addRecipe/slice.js";
 
 import {
   persistStore,
@@ -22,7 +23,7 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "accessToken",
   storage,
-  whitelist: ["accessToken", "userName"],
+  whitelist: ["accessToken", "hasAvatar", "userName"],
 };
 
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);
@@ -36,6 +37,7 @@ export const store = configureStore({
     ingredients: ingredientsReducer,
     filters: filterReducer,
     favorites: favReducer,
+    addRecipe: recipesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

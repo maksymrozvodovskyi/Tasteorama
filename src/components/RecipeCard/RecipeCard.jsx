@@ -31,7 +31,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
     if (isFavorite) {
       dispatch(removeFavorite(_id));
     } else {
-      const resultAction = await dispatch(addFavorite(_id));
+      const resultAction = dispatch(addFavorite(_id));
 
       if (addFavorite.fulfilled.match(resultAction)) {
         navigate(`/recipes/${_id}`);
