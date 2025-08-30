@@ -31,12 +31,14 @@
 }
 
 .timeBox {
+    min-width: 53px;
     height: 28px;
     border-radius: 8px;
     padding: 2px 8px;
     display: flex;
     align-items: center;
     gap: 4px;
+    justify-content: center;
     background-color: #ffffff;
 }
 
@@ -119,16 +121,16 @@
     fill: currentColor;
 }
 
-.saveBtn.active{
-    background-color: #9B6C43;
-    border: none;
-    color: #FFFFFF;
-}
-
 .removeBtn:hover,
 .removeBtn:active{
     background-color: #C80000;
         border-color: #C80000;
+}
+
+.saveBtn.active {
+    background-color: #9B6C43 !important;
+    border: none !important;
+    color: #FFFFFF !important;
 }
 
 
@@ -155,7 +157,7 @@
     }
 
     .timeBox{
-        width: 53px;
+        min-width: 53px;
         height: 28px;
 
     }
