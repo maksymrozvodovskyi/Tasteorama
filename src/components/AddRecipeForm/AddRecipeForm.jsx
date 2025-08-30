@@ -101,14 +101,13 @@ const AddRecipeForm = () => {
             formData.append(key, JSON.stringify(values[key]));
           } else if (key === "photo") {
             if (values.photo) {
-              formData.append("photo", values.photo);
+              formData.append("thumb", values.photo);
             }
           } else {
             formData.append(key, values[key]);
           }
         });
 
-        console.log([...formData.entries()]);
         dispatch(addRecipe(formData));
         resetForm();
       }}
@@ -148,7 +147,7 @@ const AddRecipeForm = () => {
                 onChange={(e) => {
                   const file = e.currentTarget.files[0];
                   if (file) {
-                    setFieldValue("photo", file);
+                    setFieldValue("thumb", file);
                     setPreview(URL.createObjectURL(file));
                   }
                 }}
