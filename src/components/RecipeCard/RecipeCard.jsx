@@ -72,7 +72,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
         <div className={css.header}>
           <h3>{title}</h3>
           <span className={css.timeBox}>
-            <svg width="24" height="24">
+            <svg width="24" height="24" className={css.icon}>
               <use href="/icons.svg#icon-clock" />
             </svg>
             <p className={css.time}>{time ? `${time}` : "—"}</p>
@@ -102,7 +102,13 @@ export default function RecipeCard({ recipe, mode = "default" }) {
               className={`${css.saveBtn} ${isFavorite ? css.active : ""}`}
             >
               <svg width="24" height="24" className={css.icon}>
-                <use href="/icons.svg#icon-flag" />
+                <use
+                  xlinkHref={
+                    isFavorite
+                      ? "/icons.svg#icon-delete"
+                      : "/icons.svg#icon-flag"
+                  }
+                />
               </svg>
             </button>
           )}

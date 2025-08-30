@@ -93,6 +93,11 @@
     width: 100% !important;
 }
 
+.saveBtn,
+.removeBtn{
+    color: #000000;
+}
+
 .moreBtn:hover,
 .saveBtn:hover{
     background-color: #9B6C43;
@@ -118,19 +123,26 @@
 }
 
 .icon {
-    fill: currentColor;
+    fill: transparent;
+    stroke: currentColor;
 }
 
 .removeBtn:hover,
-.removeBtn:active{
+.removeBtn:active,
+.saveBtn.active:active{
     background-color: #C80000;
         border-color: #C80000;
 }
 
 .saveBtn.active {
-    background-color: #9B6C43 !important;
+    background-color: #9B6C43;
     border: none !important;
     color: #FFFFFF !important;
+}
+
+.saveBtn.active:hover{
+    background-color: #C80000;
+        border-color: #C80000;
 }
 
 
