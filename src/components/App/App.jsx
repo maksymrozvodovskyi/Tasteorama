@@ -28,6 +28,8 @@ function App() {
         <Route path="/add-recipe" element={<AddRecipePage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
 
+        <Route path="/profile" element={<MyRecipesPage />} />
+
         {/* ерор пейдж 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>

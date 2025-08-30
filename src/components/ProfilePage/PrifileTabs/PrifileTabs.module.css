@@ -1,0 +1,38 @@
+.title {
+  font-weight: 600;
+  font-size: 40px;
+  color: var(--black);
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.tabList {
+  display: flex;
+  justify-content: left;
+  gap: 38px;
+  margin-bottom: 16px;
+}
+
+.tab {
+  padding-bottom: 4px;
+  border-bottom: 1px solid transparent;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--black);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  outline: none;
+}
+
+.selectedTab {
+  border-color: var(--black);
+}
+
+@media (min-width: 768px) {
+  .tab {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1440px) {
+}
