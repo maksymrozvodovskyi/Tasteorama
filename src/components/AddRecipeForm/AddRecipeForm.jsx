@@ -91,7 +91,7 @@ const AddRecipeForm = () => {
         category: "",
         instructions: "",
         ingredients: [],
-        photo: null,
+        thumb: null,
       }}
       validationSchema={AddRecipeSchema}
       onSubmit={(values, { resetForm }) => {
@@ -110,6 +110,7 @@ const AddRecipeForm = () => {
 
         dispatch(addRecipe(formData));
         resetForm();
+        setPreview(null);
       }}
     >
       {({ values, setFieldValue }) => (
@@ -139,15 +140,15 @@ const AddRecipeForm = () => {
 
               <input
                 className={styles.inputPhoto}
-                id="thumb"
-                name="thumb"
+                id="photo"
+                name="photo"
                 type="file"
                 accept="image/*"
                 style={{ display: "none" }}
                 onChange={(e) => {
                   const file = e.currentTarget.files[0];
                   if (file) {
-                    setFieldValue("thumb", file);
+                    setFieldValue("photo", file);
                     setPreview(URL.createObjectURL(file));
                   }
                 }}
