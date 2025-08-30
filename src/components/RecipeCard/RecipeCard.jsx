@@ -6,6 +6,7 @@ import { addFavorite, removeFavorite } from "../../redux/favourite/operations";
 import { useState } from "react";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+import ErrorWhileSaving from "../ErrorWhileSaving/ErrorWhileSaving";
 
 export default function RecipeCard({ recipe, mode = "default" }) {
   const [showModal, setShowModal] = useState(false);
@@ -105,7 +106,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
             </button>
           )}
         </div>
-        {showModal && ""}
+        {showModal && <ErrorWhileSaving onClose={() => setShowModal(false)} />}
       </div>
     </div>
   );

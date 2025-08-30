@@ -36,7 +36,7 @@
   font-weight: 600;
   font-size: 40px;
   color: #fff;
-  /* line-height: 1.1; */
+ 
   margin-bottom: 24px;
 }
 
@@ -57,7 +57,7 @@
     text-align: left;
     width: 100%;
     padding: 0 16px;
-    /* max-width: 329px; */
+   
   }
 
   /* retina */
@@ -76,8 +76,7 @@
     justify-content: flex-start;
     align-items: center;
     text-align: left;
-    /* padding-right: 49px; */
-    /* padding-bottom: 128px; */
+   
     height: 443px;
   }
 
@@ -104,11 +103,7 @@
   .hero {
     background-image: url("../../img/HeroSearchBox/banner-desktop.jpg");
     background-size: contain;
-    /* display: flex; */
-    /* justify-content: flex-start; */
-    /* align-items: center; */
-    /* text-align: left; */
-    /* padding-right: 665px; */
+  
     max-width: 1440px;
     margin: 0 auto;
     background-size: cover;
@@ -120,8 +115,7 @@
   }
 
   .title {
-    /* font-size: 48px; */
-    /* line-height: 1.1; */
+  
     width: 493px;
   }
 

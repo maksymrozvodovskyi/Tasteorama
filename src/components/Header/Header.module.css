@@ -1,0 +1,118 @@
+.header {
+    padding: 14px 0;
+    background-color: #3d2218;
+    position: relative;
+    color: white;
+    margin: 0 -16px;
+}
+
+@media (min-width: 768px) {
+    .header {
+        margin: 0 -32px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .header {
+        margin: 0 -108px;
+    }
+}
+
+.container {
+    max-width: 393px;
+    padding: 0 16px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    text-align: left;
+}
+
+.desktopNav {
+    display: none;
+}
+
+.mobileMenu {
+    display: none;
+}
+
+.mobileMenu.open {
+    max-width: 393px;
+    padding: 0 16px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 32px;
+    padding-bottom: 26px;
+    z-index: 999;
+    text-align: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 46px;
+    width: 165px;
+    justify-content: center;
+}
+
+.iconBox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoIcon {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    transition: letter-spacing 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.logoText {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    transition: leter-spacing 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 768px;
+        padding: 0 32px;
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .desktopNav {
+        display: block;
+    }
+
+    .mobileMenu.open {
+        display: none;
+    }
+}
+
+@media (min-width:1440px) {
+    .container {
+        max-width: 1440px;
+        padding: 0 108px;
+    }
+}
+
+.handleLoginToggle {
+    position: absolute;
+    top: 30px;
+    left: 30%;
+}

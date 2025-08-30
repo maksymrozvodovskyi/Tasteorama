@@ -1,0 +1,51 @@
+.burgerBtn, 
+.closeBtn {
+    display: block;
+} 
+
+.burgerBtn {
+    background: none;
+    border: none;
+    display: block;
+    position: relative;
+    width: 32px;
+    height: 32px;
+}
+
+.burgerIcon {
+    width: 32px;
+    height: 32px;
+    fill: #fff;
+    stroke: #fff;
+}
+
+.closeBtn {
+    background-color: transparent;
+    border: 1.3px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+}
+
+.closeIcon {
+    width: 19px;
+    height: 19px;
+    stroke: #fff;
+    stroke-width: 1.3;
+    stroke-linecap: round;
+    fill: none;
+}
+
+.desktopNav {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .burgerBtn,
+    .closeBtn {
+        display: none;
+    }
+}

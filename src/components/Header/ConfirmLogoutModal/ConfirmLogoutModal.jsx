@@ -1,11 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { useEffect } from "react";
-import css from "./ModalAuthentication.module.css";
+import css from "./ConfirmLogoutModal.module.css";
 
-export default function ModalAuthentication({ onClose = () => {} }) {
-  const navigate = useNavigate();
-
+export default function ConfirmLogoutModal({ onClose, onConfirm }) {
   useEffect(() => {
     const handleEsc = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", handleEsc);
@@ -25,26 +22,14 @@ export default function ModalAuthentication({ onClose = () => {} }) {
           </svg>
         </button>
         <div className={css.content}>
-          <h2 className={css.title}>Unautorized</h2>
-          <p className={css.text}>Please log in or register to continue.</p>
-          <div className={css.actions}>
-            <button
-              className={css.loginBtn}
-              onClick={() => {
-                onClose();
-                navigate("/login");
-              }}
-            >
-              Log in
+          <h2 className={css.title}>Are you sure?</h2>
+          <p className={css.text}>We will miss you!</p>
+          <div className={css.action}>
+            <button className={css.logoutBtn} onClick={onConfirm}>
+              Log out
             </button>
-            <button
-              className={css.registerBtn}
-              onClick={() => {
-                onClose();
-                navigate("/register");
-              }}
-            >
-              Register
+            <button className={css.cancelBtn} onClick={onClose}>
+              Cancel
             </button>
           </div>
         </div>

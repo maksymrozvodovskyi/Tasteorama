@@ -1,30 +1,33 @@
 import { useState } from "react";
 import styles from "./SearchBox.module.css";
-import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+
+import { setTitleFilter } from "../../redux/filters/slice";
+import { fetchRecipes } from "../../redux/recipesList/operations";
 
 
-export default function SearchBox({ onSearch }) {
-  const [searchQuery, setSearchQuery] = useState("");
+
+export default function SearchBox() {
+const dispatch = useDispatch();
+  const [query, setQuery] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!query.trim()) return;
 
-    if (!searchQuery.trim()) {
-      toast.error("Please enter a recipe name!");
-      return;
-    }
-
-    onSearch(searchQuery.trim());
-
+    dispatch(setTitleFilter(query)); 
+    dispatch(fetchRecipes());       
   };
+
+
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <input
         type="text"
         placeholder="Search recipes"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
         className={styles.input}
       />
       <button type="submit" className={styles.button}>
