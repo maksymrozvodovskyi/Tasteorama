@@ -19,10 +19,12 @@ export default function HomePage() {
   };
 
   return (
-    <div className={css.container}>
+    <>
       <Hero onSearch={handleSearch} />
-      <Filters />
-      <RecipesList />
-    </div>
+      <div className={css.containerFilterRecList}>
+        <Filters />
+        <RecipesList />
+      </div>
+    </>
   );
 }

@@ -3,18 +3,18 @@
     background-color: #3d2218;
     position: relative;
     color: white;
-    margin: 0 -16px;
+    /* margin: 0 -16px; */
 }
 
 @media (min-width: 768px) {
     .header {
-        margin: 0 -32px;
+        /* margin: 0 -32px; */
     }
 }
 
 @media (min-width: 1440px) {
     .header {
-        margin: 0 -108px;
+        /* margin: 0 -108px; */
     }
 }
 

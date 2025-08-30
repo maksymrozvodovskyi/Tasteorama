@@ -11,10 +11,11 @@ import Footer from "../Footer/Footer";
 import NotFound from "../RecipeViewPage/NotFound/NotFound";
 import ModalAuthentication from "../ModalAuthentication/ModalAuthentication";
 import Header from "../Header/Header";
+import css from "../../styles/container.module.css";
 
 function App() {
   return (
-    <>
+    <div className={css.container}>
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -32,7 +33,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
-    </>
+    </div>
   );
 }
 

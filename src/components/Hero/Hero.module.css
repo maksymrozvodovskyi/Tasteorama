@@ -1,26 +1,4 @@
-/* Styles for Mobile devices */
-.container {
-  min-width: 320px;
-  /* max-width: 393px; */
-  padding: 0 16px;
-  margin: 0 auto;
-}
 
-/* Styles for Tablet devices */
-@media only screen and (min-width: 768px) {
-  .container {
-    max-width: 768px;
-    padding: 0 32px;
-  }
-}
-
-/* Styles for Desktop devices */
-@media only screen and (min-width: 1440px) {
-  .container {
-    max-width: 1440px;
-    padding: 0 575px 0 0;
-  }
-}
 
 .hero {
   position: relative;
@@ -111,7 +89,8 @@
   }
 
   .content {
-    padding: 0;
+    /* padding: 0; */
+    padding: 128px 108px;
   }
 
   .title {
