@@ -22,7 +22,20 @@ export const fetchOwnRecipes = createAsyncThunk(
   "recipes/fetchOwnRecipes",
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get("/api/recipes/own");
+      const state = thunkAPI.getState();
+      const token = state.auth.accessToken;
+
+      if (!token) {
+        return thunkAPI.rejectWithValue("No access token");
+      }
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.get("/api/recipes/own", config);
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue({
@@ -37,7 +50,20 @@ export const fetchFavoriteRecipes = createAsyncThunk(
   "recipes/fetchFavoriteRecipes",
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get("/api/recipes/favorites");
+      const state = thunkAPI.getState();
+      const token = state.auth.accessToken;
+
+      if (!token) {
+        return thunkAPI.rejectWithValue("No access token");
+      }
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.get("/api/recipes/favorites", config);
       return data.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
