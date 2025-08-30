@@ -14,6 +14,7 @@
   flex-direction: column;
   justify-content: center;
 }
+
 .titleSection {
   font-size: 24px;
   justify-content: left;
@@ -81,6 +82,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .inputWrapper {
   position: relative;
   display: flex;
@@ -96,7 +98,7 @@
 .input::placeholder,
 .inputTitle::placeholder,
 .textarea::placeholder {
-  font-family: inherit; /* успадкує від input */
+  font-family: inherit;
   font-size: inherit;
   color: #595d62;
   font-size: 18px;
@@ -116,7 +118,7 @@
   right: 10px;
   color: #666;
   font-size: 14px;
-  pointer-events: none; /* щоб текст не заважав кліку */
+  pointer-events: none;
 }
 .textarea {
   border-radius: 8px;
