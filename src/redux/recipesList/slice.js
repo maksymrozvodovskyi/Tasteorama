@@ -57,7 +57,7 @@ const recipesSlice = createSlice({
       })
       .addCase(fetchFavoriteRecipes.fulfilled, (state, { payload }) => {
         state.error = null;
-        state.favoriteItems = payload.recipes || payload; // записуємо у favoriteItems
+        state.favoriteItems = payload.recipes || payload;
         state.isLoadingFavoriteRecipes = false;
       })
       .addCase(fetchFavoriteRecipes.rejected, (state, action) => {

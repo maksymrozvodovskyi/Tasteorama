@@ -27,11 +27,12 @@ const RecipesList = () => {
   return (
     <>
       <ul className={styles.list}>
-        {recipes.map((recipe) => (
-          <li key={recipe._id}>
-            <RecipeCard recipe={recipe} mode="default" />
-          </li>
-        ))}
+        {Array.isArray(recipes) &&
+          recipes.map((recipe) => (
+            <li key={recipe._id}>
+              <RecipeCard recipe={recipe} mode="default" />
+            </li>
+          ))}
       </ul>
       {totalPages > 0 && currentPage < totalPages && (
         <LoadMoreBtn nextPage={nextPage} fetchAction={fetchRecipes} />
