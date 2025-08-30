@@ -11,6 +11,7 @@ import Footer from "../Footer/Footer";
 import NotFound from "../RecipeViewPage/NotFound/NotFound";
 import ModalAuthentication from "../ModalAuthentication/ModalAuthentication";
 import Header from "../Header/Header";
+import ProfileTabs from "../../components/ProfilePage/PrifileTabs/ProfileTabs";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/my-recipes" element={<ProfilePage />} />
         <Route path="/add-recipe" element={<AddRecipePage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="/profile/:recipeType" element={<ProfileTabs />} />
 
         {/* ерор пейдж 404 */}
         <Route path="*" element={<NotFound />} />
