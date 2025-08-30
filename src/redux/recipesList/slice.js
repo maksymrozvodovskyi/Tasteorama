@@ -1,13 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchRecipes } from "./operations";
+import {
+  fetchFavoriteRecipes,
+  fetchOwnRecipes,
+} from "../recipes/operations.js";
+import { handleError } from "../../utils/reduxUtils.js";
 
 const initialState = {
-  items: [],
+  ownItems: [],
+  favoriteItems: [],
   total: 0,
   loading: true,
   error: null,
   currentPage: 1,
   totalPages: null,
+  isLoadingFavoriteRecipes: false,
+  isLoadingOwnRecipes: false,
 };
 
 const recipesSlice = createSlice({
@@ -42,6 +50,37 @@ const recipesSlice = createSlice({
       .addCase(fetchRecipes.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || action.error.message;
+      })
+      .addCase(fetchFavoriteRecipes.pending, (state) => {
+        state.error = null;
+        state.isLoadingFavoriteRecipes = true;
+      })
+      .addCase(fetchFavoriteRecipes.fulfilled, (state, { payload }) => {
+        state.error = null;
+        state.favoriteItems = payload.recipes || payload; // записуємо у favoriteItems
+        state.isLoadingFavoriteRecipes = false;
+      })
+      .addCase(fetchFavoriteRecipes.rejected, (state, action) => {
+        state.isLoadingFavoriteRecipes = false;
+        handleError(state, action);
+      })
+
+      .addCase(fetchOwnRecipes.pending, (state) => {
+        state.error = null;
+        state.isLoadingOwnRecipes = true;
+      })
+      .addCase(fetchOwnRecipes.fulfilled, (state, { payload }) => {
+        state.error = null;
+        state.ownItems = payload.data?.recipes || payload; // записуємо у ownItems
+        state.page = payload.page;
+        state.perPage = payload.perPage;
+        state.totalItems = payload.totalItems;
+        state.totalPages = payload.totalPages;
+        state.isLoadingOwnRecipes = false;
+      })
+      .addCase(fetchOwnRecipes.rejected, (state, action) => {
+        state.isLoadingOwnRecipes = false;
+        handleError(state, action);
       });
   },
 });

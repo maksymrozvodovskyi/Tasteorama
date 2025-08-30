@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { fetchOwnRecipes } from "../../../redux/recipes/operations";
 import {
-  selectRecipesItems,
+  selectOwnRecipes,
   selectRecipesIsLoadingOwnRecipes,
-} from "../../../redux/recipes/selectors";
+} from "../../../redux/recipesList/selectors";
 import styles from "./MyRecipesList.module.css";
-import RecipeList from "../MyRecipesList/MyRecipesList";
+import RecipeList from "../../RecipeList/RecipeList";
 import Loader from "../../Loader/Loader";
 
 const MyRecipesList = () => {
   const dispatch = useDispatch();
-  const recipes = useSelector(selectRecipesItems);
+  const recipes = useSelector(selectOwnRecipes);
 
   const isLoadingOwnRecipes = useSelector(selectRecipesIsLoadingOwnRecipes);
 

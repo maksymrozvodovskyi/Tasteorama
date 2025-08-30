@@ -2,16 +2,16 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchFavoriteRecipes } from "../../../redux/recipes/operations.js";
-import { selectRecipesIsLoadingFavoriteRecipes } from "../../../redux/recipes/selectors";
-import { selectRecipesItems } from "../../../redux/recipes/selectors.js";
+import { selectRecipesIsLoadingFavoriteRecipes } from "../../../redux/recipesList/selectors.js";
+import { selectFavoriteRecipes } from "../../../redux/recipesList/selectors.js";
 
-import RecipeList from "../MyRecipesList/MyRecipesList";
+import RecipeList from "../../RecipeList/RecipeList.jsx";
 import Loader from "../../Loader/Loader";
 import styles from "./FavoritesList.module.css";
 
 const FavoritesList = () => {
   const dispatch = useDispatch();
-  const recipes = useSelector(selectRecipesItems);
+  const recipes = useSelector(selectFavoriteRecipes);
   const isLoadingFavoriteRecipes = useSelector(
     selectRecipesIsLoadingFavoriteRecipes
   );

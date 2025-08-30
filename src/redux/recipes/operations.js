@@ -36,6 +36,7 @@ export const fetchOwnRecipes = createAsyncThunk(
       };
 
       const { data } = await axios.get("/api/recipes/own", config);
+      console.log("own", data);
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue({
@@ -64,6 +65,7 @@ export const fetchFavoriteRecipes = createAsyncThunk(
       };
 
       const { data } = await axios.get("/api/recipes/favorites", config);
+      console.log("favorites", data.data);
       return data.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
