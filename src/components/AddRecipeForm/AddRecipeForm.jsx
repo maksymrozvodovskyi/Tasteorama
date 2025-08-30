@@ -156,7 +156,6 @@ const AddRecipeForm = () => {
             </div>
           </div>
           <div className={styles.fieldItem}>
-            {" "}
             {/* General Information */}
             <h3 className={styles.titleSection}>General Information</h3>
             <h4 className={styles.titlePart}>Recipe Title</h4>
@@ -232,6 +231,7 @@ const AddRecipeForm = () => {
                 />
               </div>
             </div>
+
             {/* Ingredients */}
             <h3 className={styles.titleSection}>Ingredients</h3>
             <div className={styles.ingredients}>
@@ -276,6 +276,7 @@ const AddRecipeForm = () => {
                             className={styles.dropdownItem}
                             onClick={() => {
                               setIngredientName(ing.name);
+                              setIngredientId(ing._id);
                               setShowList(false);
                             }}
                           >
@@ -286,24 +287,6 @@ const AddRecipeForm = () => {
                     )}
                   </div>
                 </div>
-                {showList && filtered.length > 0 && (
-                  <ul className={styles.dropdown}>
-                    {filtered.map((ing) => (
-                      <li
-                        key={ing._id}
-                        className={styles.dropdownItem}
-                        onClick={() => {
-                          setIngredientName(ing.name);
-                          setIngredientId(ing._id);
-                          setShowList(false);
-                        }}
-                      >
-                        {ing.name}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
 
                 <div className={styles.fieldItem}>
                   <h4 className={styles.titlePart}>Amount</h4>
@@ -327,6 +310,7 @@ const AddRecipeForm = () => {
                       {
                         name: ingredientName.trim(),
                         amount: ingredientAmount.trim(),
+                        id: ingredientId,
                       },
                     ]);
                     setIngredientName("");
@@ -336,26 +320,6 @@ const AddRecipeForm = () => {
               >
                 Add new Ingredient
               </button>
-            <button
-              type="button"
-              className={styles.addBtn}
-              onClick={() => {
-                if (ingredientName.trim() && ingredientAmount.trim()) {
-                  setFieldValue("ingredients", [
-                    ...values.ingredients,
-                    {
-                      name: ingredientName.trim(),
-                      amount: ingredientAmount.trim(),
-                      id: ingredientId,
-                    },
-                  ]);
-                  setIngredientName("");
-                  setIngredientAmount("");
-                }
-              }}
-            >
-              Add new Ingredient
-            </button>
 
               {values.ingredients.length > 0 && (
                 <table className={styles.ingredientsTable}>
@@ -403,6 +367,7 @@ const AddRecipeForm = () => {
                 className={styles.error}
               />
             </div>
+
             {/* Instructions */}
             <h3 className={styles.titleSection}>Instructions</h3>
             <Field
