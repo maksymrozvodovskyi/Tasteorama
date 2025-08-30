@@ -17,6 +17,7 @@ import css from "./Filters.module.css";
 import { clearitems } from "../../redux/recipesList/slice";
 import { selectFilterTitle } from "../../redux/filters/selectors";
 
+
 const Filters = () => {
   const dispatch = useDispatch();
   const [selectedCategory, setSelectedCategory] = useState(null);

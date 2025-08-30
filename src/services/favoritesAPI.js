@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://tasteoramaapi.onrender.com/api",
+  baseURL: "https://tasteoramaapi.onrender.com/api",
 });
 
 export function setAuthToken(token) {
@@ -9,16 +9,23 @@ export function setAuthToken(token) {
 }
 
 export async function addToFavorites(id) {
-    const res = await api.post(`/favorites/${id}`);
-    return res.data;
-};
+  const res = await api.post(`/recipes/favorites/${id}`);
+  return res.data;
+}
 
 export async function removeFromFavorites(id) {
-    const res = await api.delete(`/favorites/${id}`);
-    return res.data;
-};
+  const res = await api.delete(`/recipes/favorites/${id}`);
+  return res.data;
+}
 
 export async function fetchFavorites() {
   const res = await api.get("/favorites");
   return res.data;
+}
+
+export async function getFavorites(page = 1, perPage = 12) {
+  const res = await api.get(
+    `/recipes/favorites?page=${page}&perPage=${perPage}`
+  );
+  return res;
 }

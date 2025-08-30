@@ -47,8 +47,8 @@
 }
 
 .closeIcon {
-    width: 16px;
-    height: 15px;
+    width: 24px;
+    height: 24px;
     stroke: #000;
     stroke-width: 2;
     fill: none;
@@ -94,18 +94,21 @@
     cursor: pointer;
 }
 
+.cancelBtn:hover {
+    background-color: lightgrey;
+}
+.cancelBtn:focus {
+    box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+}
+
 .logoutBtn:hover {
     background-color: #a10f0f;
 }
 
 .logoutBtn:focus {
-    background-color: #c80000;
     box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
 }
 
-.logoutBtn:hover {
-    background-color: #c80000;
-}
 
 @media screen and (min-width: 768px) {
     .modal {
