@@ -8,15 +8,15 @@
 }
 
 .link {
-    position: relative;
-    padding-bottom: 4px;
-    text-decoration: none;
-    color: white;
-    transition: all 200ms ease-in-out;
+    color: #fff;
+    height: 24px;
 }
 
-.link:hover {
-    color: #e3caa5;
+.link {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    padding: 2px 4px;
 }
 
 .link::after {
@@ -24,13 +24,15 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 0%;
+    width: 0;
     height: 2px;
-    background-color: white;
+    background: currentColor;
     transition: width 0.3s ease;
 }
 
-.link.active::after {
+.link:hover::after,
+.link:focus::after,
+.link:focus-visible::after {
     width: 100%;
 }
 

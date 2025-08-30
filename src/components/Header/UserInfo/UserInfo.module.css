@@ -31,13 +31,13 @@
     border: none;
     padding: 0;
     width: 24px;
-    height: 28px;
+    height: 24px;
     cursor: pointer;
 }
 
 .logoutIcon {
-    width: 17px;
-    height: 17px;
+    width: 24px;
+    height: 24px;
     stroke: white;
     transition: stroke 0.3s;
     fill: none;
