@@ -86,12 +86,12 @@
     border-radius: 16px;
     padding: 40px 24px;
     background: #faf3e0;
-    width: 100%;
 }
 
 .noRecipesTitle {
     font-weight: 600;
     font-size: 24px;
+    max-width: 382px;
 }
 
 .noRecipesResetBtn {
@@ -100,9 +100,27 @@
     padding: 16px 48px;
     background-color: inherit;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.noRecipesResetBtn:hover,
+.noRecipesResetBtn:focus {
+    border: 1px solid #9b6c43;
+    background-color: #9b6c43;
+    color: white;
+}
+
+@media only screen and (min-width: 768px) {
+    .noRecipesContainer {
+        max-width: 522px;
+    }
 }
 
 @media only screen and (min-width: 1440px) {
+    .noRecipesContainer {
+        max-width: 598px;
+    }
+
     .filtersContainerWrapper {
         flex-direction: row;
         align-items: center;
