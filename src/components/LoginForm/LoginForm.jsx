@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ import { loginSchema } from "../../formSchema";
 
 const PasswordField = ({ field, form }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [, meta] = useField(field.name);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -22,8 +23,10 @@ const PasswordField = ({ field, form }) => {
       <input
         {...field}
         type={showPassword ? "text" : "password"}
-        placeholder="Enter your password"
-        className={css.input}
+        placeholder="*********"
+        className={`${css.input} ${
+          meta.touched && meta.error ? css.inputError : ""
+        }`}
         value={field.value}
         onChange={(evt) => form.setFieldValue(field.name, evt.target.value)}
         autoComplete="off"
@@ -71,7 +74,6 @@ export const LoginForm = () => {
       toast.success("Login successful!");
       
       await dispatch(fetchCurrentUser()).unwrap();
-      // console.log("currentUserName:", currentUser.data.name);
 
       navigate("/");
     } catch {    
@@ -83,18 +85,15 @@ export const LoginForm = () => {
 
   return (
     <div className={css.formContainer}>
-      <h2 className={css.title}>Log In</h2>
-      <p className={css.subtitle}>
-        Welcome back! Please enter your credentials to access your account.
-      </p>
+      <h2 className={css.title}>Login</h2>
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={loginSchema}
-        validateOnBlur={false}
-        validateOnChange={false}
+        // validateOnBlur={false}
+        // validateOnChange={false}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, isValid }) => (
           <Form className={css.form}>
             {isSubmitting && <div className={css.loader}></div>}
 
@@ -102,14 +101,20 @@ export const LoginForm = () => {
               <label htmlFor="email" className={css.label}>
                 Enter your email address
               </label>
-              <Field
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                className={css.input}
-                autoComplete="off"
-              />
+              <Field name="email">
+                {({ field, meta }) => (
+                  <input
+                    {...field}
+                    id="email"
+                    type="email"
+                    placeholder="email@gmail.com"
+                    className={`${css.input} ${
+                      meta.touched && meta.error ? css.inputError : ""
+                    }`}
+                    autoComplete="off"
+                  />
+                )}
+              </Field>
               <ErrorMessage
                 name="email"
                 component="div"
@@ -132,9 +137,9 @@ export const LoginForm = () => {
             <button
               type="submit"
               className={css.button}
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isValid}
             >
-              Log In
+              Login
             </button>
           </Form>
         )}
