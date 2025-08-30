@@ -15,6 +15,7 @@ import {
 import { fetchRecipes } from "../../redux/recipesList/operations";
 import css from "./Filters.module.css";
 import { clearitems } from "../../redux/recipesList/slice";
+import { selectFilterTitle } from "../../redux/filters/selectors";
 
 
 const Filters = () => {
@@ -26,6 +27,7 @@ const Filters = () => {
   const recipesAmount = useSelector(selectTotalRecipes);
   const ingredients = useSelector(selectIngredients);
   const categories = useSelector(selectCategories);
+  const title = useSelector(selectFilterTitle);
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -88,7 +90,9 @@ const Filters = () => {
   const animatedComponents = makeAnimated();
   return (
     <div className={css.filtersSection}>
-      <h2 className={css.title}>Recipes</h2>
+      <h2 className={css.title}>
+        {title ? `Search Results for “${title}”` : "Recipes"}
+      </h2>
       <div className={css.filtersContainerWrapper}>
         <div className={css.filtersContainer}>
           <p className={css.recipesCount}>{recipesAmount} recipes</p>
@@ -144,6 +148,20 @@ const Filters = () => {
           </button>
         </div>
       </div>
+      {recipesAmount === 0 && (
+        <div className={css.noRecipesContainer}>
+          <h3 className={css.noRecipesTitle}>
+            We’re sorry! We were not able to find a match.
+          </h3>
+          <button
+            type="button"
+            className={css.noRecipesResetBtn}
+            onClick={handleResetFilters}
+          >
+            Reset search and filters
+          </button>
+        </div>
+      )}
     </div>
   );
 };

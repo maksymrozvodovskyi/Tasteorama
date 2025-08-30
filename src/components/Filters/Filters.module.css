@@ -75,6 +75,33 @@
     margin-bottom: 16px;
 }
 
+.noRecipesContainer {
+    margin: 48px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+    border-radius: 16px;
+    padding: 40px 24px;
+    background: #faf3e0;
+    width: 100%;
+}
+
+.noRecipesTitle {
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.noRecipesResetBtn {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 16px 48px;
+    background-color: inherit;
+    cursor: pointer;
+}
+
 @media only screen and (min-width: 1440px) {
     .filtersContainerWrapper {
         flex-direction: row;
@@ -97,7 +124,6 @@
     .selectContainer {
         margin-bottom: 0;
         margin-left: 16px;
-        min-width: 180px;
     }
 
     .resetButton {

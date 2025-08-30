@@ -12,8 +12,6 @@ import { logoutUserThunk } from "../../redux/auth/operations.js";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const isLoggedIn = useSelector(selectAuthIsLoggedIn);
-  const state = JSON.parse(localStorage.getItem("persist:accessToken"));
-  const name = JSON.parse(state.userName);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
