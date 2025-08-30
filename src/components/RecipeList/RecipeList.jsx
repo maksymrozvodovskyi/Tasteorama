@@ -11,13 +11,21 @@ import { nextPage } from "../../redux/recipesList/slice";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import Filters from "../Filters/Filters";
 import RecipeCard from "../RecipeCard/RecipeCard";
+import { setAuthToken } from "../../services/favoritesAPI";
+import { fetchFavorites } from "../../redux/favourite/operations";
 
 const RecipesList = () => {
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.accessToken);
 
   useEffect(() => {
     dispatch(fetchRecipes());
-  }, [dispatch]);
+
+    if (token) {
+      setAuthToken(token);
+      dispatch(fetchFavorites());
+    }
+  }, [dispatch, token]);
 
   const recipes = useSelector(selectRecipes);
   const currentPage = useSelector(selectCurrentPage);
