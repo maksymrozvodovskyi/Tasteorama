@@ -48,7 +48,7 @@ const RecipeDetails = () => {
   };
 
   return (
-    <>
+    <div className={styles.container}>
       {/* Заголовок + картинка */}
       <div className={styles.wrapperImg}>
         <div className={styles.containerImg}>
@@ -65,17 +65,17 @@ const RecipeDetails = () => {
         {/* General information */}
         <div className={styles.generalInfobutton}>
           <div className={styles.generalInfo}>
-            <h3 className={styles.recipeinform}>General information</h3>
-            <p>
-              <span className="recipeinfovalue">Category: </span>
+            <h3 className={styles.geninfoTitle}>General information</h3>
+            <p className={styles.genInfoText}>
+              <span className={styles.recipeinfovalue}>Category: </span>
               {recipe.category || "-"}
             </p>
-            <p>
-              <span className="recipeinfovalue">Cooking time: </span>
+            <p className={styles.genInfoText}>
+              <span className={styles.recipeinfovalue}>Cooking time: </span>
               {recipe.time ? `${recipe.time} minutes` : "-"}
             </p>
-            <p>
-              <span className="recipeinfovalue">Caloric content: </span>
+            <p className={styles.genInfoText}>
+              <span className={styles.recipeinfovalue}>Caloric content: </span>
               {recipe.cals
                 ? `Approximately ${recipe.cals} kcal per serving`
                 : "-"}
@@ -94,7 +94,15 @@ const RecipeDetails = () => {
               isFavorite ? "Remove from favorites" : "Add to favorites"
             }
           >
-            {isFavorite ? "Remove from favorites" : "Save to favorites"}
+            <svg
+              className={clsx(
+                styles.flagIconSave,
+                isFavorite && styles.flagIconUnsave
+              )}
+            >
+              <use href="/icons.svg#icon-flag" />
+            </svg>
+            {isFavorite ? "Unsave" : "Save"}
           </button>
         </div>
 
@@ -122,8 +130,8 @@ const RecipeDetails = () => {
                       <p>
                         <span className={styles.ingname}>
                           {ingredient
-                            ? ingredient.name
-                            : "Невідомий інгредієнт"}{" "}
+                            ? "• " + ingredient.name
+                            : "Unknown ingredient"}{" "}
                           -{" "}
                         </span>
                         {item.measure || "-"}
@@ -157,7 +165,7 @@ const RecipeDetails = () => {
           </section>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
