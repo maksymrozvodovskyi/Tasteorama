@@ -1,3 +1,15 @@
+.container {
+  margin: 48px 0 48px 0;
+  /* margin-top: 48px;
+  margin-bottom: 48px; */
+  padding: 0 16px 0 16px;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 600;
+}
+
 .wrapperImg {
   margin-bottom: 32px;
 }
@@ -7,7 +19,6 @@
   margin-bottom: 32px;
   max-height: 276px;
   height: 100%;
-
   border-radius: 8px;
   overflow: hidden;
 }
@@ -18,9 +29,13 @@
 .title {
   font-weight: 600;
   font-size: 40px;
-  color: var(--black);
+  color: #000000;
   text-align: center;
   max-width: 100%;
+  margin-bottom: 32px;
+}
+
+.recipeLayout {
 }
 
 .saveButton {
@@ -28,7 +43,6 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  gap: 16px;
   border-radius: 8px;
   padding: 16px;
   width: 100%;
@@ -41,21 +55,107 @@
   margin-bottom: 24px;
   border: none;
 }
-.icon {
-  width: 20px;
-  height: 20px;
-  fill: transparent;
-  stroke: var(--white);
+
+.saveButton:hover,
+.saveButton:focus {
+  background-color: #6d554b;
 }
-.iconSaveFavorite {
-  fill: var(--white);
+
+.saveButton:active {
+  box-shadow: 0px 0px 0px 6px #4e46b41f;
+  box-shadow: 0px 0px 0px 2px #ffffff;
 }
+
+.saveButton:disabled {
+  opacity: 0.3;
+  box-shadow: 0px 0px 0px 6px #4e46b41f;
+  box-shadow: 0px 0px 0px 2px #ffffff;
+}
+
+.flagIconSave {
+  width: 24px;
+  height: 24px;
+  stroke: #ffffff;
+  transition: stroke 0.3s;
+  fill: none;
+}
+
+.flagIconUnsave {
+  fill: #ffffff;
+}
+
 .generalInfo {
-  font-size: 14px;
-  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  width: 100%;
+  padding: 16px;
+  background-color: #faf3e0;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  gap: 15px;
 }
+
+.geninfoTitle {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.genInfoText {
+  font-weight: 400;
+}
+
+.recipeinfovalue {
+  font-weight: 600;
+}
+
+.leftContent {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.sectionabout {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sectioningredients {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ingredientsList {
+  list-style-type: none;
+}
+
+.ingredientsList li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  line-height: 1.55;
+}
+
+.sectionsteps {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.stepItem {
+  margin-bottom: 16px;
+}
+
 /*Tablet*/
 @media screen and (min-width: 768px) {
+  .container {
+    margin: 48px 0 48px 0;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
   .wrapperImg {
     display: flex;
     flex-direction: column-reverse;
@@ -64,6 +164,7 @@
   .containerImg {
     max-height: 624px;
   }
+
   .title {
     font-size: 48px;
     margin-bottom: 32px;
@@ -71,23 +172,25 @@
   }
   .generalInfobutton {
     display: flex;
+    justify-content: space-between;
     gap: 24px;
   }
-  .recipeinform {
+  .geninfoTitle {
     font-size: 24px;
   }
   .generalInfo {
-    font-size: 15px;
+    font-size: 16px;
     border-radius: 16px;
     padding: 24px;
-    width: 431px;
+    min-width: 431px;
     height: auto;
   }
   .saveButton {
     border-radius: 8px;
-    padding: 16px;
-    width: 249px;
+    padding: 17px 83px;
+    min-width: 249px;
     height: 56px;
+    flex: 2;
   }
   .sectionabout h2,
   .sectioningredients h2,
@@ -95,7 +198,7 @@
     font-size: 32px;
   }
   .ingredientsList li,
-  .steps li {
+  .stepItem {
     font-size: 16px;
   }
   .textabout {
@@ -105,6 +208,14 @@
 
 /*Desktop*/
 @media screen and (min-width: 1440px) {
+  .container {
+    padding: 0 108px 0 108px;
+  }
+  .containerImg {
+    width: 1226px;
+    background-color: #2b2d30;
+  }
+
   .recipeLayout {
     display: flex;
     flex-direction: row-reverse;
@@ -121,9 +232,7 @@
   .title {
     font-size: 40px;
   }
-  .containerImg {
-    background-color: var(--gray-4);
-  }
+
   .containerImg img {
     width: auto;
     height: 624px;
@@ -131,7 +240,8 @@
   .generalInfo {
     width: 393px;
     font-size: 16px;
-    padding: 20px;
+    padding: 24px;
+    margin: 0;
   }
   .generalInfobutton {
     display: flex;
@@ -142,7 +252,8 @@
     font-size: 18px;
     width: 393px;
     height: 56px;
-    padding: 16px;
+    padding: 15px;
+    margin: 0;
   }
   .sectionabout h2,
   .sectioningredients h2,
