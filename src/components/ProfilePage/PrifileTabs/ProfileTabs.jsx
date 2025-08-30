@@ -23,7 +23,7 @@ const ProfileTabs = () => {
     return <Navigate to={`/profile/${tabRoutes[0]}`} replace />;
 
   return (
-    <>
+    <div className={styles.container}>
       <h1 className={styles.title}>My Profile</h1>
 
       <Tabs selectedIndex={selectedIndex} onSelect={handleSelect}>
@@ -43,7 +43,7 @@ const ProfileTabs = () => {
           <FavoritesList />
         </TabPanel>
       </Tabs>
-    </>
+    </div>
   );
 };
 

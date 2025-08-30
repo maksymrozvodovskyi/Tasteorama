@@ -1,3 +1,7 @@
+.container {
+  padding: 48px 16px;
+  background: #fbfcf8;
+}
 .title {
   font-weight: 600;
   font-size: 40px;
@@ -11,6 +15,8 @@
   justify-content: left;
   gap: 38px;
   margin-bottom: 16px;
+  list-style-type: none;
+  padding-left: 0;
 }
 
 .tab {
@@ -29,10 +35,17 @@
 }
 
 @media (min-width: 768px) {
+  .container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
   .tab {
     font-size: 12px;
   }
 }
 
 @media (min-width: 1440px) {
+  .container {
+    padding: 46px 108px;
+  }
 }
