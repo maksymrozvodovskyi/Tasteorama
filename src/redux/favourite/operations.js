@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addToFavorites, removeFromFavorites } from "../../services/favoritesAPI";
+import { addToFavorites, getFavorites, removeFromFavorites } from "../../services/favoritesAPI";
 
 export const addFavorite = createAsyncThunk(
   "favorites/add",
@@ -8,9 +8,9 @@ export const addFavorite = createAsyncThunk(
     const result = await addToFavorites(id);
     return result; 
   } catch (err) {
-    console.error("addFavorite failed:", err.response?.data || err.message);
-    return thunkAPI.rejectWithValue(err.response?.data || "Unknown error");
-  }
+  console.error("addFavorite failed:", err.response?.status, err.response?.data || err.message);
+  return thunkAPI.rejectWithValue(err.response?.data || "Unknown error");
+}
 });
 
 
@@ -25,4 +25,16 @@ export const removeFavorite = createAsyncThunk(
         return thunkAPI.rejectWithValue(err.response?.data || "Unknown error");
       }
     }
+);
+
+export const fetchFavorites = createAsyncThunk(
+  "favorites/fetchAll",
+  async (_, thunkAPI) => {
+    try {
+      const res = await getFavorites();
+      return res.data.data.recipes;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response?.data || "Unknown error");
+    }
+  }
 );

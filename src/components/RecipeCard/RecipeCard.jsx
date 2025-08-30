@@ -7,6 +7,7 @@ import { useState } from "react";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import ErrorWhileSaving from "../ErrorWhileSaving/ErrorWhileSaving";
+import { setAuthToken } from "../../services/favoritesAPI";
 
 export default function RecipeCard({ recipe, mode = "default" }) {
   const [showModal, setShowModal] = useState(false);
@@ -15,9 +16,8 @@ export default function RecipeCard({ recipe, mode = "default" }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const isFavorite = useSelector((state) =>
-    state.favorites.items.some((item) => item._id === _id)
-  );
+  const favorites = useSelector((state) => state.favorites.items) || [];
+  const isFavorite = favorites.some((item) => item._id === _id);
 
   const token = useSelector((state) => state.auth.accessToken);
   const isLoggedIn = Boolean(token);
@@ -28,19 +28,32 @@ export default function RecipeCard({ recipe, mode = "default" }) {
       return;
     }
 
-    if (isFavorite) {
-      dispatch(removeFavorite(_id));
-    } else {
-      const resultAction = dispatch(addFavorite(_id));
+    try {
+      setAuthToken(token);
 
-      if (addFavorite.fulfilled.match(resultAction)) {
+      if (isFavorite) {
+        await dispatch(removeFavorite(_id)).unwrap();
+        iziToast.info({
+          message: "Recipe removed from favorites",
+          position: "topRight",
+        });
+      } else {
+        await dispatch(addFavorite(_id)).unwrap();
+
         navigate(`/recipes/${_id}`);
       }
+    } catch {
+      iziToast.error({
+        title: "Error",
+        message: "Failed to update favorites",
+        position: "topRight",
+      });
     }
   };
 
   const handleRemoveFav = async () => {
     try {
+      setAuthToken(token);
       await dispatch(removeFavorite(_id)).unwrap();
     } catch {
       iziToast.error({
@@ -59,7 +72,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
         <div className={css.header}>
           <h3>{title}</h3>
           <span className={css.timeBox}>
-            <svg width="14.25" height="14.25">
+            <svg width="24" height="24">
               <use href="/icons.svg#icon-clock" />
             </svg>
             <p className={css.time}>{time ? `${time}` : "—"}</p>
