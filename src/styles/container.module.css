@@ -1,8 +1,6 @@
 /* Styles for Mobile devices */
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 .container {
   min-width: 320px;
