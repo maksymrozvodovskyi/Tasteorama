@@ -7,7 +7,7 @@ import FavoritesList from "../FavoritesList/FavoritesList.jsx";
 
 import styles from "./ProfileTabs.module.css";
 
-const PrifileTabs = () => {
+const ProfileTabs = () => {
   const { recipeType } = useParams();
 
   const navigate = useNavigate();
@@ -47,4 +47,4 @@ const PrifileTabs = () => {
   );
 };
 
-export default PrifileTabs;
+export default ProfileTabs;

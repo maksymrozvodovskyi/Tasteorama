@@ -1,12 +1,7 @@
-import FavoritesList from "../../components/ProfilePage/FavoritesList/FavoritesList";
-import MyRecipesList from "../../components/ProfilePage/MyRecipesList/MyRecipesList";
+import ProfileTabs from "../../components/ProfilePage/PrifileTabs";
 
-export default function MyRecipesPage() {
-  return (
-    <>
-      <h1>MyRecipesPage</h1>
-      <MyRecipesList />
-      <FavoritesList />
-    </>
-  );
-}
+const ProfilePage = () => {
+  return <ProfileTabs />;
+};
+
+export default ProfilePage;

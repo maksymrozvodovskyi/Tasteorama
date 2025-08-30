@@ -4,7 +4,7 @@ import LoginPage from "../../pages/LoginPage/LoginPage";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import RecipeViewPage from "../../pages/RecipeViewPage/RecipeViewPage";
 import FavoritesPage from "../../pages/FavoritesPage/FavoritesPage";
-import MyRecipesPage from "../../pages/MyRecipesPage/MyRecipesPage";
+import ProfilePage from "../../pages/MyRecipesPage/MyRecipesPage";
 import AddRecipePage from "../../pages/AddRecipePage/AddRecipePage";
 import RecipePage from "../../pages/RecipePage/RecipePage";
 import Footer from "../Footer/Footer";
@@ -24,11 +24,9 @@ function App() {
         <Route path="/recipes/:id" element={<RecipeViewPage />} />
 
         {/* приватні роути */}
-        <Route path="/my-recipes" element={<MyRecipesPage />} />
+        <Route path="/my-recipes" element={<ProfilePage />} />
         <Route path="/add-recipe" element={<AddRecipePage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
-
-        <Route path="/profile" element={<MyRecipesPage />} />
 
         {/* ерор пейдж 404 */}
         <Route path="*" element={<NotFound />} />
