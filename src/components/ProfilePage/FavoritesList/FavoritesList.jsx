@@ -9,10 +9,9 @@ import {
   selectTotalPagesFavorites,
   selectCurrentPageFavorite,
 } from "../../../redux/recipesList/selectors.js";
-import { nextPage } from "../../../redux/recipesList/slice";
+import { nextPageFavorite } from "../../../redux/recipesList/slice";
 import { clearFavitems } from "../../../redux/recipesList/slice";
 import { selectRecipesIsLoadingFavoriteRecipes } from "../../../redux/recipesList/selectors.js";
-import Loader from "../../Loader/Loader.jsx";
 
 const FavoritesList = () => {
   const dispatch = useDispatch();
@@ -24,8 +23,12 @@ const FavoritesList = () => {
     selectRecipesIsLoadingFavoriteRecipes
   );
 
+  console.log("total", total);
+  console.log(totalPages);
+  console.log(currentPage);
+
   useEffect(() => {
-    dispatch(clearFavitems());
+    // dispatch(clearFavitems());
     dispatch(fetchFavoriteRecipes());
   }, [dispatch]);
 
@@ -37,7 +40,7 @@ const FavoritesList = () => {
         recipes={recipes}
         totalPages={totalPages}
         currentPage={currentPage}
-        nextPage={nextPage}
+        nextPage={nextPageFavorite}
         fetchRecipes={fetchFavoriteRecipes}
       />
     </div>

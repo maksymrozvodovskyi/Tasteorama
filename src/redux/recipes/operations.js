@@ -53,7 +53,7 @@ export const fetchFavoriteRecipes = createAsyncThunk(
     try {
       const state = thunkAPI.getState();
       const token = state.auth.accessToken;
-      const { currentPage } = state.recipes;
+      const { currentPageFavorite } = state.recipes;
 
       if (!token) {
         return thunkAPI.rejectWithValue("No access token");
@@ -63,7 +63,7 @@ export const fetchFavoriteRecipes = createAsyncThunk(
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        params: { page: currentPage },
+        params: { page: currentPageFavorite },
       };
 
       const { data } = await axios.get("/api/recipes/favorites", config);
