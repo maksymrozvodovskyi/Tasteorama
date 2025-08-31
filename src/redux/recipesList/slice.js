@@ -5,7 +5,7 @@ import {
   fetchOwnRecipes,
 } from "../recipes/operations.js";
 import { handleError } from "../../utils/reduxUtils.js";
-import { removeFavorite } from "../favourite/operations.js";
+import { removeFavorite, addFavorite } from "../favourite/operations.js";
 
 const initialState = {
   ownItems: [],
@@ -16,7 +16,9 @@ const initialState = {
   loading: true,
   error: null,
   currentPage: 1,
+  currentPageFavorite: 1,
   totalPages: null,
+  totalPagesFavorite: null,
   isLoadingFavoriteRecipes: false,
   isLoadingOwnRecipes: false,
 };
@@ -28,13 +30,16 @@ const recipesSlice = createSlice({
     nextPage: (state) => {
       state.currentPage += 1;
     },
+    nextPageFavorite: (state) => {
+      state.currentPageFavorite += 1;
+    },
     clearitems: (state) => {
       state.items = [];
       state.currentPage = 1;
     },
     clearFavitems: (state) => {
       state.favoriteItems = [];
-      state.currentPage = 1;
+      state.currentPageFavorite = 1;
     },
   },
   extraReducers: (builder) => {
@@ -71,7 +76,7 @@ const recipesSlice = createSlice({
       .addCase(fetchFavoriteRecipes.fulfilled, (state, { payload }) => {
         state.error = null;
         state.isLoadingFavoriteRecipes = false;
-        if (state.currentPage > 1) {
+        if (state.currentPageFavorite > 1) {
           const newRecipes = payload.recipes.filter(
             (r) => !state.favoriteItems.some((item) => item._id === r._id)
           );
@@ -79,7 +84,7 @@ const recipesSlice = createSlice({
         } else {
           state.favoriteItems = payload.recipes;
         }
-        state.totalPages = payload.totalPages;
+        state.totalPagesFavorite = payload.totalPages;
         state.totalFavorites = payload.totalResults;
       })
       .addCase(fetchFavoriteRecipes.rejected, (state, action) => {
@@ -109,8 +114,22 @@ const recipesSlice = createSlice({
           (favoriteItem) => favoriteItem._id !== action.meta.arg
         );
         state.totalFavorites = state.totalFavorites - 1;
+      })
+      .addCase(addFavorite.rejected, (state, action) => {
+        console.error("addFavorite rejected:", action.payload);
+      })
+      .addCase(addFavorite.fulfilled, (state, action) => {
+        if (action.payload.favoritesRecipes) {
+          const unique = [
+            ...new Map(
+              action.payload.favoritesRecipes.map((item) => [item._id, item])
+            ).values(),
+          ];
+          state.favoriteItems = unique;
+        }
       });
   },
 });
-export const { nextPage, clearitems, clearFavitems } = recipesSlice.actions;
+export const { nextPage, clearitems, clearFavitems, nextPageFavorite } =
+  recipesSlice.actions;
 export default recipesSlice.reducer;

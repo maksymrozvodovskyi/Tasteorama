@@ -1,6 +1,4 @@
-// import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../../../redux/auth/selectors.js";
 import { selectCurrentRecipes } from "../../../redux/recipes/selectors.js";
 import {
   addFavorite,
@@ -13,20 +11,22 @@ import { useEffect, useState } from "react";
 import { fetchIngredients } from "../../../redux/ingredients/operations";
 import { selectIngredients } from "../../../redux/ingredients/selectors";
 import ErrorWhileSaving from "../../ErrorWhileSaving/ErrorWhileSaving.jsx";
-// пуш повідомлення
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { setAuthToken } from "../../../services/favoritesAPI.js";
 
 const RecipeDetails = () => {
   const [showModal, setShowModal] = useState(false);
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const user = useSelector(selectUser);
   const ingredientsList = useSelector(selectIngredients) || [];
   const recipe = useSelector(selectCurrentRecipes);
 
-  console.log("recipe", recipe);
+  const favorites = useSelector((state) => state.recipes.favoriteItems) || [];
+  const isFavorite = favorites.some((item) => item._id === recipe._id);
+
+  const token = useSelector((state) => state.auth.accessToken);
+  const isLoggedIn = Boolean(token);
 
   useEffect(() => {
     if (!Array.isArray(ingredientsList) || ingredientsList.length === 0) {
@@ -34,36 +34,25 @@ const RecipeDetails = () => {
     }
   }, [dispatch, ingredientsList]);
 
-  // Якщо рецепт не завантажився — NotFound
   if (!recipe) return <NotFound />;
 
-  const isAuth = Boolean(user);
-  const isFavorite = user?.favorites?.includes(recipe._id);
-
   const handleFavoriteClick = async () => {
-    if (!isAuth) {
-      // navigate("/login");
-      // return;
+    if (!isLoggedIn) {
       setShowModal(true);
       return;
     }
 
     try {
+      setAuthToken(token);
       if (isFavorite) {
-        await dispatch(removeFavorite(recipe._id)).unwrap();
+        dispatch(removeFavorite(recipe._id)).unwrap();
         toast.success("Recipe removed from favorites ✅");
       } else {
-        await dispatch(addFavorite(recipe._id)).unwrap();
+        dispatch(addFavorite(recipe._id)).unwrap();
         toast.success("Recipe added to favorites ❤️");
       }
-    } catch (error) {
-      toast.error(error?.message || "Something went wrong while saving ❌");
-    }
-
-    if (isFavorite) {
-      dispatch(removeFavorite(recipe._id));
-    } else {
-      dispatch(addFavorite(recipe._id));
+    } catch {
+      toast.error("Something went wrong while saving ❌");
     }
   };
 
@@ -114,6 +103,7 @@ const RecipeDetails = () => {
               isFavorite ? "Remove from favorites" : "Add to favorites"
             }
           >
+            {isFavorite ? "Unsave" : "Save"}
             <svg
               className={clsx(
                 styles.flagIconSave,
@@ -122,7 +112,6 @@ const RecipeDetails = () => {
             >
               <use href="/icons.svg#icon-flag" />
             </svg>
-            {isFavorite ? "Unsave" : "Save"}
           </button>
         </div>
 

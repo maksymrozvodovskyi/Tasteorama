@@ -6,7 +6,6 @@ import RecipeViewPage from "../../pages/RecipeViewPage/RecipeViewPage";
 import FavoritesPage from "../../pages/FavoritesPage/FavoritesPage";
 import ProfilePage from "../../pages/MyRecipesPage/MyRecipesPage";
 import AddRecipePage from "../../pages/AddRecipePage/AddRecipePage";
-import RecipePage from "../../pages/RecipePage/RecipePage";
 import Footer from "../Footer/Footer";
 import NotFound from "../RecipeViewPage/NotFound/NotFound";
 import ModalAuthentication from "../ModalAuthentication/ModalAuthentication";
@@ -21,7 +20,6 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/recipes" element={<RecipePage />} />
         <Route path="/recipes/:id" element={<RecipeViewPage />} />
 
         {/* приватні роути */}
