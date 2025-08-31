@@ -44,7 +44,6 @@
   cursor: pointer;
   transition: border-color 0.3s;
   aspect-ratio: 1 / 1;
-  border-radius: 16px;
   width: 100%;
   background: #9f9f9f;
 }
@@ -63,11 +62,9 @@
 
   .fieldPhoto {
     flex: 1;
-    /* фото займає менше */
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    /* по вертикалі вгору */
   }
 }
 
@@ -77,7 +74,6 @@
 
 .inputPhoto {
   display: none;
-  /* ховаємо стандартний інпут */
 }
 
 .uploadImage {
@@ -122,7 +118,6 @@
 @media only screen and (min-width: 1440px) {
   .fieldForm {
     flex: 2;
-    /* форма займає більше */
   }
 }
 
@@ -137,6 +132,14 @@
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   padding: 12px;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.input:focus {
+  border: 1.5px solid #9b6c43;
+  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
+  outline: none;
 }
 
 .input::placeholder,
@@ -158,6 +161,12 @@
   box-sizing: border-box;
 }
 
+.inputTitle:focus {
+  border: 1.5px solid #9b6c43;
+  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
+  outline: none;
+}
+
 .inputSuffix {
   position: absolute;
   right: 10px;
@@ -177,6 +186,12 @@
   border: 1px solid #d9d9d9;
   box-sizing: border-box;
   margin-top: 8px;
+}
+
+.textarea:focus {
+  border: 1.5px solid #9b6c43;
+  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
+  outline: none;
 }
 
 .ingredients {
@@ -327,4 +342,9 @@
 
 .dropdownItem:hover {
   background: #f0f0f0;
+}
+
+.invalid {
+  border: 1.5px solid #c80000;
+  color: #c80000;
 }
