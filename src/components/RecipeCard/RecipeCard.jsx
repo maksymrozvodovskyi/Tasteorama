@@ -34,7 +34,6 @@ export default function RecipeCard({ recipe, mode = "default" }) {
 
       if (isFavorite) {
         await dispatch(removeFavorite(_id)).unwrap();
-        dispatch(fetchFavoriteRecipes());
 
         iziToast.info({
           message: "Recipe removed from favorites",

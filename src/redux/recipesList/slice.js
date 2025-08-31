@@ -16,6 +16,7 @@ const initialState = {
   favoriteItems: [],
   items: [],
   total: 0,
+  totalFavorites: 0,
   loading: true,
   error: null,
   currentPage: 1,
@@ -83,7 +84,7 @@ const recipesSlice = createSlice({
           state.favoriteItems = payload.recipes;
         }
         state.totalPages = payload.totalPages;
-        state.total = payload.totalResults;
+        state.totalFavorites = payload.totalResults;
       })
       .addCase(fetchFavoriteRecipes.rejected, (state, action) => {
         state.isLoadingFavoriteRecipes = false;
@@ -111,6 +112,7 @@ const recipesSlice = createSlice({
         state.favoriteItems = state.favoriteItems.filter(
           (favoriteItem) => favoriteItem._id !== action.meta.arg
         );
+        state.totalFavorites = state.totalFavorites - 1;
       });
   },
 });

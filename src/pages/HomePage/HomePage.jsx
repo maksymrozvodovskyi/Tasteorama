@@ -15,6 +15,9 @@ import { useEffect } from "react";
 import { nextPage } from "../../redux/recipesList/slice";
 import { setAuthToken } from "../../services/favoritesAPI";
 import { fetchFavorites } from "../../redux/favourite/operations";
+import { fetchFavoriteRecipes } from "../../redux/recipes/operations.js";
+import { clearitems } from "../../redux/recipesList/slice";
+import { selectRecipesIsLoadingOwnRecipes } from "../../redux/recipesList/selectors";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -22,15 +25,14 @@ export default function HomePage() {
   const currentPage = useSelector(selectCurrentPage);
   const totalPages = useSelector(selectTotalPages);
   const token = useSelector((state) => state.auth.accessToken);
-  console.log("recipes", recipes);
-  console.log("currentPage", currentPage);
-  console.log("totalPages", totalPages);
+  const loader = useSelector(selectRecipesIsLoadingOwnRecipes);
 
   useEffect(() => {
+    dispatch(clearitems());
     dispatch(fetchRecipes());
     if (token) {
       setAuthToken(token);
-      dispatch(fetchFavorites());
+      dispatch(fetchFavoriteRecipes());
     }
   }, [token, dispatch]);
 
@@ -43,13 +45,15 @@ export default function HomePage() {
     <div className={css.container}>
       <Hero onSearch={handleSearch} />
       <Filters />
-      <RecipesList
-        recipes={recipes}
-        totalPages={totalPages}
-        currentPage={currentPage}
-        nextPage={nextPage}
-        fetchRecipes={fetchRecipes}
-      />
+      {!loader && (
+        <RecipesList
+          recipes={recipes}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          nextPage={nextPage}
+          fetchRecipes={fetchRecipes}
+        />
+      )}
     </div>
   );
 }
