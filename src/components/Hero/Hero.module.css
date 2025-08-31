@@ -34,6 +34,7 @@
   color: #fff;
 }
 
+/* === Tablet === */
 @media screen and (min-width: 768px) {
   .hero {
     padding: 128px 0;

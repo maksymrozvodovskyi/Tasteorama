@@ -53,6 +53,7 @@
   background-color: #9b6c43;
 }
 
+/* === Tablet === */
 @media screen and (min-width: 768px) {
   .form {
     flex-direction: row;
@@ -71,6 +72,7 @@
   }
 }
 
+/* === Desktop === */
 @media screen and (min-width: 1440px) {
   .form {
     gap: 12px;
