@@ -16,7 +16,9 @@ const initialState = {
   loading: true,
   error: null,
   currentPage: 1,
+  currentPageFavorite: 1,
   totalPages: null,
+  totalPagesFavorite: null,
   isLoadingFavoriteRecipes: false,
   isLoadingOwnRecipes: false,
 };
@@ -79,7 +81,7 @@ const recipesSlice = createSlice({
         } else {
           state.favoriteItems = payload.recipes;
         }
-        state.totalPages = payload.totalPages;
+        state.totalPagesFavorite = payload.totalPages;
         state.totalFavorites = payload.totalResults;
       })
       .addCase(fetchFavoriteRecipes.rejected, (state, action) => {

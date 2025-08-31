@@ -8,6 +8,8 @@ import {
   selectCurrentPage,
   selectTotalPages,
   selectTotalFavoritesRecipes,
+  selectTotalPagesFavorites,
+  selectCurrentPageFavorite,
 } from "../../../redux/recipesList/selectors.js";
 import { nextPage } from "../../../redux/recipesList/slice";
 import { clearFavitems } from "../../../redux/recipesList/slice";
@@ -18,8 +20,8 @@ const FavoritesList = () => {
   const dispatch = useDispatch();
   const recipes = useSelector(selectFavoriteRecipes);
   const total = useSelector(selectTotalFavoritesRecipes);
-  const currentPage = useSelector(selectCurrentPage);
-  const totalPages = useSelector(selectTotalPages);
+  const currentPage = useSelector(selectCurrentPageFavorite); //
+  const totalPages = useSelector(selectTotalPagesFavorites); //
   const isLoadingFavoriteRecipes = useSelector(
     selectRecipesIsLoadingFavoriteRecipes
   );
