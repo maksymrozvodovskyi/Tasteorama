@@ -112,7 +112,7 @@ const AddRecipeForm = () => {
         resetForm();
       }}
     >
-      {({ values, setFieldValue }) => (
+      {({ values, setFieldValue, errors, touched }) => (
         <Form className={styles.form}>
           {/* Upload Photo */}
           <div className={styles.fieldPhoto}>
@@ -163,7 +163,9 @@ const AddRecipeForm = () => {
               name="title"
               type="text"
               placeholder="Enter the name of your recipe"
-              className={styles.inputTitle}
+              className={`${styles.inputTitle} ${
+                errors.title && touched.title ? styles.invalid : ""
+              }`}
             />
             <ErrorMessage
               name="title"
@@ -176,7 +178,9 @@ const AddRecipeForm = () => {
               as="textarea"
               name="description"
               placeholder="Enter a brief description of your recipe"
-              className={styles.textarea}
+              className={`${styles.textarea} ${
+                errors.description && touched.description ? styles.invalid : ""
+              }`}
             />
             <ErrorMessage
               name="description"
@@ -189,7 +193,9 @@ const AddRecipeForm = () => {
               name="time"
               type="number"
               placeholder="10"
-              className={styles.inputTitle}
+              className={`${styles.inputTitle} ${
+                errors.time && touched.time ? styles.invalid : ""
+              }`}
             />
             <ErrorMessage
               name="time"
@@ -205,7 +211,9 @@ const AddRecipeForm = () => {
                     name="calories"
                     type="number"
                     placeholder="150"
-                    className={styles.input}
+                    className={`${styles.input} ${
+                      errors.calories && touched.calories ? styles.invalid : ""
+                    }`}
                   />
                 </div>
                 <ErrorMessage
@@ -218,7 +226,13 @@ const AddRecipeForm = () => {
               <div className={styles.fieldItem}>
                 <h4 className={styles.titlePart}>Category</h4>
                 <div className={styles.selectWrapper}>
-                  <Field as="select" name="category" className={styles.input}>
+                  <Field
+                    as="select"
+                    name="category"
+                    className={`${styles.input} ${
+                      errors.category && touched.category ? styles.invalid : ""
+                    }`}
+                  >
                     <option value="">Select category</option>
                     {categories.map((cat) => (
                       <option key={cat._id} value={cat.name}>
@@ -244,7 +258,11 @@ const AddRecipeForm = () => {
                   <div className={styles.selectWrapper}>
                     <input
                       type="text"
-                      className={styles.inputTitle}
+                      className={`${styles.inputTitle} ${
+                        errors.ingredients && touched.ingredients
+                          ? styles.invalid
+                          : ""
+                      }`}
                       placeholder="Search ingredient..."
                       value={ingredientName}
                       onChange={(e) => {
@@ -375,7 +393,11 @@ const AddRecipeForm = () => {
               as="textarea"
               name="instructions"
               placeholder="Enter a text"
-              className={styles.textarea}
+              className={`${styles.textarea} ${
+                errors.instructions && touched.instructions
+                  ? styles.invalid
+                  : ""
+              }`}
             />
             <ErrorMessage
               name="instructions"
