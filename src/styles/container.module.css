@@ -10,7 +10,7 @@
   min-width: 320px;
   max-width: 393px;
   padding: 0 16px;
-  /* margin: 0 auto; */
+  margin: 0 auto;
 }
 
 .containerFilterRecList {
@@ -23,7 +23,7 @@
     max-width: 768px;
   }
   .containerFilterRecList {
-    padding: 0 32px;
+    /* padding: 0 32px; */
   }
 }
 
