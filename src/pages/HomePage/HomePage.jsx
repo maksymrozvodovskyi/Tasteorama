@@ -41,7 +41,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className={css.container}>
+    <>
       <Hero onSearch={handleSearch} />
       <Filters />
       {!loader && (
