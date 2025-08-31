@@ -1,13 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { fetchFavoriteRecipes } from "../../../redux/recipes/operations.js";
 import { selectRecipesIsLoadingFavoriteRecipes } from "../../../redux/recipesList/selectors.js";
 import { selectFavoriteRecipes } from "../../../redux/recipesList/selectors.js";
-
 import RecipeList from "../../RecipeList/RecipeList.jsx";
 import Loader from "../../Loader/Loader";
 import styles from "./FavoritesList.module.css";
+import {
+  selectTotalRecipes,
+  selectCurrentPage,
+  selectTotalPages,
+} from "../../../redux/recipesList/selectors.js";
+import { nextPage } from "../../../redux/recipesList/slice";
+import { fetchRecipes } from "../../../redux/recipesList/operations";
+import LoadMoreBtn from "../../LoadMoreBtn/LoadMoreBtn.jsx";
 
 const FavoritesList = () => {
   const dispatch = useDispatch();
@@ -15,6 +21,9 @@ const FavoritesList = () => {
   const isLoadingFavoriteRecipes = useSelector(
     selectRecipesIsLoadingFavoriteRecipes
   );
+  const total = useSelector(selectTotalRecipes);
+  const currentPage = useSelector(selectCurrentPage);
+  const totalPages = useSelector(selectTotalPages);
 
   useEffect(() => {
     dispatch(fetchFavoriteRecipes());
@@ -29,7 +38,13 @@ const FavoritesList = () => {
   return (
     <div>
       <p className={styles.recipesCount}>{recipes.length} recipes</p>
-      <RecipeList recipes={recipes} />
+      <RecipeList
+        recipes={recipes}
+        totalPages={totalPages}
+        currentPage={currentPage}
+        nextPage={nextPage}
+        fetchRecipes={fetchRecipes}
+      />
     </div>
   );
 };

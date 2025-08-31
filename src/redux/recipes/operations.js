@@ -53,6 +53,7 @@ export const fetchFavoriteRecipes = createAsyncThunk(
     try {
       const state = thunkAPI.getState();
       const token = state.auth.accessToken;
+      const { currentPage } = state.recipes;
 
       if (!token) {
         return thunkAPI.rejectWithValue("No access token");
@@ -61,6 +62,7 @@ export const fetchFavoriteRecipes = createAsyncThunk(
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
+          params: { page: currentPage },
         },
       };
 

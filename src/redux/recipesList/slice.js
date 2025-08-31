@@ -9,6 +9,7 @@ import { handleError } from "../../utils/reduxUtils.js";
 const initialState = {
   ownItems: [],
   favoriteItems: [],
+  items: [],
   total: 0,
   loading: true,
   error: null,
@@ -59,6 +60,14 @@ const recipesSlice = createSlice({
         state.error = null;
         state.favoriteItems = payload.recipes || payload;
         state.isLoadingFavoriteRecipes = false;
+        if (state.currentPage > 1) {
+          state.favoriteItems = [...state.favoriteItems, ...payload.recipes];
+        } else {
+          state.favoriteItems = payload.recipes;
+          state.currentPage = 1;
+        }
+        state.totalPages = payload.totalPages;
+        state.total = payload.totalResults;
       })
       .addCase(fetchFavoriteRecipes.rejected, (state, action) => {
         state.isLoadingFavoriteRecipes = false;
