@@ -28,7 +28,7 @@ export const addRecipe = createAsyncThunk(
       const debugData = formDataToObject(formData);
       console.log("FormData as object:", debugData);
 
-      const res = await createRecipe(formData, accessToken);
+      const res = await createRecipe(debugData, accessToken);
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(

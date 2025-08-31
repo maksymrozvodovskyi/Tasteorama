@@ -98,6 +98,7 @@ const AddRecipeForm = () => {
       validationSchema={AddRecipeSchema}
       onSubmit={async (values, { resetForm }) => {
         const formData = new FormData();
+
         Object.keys(values).forEach((key) => {
           if (key === "ingredients") {
             formData.append(key, JSON.stringify(values[key]));
