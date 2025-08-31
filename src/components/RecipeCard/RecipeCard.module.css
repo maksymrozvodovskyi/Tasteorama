@@ -1,15 +1,15 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-.card{
+.card {
     width: 100%;
     border-radius: 16px;
     background-color: #FAF3E0;
     padding: 8px;
 }
 
-.img{
+.img {
     width: 100%;
     height: 230px;
     border-radius: 8px;
@@ -88,29 +88,29 @@
     align-content: center;
 }
 
-.moreBtnFull{
+.moreBtnFull {
     display: block;
     width: 100% !important;
 }
 
 .saveBtn,
-.removeBtn{
+.removeBtn {
     color: #000000;
 }
 
 .moreBtn:hover,
-.saveBtn:hover{
+.saveBtn:hover {
     background-color: #9B6C43;
     border-color: #9B6C43;
     color: #ffffff;
 }
 
 .moreBtn:active,
-.saveBtn:active{
+.saveBtn:active {
     background-color: #9B6C43;
     border-color: #ffffff;
     color: #ffffff;
-    box-shadow: 
+    box-shadow:
         0px 0px 0px 6px #4E46B41F,
         0px 0px 0px 2px #FFFFFF;
 }
@@ -129,9 +129,9 @@
 
 .removeBtn:hover,
 .removeBtn:active,
-.saveBtn.active:active{
+.saveBtn.active:active {
     background-color: #C80000;
-        border-color: #C80000;
+    border-color: #C80000;
 }
 
 .saveBtn.active {
@@ -140,99 +140,99 @@
     color: #FFFFFF !important;
 }
 
-.saveBtn.active:hover{
+.saveBtn.active:hover {
     background-color: #C80000;
-        border-color: #C80000;
+    border-color: #C80000;
 }
 
 
 @media screen and (min-width: 393px) {
-    .card{
+    .card {
         width: 361px;
         height: 483px;
         padding: 12px;
     }
 
-    .img{
+    .img {
         width: 337px;
         height: 230px;
     }
 
-    .header{
+    .header {
         width: 337px;
         height: 58px;
         gap: 8px;
     }
 
-    .title{
+    .title {
         width: 276px;
     }
 
-    .timeBox{
+    .timeBox {
         min-width: 53px;
         height: 28px;
 
     }
 
-    .btnBox{
+    .btnBox {
         gap: 8px;
     }
 
-    .moreBtn{
+    .moreBtn {
         width: 289px;
     }
 
-    .saveBtn{
+    .saveBtn {
         width: 40px;
     }
 }
 
 @media screen and (min-width: 768px) {
-    .card{
+    .card {
         width: 339px;
     }
 
-    .img{
+    .img {
         width: 315px;
     }
 
-    .header{
+    .header {
         width: 315px;
     }
 
-    .title{
+    .title {
         width: 253px;
     }
 
-    .moreBtn{
+    .moreBtn {
         width: 267px;
     }
 }
 
 @media screen and (min-width: 1440px) {
-    .card{
+    .card {
         width: 288px;
         height: 431px;
     }
 
-    .img{
+    .img {
         width: 264px;
         height: 178px;
     }
 
-    .header{
+    .header {
         width: 264px;
     }
 
-    .title{
+    .title {
         width: 203px;
     }
 
-    .btnBox{
+    .btnBox {
         width: 264px;
     }
 
-    .moreBtn{
+    .moreBtn {
         width: 216px;
     }
 }
