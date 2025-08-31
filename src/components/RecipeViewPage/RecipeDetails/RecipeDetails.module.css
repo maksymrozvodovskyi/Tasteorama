@@ -212,7 +212,7 @@ h2 {
     padding: 0 108px 0 108px;
   }
   .containerImg {
-    width: 1226px;
+    width: 100%;
     background-color: #2b2d30;
   }
 
@@ -250,7 +250,7 @@ h2 {
   }
   .saveButton {
     font-size: 18px;
-    width: 393px;
+    min-width: 393px;
     height: 56px;
     padding: 15px;
     margin: 0;
