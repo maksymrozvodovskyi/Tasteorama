@@ -13,7 +13,7 @@ const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!query.trim()) return;
+    // if (!query.trim()) return;
 
     dispatch(setTitleFilter(query)); 
     dispatch(fetchRecipes());       
