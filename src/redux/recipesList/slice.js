@@ -30,6 +30,10 @@ const recipesSlice = createSlice({
       state.items = [];
       state.currentPage = 1;
     },
+    clearFavitems: (state) => {
+      state.favoriteItems = [];
+      state.currentPage = 1;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -100,5 +104,5 @@ const recipesSlice = createSlice({
       });
   },
 });
-export const { nextPage, clearitems } = recipesSlice.actions;
+export const { nextPage, clearitems, clearFavitems } = recipesSlice.actions;
 export default recipesSlice.reducer;
