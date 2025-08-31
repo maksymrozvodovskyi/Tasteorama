@@ -89,6 +89,13 @@ const Filters = () => {
   }, []);
 
   const animatedComponents = makeAnimated();
+
+  const customStyles = {
+    indicatorSeparator: () => ({
+      display: "none",
+    }),
+  };
+
   return (
     <div className={css.filtersSection}>
       <h2 className={css.title}>
@@ -129,6 +136,7 @@ const Filters = () => {
               onChange={onCategoryChange}
               placeholder="Category"
               isClearable
+              styles={customStyles}
             />
           </div>
 
@@ -140,6 +148,7 @@ const Filters = () => {
               onChange={onIngredientsChange}
               placeholder="Ingredient"
               isMulti
+              styles={customStyles}
             />
           </div>
           <button
