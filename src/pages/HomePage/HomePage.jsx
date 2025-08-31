@@ -16,6 +16,7 @@ import { setAuthToken } from "../../services/favoritesAPI";
 import { fetchFavoriteRecipes } from "../../redux/recipes/operations.js";
 import { clearitems } from "../../redux/recipesList/slice";
 import { selectRecipesIsLoadingOwnRecipes } from "../../redux/recipesList/selectors";
+import css from "../../styles/container.module.css";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -42,16 +43,18 @@ export default function HomePage() {
   return (
     <div>
       <Hero onSearch={handleSearch} />
-      <Filters />
-      {!loader && (
-        <RecipesList
-          recipes={recipes}
-          totalPages={totalPages}
-          currentPage={currentPage}
-          nextPage={nextPage}
-          fetchRecipes={fetchRecipes}
-        />
-      )}
+      <div className={css.containerFilterRecList}>
+        <Filters />
+        {!loader && (
+          <RecipesList
+            recipes={recipes}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            nextPage={nextPage}
+            fetchRecipes={fetchRecipes}
+          />
+        )}
+      </div>
     </div>
   );
 }

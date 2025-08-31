@@ -32,7 +32,7 @@
     align-items: flex-start;
     text-align: left;
     width: 100%;
-    padding: 0 16px;
+    /* padding: 0 16px; */
     /* max-width: 329px; */
   }
 
@@ -111,11 +111,11 @@
 }
 
 .hero {
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin: 0px -50vw 48px -50vw;
+  /* position: relative; */
+  width: 100%;
+  /* left: 50%;
+  right: 50%; */
+  /* margin: 0px -50vw 48px -50vw; */
   padding: 128px 32px 98px 32px;
 
   color: white;
