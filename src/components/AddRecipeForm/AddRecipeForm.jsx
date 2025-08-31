@@ -127,12 +127,7 @@ const AddRecipeForm = () => {
                     className={styles.previewImage}
                   />
                 ) : (
-                  <svg
-                    width="52"
-                    height="52"
-                    className={styles.uploadImage}
-                    aria-hidden="true"
-                  >
+                  <svg className={styles.uploadImage} aria-hidden="true">
                     <use href="/icons.svg#icon-photo" />
                   </svg>
                 )}
@@ -220,7 +215,6 @@ const AddRecipeForm = () => {
                 <h4 className={styles.titlePart}>Category</h4>
                 <div className={styles.selectWrapper}>
                   <Field as="select" name="category" className={styles.input}>
-                    <option value="">Select category</option>
                     {categories.map((cat) => (
                       <option key={cat._id} value={cat.name}>
                         {cat.name}

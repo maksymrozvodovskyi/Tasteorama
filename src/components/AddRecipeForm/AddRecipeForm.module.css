@@ -70,6 +70,15 @@
   color: #070707;
   stroke-width: 1px;
   stroke: currentColor;
+  width: 52px;
+  height: 52px;
+}
+
+@media only screen and (min-width: 1440px) {
+  .uploadImage {
+    width: 99px;
+    height: 81px;
+  }
 }
 .titlePart {
   font-weight: 400;
