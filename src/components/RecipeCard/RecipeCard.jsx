@@ -8,6 +8,7 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import ErrorWhileSaving from "../ErrorWhileSaving/ErrorWhileSaving";
 import { setAuthToken } from "../../services/favoritesAPI";
+import { fetchFavoriteRecipes } from "../../redux/recipes/operations";
 
 export default function RecipeCard({ recipe, mode = "default" }) {
   const [showModal, setShowModal] = useState(false);
@@ -16,7 +17,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const favorites = useSelector((state) => state.favorites.items) || [];
+  const favorites = useSelector((state) => state.recipes.favoriteItems) || [];
   const isFavorite = favorites.some((item) => item._id === _id);
 
   const token = useSelector((state) => state.auth.accessToken);
@@ -33,6 +34,8 @@ export default function RecipeCard({ recipe, mode = "default" }) {
 
       if (isFavorite) {
         await dispatch(removeFavorite(_id)).unwrap();
+        dispatch(fetchFavoriteRecipes());
+
         iziToast.info({
           message: "Recipe removed from favorites",
           position: "topRight",

@@ -10,7 +10,7 @@ import {
   selectTotalPages,
 } from "../../../redux/recipesList/selectors.js";
 import { nextPage } from "../../../redux/recipesList/slice";
-import { clearFavitems } from "../../../redux/recipesList/slice";
+import { clearFavitems, clearitems } from "../../../redux/recipesList/slice";
 
 const FavoritesList = () => {
   const dispatch = useDispatch();

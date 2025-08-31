@@ -5,6 +5,11 @@ import {
   fetchOwnRecipes,
 } from "../recipes/operations.js";
 import { handleError } from "../../utils/reduxUtils.js";
+import {
+  addFavorite,
+  fetchFavorites,
+  removeFavorite,
+} from "../favourite/operations.js";
 
 const initialState = {
   ownItems: [],
@@ -101,6 +106,11 @@ const recipesSlice = createSlice({
       .addCase(fetchOwnRecipes.rejected, (state, action) => {
         state.isLoadingOwnRecipes = false;
         handleError(state, action);
+      })
+      .addCase(removeFavorite.fulfilled, (state, action) => {
+        state.favoriteItems = state.favoriteItems.filter(
+          (favoriteItem) => favoriteItem._id !== action.meta.arg
+        );
       });
   },
 });

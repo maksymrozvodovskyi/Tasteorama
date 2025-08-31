@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addFavorite, fetchFavorites, removeFavorite } from "./operations";
+import { addFavorite, fetchFavorites } from "./operations";
 
 const favoriteSlice = createSlice({
   name: "favorites",
@@ -11,6 +11,9 @@ const favoriteSlice = createSlice({
       .addCase(fetchFavorites.fulfilled, (state, action) => {
         state.items = action.payload || [];
       })
+      .addCase(addFavorite.rejected, (state, action) => {
+        console.error("addFavorite rejected:", action.payload);
+      })
       .addCase(addFavorite.fulfilled, (state, action) => {
         if (action.payload.favoritesRecipes) {
           const unique = [
@@ -20,14 +23,6 @@ const favoriteSlice = createSlice({
           ];
           state.items = unique;
         }
-      })
-      .addCase(removeFavorite.fulfilled, (state, action) => {
-        state.items = state.items.filter(
-          (item) => item._id !== action.meta.arg
-        );
-      })
-      .addCase(addFavorite.rejected, (state, action) => {
-        console.error("addFavorite rejected:", action.payload);
       });
   },
 });
