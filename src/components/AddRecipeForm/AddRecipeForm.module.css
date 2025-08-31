@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
 }
+
 @media only screen and (min-width: 1440px) {
   .form {
     display: flex;
@@ -9,6 +10,7 @@
     gap: 24px;
   }
 }
+
 .fieldPhoto {
   flex: 1;
   display: flex;
@@ -20,17 +22,20 @@
   flex-direction: column;
   justify-content: center;
 }
+
 .titleSection {
   font-size: 24px;
   justify-content: left;
   font-weight: 600;
   padding-top: 24px;
 }
+
 @media only screen and (min-width: 768px) {
   .titleSection {
     font-size: 32px;
   }
 }
+
 .uploadLabel {
   border-radius: 16px;
   display: flex;
@@ -39,74 +44,104 @@
   cursor: pointer;
   transition: border-color 0.3s;
   aspect-ratio: 1 / 1;
-  border-radius: 16px;
   width: 100%;
   background: #9f9f9f;
 }
+
 @media only screen and (min-width: 768px) {
   .uploadLabel {
     aspect-ratio: 2/1;
   }
 }
+
 @media only screen and (min-width: 1440px) {
   .uploadLabel {
     width: 391px;
     aspect-ratio: 1/1;
   }
+
   .fieldPhoto {
-    flex: 1; /* фото займає менше */
+    flex: 1;
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start; /* по вертикалі вгору */
+    align-items: flex-start;
   }
 }
+
 .uploadLabel:hover {
   border-color: #666;
 }
+
 .inputPhoto {
-  display: none; /* ховаємо стандартний інпут */
+  display: none;
 }
+
 .uploadImage {
   color: #070707;
   stroke-width: 1px;
   stroke: currentColor;
+  width: 52px;
+  height: 52px;
 }
+
+@media only screen and (min-width: 1440px) {
+  .uploadImage {
+    width: 99px;
+    height: 81px;
+  }
+}
+
 .titlePart {
   font-weight: 400;
   font-size: 18px;
   padding-top: 8px;
 }
+
 .fieldGroup {
   display: flex;
   gap: 16px;
   margin-bottom: 20px;
 }
+
 .fieldItem {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
+
 .fieldForm {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
+
 @media only screen and (min-width: 1440px) {
   .fieldForm {
-    flex: 2; /* форма займає більше */
+    flex: 2;
   }
 }
+
 .inputWrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
+
 .input {
   width: 100%;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   padding: 12px;
+  font-weight: 400;
+  font-size: 18px;
 }
+
+.input:focus {
+  border: 1.5px solid #9b6c43;
+  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
+  outline: none;
+}
+
 .input::placeholder,
 .inputTitle::placeholder,
 .textarea::placeholder {
@@ -115,6 +150,7 @@
   color: #595d62;
   font-size: 18px;
 }
+
 .inputTitle {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
@@ -124,6 +160,13 @@
   color: #595d62;
   box-sizing: border-box;
 }
+
+.inputTitle:focus {
+  border: 1.5px solid #9b6c43;
+  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
+  outline: none;
+}
+
 .inputSuffix {
   position: absolute;
   right: 10px;
@@ -131,6 +174,7 @@
   font-size: 14px;
   pointer-events: none;
 }
+
 .textarea {
   border-radius: 8px;
   padding: 12px;
@@ -143,16 +187,25 @@
   box-sizing: border-box;
   margin-top: 8px;
 }
+
+.textarea:focus {
+  border: 1.5px solid #9b6c43;
+  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
+  outline: none;
+}
+
 .ingredients {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
+
 .inputsRow {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
 @media only screen and (min-width: 768px) {
   .inputsRow {
     display: flex;
@@ -160,6 +213,7 @@
     gap: 24px;
   }
 }
+
 .addBtn {
   background-color: #9b6c43;
   color: #fff;
@@ -172,6 +226,7 @@
   transition: background 0.2s ease;
   width: 100%;
 }
+
 @media only screen and (min-width: 768px) {
   .addBtn {
     width: 249px;
@@ -179,39 +234,47 @@
     display: block;
   }
 }
+
 .addBtn:hover,
 .addBtn:focus {
   background-color: #6d554b;
 }
+
 .addBtn:active {
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
   background: #9b6c43;
 }
+
 .ingredientsTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 8px;
 }
+
 .ingredientsTable th,
 .ingredientsTable td {
   text-align: left;
   padding: 8px;
   border-bottom: 1px solid #ddd;
 }
+
 .ingredientsTable th {
   font-weight: 600;
 }
+
 .ingredientsTable button {
   background: none;
   border: none;
   cursor: pointer;
   font-size: 16px;
 }
+
 .selectWrapper {
   position: relative;
   display: inline-block;
   width: 100%;
 }
+
 .selectWrapper select {
   appearance: none;
   -webkit-appearance: none;
@@ -219,6 +282,7 @@
   width: 100%;
   padding-right: 40px;
 }
+
 .selectWrapper::after {
   content: "";
   position: absolute;
@@ -230,6 +294,7 @@
   background-size: contain;
   pointer-events: none;
 }
+
 .submitBtn {
   border-radius: 8px;
   padding: 12px 16px;
@@ -242,15 +307,19 @@
   border: none;
   margin-top: 40px;
   margin-bottom: 48px;
+  cursor: pointer;
 }
+
 .submitBtn:hover,
 .submitBtn:focus {
   background-color: #6d554b;
 }
+
 .submitBtn:active {
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
   background: #9b6c43;
 }
+
 .dropdown {
   position: absolute;
   top: 100%;
@@ -265,10 +334,17 @@
   margin: 0;
   padding: 0;
 }
+
 .dropdownItem {
   padding: 8px;
   cursor: pointer;
 }
+
 .dropdownItem:hover {
   background: #f0f0f0;
+}
+
+.invalid {
+  border: 1.5px solid #c80000;
+  color: #c80000;
 }

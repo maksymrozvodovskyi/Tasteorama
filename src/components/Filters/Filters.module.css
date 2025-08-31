@@ -33,11 +33,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    justify-self: flex-end;
     gap: 4px;
     background: #fff;
     border: none;
     cursor: pointer;
     font-size: 12px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    margin-left: auto;
 }
 
 .filtersIcon {

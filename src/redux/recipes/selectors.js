@@ -6,3 +6,8 @@ export const selectRecipesIsLoadingCurrentRecipe = (state) =>
   state.recipesSliceById.isLoadingCurrentRecipe;
 
 export const selectRecipesError = (state) => state.recipesSliceById.error;
+
+export const selectRecipesIsLoadingFavoriteRecipes = ({ recipes }) =>
+  recipes.isLoadingFavoriteRecipes;
+export const selectRecipesIsLoadingOwnRecipes = ({ recipes }) =>
+  recipes.isLoadingOwnRecipes;

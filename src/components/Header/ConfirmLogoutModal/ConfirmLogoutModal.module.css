@@ -16,7 +16,7 @@
     background-color: #faf3e0;
     border-radius: 24px;
     padding: 56px 24px 32px 24px;
-    width: 90%;
+    width: 95%;
     max-width: 420px;
     text-align: center;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
@@ -33,7 +33,7 @@
     display: flex;
     gap: 16px;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
 }
 
@@ -110,20 +110,23 @@
 }
 
 
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
     .modal {
         padding: 56px 32px 32px 32px;
     }
 
-    .actions {
+    .action {
         flex-direction: row;
         justify-content: center;
+        gap: 27px;
     }
 
     .cancelBtn,
     .logoutBtn {
-        padding: 12px 24px;
+        padding: 8px;
+        font-size: 16px;
         width: 164px;
         height: 36px;
     }
 }
+
