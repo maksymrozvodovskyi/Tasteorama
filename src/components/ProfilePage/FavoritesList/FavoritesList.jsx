@@ -5,8 +5,6 @@ import { selectFavoriteRecipes } from "../../../redux/recipesList/selectors.js";
 import RecipeList from "../../RecipeList/RecipeList.jsx";
 import styles from "./FavoritesList.module.css";
 import {
-  selectCurrentPage,
-  selectTotalPages,
   selectTotalFavoritesRecipes,
   selectTotalPagesFavorites,
   selectCurrentPageFavorite,
@@ -30,9 +28,6 @@ const FavoritesList = () => {
     dispatch(clearFavitems());
     dispatch(fetchFavoriteRecipes());
   }, [dispatch]);
-
-  // if (!Array.isArray(recipes) || recipes.length === 0)
-  //   return <h3>No favorites</h3>;
 
   return (
     <div>
