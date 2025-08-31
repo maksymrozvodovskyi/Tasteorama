@@ -4,6 +4,7 @@ import styles from "./AddRecipeForm.module.css";
 import { useDispatch } from "react-redux";
 import { addRecipe } from "../../redux/addRecipe/operations";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Схема валідації
 const AddRecipeSchema = Yup.object().shape({
@@ -39,6 +40,7 @@ const AddRecipeSchema = Yup.object().shape({
 
 const AddRecipeForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [ingredientName, setIngredientName] = useState("");
   const [ingredientAmount, setIngredientAmount] = useState("");
@@ -94,7 +96,7 @@ const AddRecipeForm = () => {
         thumb: null,
       }}
       validationSchema={AddRecipeSchema}
-      onSubmit={(values, { resetForm }) => {
+      onSubmit={async (values, { resetForm }) => {
         const formData = new FormData();
         Object.keys(values).forEach((key) => {
           if (key === "ingredients") {
@@ -108,9 +110,17 @@ const AddRecipeForm = () => {
           }
         });
 
-        dispatch(addRecipe(formData));
-        resetForm();
-        setPreview(null);
+        try {
+          // викликаєш екшен
+          const result = await dispatch(addRecipe(formData)).unwrap();
+          // якщо у твоєму addRecipe API повертає id нового рецепта:
+          const recipeId = result._id;
+          navigate(`/recipes/${recipeId}`); // редірект
+
+          resetForm();
+        } catch (error) {
+          console.error("Помилка створення рецепта:", error);
+        }
       }}
     >
       {({ values, setFieldValue }) => (

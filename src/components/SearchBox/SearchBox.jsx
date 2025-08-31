@@ -5,34 +5,25 @@ import { useDispatch } from "react-redux";
 import { setTitleFilter } from "../../redux/filters/slice";
 import { fetchRecipes } from "../../redux/recipesList/operations";
 
-
-
 export default function SearchBox() {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [query, setQuery] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // if (!query.trim()) return;
 
-    dispatch(setTitleFilter(query)); 
-    dispatch(fetchRecipes());       
+    dispatch(setTitleFilter(query));
+    dispatch(fetchRecipes());
   };
-
-
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <input
         type="text"
         placeholder="Search recipes"
-<<<<<<< HEAD
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-=======
         value={query}
         onChange={(e) => setQuery(e.target.value)}
->>>>>>> main
         className={styles.input}
       />
       <button type="submit" className={styles.button}>

@@ -62,33 +62,11 @@
 
   .input {
     width: 471px;
-<<<<<<< HEAD
-=======
     font-size: 18px;
->>>>>>> main
   }
 
   .button {
     width: 176px;
-<<<<<<< HEAD
-  }
-}
-
-
-@media (min-width: 769px) {
-  .form {
-    /* flex-direction: row; */
-    gap: 12px;
-    /* width: 661px; */
-  }
-
-  .input {
-    width: 459px;
-  }
-
-  .button {
-    width: 190px;
-=======
     font-size: 18px;
     padding: 0;
   }
@@ -105,6 +83,5 @@
   }
   .input {
     width: 456px;
->>>>>>> main
   }
 }
