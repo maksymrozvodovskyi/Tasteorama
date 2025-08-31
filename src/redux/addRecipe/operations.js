@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createRecipe } from "../../services/recipesAPI";
 
 const formDataToObject = (formData) => {
   const obj = {};
@@ -10,6 +10,8 @@ const formDataToObject = (formData) => {
         ...rest,
         measure: amount,
       }));
+    } else if (key === "photo") {
+      obj["thumb"] = value;
     } else {
       obj[key] = value;
     }
@@ -27,12 +29,8 @@ export const addRecipe = createAsyncThunk(
       const debugData = formDataToObject(formData);
       console.log("FormData as object:", debugData);
 
-      const res = await axios.post("/api/recipes", debugData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const res = await createRecipe(debugData, accessToken);
+      console.log(res);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(

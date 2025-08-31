@@ -1,7 +1,6 @@
 import SearchBox from "../SearchBox/SearchBox";
 import styles from "./Hero.module.css";
 
-
 export default function Hero({ onSearch }) {
   return (
     <section className={styles.hero}>
@@ -14,5 +13,3 @@ export default function Hero({ onSearch }) {
     </section>
   );
 }
-
-
