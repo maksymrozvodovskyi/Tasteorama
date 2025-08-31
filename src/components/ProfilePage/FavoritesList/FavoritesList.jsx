@@ -12,7 +12,6 @@ import {
   selectTotalPages,
 } from "../../../redux/recipesList/selectors.js";
 import { nextPage } from "../../../redux/recipesList/slice";
-import { fetchRecipes } from "../../../redux/recipesList/operations";
 import LoadMoreBtn from "../../LoadMoreBtn/LoadMoreBtn.jsx";
 
 const FavoritesList = () => {
@@ -43,7 +42,7 @@ const FavoritesList = () => {
         totalPages={totalPages}
         currentPage={currentPage}
         nextPage={nextPage}
-        fetchRecipes={fetchRecipes}
+        fetchRecipes={fetchFavoriteRecipes}
       />
     </div>
   );

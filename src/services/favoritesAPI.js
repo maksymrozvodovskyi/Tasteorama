@@ -21,7 +21,7 @@ export async function removeFromFavorites(id) {
 }
 
 // Отримати всі улюблені рецепти з пагінацією
-export async function getFavorites(page = 1, perPage = 12) {
+export async function getFavorites(page, perPage) {
   const res = await api.get(
     `/recipes/favorites?page=${page}&perPage=${perPage}`
   );

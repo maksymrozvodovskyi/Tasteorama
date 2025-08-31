@@ -58,13 +58,11 @@ const recipesSlice = createSlice({
       })
       .addCase(fetchFavoriteRecipes.fulfilled, (state, { payload }) => {
         state.error = null;
-        state.favoriteItems = payload.recipes || payload;
         state.isLoadingFavoriteRecipes = false;
         if (state.currentPage > 1) {
           state.favoriteItems = [...state.favoriteItems, ...payload.recipes];
         } else {
           state.favoriteItems = payload.recipes;
-          state.currentPage = 1;
         }
         state.totalPages = payload.totalPages;
         state.total = payload.totalResults;

@@ -62,8 +62,8 @@ export const fetchFavoriteRecipes = createAsyncThunk(
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
-          params: { page: currentPage },
         },
+        params: { page: currentPage },
       };
 
       const { data } = await axios.get("/api/recipes/favorites", config);
