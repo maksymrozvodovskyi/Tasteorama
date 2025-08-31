@@ -35,9 +35,6 @@ h2 {
   margin-bottom: 32px;
 }
 
-.recipeLayout {
-}
-
 .saveButton {
   display: flex;
   align-items: center;
@@ -78,6 +75,7 @@ h2 {
   stroke: #ffffff;
   transition: stroke 0.3s;
   fill: none;
+  margin-left: 20px;
 }
 
 .flagIconUnsave {
@@ -144,8 +142,10 @@ h2 {
   gap: 24px;
 }
 
-.stepItem {
-  margin-bottom: 16px;
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 /*Tablet*/
@@ -211,6 +211,7 @@ h2 {
   .container {
     padding: 0 108px 0 108px;
   }
+
   .containerImg {
     width: 1226px;
     background-color: #2b2d30;
@@ -230,7 +231,7 @@ h2 {
     max-width: 1440px;
   }
   .title {
-    font-size: 40px;
+    font-size: 48px;
   }
 
   .containerImg img {
@@ -239,6 +240,7 @@ h2 {
   }
   .generalInfo {
     width: 393px;
+    min-width: auto;
     font-size: 16px;
     padding: 24px;
     margin: 0;
