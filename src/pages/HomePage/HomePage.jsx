@@ -13,19 +13,26 @@ import {
 } from "../../redux/recipesList/selectors";
 import { useEffect } from "react";
 import { nextPage } from "../../redux/recipesList/slice";
+import { setAuthToken } from "../../services/favoritesAPI";
+import { fetchFavorites } from "../../redux/favourite/operations";
 
 export default function HomePage() {
   const dispatch = useDispatch();
   const recipes = useSelector(selectRecipes);
   const currentPage = useSelector(selectCurrentPage);
   const totalPages = useSelector(selectTotalPages);
+  const token = useSelector((state) => state.auth.accessToken);
   console.log("recipes", recipes);
   console.log("currentPage", currentPage);
   console.log("totalPages", totalPages);
 
   useEffect(() => {
     dispatch(fetchRecipes());
-  }, [dispatch]);
+    if (token) {
+      setAuthToken(token);
+      dispatch(fetchFavorites());
+    }
+  }, [token, dispatch]);
 
   const handleSearch = (query) => {
     dispatch(setTitleFilter(query));

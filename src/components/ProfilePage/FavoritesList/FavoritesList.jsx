@@ -36,7 +36,7 @@ const FavoritesList = () => {
 
   return (
     <div>
-      <p className={styles.recipesCount}>{recipes.length} recipes</p>
+      <p className={styles.recipesCount}>{total} recipes</p>
       <RecipeList
         recipes={recipes}
         totalPages={totalPages}

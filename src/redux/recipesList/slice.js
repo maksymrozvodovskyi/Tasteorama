@@ -41,7 +41,10 @@ const recipesSlice = createSlice({
         state.loading = false;
         state.error = null;
         if (state.currentPage > 1) {
-          state.items = [...state.items, ...action.payload.recipes];
+          const newRecipes = action.payload.recipes.filter(
+            (r) => !state.items.some((item) => item._id === r._id)
+          );
+          state.items = [...state.items, ...newRecipes];
         } else {
           state.items = action.payload.recipes;
         }
@@ -60,7 +63,10 @@ const recipesSlice = createSlice({
         state.error = null;
         state.isLoadingFavoriteRecipes = false;
         if (state.currentPage > 1) {
-          state.favoriteItems = [...state.favoriteItems, ...payload.recipes];
+          const newRecipes = payload.recipes.filter(
+            (r) => !state.favoriteItems.some((item) => item._id === r._id)
+          );
+          state.favoriteItems = [...state.favoriteItems, ...newRecipes];
         } else {
           state.favoriteItems = payload.recipes;
         }
