@@ -14,7 +14,6 @@ import {
 import { useEffect } from "react";
 import { nextPage } from "../../redux/recipesList/slice";
 import { setAuthToken } from "../../services/favoritesAPI";
-import { fetchFavorites } from "../../redux/favourite/operations";
 import { fetchFavoriteRecipes } from "../../redux/recipes/operations.js";
 import { clearitems } from "../../redux/recipesList/slice";
 import { selectRecipesIsLoadingOwnRecipes } from "../../redux/recipesList/selectors";

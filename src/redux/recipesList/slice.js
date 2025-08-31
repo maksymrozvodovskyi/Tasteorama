@@ -5,11 +5,7 @@ import {
   fetchOwnRecipes,
 } from "../recipes/operations.js";
 import { handleError } from "../../utils/reduxUtils.js";
-import {
-  addFavorite,
-  fetchFavorites,
-  removeFavorite,
-} from "../favourite/operations.js";
+import { removeFavorite } from "../favourite/operations.js";
 
 const initialState = {
   ownItems: [],

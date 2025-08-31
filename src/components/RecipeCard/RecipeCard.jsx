@@ -8,7 +8,6 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import ErrorWhileSaving from "../ErrorWhileSaving/ErrorWhileSaving";
 import { setAuthToken } from "../../services/favoritesAPI";
-import { fetchFavoriteRecipes } from "../../redux/recipes/operations";
 
 export default function RecipeCard({ recipe, mode = "default" }) {
   const [showModal, setShowModal] = useState(false);
