@@ -1,21 +1,21 @@
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { selectUser } from "../../redux/auth/selectors";
+import { selectAvatar } from "../../redux/auth/selectors";
 import Logo from "../Logo/Logo";
 import ModalAuthentication from "../ModalAuthentication/ModalAuthentication";
 import css from "./Footer.module.css";
 
 const Footer = () => {
   const location = useLocation();
-  const user = useSelector(selectUser);
+  const user = useSelector(selectAvatar);
   const isAuth = Boolean(user);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const hideAccountLink = ["/login", "/register"].includes(location.pathname);
   const handleAccountClick = () => {
     if (isAuth) {
-      window.location.href = "/profile";
+      window.location.href = "/my-recipes";
     } else {
       setIsModalOpen(true);
     }
@@ -29,12 +29,13 @@ const Footer = () => {
           © 2025 CookingCompanion. All rights reserved.
         </p>
         <div className={css.nav}>
-          <Link to="/recipes" className={css.link}>
+          <Link to="/" className={css.link}>
             Recipes
           </Link>
+
           {!hideAccountLink && (
             <Link
-              to="/recipes"
+              to="/my-recipes"
               className={css.link}
               onClick={handleAccountClick}
             >

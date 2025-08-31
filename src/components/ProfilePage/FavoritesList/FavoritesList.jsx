@@ -5,32 +5,32 @@ import { selectFavoriteRecipes } from "../../../redux/recipesList/selectors.js";
 import RecipeList from "../../RecipeList/RecipeList.jsx";
 import styles from "./FavoritesList.module.css";
 import {
-  selectCurrentPage,
-  selectTotalPages,
   selectTotalFavoritesRecipes,
+  selectTotalPagesFavorites,
+  selectCurrentPageFavorite,
 } from "../../../redux/recipesList/selectors.js";
-import { nextPage } from "../../../redux/recipesList/slice";
+import { nextPageFavorite } from "../../../redux/recipesList/slice";
 import { clearFavitems } from "../../../redux/recipesList/slice";
 import { selectRecipesIsLoadingFavoriteRecipes } from "../../../redux/recipesList/selectors.js";
-import Loader from "../../Loader/Loader.jsx";
 
 const FavoritesList = () => {
   const dispatch = useDispatch();
   const recipes = useSelector(selectFavoriteRecipes);
   const total = useSelector(selectTotalFavoritesRecipes);
-  const currentPage = useSelector(selectCurrentPage);
-  const totalPages = useSelector(selectTotalPages);
+  const currentPage = useSelector(selectCurrentPageFavorite); //
+  const totalPages = useSelector(selectTotalPagesFavorites); //
   const isLoadingFavoriteRecipes = useSelector(
     selectRecipesIsLoadingFavoriteRecipes
   );
 
+  console.log("total", total);
+  console.log(totalPages);
+  console.log(currentPage);
+
   useEffect(() => {
-    dispatch(clearFavitems());
+    // dispatch(clearFavitems());
     dispatch(fetchFavoriteRecipes());
   }, [dispatch]);
-
-  // if (!Array.isArray(recipes) || recipes.length === 0)
-  //   return <h3>No favorites</h3>;
 
   return (
     <div>
@@ -40,7 +40,7 @@ const FavoritesList = () => {
         recipes={recipes}
         totalPages={totalPages}
         currentPage={currentPage}
-        nextPage={nextPage}
+        nextPage={nextPageFavorite}
         fetchRecipes={fetchFavoriteRecipes}
       />
     </div>
