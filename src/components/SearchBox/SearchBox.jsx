@@ -11,8 +11,6 @@ export default function SearchBox() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (!query.trim()) return;
-
     dispatch(setTitleFilter(query));
     dispatch(fetchRecipes());
   };

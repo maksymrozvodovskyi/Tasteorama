@@ -10,7 +10,6 @@ import {
   selectCurrentPageFavorite,
 } from "../../../redux/recipesList/selectors.js";
 import { nextPageFavorite } from "../../../redux/recipesList/slice";
-import { clearFavitems } from "../../../redux/recipesList/slice";
 import { selectRecipesIsLoadingFavoriteRecipes } from "../../../redux/recipesList/selectors.js";
 
 const FavoritesList = () => {
@@ -22,10 +21,6 @@ const FavoritesList = () => {
   const isLoadingFavoriteRecipes = useSelector(
     selectRecipesIsLoadingFavoriteRecipes
   );
-
-  console.log("total", total);
-  console.log(totalPages);
-  console.log(currentPage);
 
   useEffect(() => {
     // dispatch(clearFavitems());

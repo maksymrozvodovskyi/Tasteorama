@@ -6,7 +6,6 @@ import { addRecipe } from "../../redux/addRecipe/operations";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Схема валідації
 const AddRecipeSchema = Yup.object().shape({
   title: Yup.string()
     .min(3)
@@ -51,7 +50,6 @@ const AddRecipeForm = () => {
   const [preview, setPreview] = useState(null);
   const [ingredientId, setIngredientId] = useState("");
 
-  // Підтягування категорій
   useEffect(() => {
     async function fetchCategories() {
       try {
@@ -67,7 +65,6 @@ const AddRecipeForm = () => {
     fetchCategories();
   }, []);
 
-  // Підтягування інгредієнтів
   useEffect(() => {
     async function fetchIngredients() {
       try {

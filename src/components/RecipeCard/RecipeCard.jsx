@@ -1,4 +1,3 @@
-// components/RecipeCard/RecipeCard.jsx
 import { Link, useNavigate } from "react-router-dom";
 import css from "./RecipeCard.module.css";
 import { useDispatch, useSelector } from "react-redux";

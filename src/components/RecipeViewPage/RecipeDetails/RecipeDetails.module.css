@@ -1,7 +1,5 @@
 .container {
   margin: 48px 0 48px 0;
-  /* margin-top: 48px;
-  margin-bottom: 48px; */
   padding: 0 16px 0 16px;
 }
 
@@ -151,7 +149,6 @@ h2 {
   gap: 16px;
 }
 
-/*Tablet*/
 @media screen and (min-width: 768px) {
   .container {
     margin: 48px 0 48px 0;
@@ -216,7 +213,6 @@ h2 {
   }
 }
 
-/*Desktop*/
 @media screen and (min-width: 1440px) {
   .container {
     padding: 0 108px 0 108px;

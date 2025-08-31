@@ -1,5 +1,4 @@
 import css from "./RegistrationForm.module.css";
-// import style from "../../styles/container.module.css";
 import { initialValues, registerSchema } from "../../formSchema";
 import { registerUserThunk, loginUserThunk } from "../../redux/auth/operations";
 
@@ -73,18 +72,13 @@ export const RegistrationForm = () => {
       toast.success("Login successful!");
       navigate("/");
     } catch (error) {
-      // console.error("Registration error:", error.response.data.data.message);
-      // if (error.status === 409) {
-      //   toast.error("Already in use");
-      // } else
-        toast.error(error.response.data.data.message || "Registration failed");
+      toast.error(error.response.data.data.message || "Registration failed");
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    // <div className={style.container}>
     <div className={css.formContainer}>
       <h2 className={css.title}>Register</h2>
       <p className={css.subtitle}>
@@ -181,6 +175,5 @@ export const RegistrationForm = () => {
         </Link>
       </div>
     </div>
-    // </div>
   );
 };
