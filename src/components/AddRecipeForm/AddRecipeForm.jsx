@@ -111,11 +111,10 @@ const AddRecipeForm = () => {
         });
 
         try {
-          // викликаєш екшен
           const result = await dispatch(addRecipe(formData)).unwrap();
-          // якщо у твоєму addRecipe API повертає id нового рецепта:
+
           const recipeId = result._id;
-          navigate(`/recipes/${recipeId}`); // редірект
+          navigate(`/recipes/${recipeId}`);
 
           resetForm();
         } catch (error) {

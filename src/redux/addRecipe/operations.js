@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createRecipe } from "../../services/recipesAPI";
 
 const formDataToObject = (formData) => {
   const obj = {};
@@ -24,16 +24,12 @@ export const addRecipe = createAsyncThunk(
       const state = thunkAPI.getState();
       const accessToken = state.auth.accessToken;
 
+      // тільки для відладки — дивимося, що у FormData
       const debugData = formDataToObject(formData);
       console.log("FormData as object:", debugData);
 
-      const res = await axios.post("/api/recipes", debugData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      return res.data;
+      const res = await createRecipe(formData, accessToken);
+      return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || error.message
