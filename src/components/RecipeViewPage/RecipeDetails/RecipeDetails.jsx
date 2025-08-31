@@ -103,6 +103,7 @@ const RecipeDetails = () => {
               isFavorite ? "Remove from favorites" : "Add to favorites"
             }
           >
+            {isFavorite ? "Unsave" : "Save"}
             <svg
               className={clsx(
                 styles.flagIconSave,
@@ -111,7 +112,6 @@ const RecipeDetails = () => {
             >
               <use href="/icons.svg#icon-flag" />
             </svg>
-            {isFavorite ? "Unsave" : "Save"}
           </button>
         </div>
 
