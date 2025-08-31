@@ -7,6 +7,8 @@ import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import RecipeCard from "../RecipeCard/RecipeCard";
 import { setAuthToken } from "../../services/favoritesAPI";
 import { fetchFavorites } from "../../redux/favourite/operations";
+import { selectRecipesIsLoadingFavoriteRecipes } from "../../redux/recipesList/selectors.js";
+import Loader from "../Loader/Loader";
 
 const RecipesList = ({
   recipes,
@@ -17,6 +19,9 @@ const RecipesList = ({
 }) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.accessToken);
+  const isLoadingFavoriteRecipes = useSelector(
+    selectRecipesIsLoadingFavoriteRecipes
+  );
 
   // const recipes = useSelector(selectRecipes);
   // const currentPage = useSelector(selectCurrentPage);
@@ -34,9 +39,12 @@ const RecipesList = ({
             </li>
           ))}
       </ul>
-      {totalPages > 0 && currentPage < totalPages && (
-        <LoadMoreBtn nextPage={nextPage} fetchAction={fetchRecipes} />
-      )}
+      {isLoadingFavoriteRecipes && <Loader />}
+      {totalPages > 0 &&
+        currentPage < totalPages &&
+        !isLoadingFavoriteRecipes && (
+          <LoadMoreBtn nextPage={nextPage} fetchAction={fetchRecipes} />
+        )}
     </>
   );
 };

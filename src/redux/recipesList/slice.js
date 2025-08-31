@@ -36,9 +36,11 @@ const recipesSlice = createSlice({
       .addCase(fetchRecipes.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.isLoadingFavoriteRecipes = true;
       })
       .addCase(fetchRecipes.fulfilled, (state, action) => {
         state.loading = false;
+        state.isLoadingFavoriteRecipes = false;
         state.error = null;
         if (state.currentPage > 1) {
           const newRecipes = action.payload.recipes.filter(
@@ -53,6 +55,7 @@ const recipesSlice = createSlice({
       })
       .addCase(fetchRecipes.rejected, (state, action) => {
         state.loading = false;
+        state.isLoadingFavoriteRecipes = false;
         state.error = action.payload || action.error.message;
       })
       .addCase(fetchFavoriteRecipes.pending, (state) => {

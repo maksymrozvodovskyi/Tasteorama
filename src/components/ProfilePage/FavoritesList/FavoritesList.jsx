@@ -28,8 +28,6 @@ const FavoritesList = () => {
     dispatch(fetchFavoriteRecipes());
   }, [dispatch]);
 
-  if (isLoadingFavoriteRecipes) return <Loader />;
-
   // if (recipes.length === 0) return <h3>No favorites recipes</h3>;
   if (!Array.isArray(recipes) || recipes.length === 0)
     return <h3>No favorites</h3>;
