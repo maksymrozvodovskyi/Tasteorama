@@ -4,7 +4,6 @@ import Filters from "../../components/Filters/Filters";
 import RecipesList from "../../components/RecipeList/RecipeList";
 import { fetchRecipes } from "../../redux/recipesList/operations";
 import { setTitleFilter } from "../../redux/filters/slice";
-import css from "../../styles/container.module.css";
 import { useSelector } from "react-redux";
 import {
   selectRecipes,
@@ -41,7 +40,7 @@ export default function HomePage() {
   };
 
   return (
-    <>
+    <div>
       <Hero onSearch={handleSearch} />
       <Filters />
       {!loader && (
