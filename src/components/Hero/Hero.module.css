@@ -1,128 +1,72 @@
-/* Styles for Mobile devices */
-.container {
-  min-width: 320px;
-  /* max-width: 393px; */
-  padding: 0 16px;
-  margin: 0 auto;
-}
-
-/* Styles for Tablet devices */
-@media only screen and (min-width: 768px) {
-  .container {
-    max-width: 768px;
-    padding: 0 32px;
-  }
-}
-
-/* Styles for Desktop devices */
-@media only screen and (min-width: 1440px) {
-  .container {
-    max-width: 1440px;
-    padding: 0 575px 0 0;
-  }
-}
-
 .hero {
   position: relative;
-  width: 100%;
-  height: 513px;
-  background-repeat: no-repeat;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin: 0px -50vw 48px -50vw;
+  padding: 128px 32px 98px 32px;
+
+  color: white;
+  background-image: url("../../img/HeroSearchBox/banner-mob.jpg");
   background-size: cover;
-  background-position: center;
-  /* padding: 128px 16px 98px 16px; */
+  background-position: center 25%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+
+  @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    background-image: url("../../img/HeroSearchBox/banner-mob@2x.jpg");
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 329px;
+  margin: 0 auto;
 }
 
 .title {
   font-weight: 600;
   font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: 0;
   color: #fff;
- 
-  margin-bottom: 24px;
 }
 
-/* ----------  Mobile до 393px ---------- */
-@media (max-width: 393px) {
+@media screen and (min-width: 768px) {
   .hero {
-    background-image: url("../../img/HeroSearchBox/banner-mob.jpg");
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: left;
-  }
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    width: 100%;
-    padding: 0 16px;
-   
-  }
-
-  /* retina */
-  @media only screen and (max-width: 393px) and (min-resolution: 192dpi) and (min-resolution: 2dppx) {
-    .hero {
-      background-image: url("../../img/HeroSearchBox/banner-mob@2x.jpg");
-    }
-  }
-}
-
-/* ----------  Tablet 394–768px ---------- */
-@media (min-width: 394px) {
-  .hero {
+    padding: 128px 0;
     background-image: url("../../img/HeroSearchBox/banner-tablet.jpg");
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: left;
-   
-    height: 443px;
-  }
 
-  /* retina */
-  @media only screen and (min-width: 394px) and (min-resolution: 192dpi) and (min-resolution: 2dppx) {
-    .hero {
+    @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
       background-image: url("../../img/HeroSearchBox/banner-tablet@2x.jpg");
     }
   }
-
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+  }
   .title {
     font-size: 48px;
-    line-height: 1.1;
-    max-width: 493px;
-  }
-
-  .content {
-    padding: 0 16px;
+    height: 117px;
+    width: 493px;
   }
 }
 
-/* ----------  Desktop 769–1440px ---------- */
-@media (min-width: 769px) {
+/* === Desktop === */
+
+@media screen and (min-width: 1440px) {
   .hero {
     background-image: url("../../img/HeroSearchBox/banner-desktop.jpg");
-    background-size: contain;
-  
-    max-width: 1440px;
-    margin: 0 auto;
-    background-size: cover;
-    /* можна лишити */
-  }
 
-  .content {
-    padding: 0;
-  }
-
-  .title {
-  
-    width: 493px;
-  }
-
-  /* retina */
-  @media only screen and (min-width: 769px) and (min-resolution: 192dpi) and (min-resolution: 2dppx) {
-    .hero {
+    @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
       background-image: url("../../img/HeroSearchBox/banner-desktop@2x.jpg");
     }
+  }
+
+  .container {
+    max-width: 1440px;
+    padding: 0 108px;
   }
 }
