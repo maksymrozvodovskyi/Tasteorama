@@ -1,20 +1,25 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../../redux/auth/selectors.js";
 import { selectCurrentRecipes } from "../../../redux/recipes/selectors.js";
 import {
-  fetchAddRecipesToFavorite,
-  fetchDeleteRecipesFromFavorite,
-} from "../../../redux/recipes/operations.js";
+  addFavorite,
+  removeFavorite,
+} from "../../../redux/favourite/operations.js";
 import styles from "./RecipeDetails.module.css";
 import clsx from "clsx";
 import NotFound from "../NotFound/NotFound.jsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchIngredients } from "../../../redux/ingredients/operations";
 import { selectIngredients } from "../../../redux/ingredients/selectors";
+import ErrorWhileSaving from "../../ErrorWhileSaving/ErrorWhileSaving.jsx";
+// пуш повідомлення
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const RecipeDetails = () => {
-  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
@@ -35,20 +40,35 @@ const RecipeDetails = () => {
   const isAuth = Boolean(user);
   const isFavorite = user?.favorites?.includes(recipe._id);
 
-  const handleFavoriteClick = () => {
+  const handleFavoriteClick = async () => {
     if (!isAuth) {
-      navigate("/login");
+      // navigate("/login");
+      // return;
+      setShowModal(true);
       return;
     }
+
+    try {
+      if (isFavorite) {
+        await dispatch(removeFavorite(recipe._id)).unwrap();
+        toast.success("Recipe removed from favorites ✅");
+      } else {
+        await dispatch(addFavorite(recipe._id)).unwrap();
+        toast.success("Recipe added to favorites ❤️");
+      }
+    } catch (error) {
+      toast.error(error?.message || "Something went wrong while saving ❌");
+    }
+
     if (isFavorite) {
-      dispatch(fetchDeleteRecipesFromFavorite(recipe._id));
+      dispatch(removeFavorite(recipe._id));
     } else {
-      dispatch(fetchAddRecipesToFavorite(recipe._id));
+      dispatch(addFavorite(recipe._id));
     }
   };
 
   return (
-    <>
+    <div className={styles.container}>
       {/* Заголовок + картинка */}
       <div className={styles.wrapperImg}>
         <div className={styles.containerImg}>
@@ -65,17 +85,17 @@ const RecipeDetails = () => {
         {/* General information */}
         <div className={styles.generalInfobutton}>
           <div className={styles.generalInfo}>
-            <h3 className={styles.recipeinform}>General information</h3>
-            <p>
-              <span className="recipeinfovalue">Category: </span>
+            <h3 className={styles.geninfoTitle}>General information</h3>
+            <p className={styles.genInfoText}>
+              <span className={styles.recipeinfovalue}>Category: </span>
               {recipe.category || "-"}
             </p>
-            <p>
-              <span className="recipeinfovalue">Cooking time: </span>
+            <p className={styles.genInfoText}>
+              <span className={styles.recipeinfovalue}>Cooking time: </span>
               {recipe.time ? `${recipe.time} minutes` : "-"}
             </p>
-            <p>
-              <span className="recipeinfovalue">Caloric content: </span>
+            <p className={styles.genInfoText}>
+              <span className={styles.recipeinfovalue}>Caloric content: </span>
               {recipe.cals
                 ? `Approximately ${recipe.cals} kcal per serving`
                 : "-"}
@@ -94,7 +114,15 @@ const RecipeDetails = () => {
               isFavorite ? "Remove from favorites" : "Add to favorites"
             }
           >
-            {isFavorite ? "Remove from favorites" : "Save to favorites"}
+            <svg
+              className={clsx(
+                styles.flagIconSave,
+                isFavorite && styles.flagIconUnsave
+              )}
+            >
+              <use href="/icons.svg#icon-flag" />
+            </svg>
+            {isFavorite ? "Unsave" : "Save"}
           </button>
         </div>
 
@@ -122,8 +150,8 @@ const RecipeDetails = () => {
                       <p>
                         <span className={styles.ingname}>
                           {ingredient
-                            ? ingredient.name
-                            : "Невідомий інгредієнт"}{" "}
+                            ? "• " + ingredient.name
+                            : "Unknown ingredient"}{" "}
                           -{" "}
                         </span>
                         {item.measure || "-"}
@@ -157,7 +185,8 @@ const RecipeDetails = () => {
           </section>
         </div>
       </div>
-    </>
+      {showModal && <ErrorWhileSaving onClose={() => setShowModal(false)} />}
+    </div>
   );
 };
 

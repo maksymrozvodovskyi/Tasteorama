@@ -1,64 +1,76 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  align-items: center;
-  justify-content: flex-start;
   width: 100%;
+  gap: 24px;
 }
 
 .input {
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
   padding: 12px;
+  border: 1px solid #d9d9d9;
+  border: none;
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.input::placeholder {
+  color: #999;
+}
+
+.input,
+.button {
+  width: 100%;
   height: 46px;
-  font-family: var(--font-family);
-  font-size: 18px;
-  color: var(--gray-3);
+  font-size: 16px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 0 12px;
 }
 
 .button {
-  border-radius: 8px;
-  padding: 12px 16px;
-  height: 46px;
-  background: #9b6c43;
-  color: #fff;
-  font-weight: 500;
-  cursor: pointer;
-  border: none;
-  font-family: var(--font-family);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 600;
-  font-size: 16px;
+  color: #fff;
+  background-color: #9b6c43;
+  border: none;
+  transition: background-color 0.3s;
 }
 
-
-
-@media (max-width: 393px) {
-  .form {
-    max-width: 329px;
-  }
-
-  .input,
-  .button {
-    width: 100%;
-  }
+.button:hover {
+  background-color: #6d554b;
 }
 
+.button:focus {
+  background-color: #9b6c43;
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+}
 
+.button:focus:hover {
+  background-color: #9b6c43;
+}
 
-@media (min-width: 394px) {
+/* === Tablet === */
+@media screen and (min-width: 768px) {
   .form {
     flex-direction: row;
-    /* align-items: flex-start; */
-    /* width: 671px; */
+    margin: 0;
   }
 
   .input {
     width: 471px;
+<<<<<<< HEAD
+=======
+    font-size: 18px;
+>>>>>>> main
   }
 
   .button {
     width: 176px;
+<<<<<<< HEAD
   }
 }
 
@@ -76,5 +88,23 @@
 
   .button {
     width: 190px;
+=======
+    font-size: 18px;
+    padding: 0;
+  }
+}
+
+/* === Desktop === */
+@media screen and (min-width: 1440px) {
+  .form {
+    gap: 12px;
+  }
+  .button {
+    width: 190px;
+    font-size: 16px;
+  }
+  .input {
+    width: 456px;
+>>>>>>> main
   }
 }

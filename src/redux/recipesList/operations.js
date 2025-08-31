@@ -22,11 +22,11 @@ export const fetchRecipes = createAsyncThunk(
         params: {
           perPage: 12,
           page: currentPage,
-          title: title,
+          ...(title.trim() && { title }),
           category: category,
         },
       });
-      console.log("recipes from backend:", response.data);
+    
 
       return response.data.data;
     } catch (error) {

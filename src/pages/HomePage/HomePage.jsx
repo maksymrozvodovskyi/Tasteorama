@@ -1,34 +1,58 @@
-import { useState } from "react";
 import Hero from "../../components/Hero/Hero.jsx";
-// import RecipeList from "../components/RecipeList/RecipeList";
-// import { fetchRecipes } from "../services/api";
-// import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import Filters from "../../components/Filters/Filters";
+import RecipesList from "../../components/RecipeList/RecipeList";
+import { fetchRecipes } from "../../redux/recipesList/operations";
+import { setTitleFilter } from "../../redux/filters/slice";
+import css from "../../styles/container.module.css";
+import { useSelector } from "react-redux";
+import {
+  selectRecipes,
+  selectTotalPages,
+  selectCurrentPage,
+} from "../../redux/recipesList/selectors";
+import { useEffect } from "react";
+import { nextPage } from "../../redux/recipesList/slice";
+import { setAuthToken } from "../../services/favoritesAPI";
+import { fetchFavoriteRecipes } from "../../redux/recipes/operations.js";
+import { clearitems } from "../../redux/recipesList/slice";
+import { selectRecipesIsLoadingOwnRecipes } from "../../redux/recipesList/selectors";
 
 export default function HomePage() {
-  const [recipes, setRecipes] = useState([]);
+  const dispatch = useDispatch();
+  const recipes = useSelector(selectRecipes);
+  const currentPage = useSelector(selectCurrentPage);
+  const totalPages = useSelector(selectTotalPages);
+  const token = useSelector((state) => state.auth.accessToken);
+  const loader = useSelector(selectRecipesIsLoadingOwnRecipes);
 
-  const handleSearch = async (query, filters) => {
-    //   if (!query.trim()) {
-    //     toast.error("Введіть назву рецепту!");
-    //     return;
-    //   }
-    //   try {
-    //     const data = await fetchRecipes(query, filters);
-    //     if (data.length === 0) {
-    //       setRecipes([]);
-    //       toast("Рецептів за цим запитом не знайдено!");
-    //       return;
-    //     }
-    //     setRecipes(data);
-    //   } catch (error) {
-    //     toast.error("Сталася помилка при завантаженні рецептів.");
-    //   }
+  useEffect(() => {
+    dispatch(clearitems());
+    dispatch(fetchRecipes());
+    if (token) {
+      setAuthToken(token);
+      dispatch(fetchFavoriteRecipes());
+    }
+  }, [token, dispatch]);
+
+  const handleSearch = (query) => {
+    dispatch(setTitleFilter(query));
+    dispatch(fetchRecipes());
   };
 
   return (
-    <>
+    <div className={css.container}>
       <Hero onSearch={handleSearch} />
-      {/* <RecipeList recipes={recipes} /> */}
-    </>
+      <Filters />
+      {!loader && (
+        <RecipesList
+          recipes={recipes}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          nextPage={nextPage}
+          fetchRecipes={fetchRecipes}
+        />
+      )}
+    </div>
   );
 }

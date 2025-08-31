@@ -132,3 +132,76 @@
     }
   }
 }
+.hero {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin: 0px -50vw 48px -50vw;
+  padding: 128px 32px 98px 32px;
+
+  color: white;
+  background-image: url("../../img/HeroSearchBox/banner-mob.jpg");
+  background-size: cover;
+  background-position: center 25%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+
+  @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    background-image: url("../../img/HeroSearchBox/banner-mob@2x.jpg");
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 329px;
+  margin: 0 auto;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: #fff;
+}
+
+/* === Tablet === */
+@media screen and (min-width: 768px) {
+  .hero {
+    padding: 128px 0;
+    background-image: url("../../img/HeroSearchBox/banner-tablet.jpg");
+
+    @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      background-image: url("../../img/HeroSearchBox/banner-tablet@2x.jpg");
+    }
+  }
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+  }
+  .title {
+    font-size: 48px;
+    height: 117px;
+    width: 493px;
+  }
+}
+
+/* === Desktop === */
+
+@media screen and (min-width: 1440px) {
+  .hero {
+    background-image: url("../../img/HeroSearchBox/banner-desktop.jpg");
+
+    @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      background-image: url("../../img/HeroSearchBox/banner-desktop@2x.jpg");
+    }
+  }
+
+  .container {
+    max-width: 1440px;
+    padding: 0 108px;
+  }
+}
