@@ -1,13 +1,13 @@
-import { useState } from "react";
 import styles from "./SearchBox.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { setTitleFilter } from "../../redux/filters/slice";
+import { setSearchQuery, setTitleFilter } from "../../redux/filters/slice";
 import { fetchRecipes } from "../../redux/recipesList/operations";
+import { selectSearchQuery } from "../../redux/filters/selectors";
 
 export default function SearchBox() {
   const dispatch = useDispatch();
-  const [query, setQuery] = useState("");
+  const query = useSelector(selectSearchQuery);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ export default function SearchBox() {
         type="text"
         placeholder="Search recipes"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => dispatch(setSearchQuery(e.target.value))}
         className={styles.input}
       />
       <button type="submit" className={styles.button}>
