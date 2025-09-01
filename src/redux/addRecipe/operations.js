@@ -10,6 +10,8 @@ const formDataToObject = (formData) => {
         ...rest,
         measure: amount,
       }));
+    } else if (key === "photo") {
+      obj["thumb"] = value;
     } else {
       obj[key] = value;
     }
@@ -24,7 +26,6 @@ export const addRecipe = createAsyncThunk(
       const state = thunkAPI.getState();
       const accessToken = state.auth.accessToken;
 
-      // тільки для відладки — дивимося, що у FormData
       const debugData = formDataToObject(formData);
       console.log("FormData as object:", debugData);
 
