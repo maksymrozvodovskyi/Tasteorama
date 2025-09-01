@@ -74,7 +74,7 @@ const RecipeDetails = () => {
         {/* General information */}
         <div className={styles.generalInfobutton}>
           <div className={styles.generalInfo}>
-            <h3 className={styles.geninfoTitle}>General information</h3>
+            <h3 className={styles.geninfoTitle}>General informations</h3>
             <p className={styles.genInfoText}>
               <span className={styles.recipeinfovalue}>Category: </span>
               {recipe.category || "-"}

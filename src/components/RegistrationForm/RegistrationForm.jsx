@@ -7,8 +7,8 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import eyeOpenSvg from "../../assets/icons/eye.svg";
-import eyeClosedSvg from "../../assets/icons/eye-crossed.svg";
+import eyeOpenSvg from "../../assets/Icons/eye.svg";
+import eyeClosedSvg from "../../assets/Icons/eye-crossed.svg";
 
 const PasswordField = ({ field, form }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -41,6 +41,7 @@ const PasswordField = ({ field, form }) => {
         <img
           src={showPassword ? eyeOpenSvg : eyeClosedSvg}
           alt={showPassword ? "Hide password" : "Show password"}
+          loading="lazy"
           width="24"
           height="24"
         />

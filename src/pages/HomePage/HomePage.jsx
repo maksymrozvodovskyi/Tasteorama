@@ -27,12 +27,15 @@ export default function HomePage() {
   const loader = useSelector(selectRecipesIsLoadingOwnRecipes);
 
   useEffect(() => {
-    dispatch(clearitems());
-    dispatch(fetchRecipes());
-    if (token) {
-      setAuthToken(token);
-      dispatch(fetchFavoriteRecipes());
-    }
+    const fetchData = async () => {
+      await dispatch(clearitems());
+      await dispatch(fetchRecipes());
+      if (token) {
+        await setAuthToken(token);
+        await dispatch(fetchFavoriteRecipes());
+      }
+    };
+    fetchData();
   }, [token, dispatch]);
 
   const handleSearch = (query) => {
@@ -52,6 +55,7 @@ export default function HomePage() {
             currentPage={currentPage}
             nextPage={nextPage}
             fetchRecipes={fetchRecipes}
+            mode={"default"}
           />
         )}
       </div>
