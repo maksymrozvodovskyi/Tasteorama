@@ -17,7 +17,7 @@ const addRecipeSlice = createSlice({
       })
       .addCase(addRecipe.fulfilled, (state, action) => {
         state.loading = false;
-        state.recipe = action.payload; // тут буде новий рецепт з бекенду
+        state.recipe = action.payload.data; // тут буде новий рецепт з бекенду
       })
       .addCase(addRecipe.rejected, (state, action) => {
         state.loading = false;

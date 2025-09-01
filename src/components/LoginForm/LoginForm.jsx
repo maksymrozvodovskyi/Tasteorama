@@ -4,9 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import css from "./LoginForm.module.css";
 import { useState } from "react";
-import eyeOpenSvg from "../../assets/icons/eye.svg";
-import eyeClosedSvg from "../../assets/icons/eye-crossed.svg";
-// import icons from "../../../public/icons.svg";
+import eyeOpenSvg from "../../assets/Icons/eye.svg";
+import eyeClosedSvg from "../../assets/Icons/eye-crossed.svg";
 import { loginUserThunk, fetchCurrentUser } from "../../redux/auth/operations";
 import { loginSchema } from "../../formSchema";
 
@@ -38,16 +37,10 @@ const PasswordField = ({ field, form }) => {
         tabIndex={0}
         onKeyDown={(evt) => evt.key === "Enter" && togglePasswordVisibility()}
       >
-        {/* <svg width="24" height="24">
-          <use
-            href={`${icons}#${
-              showPassword ? "icon-eye-open" : "icon-eye-crossed"
-            }`}
-          />
-        </svg> */}
         <img
           src={showPassword ? eyeOpenSvg : eyeClosedSvg}
           alt={showPassword ? "Hide password" : "Show password"}
+          loading="lazy"
           width="24"
           height="24"
         />
@@ -63,20 +56,14 @@ export const LoginForm = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     const { email, password } = values;
 
-    // if (!email.trim() || !password.trim()) {
-    //   toast.error("All fields must be filled");
-    //   setSubmitting(false);
-    //   return;
-    // }
-
     try {
       await dispatch(loginUserThunk({ email, password })).unwrap();
       toast.success("Login successful!");
-      
+
       await dispatch(fetchCurrentUser()).unwrap();
 
       navigate("/");
-    } catch {    
+    } catch {
       toast.error("Incorrect email or password");
     } finally {
       setSubmitting(false);
@@ -89,8 +76,6 @@ export const LoginForm = () => {
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={loginSchema}
-        // validateOnBlur={false}
-        // validateOnChange={false}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting, isValid }) => (

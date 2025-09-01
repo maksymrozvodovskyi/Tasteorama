@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addFavorite, fetchFavorites } from "./operations";
+import { fetchFavorites } from "./operations";
 
 const favoriteSlice = createSlice({
   name: "favorites",

@@ -4,7 +4,6 @@ import Filters from "../../components/Filters/Filters";
 import RecipesList from "../../components/RecipeList/RecipeList";
 import { fetchRecipes } from "../../redux/recipesList/operations";
 import { setTitleFilter } from "../../redux/filters/slice";
-import css from "../../styles/container.module.css";
 import { useSelector } from "react-redux";
 import {
   selectRecipes,
@@ -17,6 +16,7 @@ import { setAuthToken } from "../../services/favoritesAPI";
 import { fetchFavoriteRecipes } from "../../redux/recipes/operations.js";
 import { clearitems } from "../../redux/recipesList/slice";
 import { selectRecipesIsLoadingOwnRecipes } from "../../redux/recipesList/selectors";
+import css from "../../styles/container.module.css";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -27,12 +27,15 @@ export default function HomePage() {
   const loader = useSelector(selectRecipesIsLoadingOwnRecipes);
 
   useEffect(() => {
-    dispatch(clearitems());
-    dispatch(fetchRecipes());
-    if (token) {
-      setAuthToken(token);
-      dispatch(fetchFavoriteRecipes());
-    }
+    const fetchData = async () => {
+      await dispatch(clearitems());
+      await dispatch(fetchRecipes());
+      if (token) {
+        await setAuthToken(token);
+        await dispatch(fetchFavoriteRecipes());
+      }
+    };
+    fetchData();
   }, [token, dispatch]);
 
   const handleSearch = (query) => {
@@ -41,18 +44,21 @@ export default function HomePage() {
   };
 
   return (
-    <div className={css.container}>
+    <div>
       <Hero onSearch={handleSearch} />
-      <Filters />
-      {!loader && (
-        <RecipesList
-          recipes={recipes}
-          totalPages={totalPages}
-          currentPage={currentPage}
-          nextPage={nextPage}
-          fetchRecipes={fetchRecipes}
-        />
-      )}
+      <div className={css.containerFilterRecList}>
+        <Filters />
+        {!loader && (
+          <RecipesList
+            recipes={recipes}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            nextPage={nextPage}
+            fetchRecipes={fetchRecipes}
+            mode={"default"}
+          />
+        )}
+      </div>
     </div>
   );
 }

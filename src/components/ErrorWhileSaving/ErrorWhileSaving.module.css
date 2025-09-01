@@ -138,7 +138,10 @@
   .closeBtn {
     right: 32px;
   }
+
+  .title {
+    width: 356px;
+  }
 }
 
-@media (min-width: 1440px) {
-}
+@media (min-width: 1440px) {}

@@ -4,8 +4,8 @@ import styles from "./AddRecipeForm.module.css";
 import { useDispatch } from "react-redux";
 import { addRecipe } from "../../redux/addRecipe/operations";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-// Схема валідації
 const AddRecipeSchema = Yup.object().shape({
   title: Yup.string()
     .min(3)
@@ -39,6 +39,7 @@ const AddRecipeSchema = Yup.object().shape({
 
 const AddRecipeForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [ingredientName, setIngredientName] = useState("");
   const [ingredientAmount, setIngredientAmount] = useState("");
@@ -49,7 +50,6 @@ const AddRecipeForm = () => {
   const [preview, setPreview] = useState(null);
   const [ingredientId, setIngredientId] = useState("");
 
-  // Підтягування категорій
   useEffect(() => {
     async function fetchCategories() {
       try {
@@ -65,7 +65,6 @@ const AddRecipeForm = () => {
     fetchCategories();
   }, []);
 
-  // Підтягування інгредієнтів
   useEffect(() => {
     async function fetchIngredients() {
       try {
@@ -91,10 +90,10 @@ const AddRecipeForm = () => {
         category: "",
         instructions: "",
         ingredients: [],
-        photo: null,
+        thumb: null,
       }}
       validationSchema={AddRecipeSchema}
-      onSubmit={(values, { resetForm }) => {
+      onSubmit={async (values, { resetForm }) => {
         const formData = new FormData();
         Object.keys(values).forEach((key) => {
           if (key === "ingredients") {
@@ -108,8 +107,14 @@ const AddRecipeForm = () => {
           }
         });
 
-        dispatch(addRecipe(formData));
-        resetForm();
+        try {
+          const result = await dispatch(addRecipe(formData)).unwrap();
+          const recipeId = result._id;
+          navigate(`/recipes/${recipeId}`);
+          resetForm();
+        } catch (error) {
+          console.error("Помилка створення рецепта:", error);
+        }
       }}
     >
       {({ values, setFieldValue, errors, touched }) => (
@@ -123,15 +128,11 @@ const AddRecipeForm = () => {
                   <img
                     src={preview}
                     alt="Preview"
+                    loading="lazy"
                     className={styles.previewImage}
                   />
                 ) : (
-                  <svg
-                    width="52"
-                    height="52"
-                    className={styles.uploadImage}
-                    aria-hidden="true"
-                  >
+                  <svg className={styles.uploadImage} aria-hidden="true">
                     <use href="/icons.svg#icon-photo" />
                   </svg>
                 )}
@@ -147,7 +148,7 @@ const AddRecipeForm = () => {
                 onChange={(e) => {
                   const file = e.currentTarget.files[0];
                   if (file) {
-                    setFieldValue("thumb", file);
+                    setFieldValue("photo", file);
                     setPreview(URL.createObjectURL(file));
                   }
                 }}

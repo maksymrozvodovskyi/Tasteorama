@@ -1,4 +1,3 @@
-// components/RecipeCard/RecipeCard.jsx
 import { Link, useNavigate } from "react-router-dom";
 import css from "./RecipeCard.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +16,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
   const navigate = useNavigate();
 
   const favorites = useSelector((state) => state.recipes.favoriteItems) || [];
-  const isFavorite = favorites.some((item) => item._id === _id);
+  const isFavorite = favorites.some((item) => String(item._id) === String(_id));
 
   const token = useSelector((state) => state.auth.accessToken);
   const isLoggedIn = Boolean(token);
@@ -33,7 +32,6 @@ export default function RecipeCard({ recipe, mode = "default" }) {
 
       if (isFavorite) {
         await dispatch(removeFavorite(_id)).unwrap();
-
         iziToast.info({
           message: "Recipe removed from favorites",
           position: "topRight",

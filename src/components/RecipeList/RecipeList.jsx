@@ -11,6 +11,7 @@ const RecipesList = ({
   currentPage,
   nextPage,
   fetchRecipes,
+  mode,
 }) => {
   const isLoadingFavoriteRecipes = useSelector(
     selectRecipesIsLoadingFavoriteRecipes
@@ -22,7 +23,7 @@ const RecipesList = ({
         {Array.isArray(recipes) &&
           recipes.map((recipe) => (
             <li key={recipe._id}>
-              <RecipeCard recipe={recipe} mode="default" />
+              <RecipeCard recipe={recipe} mode={mode} />
             </li>
           ))}
       </ul>

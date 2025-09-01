@@ -11,14 +11,22 @@ const initialState = {
   ownItems: [],
   favoriteItems: [],
   items: [],
+
   total: 0,
   totalFavorites: 0,
+  totalOwn: 0,
+
   loading: true,
   error: null,
+
   currentPage: 1,
   currentPageFavorite: 1,
+  currentPageOwn: 1,
+
   totalPages: null,
   totalPagesFavorite: null,
+  totalPagesOwn: null,
+
   isLoadingFavoriteRecipes: false,
   isLoadingOwnRecipes: false,
 };
@@ -33,13 +41,21 @@ const recipesSlice = createSlice({
     nextPageFavorite: (state) => {
       state.currentPageFavorite += 1;
     },
+    nextPageOwn: (state) => {
+      state.currentPageOwn += 1;
+    },
     clearitems: (state) => {
       state.items = [];
       state.currentPage = 1;
+      state.total = 0;
     },
     clearFavitems: (state) => {
       state.favoriteItems = [];
       state.currentPageFavorite = 1;
+    },
+    clearFavOwn: (state) => {
+      state.favoriteItems = [];
+      state.currentPageOwn = 1;
     },
   },
   extraReducers: (builder) => {
@@ -98,12 +114,17 @@ const recipesSlice = createSlice({
       })
       .addCase(fetchOwnRecipes.fulfilled, (state, { payload }) => {
         state.error = null;
-        state.ownItems = payload.data?.recipes || payload; // записуємо у ownItems
-        state.page = payload.page;
-        state.perPage = payload.perPage;
-        state.totalItems = payload.totalItems;
-        state.totalPages = payload.totalPages;
         state.isLoadingOwnRecipes = false;
+        if (state.currentPageOwn > 1) {
+          const newRecipes = payload.recipes.filter(
+            (r) => !state.ownItems.some((item) => item._id === r._id)
+          );
+          state.ownItems = [...state.ownItems, ...newRecipes];
+        } else {
+          state.ownItems = payload.recipes;
+        }
+        state.totalPagesOwn = payload.totalPages;
+        state.totalOwn = payload.totalResults;
       })
       .addCase(fetchOwnRecipes.rejected, (state, action) => {
         state.isLoadingOwnRecipes = false;
@@ -130,6 +151,13 @@ const recipesSlice = createSlice({
       });
   },
 });
-export const { nextPage, clearitems, clearFavitems, nextPageFavorite } =
-  recipesSlice.actions;
+
+export const {
+  nextPage,
+  clearitems,
+  clearFavitems,
+  nextPageFavorite,
+  nextPageOwn,
+  clearFavOwn,
+} = recipesSlice.actions;
 export default recipesSlice.reducer;
