@@ -1,4 +1,13 @@
-
+.appWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.pageContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 /* Styles for Mobile devices */
 * {
   box-sizing: border-box;
@@ -35,5 +44,4 @@
   .containerFilterRecList {
     padding: 0 107px;
   }
-  
 }
