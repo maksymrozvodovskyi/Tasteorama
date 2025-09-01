@@ -9,18 +9,21 @@
 .container {
   min-width: 320px;
   max-width: 393px;
-  /* padding: 0 16px; */
+  padding: 0 16px;
   margin: 0 auto;
+  margin-top: 48px;
+  margin-bottom: 48px;
 }
 
 .containerFilterRecList {
-  margin-top: 48px;
-  margin-bottom: 48px;
+  /* margin-top: 48px;
+  margin-bottom: 48px; */
 }
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
   .container {
     max-width: 768px;
+    padding: 0 32px;
   }
   .containerFilterRecList {
     /* padding: 0 32px; */
@@ -31,9 +34,10 @@
 @media only screen and (min-width: 1440px) {
   .container {
     max-width: 1440px;
+    padding: 0 107px;
   }
   .containerFilterRecList {
-    padding: 0 107px;
+    /* padding: 0 107px; */
   }
   
 }

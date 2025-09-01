@@ -43,7 +43,7 @@ export default function HomePage() {
   return (
     <div>
       <Hero onSearch={handleSearch} />
-      <div className={css.containerFilterRecList}>
+      <div className={css.container}>
         <Filters />
         {!loader && (
           <RecipesList

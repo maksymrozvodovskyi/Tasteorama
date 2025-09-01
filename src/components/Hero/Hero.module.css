@@ -17,10 +17,10 @@
 @media (max-width: 393px) {
   .hero {
     background-image: url("../../img/HeroSearchBox/banner-mob.jpg");
-    display: flex;
+    /* display: flex;
     justify-content: flex-start;
     align-items: center;
-    text-align: left;
+    text-align: left; */
   }
 
   .content {
@@ -28,7 +28,7 @@
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
-    width: 100%;
+    width: 100%;    
   }
 
   @media only screen and (max-width: 393px) and (min-resolution: 192dpi) and (min-resolution: 2dppx) {
@@ -41,10 +41,10 @@
 @media (min-width: 394px) {
   .hero {
     background-image: url("../../img/HeroSearchBox/banner-tablet.jpg");
-    display: flex;
+    /* display: flex;
     justify-content: flex-start;
     align-items: center;
-    text-align: left;
+    text-align: left; */
     height: 443px;
   }
 
@@ -69,14 +69,14 @@
   .hero {
     background-image: url("../../img/HeroSearchBox/banner-desktop.jpg");
     background-size: contain;
-    max-width: 1440px;
-    margin: 0 auto;
+    /* max-width: 1440px; */
+    /* margin: 0 auto; */
     background-size: cover;
   }
 
-  .content {
+  /* .content {
     padding: 128px 108px;
-  }
+  } */
 
   .title {
     width: 493px;
@@ -131,6 +131,9 @@
       background-image: url("../../img/HeroSearchBox/banner-tablet@2x.jpg");
     }
   }
+  .content {
+    padding: 0 65px 0 32px;
+  }
 
   .container {
     max-width: 768px;
@@ -145,7 +148,7 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .hero {
+  .hero {  
     background-image: url("../../img/HeroSearchBox/banner-desktop.jpg");
 
     @media (min-device-pixel-ratio: 2),
@@ -154,8 +157,14 @@
     }
   }
 
-  .container {
+  /* .container {
     max-width: 1440px;
+    width: 100%;
     padding: 0 108px;
+  } */
+  .content {
+    padding: 0 108px;
+    width: 1440px;
+    margin: 0 auto;
   }
 }
