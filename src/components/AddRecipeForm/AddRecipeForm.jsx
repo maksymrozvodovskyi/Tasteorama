@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import styles from "./AddRecipeForm.module.css";
 import { useDispatch } from "react-redux";
 import { addRecipe } from "../../redux/addRecipe/operations";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AddRecipeSchema = Yup.object().shape({
@@ -49,36 +49,46 @@ const AddRecipeForm = () => {
   const [showList, setShowList] = useState(false);
   const [preview, setPreview] = useState(null);
   const [ingredientId, setIngredientId] = useState("");
+  const debounceTimeout = useRef(null);
 
   useEffect(() => {
-    async function fetchCategories() {
+    async function fetchData() {
       try {
-        const res = await fetch(
-          "https://tasteoramaapi.onrender.com/api/categories"
-        );
-        const result = await res.json();
-        setCategories(result.data || []);
+        const [catRes, ingRes] = await Promise.all([
+          fetch("https://tasteoramaapi.onrender.com/api/categories"),
+          fetch("https://tasteoramaapi.onrender.com/api/ingredients"),
+        ]);
+
+        const catData = await catRes.json();
+        const ingData = await ingRes.json();
+
+        setCategories(catData.data || []);
+        setIngredients(ingData.data || []);
       } catch (err) {
-        console.error("Помилка завантаження категорій:", err);
+        console.error("Error fetching data:", err);
       }
     }
-    fetchCategories();
+    fetchData();
   }, []);
 
-  useEffect(() => {
-    async function fetchIngredients() {
-      try {
-        const res = await fetch(
-          "https://tasteoramaapi.onrender.com/api/ingredients"
-        );
-        const result = await res.json();
-        setIngredients(result.data || []);
-      } catch (err) {
-        console.error("Error loading ingredients:", err);
-      }
+  const handleIngredientInput = (value) => {
+    clearTimeout(debounceTimeout.current);
+    setIngredientName(value);
+
+    if (!value.trim()) {
+      setFiltered([]);
+      setShowList(false);
+      return;
     }
-    fetchIngredients();
-  }, []);
+
+    debounceTimeout.current = setTimeout(() => {
+      const results = ingredients.filter((ing) =>
+        ing.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setFiltered(results);
+      setShowList(true);
+    }, 250);
+  };
 
   return (
     <Formik
@@ -90,7 +100,7 @@ const AddRecipeForm = () => {
         category: "",
         instructions: "",
         ingredients: [],
-        thumb: null,
+        photo: null,
       }}
       validationSchema={AddRecipeSchema}
       onSubmit={async (values, { resetForm }) => {
@@ -98,10 +108,8 @@ const AddRecipeForm = () => {
         Object.keys(values).forEach((key) => {
           if (key === "ingredients") {
             formData.append(key, JSON.stringify(values[key]));
-          } else if (key === "photo") {
-            if (values.photo) {
-              formData.append("thumb", values.photo);
-            }
+          } else if (key === "photo" && values.photo) {
+            formData.append("thumb", values.photo);
           } else {
             formData.append(key, values[key]);
           }
@@ -109,11 +117,11 @@ const AddRecipeForm = () => {
 
         try {
           const result = await dispatch(addRecipe(formData)).unwrap();
-          const recipeId = result._id;
-          navigate(`/recipes/${recipeId}`);
+          navigate(`/recipes/${result._id}`);
           resetForm();
-        } catch (error) {
-          console.error("Помилка створення рецепта:", error);
+          setPreview(null);
+        } catch (err) {
+          console.error("Error creating recipe:", err);
         }
       }}
     >
@@ -139,7 +147,6 @@ const AddRecipeForm = () => {
               </label>
 
               <input
-                className={styles.inputPhoto}
                 id="photo"
                 name="photo"
                 type="file"
@@ -159,6 +166,7 @@ const AddRecipeForm = () => {
           {/* General Information */}
           <div className={styles.fieldForm}>
             <h3 className={styles.titleSection}>General Information</h3>
+
             <h4 className={styles.titlePart}>Recipe Title</h4>
             <Field
               name="title"
@@ -266,27 +274,9 @@ const AddRecipeForm = () => {
                       }`}
                       placeholder="Search ingredient..."
                       value={ingredientName}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        setIngredientName(value);
-
-                        if (value.trim().length > 0) {
-                          const results = ingredients.filter((ing) =>
-                            ing.name.toLowerCase().includes(value.toLowerCase())
-                          );
-                          setFiltered(results);
-                          setShowList(true);
-                        } else {
-                          setFiltered([]);
-                          setShowList(false);
-                        }
-                      }}
-                      onFocus={() => {
-                        if (ingredientName.trim().length > 0) setShowList(true);
-                      }}
-                      onBlur={() => {
-                        setTimeout(() => setShowList(false), 250);
-                      }}
+                      onChange={(e) => handleIngredientInput(e.target.value)}
+                      onFocus={() => ingredientName && setShowList(true)}
+                      onBlur={() => setTimeout(() => setShowList(false), 150)}
                     />
 
                     {showList && filtered.length > 0 && (
