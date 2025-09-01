@@ -6,7 +6,7 @@ const NotFound = ({ code = 404, message = "Recipe not found" }) => {
   return (
     <div className={styles.notFoundContainer}>
       <div className={styles.imgcontainer}>
-        <img src={notFoundImg} alt="Empty plate"></img>
+        <img src={notFoundImg} loading="lazy" alt="Empty plate"></img>
       </div>
       <div className={styles.textContainer}>
         <h2 className={styles.notfoundtitle}>{code}</h2>

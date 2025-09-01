@@ -10,8 +10,11 @@ const formDataToObject = (formData) => {
         ...rest,
         measure: amount,
       }));
-    } else if (key === "photo") {
-      obj["thumb"] = value;
+    } else if (key === "thumb") {
+      // додаємо тільки якщо value не пусте
+      if (value instanceof File && value.size > 0) {
+        obj["thumb"] = value;
+      }
     } else {
       obj[key] = value;
     }

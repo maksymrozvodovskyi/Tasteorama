@@ -82,13 +82,13 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/*Tablet*/
 @media screen and (min-width: 768px) {
   .notFoundContainer {
     margin: 208px 0;
@@ -102,7 +102,6 @@
   }
 }
 
-/*Desktop*/
 @media screen and (min-width: 1440px) {
   .notFoundContainer {
     margin: 38px 108px;

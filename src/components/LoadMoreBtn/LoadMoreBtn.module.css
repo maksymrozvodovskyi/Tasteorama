@@ -6,10 +6,11 @@
     padding: 16px;
     width: 100%;
     max-width: 372px;
-    background-color: #9B6C43 ;
+    background-color: #9B6C43;
     font-weight: 600;
     font-size: 18px;
     color: white;
+    margin-top: 24px;
 }
 
 .container {
@@ -19,12 +20,12 @@
 
 @media only screen and (min-width: 768px) {
     .btn {
-            width: 338px;
-        }
+        width: 338px;
+    }
 }
 
 @media only screen and (min-width: 1440px) {
     .btn {
-            width: 289px;
-        }
+        width: 289px;
+    }
 }

@@ -11,6 +11,7 @@ import {
   setCategoryFilter,
   setIngredientsFilter,
   resetFilters,
+  setSearchQuery,
 } from "../../redux/filters/slice";
 import { fetchRecipes } from "../../redux/recipesList/operations";
 import css from "./Filters.module.css";
@@ -51,6 +52,7 @@ const Filters = () => {
     setSelectedCategory(null);
     setSelectedIngredients([]);
     dispatch(fetchRecipes());
+    dispatch(setSearchQuery(""));
   };
 
   const onCategoryChange = (selectedOption) => {

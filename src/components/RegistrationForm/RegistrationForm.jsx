@@ -1,5 +1,4 @@
 import css from "./RegistrationForm.module.css";
-// import style from "../../styles/container.module.css";
 import { initialValues, registerSchema } from "../../formSchema";
 import { registerUserThunk, loginUserThunk } from "../../redux/auth/operations";
 
@@ -8,8 +7,8 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import eyeOpenSvg from "../../assets/icons/eye.svg";
-import eyeClosedSvg from "../../assets/icons/eye-crossed.svg";
+import eyeOpenSvg from "../../assets/Icons/eye.svg";
+import eyeClosedSvg from "../../assets/Icons/eye-crossed.svg";
 
 const PasswordField = ({ field, form }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -42,6 +41,7 @@ const PasswordField = ({ field, form }) => {
         <img
           src={showPassword ? eyeOpenSvg : eyeClosedSvg}
           alt={showPassword ? "Hide password" : "Show password"}
+          loading="lazy"
           width="24"
           height="24"
         />
@@ -73,18 +73,13 @@ export const RegistrationForm = () => {
       toast.success("Login successful!");
       navigate("/");
     } catch (error) {
-      // console.error("Registration error:", error.response.data.data.message);
-      // if (error.status === 409) {
-      //   toast.error("Already in use");
-      // } else
-        toast.error(error.response.data.data.message || "Registration failed");
+      toast.error(error.response.data.data.message || "Registration failed");
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    // <div className={style.container}>
     <div className={css.formContainer}>
       <h2 className={css.title}>Register</h2>
       <p className={css.subtitle}>
@@ -181,6 +176,5 @@ export const RegistrationForm = () => {
         </Link>
       </div>
     </div>
-    // </div>
   );
 };

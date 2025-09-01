@@ -6,6 +6,7 @@ const slice = createSlice({
     title: "",
     category: "",
     ingredients: [],
+    searchQuery: "",
     loading: false,
     error: null,
   },
@@ -24,6 +25,9 @@ const slice = createSlice({
       state.category = "";
       state.ingredients = [];
     },
+    setSearchQuery(state, action) {
+      state.searchQuery = action.payload;
+    },
   },
 });
 
@@ -32,6 +36,7 @@ export const {
   setCategoryFilter,
   setIngredientsFilter,
   resetFilters,
+  setSearchQuery,
 } = slice.actions;
 
 export default slice.reducer;

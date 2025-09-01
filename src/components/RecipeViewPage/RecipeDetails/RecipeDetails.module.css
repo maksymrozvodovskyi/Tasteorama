@@ -1,7 +1,5 @@
 .container {
   margin: 48px 0 48px 0;
-  /* margin-top: 48px;
-  margin-bottom: 48px; */
   padding: 0 16px 0 16px;
 }
 
@@ -13,6 +11,7 @@ h2 {
 .wrapperImg {
   margin-bottom: 32px;
 }
+
 .containerImg {
   display: flex;
   justify-content: center;
@@ -22,10 +21,12 @@ h2 {
   border-radius: 8px;
   overflow: hidden;
 }
+
 .containerImg img {
   width: 100%;
   object-fit: cover;
 }
+
 .title {
   font-weight: 600;
   font-size: 40px;
@@ -148,7 +149,6 @@ h2 {
   gap: 16px;
 }
 
-/*Tablet*/
 @media screen and (min-width: 768px) {
   .container {
     margin: 48px 0 48px 0;
@@ -170,14 +170,17 @@ h2 {
     margin-bottom: 32px;
     text-align: start;
   }
+
   .generalInfobutton {
     display: flex;
     justify-content: space-between;
     gap: 24px;
   }
+
   .geninfoTitle {
     font-size: 24px;
   }
+
   .generalInfo {
     font-size: 16px;
     border-radius: 16px;
@@ -185,6 +188,7 @@ h2 {
     min-width: 431px;
     height: auto;
   }
+
   .saveButton {
     border-radius: 8px;
     padding: 17px 83px;
@@ -192,21 +196,23 @@ h2 {
     height: 56px;
     flex: 2;
   }
+
   .sectionabout h2,
   .sectioningredients h2,
   .sectionsteps h2 {
     font-size: 32px;
   }
+
   .ingredientsList li,
   .stepItem {
     font-size: 16px;
   }
+
   .textabout {
     font-size: 16px;
   }
 }
 
-/*Desktop*/
 @media screen and (min-width: 1440px) {
   .container {
     padding: 0 108px 0 108px;
@@ -223,21 +229,26 @@ h2 {
     align-items: flex-start;
     gap: 40px;
   }
+
   .leftContent {
     flex: 2;
   }
+
   .recipeContainer {
     padding: 64px 80px;
     max-width: 1440px;
   }
+
   .title {
     font-size: 48px;
+    line-height: 1.1;
   }
 
   .containerImg img {
     width: auto;
     height: 624px;
   }
+
   .generalInfo {
     width: 393px;
     min-width: auto;
@@ -245,11 +256,13 @@ h2 {
     padding: 24px;
     margin: 0;
   }
+
   .generalInfobutton {
     display: flex;
     flex-direction: column;
     gap: 24px;
   }
+
   .saveButton {
     font-size: 18px;
     min-width: 393px;
@@ -257,15 +270,18 @@ h2 {
     padding: 15px;
     margin: 0;
   }
+
   .sectionabout h2,
   .sectioningredients h2,
   .sectionsteps h2 {
     font-size: 32px;
   }
+
   .ingredientsList li,
   .steps li {
     font-size: 16px;
   }
+
   .textabout {
     font-size: 16px;
   }
