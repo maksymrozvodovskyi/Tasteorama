@@ -242,6 +242,9 @@ const AddRecipeForm = () => {
                       </option>
                     ))}
                   </Field>
+                  <svg className={styles.icon}>
+                    <use href="/icons.svg#icon-arrow-down"></use>
+                  </svg>
                 </div>
                 <ErrorMessage
                   name="category"
@@ -343,15 +346,15 @@ const AddRecipeForm = () => {
                 Add new Ingredient
               </button>
 
-              {values.ingredients.length > 0 && (
-                <table className={styles.ingredientsTable}>
-                  <thead>
-                    <tr>
-                      <th>Name:</th>
-                      <th>Amount:</th>
-                      <th></th>
-                    </tr>
-                  </thead>
+              <table className={styles.ingredientsTable}>
+                <thead>
+                  <tr>
+                    <th>Name:</th>
+                    <th>Amount:</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                {values.ingredients.length > 0 && (
                   <tbody>
                     {values.ingredients.map((ing, i) => (
                       <tr key={i}>
@@ -368,9 +371,7 @@ const AddRecipeForm = () => {
                             }
                           >
                             <svg
-                              width="24"
-                              height="24"
-                              className={styles.uploadImage}
+                              className={styles.deleteImage}
                               aria-hidden="true"
                             >
                               <use href="/icons.svg#icon-delete" />
@@ -380,8 +381,9 @@ const AddRecipeForm = () => {
                       </tr>
                     ))}
                   </tbody>
-                </table>
-              )}
+                )}
+              </table>
+
               <ErrorMessage
                 name="ingredients"
                 component="div"
