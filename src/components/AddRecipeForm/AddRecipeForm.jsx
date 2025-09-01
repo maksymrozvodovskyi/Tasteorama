@@ -113,10 +113,12 @@ const AddRecipeForm = () => {
 
         try {
           const result = await dispatch(addRecipe(formData)).unwrap();
+          console.log("Результат після dispatch:", result);
 
           const recipeId = result._id;
-          navigate(`/recipes/${recipeId}`);
+          console.log("RecipeId:", recipeId);
 
+          navigate(`/recipes/${recipeId}`);
           resetForm();
         } catch (error) {
           console.error("Помилка створення рецепта:", error);
