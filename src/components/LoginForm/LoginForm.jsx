@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import css from "./LoginForm.module.css";
 import { useState } from "react";
-import eyeOpenSvg from "../../assets/icons/eye.svg";
-import eyeClosedSvg from "../../assets/icons/eye-crossed.svg";
+import eyeOpenSvg from "../../assets/Icons/eye.svg";
+import eyeClosedSvg from "../../assets/Icons/eye-crossed.svg";
 import { loginUserThunk, fetchCurrentUser } from "../../redux/auth/operations";
 import { loginSchema } from "../../formSchema";
 
