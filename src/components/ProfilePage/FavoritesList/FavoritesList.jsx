@@ -23,7 +23,6 @@ const FavoritesList = () => {
   );
 
   useEffect(() => {
-    // dispatch(clearFavitems());
     dispatch(fetchFavoriteRecipes());
   }, [dispatch]);
 
@@ -37,6 +36,7 @@ const FavoritesList = () => {
         currentPage={currentPage}
         nextPage={nextPageFavorite}
         fetchRecipes={fetchFavoriteRecipes}
+        mode={"default"}
       />
     </div>
   );

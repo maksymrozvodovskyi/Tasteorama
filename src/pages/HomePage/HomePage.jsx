@@ -52,6 +52,7 @@ export default function HomePage() {
             currentPage={currentPage}
             nextPage={nextPage}
             fetchRecipes={fetchRecipes}
+            mode={"default"}
           />
         )}
       </div>
