@@ -10,7 +10,7 @@ const AddRecipeSchema = Yup.object().shape({
   title: Yup.string()
     .min(3)
     .max(64)
-    .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]+$/, "Use only letters ")
+    .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]+$/, "Use only letters")
     .required("Recipe Title"),
   description: Yup.string()
     .max(200)
@@ -51,6 +51,7 @@ const AddRecipeForm = () => {
   const [ingredientId, setIngredientId] = useState("");
   const debounceTimeout = useRef(null);
 
+  // Fetch categories + ingredients паралельно та з кешем
   useEffect(() => {
     async function fetchData() {
       try {
@@ -75,7 +76,7 @@ const AddRecipeForm = () => {
     clearTimeout(debounceTimeout.current);
     setIngredientName(value);
 
-    if (!value.trim()) {
+    if (value.trim().length === 0) {
       setFiltered([]);
       setShowList(false);
       return;
@@ -87,7 +88,7 @@ const AddRecipeForm = () => {
       );
       setFiltered(results);
       setShowList(true);
-    }, 250);
+    }, 200); // debounce 200ms
   };
 
   return (
@@ -137,7 +138,10 @@ const AddRecipeForm = () => {
                     src={preview}
                     alt="Preview"
                     loading="lazy"
+                    width={200}
+                    height={200}
                     className={styles.previewImage}
+                    style={{ objectFit: "cover" }}
                   />
                 ) : (
                   <svg className={styles.uploadImage} aria-hidden="true">
@@ -163,15 +167,14 @@ const AddRecipeForm = () => {
             </div>
           </div>
 
-          {/* General Information */}
+          {/* General Info */}
           <div className={styles.fieldForm}>
             <h3 className={styles.titleSection}>General Information</h3>
 
-            <h4 className={styles.titlePart}>Recipe Title</h4>
             <Field
               name="title"
               type="text"
-              placeholder="Enter the name of your recipe"
+              placeholder="Recipe Title"
               className={`${styles.inputTitle} ${
                 errors.title && touched.title ? styles.invalid : ""
               }`}
@@ -182,11 +185,10 @@ const AddRecipeForm = () => {
               className={styles.error}
             />
 
-            <h4 className={styles.titlePart}>Recipe Description</h4>
             <Field
               as="textarea"
               name="description"
-              placeholder="Enter a brief description of your recipe"
+              placeholder="Description"
               className={`${styles.textarea} ${
                 errors.description && touched.description ? styles.invalid : ""
               }`}
@@ -197,11 +199,10 @@ const AddRecipeForm = () => {
               className={styles.error}
             />
 
-            <h4 className={styles.titlePart}>Cooking time in minutes</h4>
             <Field
               name="time"
               type="number"
-              placeholder="10"
+              placeholder="Cooking time"
               className={`${styles.inputTitle} ${
                 errors.time && touched.time ? styles.invalid : ""
               }`}
@@ -212,115 +213,88 @@ const AddRecipeForm = () => {
               className={styles.error}
             />
 
-            <div className={styles.fieldGroup}>
-              <div className={styles.fieldItem}>
-                <h4 className={styles.titlePart}>Calories</h4>
-                <div className={styles.inputWrapper}>
-                  <Field
-                    name="calories"
-                    type="number"
-                    placeholder="150"
-                    className={`${styles.input} ${
-                      errors.calories && touched.calories ? styles.invalid : ""
-                    }`}
-                  />
-                </div>
-                <ErrorMessage
-                  name="calories"
-                  component="div"
-                  className={styles.error}
-                />
-              </div>
+            <Field
+              name="calories"
+              type="number"
+              placeholder="Calories"
+              className={`${styles.inputTitle} ${
+                errors.calories && touched.calories ? styles.invalid : ""
+              }`}
+            />
+            <ErrorMessage
+              name="calories"
+              component="div"
+              className={styles.error}
+            />
 
-              <div className={styles.fieldItem}>
-                <h4 className={styles.titlePart}>Category</h4>
-                <div className={styles.selectWrapper}>
-                  <Field
-                    as="select"
-                    name="category"
-                    className={`${styles.input} ${
-                      errors.category && touched.category ? styles.invalid : ""
-                    }`}
-                  >
-                    <option value="">Select category</option>
-                    {categories.map((cat) => (
-                      <option key={cat._id} value={cat.name}>
-                        {cat.name}
-                      </option>
-                    ))}
-                  </Field>
-                </div>
-                <ErrorMessage
-                  name="category"
-                  component="div"
-                  className={styles.error}
-                />
-              </div>
-            </div>
+            <Field
+              as="select"
+              name="category"
+              className={`${styles.input} ${
+                errors.category && touched.category ? styles.invalid : ""
+              }`}
+            >
+              <option value="">Select category</option>
+              {categories.map((cat) => (
+                <option key={cat._id} value={cat.name}>
+                  {cat.name}
+                </option>
+              ))}
+            </Field>
+            <ErrorMessage
+              name="category"
+              component="div"
+              className={styles.error}
+            />
 
             {/* Ingredients */}
             <h3 className={styles.titleSection}>Ingredients</h3>
             <div className={styles.ingredients}>
-              <div className={styles.inputsRow}>
-                <div className={styles.fieldItem}>
-                  <h4 className={styles.titlePart}>Name</h4>
-                  <div className={styles.selectWrapper}>
-                    <input
-                      type="text"
-                      className={`${styles.inputTitle} ${
-                        errors.ingredients && touched.ingredients
-                          ? styles.invalid
-                          : ""
-                      }`}
-                      placeholder="Search ingredient..."
-                      value={ingredientName}
-                      onChange={(e) => handleIngredientInput(e.target.value)}
-                      onFocus={() => ingredientName && setShowList(true)}
-                      onBlur={() => setTimeout(() => setShowList(false), 150)}
-                    />
+              <input
+                type="text"
+                placeholder="Search ingredient..."
+                value={ingredientName}
+                onChange={(e) => handleIngredientInput(e.target.value)}
+                onFocus={() => ingredientName && setShowList(true)}
+                onBlur={() => setTimeout(() => setShowList(false), 150)}
+                className={styles.inputTitle}
+              />
 
-                    {showList && filtered.length > 0 && (
-                      <ul className={styles.dropdown}>
-                        {filtered.map((ing) => (
-                          <li
-                            key={ing._id}
-                            className={styles.dropdownItem}
-                            onClick={() => {
-                              setIngredientName(ing.name);
-                              setIngredientId(ing._id);
-                              setShowList(false);
-                            }}
-                          >
-                            {ing.name}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </div>
+              {showList && filtered.length > 0 && (
+                <ul className={styles.dropdown}>
+                  {filtered.map((ing) => (
+                    <li
+                      key={ing._id}
+                      onClick={() => {
+                        setIngredientName(ing.name);
+                        setIngredientId(ing._id);
+                        setShowList(false);
+                      }}
+                    >
+                      {ing.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
 
-                <div className={styles.fieldItem}>
-                  <h4 className={styles.titlePart}>Amount</h4>
-                  <input
-                    className={styles.inputTitle}
-                    type="text"
-                    placeholder="100g"
-                    value={ingredientAmount}
-                    onChange={(e) => setIngredientAmount(e.target.value)}
-                  />
-                </div>
-              </div>
+              <input
+                type="text"
+                placeholder="Amount"
+                value={ingredientAmount}
+                onChange={(e) => setIngredientAmount(e.target.value)}
+                className={styles.inputTitle}
+              />
 
               <button
                 type="button"
                 className={styles.addBtn}
                 onClick={() => {
-                  if (ingredientName.trim() && ingredientAmount.trim()) {
+                  if (ingredientName && ingredientAmount) {
                     setFieldValue("ingredients", [
                       ...values.ingredients,
                       {
-                        name: ingredientName.trim(),
-                        amount: ingredientAmount.trim(),
+                        name: ingredientName,
+                        amount: ingredientAmount,
                         id: ingredientId,
                       },
                     ]);
@@ -329,15 +303,15 @@ const AddRecipeForm = () => {
                   }
                 }}
               >
-                Add new Ingredient
+                Add Ingredient
               </button>
 
               {values.ingredients.length > 0 && (
                 <table className={styles.ingredientsTable}>
                   <thead>
                     <tr>
-                      <th>Name:</th>
-                      <th>Amount:</th>
+                      <th>Name</th>
+                      <th>Amount</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -356,14 +330,7 @@ const AddRecipeForm = () => {
                               )
                             }
                           >
-                            <svg
-                              width="24"
-                              height="24"
-                              className={styles.uploadImage}
-                              aria-hidden="true"
-                            >
-                              <use href="/icons.svg#icon-delete" />
-                            </svg>
+                            ×
                           </button>
                         </td>
                       </tr>
@@ -379,11 +346,10 @@ const AddRecipeForm = () => {
             </div>
 
             {/* Instructions */}
-            <h3 className={styles.titleSection}>Instructions</h3>
             <Field
               as="textarea"
               name="instructions"
-              placeholder="Enter a text"
+              placeholder="Instructions"
               className={`${styles.textarea} ${
                 errors.instructions && touched.instructions
                   ? styles.invalid
@@ -396,7 +362,6 @@ const AddRecipeForm = () => {
               className={styles.error}
             />
 
-            {/* Submit */}
             <button type="submit" className={styles.submitBtn}>
               Publish Recipe
             </button>
