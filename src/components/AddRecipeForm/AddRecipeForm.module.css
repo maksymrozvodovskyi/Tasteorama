@@ -15,6 +15,15 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  margin-top: 16px;
+  gap: 4px;
+}
+
+@media only screen and (min-width: 1440px) {
+  .fieldPhoto {
+    margin-top: 0;
+    gap: 0;
+  }
 }
 
 .upload {
@@ -23,16 +32,67 @@
   justify-content: center;
 }
 
+.titleSectionPhoto {
+  display: flex;
+  font-size: 24px;
+  justify-content: left;
+  font-weight: 600;
+  height: 29px;
+  align-items: center;
+}
 .titleSection {
   font-size: 24px;
   justify-content: left;
   font-weight: 600;
-  padding-top: 24px;
 }
 
 @media only screen and (min-width: 768px) {
   .titleSection {
     font-size: 32px;
+  }
+  .titleSectionPhoto {
+    font-size: 24px;
+    justify-content: left;
+    font-weight: 600;
+    height: 70px;
+  }
+}
+.generalInformationSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* margin-bottom: 24px; */
+}
+@media only screen and (min-width: 768px) {
+  .generalInformationSection {
+    gap: 32px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .generalInformationSection {
+    width: 809px
+  }
+}
+
+.instructionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* margin-top: 40px; */
+}
+.itemGI {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.caloriesCategory {
+  display: flex;
+  gap: 16px;
+}
+@media only screen and (min-width: 768px) {
+  .caloriesCategory {
+    gap: 24px;
   }
 }
 
@@ -77,42 +137,48 @@
 }
 
 .uploadImage {
-  color: #070707;
+  /* color: #070707;
   stroke-width: 1px;
-  stroke: currentColor;
-  width: 52px;
-  height: 52px;
+  stroke: currentColor; */
+  width: 82px;
+  height: 82px;
 }
 
 @media only screen and (min-width: 1440px) {
   .uploadImage {
-    width: 99px;
-    height: 81px;
+    width: 162px;
+    height: 136px;
   }
+}
+.delIcon {
+  width: 24px;
+  height: 24px;
 }
 
 .titlePart {
   font-weight: 400;
   font-size: 18px;
-  padding-top: 8px;
 }
 
-.fieldGroup {
+/* .fieldGroup {
   display: flex;
   gap: 16px;
   margin-bottom: 20px;
-}
+} */
 
 .fieldItem {
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
 .fieldForm {
   flex: 1;
   display: flex;
   flex-direction: column;
+  margin-top: 24px;
+  gap: 40px;
 }
 
 @media only screen and (min-width: 1440px) {
@@ -121,6 +187,21 @@
   }
 }
 
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ingredientsSection {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 40px; */
+}
+.titleSectionIngridients {
+  margin-bottom: 32px;
+  font-weight: 600;
+  font-size: 32px;
+}
 .inputWrapper {
   position: relative;
   display: flex;
@@ -149,6 +230,10 @@
   font-size: inherit;
   color: #595d62;
   font-size: 18px;
+}
+
+.input option {
+  border-radius: 4px;
 }
 
 .inputTitle {
@@ -185,7 +270,7 @@
   font-size: 18px;
   border: 1px solid #d9d9d9;
   box-sizing: border-box;
-  margin-top: 8px;
+  /* margin-top: 8px; */
 }
 
 .textarea:focus {
@@ -197,13 +282,13 @@
 .ingredients {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .inputsRow {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 24px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -225,6 +310,7 @@
   cursor: pointer;
   transition: background 0.2s ease;
   width: 100%;
+  box-sizing: border-box;
 }
 
 @media only screen and (min-width: 768px) {
@@ -232,6 +318,19 @@
     width: 249px;
     margin-left: auto;
     display: block;
+    padding: 8px;
+    height: 36px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .addBtn {
+    font-size: 12px;
+    width: 258px;
+    margin-left: auto;
+    display: block;
+    padding: 4px;
+    height: 23px;
   }
 }
 
@@ -251,11 +350,17 @@
   margin-top: 8px;
 }
 
+@media only screen and (min-width: 1440px) {
+  .ingredientsTable {
+    width: 332px;
+  }
+}
+
 .ingredientsTable th,
 .ingredientsTable td {
   text-align: left;
   padding: 8px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #c5c5c5;
 }
 
 .ingredientsTable th {
@@ -295,6 +400,17 @@
   pointer-events: none;
 }
 
+@media only screen and (min-width: 768px) {
+  .selectWrapperTabDT {
+    width: 431px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .selectWrapperTabDT {
+    width: 497px;
+  }
+}
+
 .submitBtn {
   border-radius: 8px;
   padding: 12px 16px;
@@ -305,8 +421,8 @@
   font-size: 16px;
   color: #fff;
   border: none;
-  margin-top: 40px;
-  margin-bottom: 48px;
+  /* margin-top: 40px;
+  margin-bottom: 48px; */
   cursor: pointer;
 }
 
@@ -326,13 +442,15 @@
   left: 0;
   right: 0;
   background: #fff;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   max-height: 200px;
   overflow-y: auto;
   z-index: 10;
   list-style: none;
   margin: 0;
   padding: 0;
+  border-radius: 4px;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.4), 0 8px 24px -6px rgba(0, 0, 0, 0.16);
 }
 
 .dropdownItem {

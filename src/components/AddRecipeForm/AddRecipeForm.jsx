@@ -121,7 +121,7 @@ const AddRecipeForm = () => {
         <Form className={styles.form}>
           {/* Upload Photo */}
           <div className={styles.fieldPhoto}>
-            <h3 className={styles.titleSection}>Upload photo</h3>
+            <h3 className={styles.titleSectionPhoto}>Upload photo</h3>
             <div className={styles.upload}>
               <label htmlFor="photo" className={styles.uploadLabel}>
                 {preview ? (
@@ -158,253 +158,271 @@ const AddRecipeForm = () => {
 
           {/* General Information */}
           <div className={styles.fieldForm}>
-            <h3 className={styles.titleSection}>General Information</h3>
-            <h4 className={styles.titlePart}>Recipe Title</h4>
-            <Field
-              name="title"
-              type="text"
-              placeholder="Enter the name of your recipe"
-              className={`${styles.inputTitle} ${
-                errors.title && touched.title ? styles.invalid : ""
-              }`}
-            />
-            <ErrorMessage
-              name="title"
-              component="div"
-              className={styles.error}
-            />
-
-            <h4 className={styles.titlePart}>Recipe Description</h4>
-            <Field
-              as="textarea"
-              name="description"
-              placeholder="Enter a brief description of your recipe"
-              className={`${styles.textarea} ${
-                errors.description && touched.description ? styles.invalid : ""
-              }`}
-            />
-            <ErrorMessage
-              name="description"
-              component="div"
-              className={styles.error}
-            />
-
-            <h4 className={styles.titlePart}>Cooking time in minutes</h4>
-            <Field
-              name="time"
-              type="number"
-              placeholder="10"
-              className={`${styles.inputTitle} ${
-                errors.time && touched.time ? styles.invalid : ""
-              }`}
-            />
-            <ErrorMessage
-              name="time"
-              component="div"
-              className={styles.error}
-            />
-
-            <div className={styles.fieldGroup}>
-              <div className={styles.fieldItem}>
-                <h4 className={styles.titlePart}>Calories</h4>
-                <div className={styles.inputWrapper}>
-                  <Field
-                    name="calories"
-                    type="number"
-                    placeholder="150"
-                    className={`${styles.input} ${
-                      errors.calories && touched.calories ? styles.invalid : ""
-                    }`}
-                  />
-                </div>
+            <div className={styles.generalInformationSection}>
+              <h3 className={styles.titleSection}>General Information</h3>
+              <div className={styles.itemGI}>
+                <h4 className={styles.titlePart}>Recipe Title</h4>
+                <Field
+                  name="title"
+                  type="text"
+                  placeholder="Enter the name of your recipe"
+                  className={`${styles.inputTitle} ${
+                    errors.title && touched.title ? styles.invalid : ""
+                  }`}
+                />
                 <ErrorMessage
-                  name="calories"
+                  name="title"
                   component="div"
                   className={styles.error}
                 />
               </div>
-
-              <div className={styles.fieldItem}>
-                <h4 className={styles.titlePart}>Category</h4>
-                <div className={styles.selectWrapper}>
-                  <Field
-                    as="select"
-                    name="category"
-                    className={`${styles.input} ${
-                      errors.category && touched.category ? styles.invalid : ""
-                    }`}
-                  >
-                    <option value="">Select category</option>
-                    {categories.map((cat) => (
-                      <option key={cat._id} value={cat.name}>
-                        {cat.name}
-                      </option>
-                    ))}
-                  </Field>
-                </div>
+              <div className={styles.itemGI}>
+                <h4 className={styles.titlePart}>Recipe Description</h4>
+                <Field
+                  as="textarea"
+                  name="description"
+                  placeholder="Enter a brief description of your recipe"
+                  className={`${styles.textarea} ${
+                    errors.description && touched.description
+                      ? styles.invalid
+                      : ""
+                  }`}
+                />
                 <ErrorMessage
-                  name="category"
+                  name="description"
                   component="div"
                   className={styles.error}
                 />
+              </div>
+              <div className={styles.itemGI}>
+                <h4 className={styles.titlePart}>Cooking time in minutes</h4>
+                <Field
+                  name="time"
+                  type="number"
+                  placeholder="10"
+                  className={`${styles.inputTitle} ${
+                    errors.time && touched.time ? styles.invalid : ""
+                  }`}
+                />
+                <ErrorMessage
+                  name="time"
+                  component="div"
+                  className={styles.error}
+                />
+              </div>
+              <div className={styles.itemGI}>
+                <div className={styles.caloriesCategory}>
+                  <div className={styles.fieldItem}>
+                    <h4 className={styles.titlePart}>Calories</h4>
+                    <div className={styles.inputWrapper}>
+                      <Field
+                        name="calories"
+                        type="number"
+                        placeholder="150"
+                        className={`${styles.input} ${
+                          errors.calories && touched.calories
+                            ? styles.invalid
+                            : ""
+                        }`}
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="calories"
+                      component="div"
+                      className={styles.error}
+                    />
+                  </div>
+                  <div className={styles.fieldItem}>
+                    <h4 className={styles.titlePart}>Category</h4>
+                    <div className={styles.selectWrapper}>
+                      <Field
+                        as="select"
+                        name="category"
+                        className={`${styles.input} ${
+                          errors.category && touched.category
+                            ? styles.invalid
+                            : ""
+                        }`}
+                      >
+                        <option value="">Select category</option>
+                        {categories.map((cat) => (
+                          <option key={cat._id} value={cat.name}>
+                            {cat.name}
+                          </option>
+                        ))}
+                      </Field>
+                    </div>
+                    <ErrorMessage
+                      name="category"
+                      component="div"
+                      className={styles.error}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Ingredients */}
-            <h3 className={styles.titleSection}>Ingredients</h3>
-            <div className={styles.ingredients}>
-              <div className={styles.inputsRow}>
-                <div className={styles.fieldItem}>
-                  <h4 className={styles.titlePart}>Name</h4>
-                  <div className={styles.selectWrapper}>
+            <div className={styles.ingredientsSection}>
+              <h3 className={styles.titleSectionIngridients}>Ingredients</h3>
+              <div className={styles.ingredients}>
+                <div className={styles.inputsRow}>
+                  <div className={styles.fieldItem}>
+                    <h4 className={styles.titlePart}>Name</h4>
+                    <div
+                      className={`${styles.selectWrapper} ${styles.selectWrapperTabDT}`}
+                    >
+                      <input
+                        type="text"
+                        className={`${styles.inputTitle} ${
+                          errors.ingredients && touched.ingredients
+                            ? styles.invalid
+                            : ""
+                        }`}
+                        placeholder="Search ingredient..."
+                        value={ingredientName}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setIngredientName(value);
+                          if (value.trim().length > 0) {
+                            const results = ingredients.filter((ing) =>
+                              ing.name
+                                .toLowerCase()
+                                .includes(value.toLowerCase())
+                            );
+                            setFiltered(results);
+                            setShowList(true);
+                          } else {
+                            setFiltered([]);
+                            setShowList(false);
+                          }
+                        }}
+                        onFocus={() => {
+                          if (ingredientName.trim().length > 0)
+                            setShowList(true);
+                        }}
+                        onBlur={() => {
+                          setTimeout(() => setShowList(false), 250);
+                        }}
+                      />
+                      {showList && filtered.length > 0 && (
+                        <ul className={styles.dropdown}>
+                          {filtered.map((ing) => (
+                            <li
+                              key={ing._id}
+                              className={styles.dropdownItem}
+                              onClick={() => {
+                                setIngredientName(ing.name);
+                                setIngredientId(ing._id);
+                                setShowList(false);
+                              }}
+                            >
+                              {ing.name}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.fieldItem}>
+                    <h4 className={styles.titlePart}>Amount</h4>
                     <input
+                      className={styles.inputTitle}
                       type="text"
-                      className={`${styles.inputTitle} ${
-                        errors.ingredients && touched.ingredients
-                          ? styles.invalid
-                          : ""
-                      }`}
-                      placeholder="Search ingredient..."
-                      value={ingredientName}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        setIngredientName(value);
-
-                        if (value.trim().length > 0) {
-                          const results = ingredients.filter((ing) =>
-                            ing.name.toLowerCase().includes(value.toLowerCase())
-                          );
-                          setFiltered(results);
-                          setShowList(true);
-                        } else {
-                          setFiltered([]);
-                          setShowList(false);
-                        }
-                      }}
-                      onFocus={() => {
-                        if (ingredientName.trim().length > 0) setShowList(true);
-                      }}
-                      onBlur={() => {
-                        setTimeout(() => setShowList(false), 250);
-                      }}
+                      placeholder="100g"
+                      value={ingredientAmount}
+                      onChange={(e) => setIngredientAmount(e.target.value)}
                     />
-
-                    {showList && filtered.length > 0 && (
-                      <ul className={styles.dropdown}>
-                        {filtered.map((ing) => (
-                          <li
-                            key={ing._id}
-                            className={styles.dropdownItem}
-                            onClick={() => {
-                              setIngredientName(ing.name);
-                              setIngredientId(ing._id);
-                              setShowList(false);
-                            }}
-                          >
-                            {ing.name}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
                   </div>
                 </div>
-
-                <div className={styles.fieldItem}>
-                  <h4 className={styles.titlePart}>Amount</h4>
-                  <input
-                    className={styles.inputTitle}
-                    type="text"
-                    placeholder="100g"
-                    value={ingredientAmount}
-                    onChange={(e) => setIngredientAmount(e.target.value)}
-                  />
-                </div>
-              </div>
-
-              <button
-                type="button"
-                className={styles.addBtn}
-                onClick={() => {
-                  if (ingredientName.trim() && ingredientAmount.trim()) {
-                    setFieldValue("ingredients", [
-                      ...values.ingredients,
-                      {
-                        name: ingredientName.trim(),
-                        amount: ingredientAmount.trim(),
-                        id: ingredientId,
-                      },
-                    ]);
-                    setIngredientName("");
-                    setIngredientAmount("");
-                  }
-                }}
-              >
-                Add new Ingredient
-              </button>
-
-              {values.ingredients.length > 0 && (
-                <table className={styles.ingredientsTable}>
-                  <thead>
-                    <tr>
-                      <th>Name:</th>
-                      <th>Amount:</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {values.ingredients.map((ing, i) => (
-                      <tr key={i}>
-                        <td>{ing.name}</td>
-                        <td>{ing.amount}</td>
-                        <td>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setFieldValue(
-                                "ingredients",
-                                values.ingredients.filter((_, idx) => idx !== i)
-                              )
-                            }
-                          >
-                            <svg
-                              width="24"
-                              height="24"
-                              className={styles.uploadImage}
-                              aria-hidden="true"
-                            >
-                              <use href="/icons.svg#icon-delete" />
-                            </svg>
-                          </button>
-                        </td>
+                <button
+                  type="button"
+                  className={styles.addBtn}
+                  onClick={() => {
+                    if (ingredientName.trim() && ingredientAmount.trim()) {
+                      setFieldValue("ingredients", [
+                        ...values.ingredients,
+                        {
+                          name: ingredientName.trim(),
+                          amount: ingredientAmount.trim(),
+                          id: ingredientId,
+                        },
+                      ]);
+                      setIngredientName("");
+                      setIngredientAmount("");
+                    }
+                  }}
+                >
+                  Add new Ingredient
+                </button>
+                {values.ingredients.length > 0 && (
+                  <table className={styles.ingredientsTable}>
+                    <thead>
+                      <tr>
+                        <th>Name:</th>
+                        <th>Amount:</th>
+                        <th></th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
+                    </thead>
+                    <tbody>
+                      {values.ingredients.map((ing, i) => (
+                        <tr key={i}>
+                          <td>{ing.name}</td>
+                          <td>{ing.amount}</td>
+                          <td>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setFieldValue(
+                                  "ingredients",
+                                  values.ingredients.filter(
+                                    (_, idx) => idx !== i
+                                  )
+                                )
+                              }
+                            >
+                              <svg
+                                width="24"
+                                height="24"
+                                className={styles.delIcon}
+                                aria-hidden="true"
+                              >
+                                <use href="/icons.svg#icon-delete" />
+                              </svg>
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+                <ErrorMessage
+                  name="ingredients"
+                  component="div"
+                  className={styles.error}
+                />
+              </div>
+            </div>
+
+            {/* Instructions */}
+            <div className={styles.instructionsSection}>
+              <h3 className={styles.titleSection}>Instructions</h3>
+              <Field
+                as="textarea"
+                name="instructions"
+                placeholder="Enter a text"
+                className={`${styles.textarea} ${
+                  errors.instructions && touched.instructions
+                    ? styles.invalid
+                    : ""
+                }`}
+              />
               <ErrorMessage
-                name="ingredients"
+                name="instructions"
                 component="div"
                 className={styles.error}
               />
             </div>
-
-            {/* Instructions */}
-            <h3 className={styles.titleSection}>Instructions</h3>
-            <Field
-              as="textarea"
-              name="instructions"
-              placeholder="Enter a text"
-              className={`${styles.textarea} ${
-                errors.instructions && touched.instructions
-                  ? styles.invalid
-                  : ""
-              }`}
-            />
-            <ErrorMessage
-              name="instructions"
-              component="div"
-              className={styles.error}
-            />
 
             {/* Submit */}
             <button type="submit" className={styles.submitBtn}>
