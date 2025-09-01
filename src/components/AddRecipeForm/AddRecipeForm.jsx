@@ -128,6 +128,7 @@ const AddRecipeForm = () => {
                   <img
                     src={preview}
                     alt="Preview"
+                    loading="lazy"
                     className={styles.previewImage}
                   />
                 ) : (

@@ -41,6 +41,7 @@ const PasswordField = ({ field, form }) => {
         <img
           src={showPassword ? eyeOpenSvg : eyeClosedSvg}
           alt={showPassword ? "Hide password" : "Show password"}
+          loading="lazy"
           width="24"
           height="24"
         />
