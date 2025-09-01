@@ -13,7 +13,7 @@ export default function UserInfo({ onLogout, className }) {
   return (
     <div className={`${css.wrapper} ${className}`}>
       <div className={css.avatar}>
-        {hasAvatar ? userName?.charAt(0).toUpperCase() : "?"}
+        {userName ? userName.charAt(0).toUpperCase() : "?"}
       </div>
       <span className={css.name}>{userName}</span>
       <div className={css.divider}></div>
