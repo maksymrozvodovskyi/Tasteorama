@@ -27,6 +27,10 @@ img {
   max-width: 100%;
 }
 
+input {
+  font-family: inherit;
+}
+
 .visually-hidden:not(:focus):not(:active) {
   position: absolute;
   width: 1px;
