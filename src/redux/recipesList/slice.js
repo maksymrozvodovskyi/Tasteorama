@@ -47,6 +47,7 @@ const recipesSlice = createSlice({
     clearitems: (state) => {
       state.items = [];
       state.currentPage = 1;
+      state.total = 0;
     },
     clearFavitems: (state) => {
       state.favoriteItems = [];
