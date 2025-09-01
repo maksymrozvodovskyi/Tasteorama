@@ -61,7 +61,9 @@
   }
 
   .content {
-    padding: 0 16px;
+    /* padding: 0 16px;     */
+    margin: 0 auto;
+    width: 329px;
   }
 }
 
@@ -69,13 +71,14 @@
   .hero {
     background-image: url("../../img/HeroSearchBox/banner-desktop.jpg");
     background-size: contain;
-    max-width: 1440px;
+    /* max-width: 1440px; */
     margin: 0 auto;
     background-size: cover;
   }
 
   .content {
-    padding: 128px 108px;
+    padding: 0 65px 0 32px;
+    width: 768px;
   }
 
   .title {
@@ -155,7 +158,13 @@
   }
 
   .container {
-    max-width: 1440px;
+    width: 1440px;
     padding: 0 108px;
+  }
+
+  .content {
+    width: 1440px;
+    padding: 0 108px;
+    /* margin: 0 auto; */
   }
 }
