@@ -1,11 +1,12 @@
 .notFoundContainer {
+  padding: 0 16px;
   width: 100%;
   margin: 0 auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 134px 0;
+  margin: 79px 0;
   gap: 32px;
 }
 
@@ -15,6 +16,7 @@
 
 .imgcontainer img {
   object-fit: contain;
+  border-radius: 8px;
 }
 
 .textContainer {
@@ -26,6 +28,7 @@
 .notfoundtitle {
   font-size: 48px;
   font-weight: 600;
+  line-height: 1.1;
   color: #000000;
   text-align: center;
   animation: fadeIn 0.6s ease-in-out;
@@ -40,12 +43,13 @@
 
 .backButton {
   display: flex;
-  width: 361px;
+  gap: 16px;
+  width: 100%;
   padding-top: 16px;
   padding-bottom: 16px;
   background-color: #9b6c43;
   color: #ffffff;
-  border-radius: 16px;
+  border-radius: 8px;
   text-decoration: none;
   text-align: center;
   transition: background 0.3s;
