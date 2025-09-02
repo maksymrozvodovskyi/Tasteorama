@@ -11,13 +11,13 @@ export default function Navigation({
 }) {
   const location = useLocation();
 
-   const isProfileActive = location.pathname.startsWith("/profile");
+  const isProfileActive = location.pathname.startsWith("/profile");
 
   return (
     <nav className={css.navGroup}>
       <NavLink
         to="/"
-        end 
+        end
         className={({ isActive }) =>
           `${css.link} ${css.recipes} ${isActive ? css.active : ""}`
         }
@@ -62,13 +62,6 @@ export default function Navigation({
           >
             My Profile
           </NavLink>
-          <div className={css.userInfo}>
-            <UserInfo
-              userName={userName}
-              onLogout={onLogout}
-              isMobile={isMobile}
-            />
-          </div>
           <NavLink
             to="/add-recipe"
             end
@@ -79,6 +72,13 @@ export default function Navigation({
           >
             Add Recipe
           </NavLink>
+          <div className={css.userInfo}>
+            <UserInfo
+              userName={userName}
+              onLogout={onLogout}
+              isMobile={isMobile}
+            />
+          </div>
         </>
       )}
     </nav>
