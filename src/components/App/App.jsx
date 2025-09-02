@@ -29,27 +29,29 @@ const ProfileTabs = lazy(() =>
 
 function App() {
   return (
-    <>
+    <div className={css.appWrapper}>
       <Header />
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/recipes/:id" element={<RecipeViewPage />} />
+      <div className={css.pageContent}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/recipes/:id" element={<RecipeViewPage />} />
 
-          {/* приватні роути */}
-          <Route path="/my-recipes" element={<ProfilePage />} />
-          <Route path="/add-recipe" element={<AddRecipePage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/profile/:recipeType" element={<ProfileTabs />} />
+            {/* приватні роути */}
+            <Route path="/my-recipes" element={<ProfilePage />} />
+            <Route path="/add-recipe" element={<AddRecipePage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/profile/:recipeType" element={<ProfileTabs />} />
 
-          {/* ерор пейдж 404 */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
+            {/* ерор пейдж 404 */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
