@@ -4,6 +4,7 @@ import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import RecipeCard from "../RecipeCard/RecipeCard";
 import { selectRecipesIsLoadingFavoriteRecipes } from "../../redux/recipesList/selectors.js";
 import Loader from "../Loader/Loader";
+import { useEffect, useRef } from "react";
 
 const RecipesList = ({
   recipes,
@@ -16,10 +17,23 @@ const RecipesList = ({
   const isLoadingFavoriteRecipes = useSelector(
     selectRecipesIsLoadingFavoriteRecipes
   );
+  const listRef = useRef(null);
 
+  useEffect(() => {
+    if (currentPage > 1 && listRef.current) {
+      const firstItem = listRef.current.firstElementChild;
+      if (firstItem) {
+        const { height } = firstItem.getBoundingClientRect();
+        window.scrollBy({
+          top: height * 2.8,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [recipes, currentPage]);
   return (
     <>
-      <ul className={styles.list}>
+      <ul className={styles.list} ref={listRef}>
         {Array.isArray(recipes) &&
           recipes.map((recipe) => (
             <li key={recipe._id}>
