@@ -101,6 +101,11 @@ const Filters = () => {
       ...provided,
       cursor: "pointer",
     }),
+    option: (provided, state) => ({
+      ...provided,
+      cursor: "pointer",
+      backgroundColor: state.isSelected ? "#e6f0ff" : provided.backgroundColor,
+    }),
     indicatorSeparator: () => ({
       display: "none",
     }),
