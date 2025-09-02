@@ -1,7 +1,4 @@
-import Hero from "../../components/Hero/Hero.jsx";
 import { useDispatch } from "react-redux";
-import Filters from "../../components/Filters/Filters";
-import RecipesList from "../../components/RecipeList/RecipeList";
 import { fetchRecipes } from "../../redux/recipesList/operations";
 import { setTitleFilter } from "../../redux/filters/slice";
 import { useSelector } from "react-redux";
@@ -17,6 +14,13 @@ import { fetchFavoriteRecipes } from "../../redux/recipes/operations.js";
 import { clearitems } from "../../redux/recipesList/slice";
 import { selectRecipesIsLoadingOwnRecipes } from "../../redux/recipesList/selectors";
 import css from "../../styles/container.module.css";
+import { lazy } from "react";
+
+const Hero = lazy(() => import("../../components/Hero/Hero.jsx"));
+const Filters = lazy(() => import("../../components/Filters/Filters"));
+const RecipesList = lazy(() =>
+  import("../../components/RecipeList/RecipeList")
+);
 
 export default function HomePage() {
   const dispatch = useDispatch();
