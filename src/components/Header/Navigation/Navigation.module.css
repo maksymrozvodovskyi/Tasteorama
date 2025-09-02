@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     gap: 36px;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
 }
 
@@ -12,7 +12,6 @@
     height: 24px;
     position: relative;
     text-decoration: none;
-    color: inherit;
     padding: 2px 4px;
     display: flex;
     align-items: center;
@@ -30,6 +29,15 @@
     transition: width 0.3s ease;
 }
 
+.link.active {
+    color: #f0f0f0;
+    /* Легший відтінок для контрасту */
+}
+
+.link.active::after {
+    width: 100%;
+}
+
 .link:hover::after,
 .link:focus::after,
 .link:focus-visible::after {
@@ -42,7 +50,7 @@
     border-radius: 8px;
     border: none;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
     padding: 12px 16px;
     width: 100%;
@@ -60,29 +68,15 @@
     box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px white;
 }
 
-.linkBtn:focus:hover {
-    background-color: #9b6c43;
+.linkBtn.active {
+    background-color: #b5895f;
+    /* Колір для активного стану кнопки */
+    color: #fff;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
 }
 
 .userInfo {
-    order: 2;
     align-self: center;
-}
-
-.navGroup>.recipes {
-    order: 0;
-}
-
-.navGroup>.profile {
-    order: 1;
-}
-
-.navGroup>.userInfo {
-    order: 2;
-}
-
-.navGroup>.addRecipe {
-    order: 3;
 }
 
 @media (min-width: 768px) {
@@ -92,44 +86,16 @@
         justify-content: space-between;
         gap: 32px;
         flex-wrap: nowrap;
-        font-size: 12px;
+        font-size: 0.875rem;
     }
 
-    .linkBtn {
-        width: auto;
-        white-space: nowrap;
-    }
-
+    .linkBtn,
     .link {
         white-space: nowrap;
     }
 
-    .navGroup>.userInfo {
+    .userInfo {
         margin-left: auto;
         align-self: center;
-    }
-
-    .navGroup>.recipes {
-        order: 0;
-    }
-
-    .navGroup>.profile {
-        order: 1;
-    }
-
-    .navGroup>.addRecipe {
-        order: 2;
-    }
-
-    .navGroup>.userInfo {
-        order: 3;
-        margin-left: auto;
-        align-self: center;
-    }
-}
-
-@media (min-width: 1024px) {
-    .container {
-        padding: 0 108px;
     }
 }
