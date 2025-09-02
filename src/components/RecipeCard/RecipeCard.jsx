@@ -72,7 +72,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
           <h3>{title}</h3>
           <span className={css.timeBox}>
             <svg width="24" height="24" className={css.icon}>
-              <use href="/icons.svg#icon-clock" />
+              <use href="/icons.svg#icon-clock" className={css.clock} />
             </svg>
             <p className={css.time}>{time ? `${time}` : "—"}</p>
           </span>
@@ -103,9 +103,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
               <svg width="24" height="24" className={css.icon}>
                 <use
                   xlinkHref={
-                    isFavorite
-                      ? "/icons.svg#icon-delete"
-                      : "/icons.svg#icon-flag"
+                    isFavorite ? "/icons.svg#icon-flag" : "/icons.svg#icon-flag"
                   }
                 />
               </svg>

@@ -11,7 +11,6 @@ const formDataToObject = (formData) => {
         measure: amount,
       }));
     } else if (key === "thumb") {
-      // додаємо тільки якщо value не пусте
       if (value instanceof File && value.size > 0) {
         obj["thumb"] = value;
       }
@@ -30,10 +29,9 @@ export const addRecipe = createAsyncThunk(
       const accessToken = state.auth.accessToken;
 
       const debugData = formDataToObject(formData);
-      console.log("FormData as object:", debugData);
 
       const res = await createRecipe(debugData, accessToken);
-      return res;
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || error.message

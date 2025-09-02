@@ -17,14 +17,16 @@ import { setAuthToken } from "../../../services/favoritesAPI.js";
 
 const RecipeDetails = () => {
   const [showModal, setShowModal] = useState(false);
+
   const dispatch = useDispatch();
 
   const ingredientsList = useSelector(selectIngredients) || [];
   const recipe = useSelector(selectCurrentRecipes);
 
   const favorites = useSelector((state) => state.recipes.favoriteItems) || [];
-  const isFavorite = favorites.some((item) => item._id === recipe._id);
-
+  const isFavorite = recipe
+    ? favorites.some((item) => item._id === recipe._id)
+    : false;
   const token = useSelector((state) => state.auth.accessToken);
   const isLoggedIn = Boolean(token);
 
@@ -56,13 +58,17 @@ const RecipeDetails = () => {
     }
   };
 
+  let url = recipe.thumb;
+
+  let newUrl = url.replace("/preview/", "/preview/large/");
+
   return (
     <div className={styles.container}>
       {/* Заголовок + картинка */}
       <div className={styles.wrapperImg}>
         <div className={styles.containerImg}>
           <img
-            src={recipe.thumb || recipe.imageUrl}
+            src={newUrl}
             alt={recipe.title || "Recipe image"}
             loading="lazy"
           />

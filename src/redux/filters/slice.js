@@ -24,6 +24,7 @@ const slice = createSlice({
       state.title = "";
       state.category = "";
       state.ingredients = [];
+      state.searchQuery = "";
     },
     setSearchQuery(state, action) {
       state.searchQuery = action.payload;

@@ -15,7 +15,7 @@ const Footer = () => {
   const hideAccountLink = ["/login", "/register"].includes(location.pathname);
   const handleAccountClick = () => {
     if (isAuth) {
-      window.location.href = "/my-recipes";
+      window.location.href = "/profile/own";
     } else {
       setIsModalOpen(true);
     }
@@ -35,7 +35,7 @@ const Footer = () => {
 
           {!hideAccountLink && (
             <Link
-              to="/my-recipes"
+              to="/profile"
               className={css.link}
               onClick={handleAccountClick}
             >

@@ -8,6 +8,7 @@ export default function LoadMoreBtn({ nextPage, fetchAction }) {
     dispatch(nextPage());
     dispatch(fetchAction());
   };
+
   return (
     <div className={css.container}>
       <button type="button" onClick={handleClick} className={css.btn}>

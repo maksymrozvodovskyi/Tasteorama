@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSearchQuery, setTitleFilter } from "../../redux/filters/slice";
 import { fetchRecipes } from "../../redux/recipesList/operations";
 import { selectSearchQuery } from "../../redux/filters/selectors";
+import { clearitems } from "../../redux/recipesList/slice";
 
 export default function SearchBox() {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export default function SearchBox() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(setTitleFilter(query));
+    dispatch(clearitems());
     dispatch(fetchRecipes());
   };
 
