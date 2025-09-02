@@ -37,7 +37,7 @@ const MyRecipesList = () => {
         currentPage={currentPage}
         nextPage={nextPageOwn}
         fetchRecipes={fetchOwnRecipes}
-        mode={"favorite"}
+        mode={"my"}
       />
     </div>
   );

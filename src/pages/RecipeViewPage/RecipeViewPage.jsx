@@ -6,7 +6,6 @@ import {
   selectRecipesError,
   selectRecipesIsLoadingCurrentRecipe,
 } from "../../redux/recipes/selectors.js";
-// import styles from "./RecipeViewPage.module.css";
 import NotFound from "../../components/RecipeViewPage/NotFound/NotFound.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
 
