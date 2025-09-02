@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import css from "../../styles/container.module.css";
+import Loader from "../Loader/Loader";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"));
@@ -32,7 +33,7 @@ function App() {
     <div className={css.appWrapper}>
       <Header />
       <div className={css.pageContent}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />

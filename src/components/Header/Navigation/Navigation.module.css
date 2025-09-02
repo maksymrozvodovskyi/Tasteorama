@@ -1,4 +1,4 @@
-.navGroup  {
+.navGroup {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,13 +10,13 @@
 .link {
     color: #fff;
     height: 24px;
-}
-
-.link {
     position: relative;
     text-decoration: none;
     color: inherit;
     padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .link::after {
