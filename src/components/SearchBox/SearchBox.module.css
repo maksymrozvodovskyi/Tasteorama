@@ -38,6 +38,7 @@
   background-color: #9b6c43;
   border: none;
   transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .button:hover {
@@ -47,10 +48,6 @@
 .button:focus {
   background-color: #9b6c43;
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
-}
-
-.button:focus:hover {
-  background-color: #9b6c43;
 }
 
 @media screen and (min-width: 768px) {
