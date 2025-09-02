@@ -20,7 +20,7 @@ const ProfileTabs = () => {
   };
 
   if (!tabRoutes.includes(recipeType))
-    return <Navigate to={`/${tabRoutes[0]}`} replace />;
+    return <Navigate to={`/profile/${tabRoutes[0]}`} replace />;
 
   return (
     <div className={styles.container}>
