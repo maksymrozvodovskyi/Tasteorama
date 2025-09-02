@@ -11,7 +11,7 @@ const AddRecipeSchema = Yup.object().shape({
     .min(3)
     .max(64)
     .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]+$/, "Use only letters ")
-    .required("Recipe Title"),
+    .required("Add recipe title"),
   description: Yup.string()
     .max(200)
     .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s.,!?()-]+$/, "Only text")
