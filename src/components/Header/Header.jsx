@@ -8,6 +8,10 @@ import css from "./Header.module.css";
 import { toast } from "react-toastify";
 import { selectAuthIsLoggedIn } from "../../redux/auth/selectors.js";
 import { logoutUserThunk } from "../../redux/auth/operations.js";
+import { fetchRecipes } from "../../redux/recipesList/operations.js";
+import { clearitems } from "../../redux/recipesList/slice.js";
+import { resetFilters, setTitleFilter } from "../../redux/filters/slice.js";
+import { selectSearchQuery } from "../../redux/filters/selectors.js";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,6 +24,9 @@ export default function Header() {
     try {
       await dispatch(logoutUserThunk()).unwrap();
       toast.success("Logout successfull!");
+      dispatch(resetFilters());
+      dispatch(clearitems());
+      dispatch(fetchRecipes());
     } catch (error) {
       toast.error("Logout error " + error);
     } finally {
@@ -38,7 +45,6 @@ export default function Header() {
           <Navigation
             isLoggedIn={isLoggedIn}
             closeMenu={() => {}}
-            userName={name}
             onLogout={handleLogout}
             isMobile={false}
           />
@@ -50,7 +56,6 @@ export default function Header() {
           <Navigation
             isLoggedIn={isLoggedIn}
             closeMenu={() => setMenuOpen(false)}
-            userName={name}
             onLogout={handleLogout}
             isMobile={true}
           />
