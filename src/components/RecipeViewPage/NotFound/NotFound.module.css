@@ -1,0 +1,116 @@
+.notFoundContainer {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 134px 0;
+  gap: 32px;
+}
+
+.imgcontainer {
+  max-width: 600px;
+}
+
+.imgcontainer img {
+  object-fit: contain;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.notfoundtitle {
+  font-size: 48px;
+  font-weight: 600;
+  color: #000000;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.notfoundMessage {
+  font-size: 24px;
+  font-weight: 400;
+  color: #000000;
+  text-align: center;
+}
+
+.backButton {
+  display: flex;
+  width: 361px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: #9b6c43;
+  color: #ffffff;
+  border-radius: 16px;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.3s;
+  align-items: center;
+  justify-content: center;
+}
+
+.backButton:hover,
+.backButton:focus {
+  background-color: #6d554b;
+}
+
+.backButton:active {
+  box-shadow: 0px 0px 0px 6px #4e46b41f;
+  box-shadow: 0px 0px 0px 2px #ffffff;
+}
+
+.backButton:disabled {
+  opacity: 0.3;
+  box-shadow: 0px 0px 0px 6px #4e46b41f;
+  box-shadow: 0px 0px 0px 2px #ffffff;
+}
+
+.backIcon {
+  width: 24px;
+  height: 24px;
+  stroke: white;
+  transition: stroke 0.3s;
+  fill: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .notFoundContainer {
+    margin: 208px 0;
+    padding: 0;
+  }
+
+  .backButton {
+    width: 340px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .notFoundContainer {
+    margin: 38px 108px;
+    gap: 32px;
+  }
+
+  .backButton {
+    width: 288px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+  }
+}

@@ -11,10 +11,13 @@ import {
   setCategoryFilter,
   setIngredientsFilter,
   resetFilters,
+  setSearchQuery,
 } from "../../redux/filters/slice";
 import { fetchRecipes } from "../../redux/recipesList/operations";
 import css from "./Filters.module.css";
 import { clearitems } from "../../redux/recipesList/slice";
+import { selectFilterTitle } from "../../redux/filters/selectors";
+import { selectRecipesIsLoadingFavoriteRecipes } from "../../redux/recipesList/selectors";
 
 const Filters = () => {
   const dispatch = useDispatch();
@@ -25,6 +28,8 @@ const Filters = () => {
   const recipesAmount = useSelector(selectTotalRecipes);
   const ingredients = useSelector(selectIngredients);
   const categories = useSelector(selectCategories);
+  const title = useSelector(selectFilterTitle);
+  const loader = useSelector(selectRecipesIsLoadingFavoriteRecipes);
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -47,6 +52,7 @@ const Filters = () => {
     setSelectedCategory(null);
     setSelectedIngredients([]);
     dispatch(fetchRecipes());
+    dispatch(setSearchQuery(""));
   };
 
   const onCategoryChange = (selectedOption) => {
@@ -85,12 +91,23 @@ const Filters = () => {
   }, []);
 
   const animatedComponents = makeAnimated();
+
+  const customStyles = {
+    indicatorSeparator: () => ({
+      display: "none",
+    }),
+  };
+
   return (
     <div className={css.filtersSection}>
-      <h2 className={css.title}>Recipes</h2>
+      <h2 className={css.title}>
+        {title ? `Search Results for “${title}”` : "Recipes"}
+      </h2>
       <div className={css.filtersContainerWrapper}>
         <div className={css.filtersContainer}>
-          <p className={css.recipesCount}>{recipesAmount} recipes</p>
+          {!loader && (
+            <p className={css.recipesCount}>{recipesAmount} recipes</p>
+          )}
 
           <button
             type="button"
@@ -121,6 +138,7 @@ const Filters = () => {
               onChange={onCategoryChange}
               placeholder="Category"
               isClearable
+              styles={customStyles}
             />
           </div>
 
@@ -132,6 +150,7 @@ const Filters = () => {
               onChange={onIngredientsChange}
               placeholder="Ingredient"
               isMulti
+              styles={customStyles}
             />
           </div>
           <button
@@ -143,6 +162,20 @@ const Filters = () => {
           </button>
         </div>
       </div>
+      {recipesAmount === 0 && !loader && (
+        <div className={css.noRecipesContainer}>
+          <h3 className={css.noRecipesTitle}>
+            We’re sorry! We were not able to find a match.
+          </h3>
+          <button
+            type="button"
+            className={css.noRecipesResetBtn}
+            onClick={handleResetFilters}
+          >
+            Reset search and filters
+          </button>
+        </div>
+      )}
     </div>
   );
 };

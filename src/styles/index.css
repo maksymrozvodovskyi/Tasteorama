@@ -4,6 +4,7 @@ html {
 
 body {
   font-family: 'Montserrat', sans-serif;
+  background: #fbfcf8;
 }
 
 h1,
@@ -25,6 +26,16 @@ ol {
 img {
   display: block;
   max-width: 100%;
+}
+
+input {
+  font-family: inherit;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+
 }
 
 .visually-hidden:not(:focus):not(:active) {

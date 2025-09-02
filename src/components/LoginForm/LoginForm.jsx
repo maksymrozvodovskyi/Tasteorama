@@ -1,17 +1,17 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import css from "./LoginForm.module.css";
 import { useState } from "react";
-import eyeOpenSvg from "../../assets/icons/eye.svg";
-import eyeClosedSvg from "../../assets/icons/eye-crossed.svg";
-// import icons from "../../../public/icons.svg";
+import eyeOpenSvg from "../../assets/Icons/eye.svg";
+import eyeClosedSvg from "../../assets/Icons/eye-crossed.svg";
 import { loginUserThunk, fetchCurrentUser } from "../../redux/auth/operations";
 import { loginSchema } from "../../formSchema";
 
 const PasswordField = ({ field, form }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [, meta] = useField(field.name);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -22,8 +22,10 @@ const PasswordField = ({ field, form }) => {
       <input
         {...field}
         type={showPassword ? "text" : "password"}
-        placeholder="Enter your password"
-        className={css.input}
+        placeholder="*********"
+        className={`${css.input} ${
+          meta.touched && meta.error ? css.inputError : ""
+        }`}
         value={field.value}
         onChange={(evt) => form.setFieldValue(field.name, evt.target.value)}
         autoComplete="off"
@@ -35,16 +37,10 @@ const PasswordField = ({ field, form }) => {
         tabIndex={0}
         onKeyDown={(evt) => evt.key === "Enter" && togglePasswordVisibility()}
       >
-        {/* <svg width="24" height="24">
-          <use
-            href={`${icons}#${
-              showPassword ? "icon-eye-open" : "icon-eye-crossed"
-            }`}
-          />
-        </svg> */}
         <img
           src={showPassword ? eyeOpenSvg : eyeClosedSvg}
           alt={showPassword ? "Hide password" : "Show password"}
+          loading="lazy"
           width="24"
           height="24"
         />
@@ -60,21 +56,14 @@ export const LoginForm = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     const { email, password } = values;
 
-    // if (!email.trim() || !password.trim()) {
-    //   toast.error("All fields must be filled");
-    //   setSubmitting(false);
-    //   return;
-    // }
-
     try {
       await dispatch(loginUserThunk({ email, password })).unwrap();
       toast.success("Login successful!");
-      
+
       await dispatch(fetchCurrentUser()).unwrap();
-      // console.log("currentUserName:", currentUser.data.name);
 
       navigate("/");
-    } catch {    
+    } catch {
       toast.error("Incorrect email or password");
     } finally {
       setSubmitting(false);
@@ -83,18 +72,13 @@ export const LoginForm = () => {
 
   return (
     <div className={css.formContainer}>
-      <h2 className={css.title}>Log In</h2>
-      <p className={css.subtitle}>
-        Welcome back! Please enter your credentials to access your account.
-      </p>
+      <h2 className={css.title}>Login</h2>
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={loginSchema}
-        validateOnBlur={false}
-        validateOnChange={false}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, isValid }) => (
           <Form className={css.form}>
             {isSubmitting && <div className={css.loader}></div>}
 
@@ -102,14 +86,20 @@ export const LoginForm = () => {
               <label htmlFor="email" className={css.label}>
                 Enter your email address
               </label>
-              <Field
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                className={css.input}
-                autoComplete="off"
-              />
+              <Field name="email">
+                {({ field, meta }) => (
+                  <input
+                    {...field}
+                    id="email"
+                    type="email"
+                    placeholder="email@gmail.com"
+                    className={`${css.input} ${
+                      meta.touched && meta.error ? css.inputError : ""
+                    }`}
+                    autoComplete="off"
+                  />
+                )}
+              </Field>
               <ErrorMessage
                 name="email"
                 component="div"
@@ -132,9 +122,9 @@ export const LoginForm = () => {
             <button
               type="submit"
               className={css.button}
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isValid}
             >
-              Log In
+              Login
             </button>
           </Form>
         )}

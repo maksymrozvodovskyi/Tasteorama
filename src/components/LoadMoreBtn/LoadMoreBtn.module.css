@@ -6,10 +6,21 @@
     padding: 16px;
     width: 100%;
     max-width: 372px;
-    background-color: #9B6C43 ;
+    background-color: #9B6C43;
     font-weight: 600;
     font-size: 18px;
     color: white;
+    margin-top: 24px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #6d554b;
+}
+
+.button:focus {
+    background-color: #9b6c43;
+    box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
 }
 
 .container {
@@ -19,12 +30,12 @@
 
 @media only screen and (min-width: 768px) {
     .btn {
-            width: 338px;
-        }
+        width: 338px;
+    }
 }
 
 @media only screen and (min-width: 1440px) {
     .btn {
-            width: 289px;
-        }
+        width: 289px;
+    }
 }

@@ -1,14 +1,10 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 /* Styles for Mobile devices */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 .container {
   min-width: 320px;
   max-width: 393px;
@@ -16,11 +12,30 @@
   margin: 0 auto;
 }
 
+.containerFilterRecList {
+  margin: 48px auto;
+
+  /* padding: 0 16px; */
+  /* / width: 393px; / */
+}
+
+
+@media only screen and (min-width: 393px) {
+  .containerFilterRecList {
+    padding: 0 16px;
+    width: 393px;
+  }
+}
+
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
   .container {
     max-width: 768px;
+  }
+
+  .containerFilterRecList {
     padding: 0 32px;
+    width: 768px;
   }
 }
 
@@ -28,6 +43,10 @@
 @media only screen and (min-width: 1440px) {
   .container {
     max-width: 1440px;
+  }
+
+  .containerFilterRecList {
+    width: 1440px;
     padding: 0 107px;
   }
 }

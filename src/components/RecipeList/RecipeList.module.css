@@ -4,15 +4,17 @@
     gap: 24px;
     justify-items: center;
     list-style: none;
-    margin: 0 auto 24px;
+    margin: 0 auto;
 }
+
 @media (min-width: 768px) {
     .list {
         max-width: 702px;
-        
+
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
 @media (min-width: 1440px) {
     .list {
         max-width: 1225px;
