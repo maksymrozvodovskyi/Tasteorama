@@ -11,6 +11,16 @@
     font-size: 18px;
     color: white;
     margin-top: 24px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #6d554b;
+}
+
+.button:focus {
+    background-color: #9b6c43;
+    box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
 }
 
 .container {

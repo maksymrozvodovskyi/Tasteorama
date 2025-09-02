@@ -29,9 +29,9 @@ const ProfileTabs = lazy(() =>
 
 function App() {
   return (
-    <>
+    <div className={css.appWrapper}>
       <Header />
-      <div className={css.container}>
+      <div className={css.pageContent}>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -51,7 +51,7 @@ function App() {
         </Suspense>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

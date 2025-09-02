@@ -31,7 +31,7 @@
 }
 
 .timeBox {
-    min-width: 53px;
+    max-width: 75px;
     height: 28px;
     border-radius: 8px;
     padding: 2px 8px;
@@ -45,6 +45,11 @@
 .time {
     font-weight: 600;
     font-size: 12px;
+}
+
+.clock {
+    width: 24px;
+    height: 24px;
 }
 
 .desBox {
@@ -168,12 +173,6 @@
         width: 276px;
     }
 
-    .timeBox {
-        min-width: 53px;
-        height: 28px;
-
-    }
-
     .btnBox {
         gap: 8px;
     }
@@ -234,5 +233,9 @@
 
     .moreBtn {
         width: 216px;
+    }
+
+    .saveBtn {
+        cursor: pointer;
     }
 }
