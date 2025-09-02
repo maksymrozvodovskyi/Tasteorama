@@ -17,6 +17,7 @@ import { setAuthToken } from "../../../services/favoritesAPI.js";
 
 const RecipeDetails = () => {
   const [showModal, setShowModal] = useState(false);
+
   const dispatch = useDispatch();
 
   const ingredientsList = useSelector(selectIngredients) || [];
@@ -57,13 +58,17 @@ const RecipeDetails = () => {
     }
   };
 
+  let url = recipe.thumb;
+
+  let newUrl = url.replace("/preview/", "/preview/large/");
+
   return (
     <div className={styles.container}>
       {/* Заголовок + картинка */}
       <div className={styles.wrapperImg}>
         <div className={styles.containerImg}>
           <img
-            src={recipe.thumb || recipe.imageUrl}
+            src={newUrl}
             alt={recipe.title || "Recipe image"}
             loading="lazy"
           />
