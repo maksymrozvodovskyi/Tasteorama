@@ -22,7 +22,6 @@ export const addFavorite = createAsyncThunk(
   }
 );
 
-// Видалити з улюблених
 export const removeFavorite = createAsyncThunk(
   "favorites/remove",
   async (id, thunkAPI) => {
