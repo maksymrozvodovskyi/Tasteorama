@@ -3,10 +3,6 @@
   color: #c80000;
 }
 
-/* ======================= */
-/* 📱 Mobile styles (base) */
-/* ======================= */
-
 .form {
   display: flex;
   flex-direction: column;

@@ -2,6 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import Loader from "../Loader/Loader";
+import ProfileTabs from "../../components/ProfilePage/PrifileTabs/ProfileTabs";
 import css from "../../styles/container.module.css";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
@@ -21,18 +23,14 @@ const ProfilePage = lazy(() =>
 const AddRecipePage = lazy(() =>
   import("../../pages/AddRecipePage/AddRecipePage")
 );
-
 const NotFound = lazy(() => import("../RecipeViewPage/NotFound/NotFound"));
-const ProfileTabs = lazy(() =>
-  import("../../components/ProfilePage/PrifileTabs/ProfileTabs")
-);
 
 function App() {
   return (
-    <>
+    <div className={css.appWrapper}>
       <Header />
-      <div className={css.container}>
-        <Suspense fallback={<div>Loading...</div>}>
+      <div className={css.pageContent}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -51,7 +49,7 @@ function App() {
         </Suspense>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

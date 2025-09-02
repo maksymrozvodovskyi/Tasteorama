@@ -41,7 +41,6 @@ export const logoutUserThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const token = state.auth.accessToken;
-    console.log("Token before logout:", token);
 
     if (!token) {
       return thunkAPI.rejectWithValue("No access token, cannot logout");
@@ -65,11 +64,11 @@ export const fetchCurrentUser = createAsyncThunk(
     if (!token) {
       return thunkApi.rejectWithValue("No access token");
     }
-     const config = {
-       headers: {
-         Authorization: `Bearer ${token}`,
-       },
-     };
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     try {
       const response = await axios.get("api/users", config);
       return response.data;

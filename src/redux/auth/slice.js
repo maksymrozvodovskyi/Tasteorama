@@ -8,7 +8,6 @@ import {
 
 const initialState = {
   accessToken: null,
-  // accessToken: localStorage.getItem("accessToken") || null,
   userName: null,
   isLoading: false,
   error: null,
@@ -39,17 +38,14 @@ const slice = createSlice({
       })
       .addCase(loginUserThunk.fulfilled, (state, { payload }) => {
         state.accessToken = payload.accessToken;
-        // state.user = { name: payload.name, email: payload.email };
         state.isLoading = false;
         state.error = null;
-        // localStorage.setItem("accessToken", payload.accessToken);
       })
       .addCase(loginUserThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload.response.data;
       })
       .addCase(logoutUserThunk.fulfilled, (state, { payload }) => {
-        console.log("Logged out token:", payload);
         state.accessToken = null;
         state.userName = null;
         state.hasAvatar = false;

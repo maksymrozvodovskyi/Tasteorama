@@ -93,6 +93,19 @@ const Filters = () => {
   const animatedComponents = makeAnimated();
 
   const customStyles = {
+    container: (provided) => ({
+      ...provided,
+      cursor: "pointer",
+    }),
+    control: (provided) => ({
+      ...provided,
+      cursor: "pointer",
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      cursor: "pointer",
+      backgroundColor: state.isSelected ? "#e6f0ff" : provided.backgroundColor,
+    }),
     indicatorSeparator: () => ({
       display: "none",
     }),
