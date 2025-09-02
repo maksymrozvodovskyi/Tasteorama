@@ -6,8 +6,8 @@ import {
   selectRecipesError,
   selectRecipesIsLoadingCurrentRecipe,
 } from "../../redux/recipes/selectors.js";
-// import styles from "./RecipeViewPage.module.css";
 import NotFound from "../../components/RecipeViewPage/NotFound/NotFound.jsx";
+import Loader from "../../components/Loader/Loader.jsx";
 
 const RecipeDetails = lazy(() =>
   import("../../components/RecipeViewPage/RecipeDetails/RecipeDetails.jsx")
@@ -26,14 +26,14 @@ const RecipeViewPage = () => {
     }
   }, [dispatch, id]);
 
+  if (isLoading) return <Loader />;
+
   if (error?.status === 404) return <NotFound />;
 
   return (
-    <section>
-      <Suspense fallback={<p>Loading recipe...</p>}>
-        <RecipeDetails />
-      </Suspense>
-    </section>
+    <Suspense fallback={<Loader />}>
+      <RecipeDetails />
+    </Suspense>
   );
 };
 
