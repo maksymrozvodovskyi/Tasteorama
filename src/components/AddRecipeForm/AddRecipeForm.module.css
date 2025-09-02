@@ -109,10 +109,26 @@
   padding: 12px;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
-  font-size: 18px;
   font-weight: 400;
-  font-family: "Montserrat", sans-serif;
   box-sizing: border-box;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #000;
+}
+.input:focus,
+.inputTitle:focus,
+.textarea:focus {
+  border: 1.5px solid #9b6c43;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  height: 41px;
+  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
+  background: #fff;
+  cursor: text;
+  outline: none;
 }
 
 .inputTitle {
@@ -124,16 +140,17 @@
   font-weight: 400;
   font-family: "Montserrat", sans-serif;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .input::placeholder,
 .inputTitle::placeholder,
-.textarea::placeholder,
-field::placeholder {
-  font-size: 18px;
-  color: #595d62;
+.textarea::placeholder {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #9f9f9f;
 }
 
 .inputSuffix {
@@ -199,11 +216,12 @@ field::placeholder {
   width: 100%;
   border-collapse: collapse;
   margin-top: 8px;
+  table-layout: fixed;
 }
 
 .ingredientsTable th,
 .ingredientsTable td {
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #c5c5c5;
   padding: 16px 0px;
   width: 100%;
@@ -219,8 +237,32 @@ field::placeholder {
   cursor: pointer;
   font-size: 16px;
 }
+.ingredientsTable th:last-child,
+.ingredientsTable td:last-child {
+  width: 40px;
+  text-align: center;
+}
 .ingredientsTable thead {
   display: none;
+}
+
+.ingredientsHeader {
+  display: grid; /* сітка як у таблиці */
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid #c5c5c5;
+  padding: 16px 0;
+  font-weight: 600;
+  text-align: left;
+  margin: 0;
+  justify-content: space-between;
+}
+
+.ingredientsHeader .col {
+  flex: 1;
+}
+
+.ingredientsHeader span {
+  width: 100%;
 }
 
 .selectWrapper {
@@ -267,7 +309,6 @@ field::placeholder {
   height: 44px;
   padding: 12px 16px;
   margin-top: 40px;
-
   background: #9b6c43;
   color: #fff;
   font-size: 16px;
@@ -347,6 +388,7 @@ field::placeholder {
     gap: 24px;
     display: grid;
     grid-template-columns: 431px 249px;
+    cursor: pointer;
   }
 
   .addBtn {
@@ -358,6 +400,7 @@ field::placeholder {
     height: 36px;
   }
   .ingredientsTable {
+    table-layout: auto;
     width: 431px;
   }
   .ingredientsTable th,
@@ -368,6 +411,9 @@ field::placeholder {
   }
   .ingredientsTable thead {
     display: table-header-group;
+  }
+  .ingredientsHeader {
+    display: none;
   }
 }
 

@@ -235,7 +235,7 @@ const AddRecipeForm = () => {
                       errors.category && touched.category ? styles.invalid : ""
                     }`}
                   >
-                    <option value="">Select category</option>
+                    <option value="">Category</option>
                     {categories.map((cat) => (
                       <option key={cat._id} value={cat.name}>
                         {cat.name}
@@ -268,7 +268,7 @@ const AddRecipeForm = () => {
                           ? styles.invalid
                           : ""
                       }`}
-                      placeholder="Search ingredient..."
+                      placeholder="Ingredient"
                       value={ingredientName}
                       onChange={(e) => {
                         const value = e.target.value;
@@ -346,6 +346,13 @@ const AddRecipeForm = () => {
                 Add new Ingredient
               </button>
 
+              {values.ingredients.length > 0 && (
+                <p className={styles.ingredientsHeader}>
+                  <span>Name:</span>
+                  <span>Amount:</span>
+                  <span></span>
+                </p>
+              )}
               <table className={styles.ingredientsTable}>
                 <thead>
                   <tr>
@@ -354,6 +361,7 @@ const AddRecipeForm = () => {
                     <th></th>
                   </tr>
                 </thead>
+
                 {values.ingredients.length > 0 && (
                   <tbody>
                     {values.ingredients.map((ing, i) => (
