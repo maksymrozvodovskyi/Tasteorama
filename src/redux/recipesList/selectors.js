@@ -21,5 +21,7 @@ export const selectRecipesIsLoadingOwnRecipes = (state) =>
 export const selectRecipesIsLoadingFavoriteRecipes = (state) =>
   state.recipes.isLoadingFavoriteRecipes;
 
+export const selectRecipesLoading = (state) => state.recipes.loading;
+
 export const selectOwnRecipes = (state) => state.recipes.ownItems;
 export const selectFavoriteRecipes = (state) => state.recipes.favoriteItems;

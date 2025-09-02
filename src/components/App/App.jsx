@@ -27,10 +27,10 @@ const NotFound = lazy(() => import("../RecipeViewPage/NotFound/NotFound"));
 
 function App() {
   return (
-    <div className={css.appWrapper}>
-      <Header />
-      <div className={css.pageContent}>
-        <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader />}>
+      <div className={css.appWrapper}>
+        <Header />
+        <div className={css.pageContent}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -46,10 +46,10 @@ function App() {
             {/* ерор пейдж 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </Suspense>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </Suspense>
   );
 }
 
