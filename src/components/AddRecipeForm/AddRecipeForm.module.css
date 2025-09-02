@@ -114,6 +114,7 @@
   line-height: 1.55;
   color: #000;
 }
+
 .input:focus,
 .inputTitle:focus,
 .textarea:focus {
@@ -237,12 +238,14 @@
   cursor: pointer;
   font-size: 16px;
 }
+
 .ingredientsTable thead {
   display: none;
 }
 
 .ingredientsHeader {
-  display: grid; /* сітка як у таблиці */
+  display: grid;
+  /* сітка як у таблиці */
   grid-template-columns: 1fr 1fr;
   border-bottom: 1px solid #c5c5c5;
   padding: 16px 0;
@@ -412,6 +415,7 @@
   .ingredientsTable thead {
     display: table-header-group;
   }
+
   .ingredientsHeader {
     display: none;
   }
