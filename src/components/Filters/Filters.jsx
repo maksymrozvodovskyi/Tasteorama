@@ -93,6 +93,14 @@ const Filters = () => {
   const animatedComponents = makeAnimated();
 
   const customStyles = {
+    container: (provided) => ({
+      ...provided,
+      cursor: "pointer",
+    }),
+    control: (provided) => ({
+      ...provided,
+      cursor: "pointer",
+    }),
     indicatorSeparator: () => ({
       display: "none",
     }),
