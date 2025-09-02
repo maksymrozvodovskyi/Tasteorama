@@ -1,15 +1,9 @@
-import { lazy } from "react";
-
-const RegistrationForm = lazy(() =>
-  import("../../components/RegistrationForm/RegistrationForm")
-);
+import { RegistrationForm } from "../../components/RegistrationForm/RegistrationForm";
 
 export default function RegisterPage() {
   return (
-    <>
-      <section>
-        <RegistrationForm />
-      </section>
-    </>
+    <section>
+      <RegistrationForm />
+    </section>
   );
 }
