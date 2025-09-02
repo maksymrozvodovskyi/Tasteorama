@@ -26,14 +26,14 @@ const RecipeViewPage = () => {
     }
   }, [dispatch, id]);
 
-  if (isLoading) return <p>Loading recipe...</p>;
-
   if (error?.status === 404) return <NotFound />;
 
   return (
-    <Suspense fallback={<p>Loading recipe...</p>}>
-      <RecipeDetails />
-    </Suspense>
+    <section>
+      <Suspense fallback={<p>Loading recipe...</p>}>
+        <RecipeDetails />
+      </Suspense>
+    </section>
   );
 };
 

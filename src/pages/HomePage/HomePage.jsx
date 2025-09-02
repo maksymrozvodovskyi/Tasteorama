@@ -44,7 +44,7 @@ export default function HomePage() {
   };
 
   return (
-    <div>
+    <section>
       <Hero onSearch={handleSearch} />
       <div className={css.containerFilterRecList}>
         <Filters />
@@ -59,6 +59,6 @@ export default function HomePage() {
           />
         )}
       </div>
-    </div>
+    </section>
   );
 }
