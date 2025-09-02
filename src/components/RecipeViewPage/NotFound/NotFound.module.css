@@ -57,6 +57,13 @@
   justify-content: center;
 }
 
+@media screen and (min-width: 393px) {
+  .backButton {
+    width: 361px;
+  }
+
+}
+
 .backButton:hover,
 .backButton:focus {
   background-color: #6d554b;
@@ -95,8 +102,8 @@
 
 @media screen and (min-width: 768px) {
   .notFoundContainer {
-    margin: 208px 0;
-    padding: 0;
+    margin: 133px 0;
+    padding: 0 84px;
   }
 
   .backButton {
@@ -108,8 +115,9 @@
 
 @media screen and (min-width: 1440px) {
   .notFoundContainer {
-    margin: 38px 108px;
+    margin: 38px 0;
     gap: 32px;
+    padding: 0 107px;
   }
 
   .backButton {
