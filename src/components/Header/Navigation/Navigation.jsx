@@ -61,14 +61,7 @@ export default function Navigation({
             onClick={closeMenu}
           >
             My Profile
-          </NavLink>
-          <div className={css.userInfo}>
-            <UserInfo
-              userName={userName}
-              onLogout={onLogout}
-              isMobile={isMobile}
-            />
-          </div>
+            </NavLink>
           <NavLink
             to="/add-recipe"
             end
@@ -79,6 +72,13 @@ export default function Navigation({
           >
             Add Recipe
           </NavLink>
+          <div className={css.userInfo}>
+            <UserInfo
+              userName={userName}
+              onLogout={onLogout}
+              isMobile={isMobile}
+            />
+          </div>
         </>
       )}
     </nav>
