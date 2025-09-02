@@ -1,7 +1,6 @@
 .filtersSection {
     margin-bottom: 16px;
     position: relative;
-    padding: 0 16px;
     gap: 16px;
     display: flex;
     flex-direction: column;
@@ -127,10 +126,6 @@
 @media only screen and (min-width: 768px) {
     .noRecipesContainer {
         max-width: 522px;
-    }
-
-    .filtersSection {
-        padding: 0 32px;
     }
 }
 
