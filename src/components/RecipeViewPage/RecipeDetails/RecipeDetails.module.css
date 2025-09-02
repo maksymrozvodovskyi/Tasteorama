@@ -52,6 +52,7 @@ h2 {
   color: #ffffff;
   margin-bottom: 24px;
   border: none;
+  cursor: pointer;
 }
 
 .saveButton:hover,
