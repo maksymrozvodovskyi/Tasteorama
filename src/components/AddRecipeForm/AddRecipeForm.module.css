@@ -54,6 +54,7 @@
   height: 82px;
   fill: transparent;
 }
+
 .deleteImage {
   color: #070707;
   stroke-width: 1px;
@@ -140,12 +141,15 @@
   font-weight: 400;
   font-family: "Montserrat", sans-serif;
   box-sizing: border-box;
-  cursor: pointer;
+  outline: none;
 }
 
 .input::placeholder,
 .inputTitle::placeholder,
-.textarea::placeholder {
+.textarea::placeholder,
+.field::placeholder {
+  font-size: 18px;
+  color: #595d62;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -237,11 +241,6 @@
   cursor: pointer;
   font-size: 16px;
 }
-.ingredientsTable th:last-child,
-.ingredientsTable td:last-child {
-  width: 40px;
-  text-align: center;
-}
 .ingredientsTable thead {
   display: none;
 }
@@ -291,6 +290,7 @@
   background-size: contain;
   pointer-events: none;
 }
+
 .icon {
   position: absolute;
   right: 12px;
@@ -298,7 +298,8 @@
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  pointer-events: none; /* щоб не заважала клікам */
+  pointer-events: none;
+  /* щоб не заважала клікам */
   stroke-width: 1px;
   stroke: #000;
   fill: transparent;
@@ -399,16 +400,19 @@
     padding: 8px;
     height: 36px;
   }
+
   .ingredientsTable {
     table-layout: auto;
     width: 431px;
   }
+
   .ingredientsTable th,
   .ingredientsTable td {
     padding: 8px 0px;
     width: 431px;
     text-align: left;
   }
+
   .ingredientsTable thead {
     display: table-header-group;
   }
@@ -477,9 +481,11 @@
     font-size: 12px;
     text-align: center;
   }
+
   .ingredientsTable {
     width: 332px;
   }
+
   .ingredientsTable th,
   .ingredientsTable td {
     width: 332px;
