@@ -36,9 +36,8 @@ const RecipeDetails = () => {
   const recipe = useSelector(selectCurrentRecipes);
 
   const favorites = useSelector((state) => state.recipes.favoriteItems) || [];
-  const isFavorite = recipe
-    ? favorites.some((item) => item._id === recipe._id)
-    : false;
+  const isFavorite = favorites.some((item) => item._id === recipe._id);
+
   const token = useSelector((state) => state.auth.accessToken);
   const isLoggedIn = Boolean(token);
 
