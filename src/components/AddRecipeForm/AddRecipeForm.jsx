@@ -41,42 +41,62 @@ const AddRecipeSchema = Yup.object().shape({
   ingredients: Yup.array().min(2, "Add at least two ingredient"),
 });
 
-const customStyles = {
-  container: (provided) => ({
-    ...provided,
-    cursor: "pointer",
-  }),
+const customSelectStyles = {
   control: (provided, state) => ({
     ...provided,
-    border: "1px solid #d9d9d9",
-    borderRadius: "4px",
-    padding: "4px 8px",
-    minHeight: "33px", // замість height краще minHeight для адаптивності
-    backgroundColor: "#fff",
-    boxShadow: state.isFocused ? "0 0 0 1px #d9d9d9" : "none", // тінь при фокусі
+    width: "100%",
+    padding: "12px",
+    border: state.isFocused ? "1.5px solid #9b6c43" : "1px solid #d9d9d9",
+    borderRadius: "8px",
+    fontWeight: 400,
+    boxSizing: "border-box",
+    cursor: "pointer",
+    fontFamily: "Montserrat, sans-serif",
+    fontSize: "16px",
+    lineHeight: 1.55,
+    color: "#000",
+    background: "#fff",
+    outline: "none !important",
+    boxShadow: state.isFocused ? "0 0 0 4px rgba(78, 70, 180, 0.2)" : "none",
+
     "&:hover": {
-      borderColor: "#bdbdbd", // колір рамки при hover
+      borderColor: state.isFocused ? "#9b6c43" : "#999",
     },
+    minHeight: "unset",
+    height: "auto",
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    padding: 0,
+  }),
+  input: (provided) => ({
+    ...provided,
+    margin: 0,
+    padding: 0,
+  }),
+  indicatorsContainer: (provided) => ({
+    ...provided,
+    height: "auto",
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: "8px",
+    padding: "8px",
+    boxShadow:
+      "0 0 1px 0 rgba(0, 0, 0, 0.4), 0 8px 24px -6px rgba(0, 0, 0, 0.16)",
+    background: "#fff",
+    marginTop: "4px",
   }),
   option: (provided, state) => ({
     ...provided,
+    padding: "10px 12px",
+    borderRadius: "4px",
+    backgroundColor: state.isFocused ? "#f5f5f5" : "#fff",
+    color: "#000",
     cursor: "pointer",
-    backgroundColor: state.isSelected
-      ? "#d3d3d3"
-      : state.isFocused
-      ? "#d3d3d3"
-      : "#fff",
-    color: "#333",
-    outline: "none",
-    boxShadow: "none",
-    userSelect: "none", // прибирає виділення тексту при натисканні
-    WebkitTapHighlightColor: "transparent", // прибирає синій фон на мобільних
-    ":active": {
-      backgroundColor: state.isSelected ? "#d3d3d3" : "#d3d3d3",
+    "&:active": {
+      backgroundColor: "#e6e6e6",
     },
-  }),
-  indicatorSeparator: () => ({
-    display: "none",
   }),
 };
 
@@ -88,10 +108,8 @@ const AddRecipeForm = () => {
   const [ingredientAmount, setIngredientAmount] = useState("");
   const [categories, setCategories] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  const [filtered, setFiltered] = useState([]);
-  const [showList, setShowList] = useState(false);
   const [preview, setPreview] = useState(null);
-  const [ingredientId, setIngredientId] = useState("");
+  const [ingredientId] = useState("");
 
   useEffect(() => {
     async function fetchCategories() {
@@ -132,6 +150,7 @@ const AddRecipeForm = () => {
         calories: "",
         category: "",
         instructions: "",
+        selectedIngredient: "",
         ingredients: [],
         thumb: null,
       }}
@@ -299,9 +318,9 @@ const AddRecipeForm = () => {
                     placeholder="Category"
                     isClearable
                     styles={{
-                      ...customStyles,
+                      ...customSelectStyles,
                       control: (provided, state) => ({
-                        ...customStyles.control(provided, state),
+                        ...customSelectStyles.control(provided, state),
                         borderColor:
                           errors.category && touched.category
                             ? "red"
@@ -334,86 +353,54 @@ const AddRecipeForm = () => {
                 <div className={styles.fieldItem}>
                   <h4 className={styles.titlePart}>Name</h4>
                   <div className={styles.selectWrapper}>
-                    <input
-                      type="text"
-                      className={`${styles.inputTitle} ${
-                        errors.ingredients && touched.ingredients
-                          ? styles.invalid
-                          : ""
-                      }`}
-                      placeholder="Ingredient"
-                      value={ingredientName}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        setIngredientName(value);
-
-                        if (value.trim().length > 0) {
-                          const results = ingredients
-                            .filter((ing) =>
-                              ing.name
-                                .toLowerCase()
-                                .includes(value.toLowerCase())
-                            )
-                            .sort((a, b) => a.name.localeCompare(b.name));
-                          setFiltered(results);
-                          setShowList(true);
-                        } else {
-                          const allSorted = [...ingredients].sort((a, b) =>
-                            a.name.localeCompare(b.name)
-                          );
-                          setFiltered(allSorted);
-                          setShowList(false);
-                        }
-                      }}
-                      onFocus={() => {
-                        if (ingredientName.trim().length > 0) setShowList(true);
-                      }}
-                      onBlur={() => {
-                        setTimeout(() => setShowList(false), 250);
+                    <Select
+                      name="ingredients"
+                      components={animatedComponents}
+                      options={ingredients
+                        .slice()
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .map((ing) => ({
+                          value: ing._id,
+                          label: ing.name,
+                        }))}
+                      value={
+                        ingredients
+                          .map((ing) => ({ value: ing._id, label: ing.name }))
+                          .find(
+                            (option) => option.value === values.ingredients
+                          ) || null
+                      }
+                      onChange={(option) =>
+                        setFieldValue("ingredients", option ? option.value : "")
+                      }
+                      placeholder="Select ingredient"
+                      isClearable
+                      isSearchable
+                      styles={{
+                        ...customSelectStyles,
+                        control: (provided, state) => ({
+                          ...customSelectStyles.control(provided, state),
+                          borderColor:
+                            errors.ingredients && touched.ingredients
+                              ? "red"
+                              : provided.borderColor,
+                          boxShadow:
+                            errors.ingredients && touched.ingredients
+                              ? "0 0 0 1px red"
+                              : provided.boxShadow,
+                          "&:hover": {
+                            borderColor:
+                              errors.ingredients && touched.ingredients
+                                ? "red"
+                                : provided.borderColor,
+                          },
+                        }),
                       }}
                     />
-
-                    <svg
-                      className={styles.icon}
-                      onClick={() => {
-                        if (!showList) {
-                          const allSorted = [...ingredients].sort((a, b) =>
-                            a.name.localeCompare(b.name)
-                          );
-                          setFiltered(allSorted);
-                          setShowList(true);
-                        } else {
-                          setShowList(false);
-                        }
-                      }}
-                    >
-                      <use href="/icons.svg#icon-arrow-down"></use>
-                    </svg>
-
-                    {showList && filtered.length > 0 && (
-                      <ul className={styles.dropdown}>
-                        <li
-                          className={`${styles.dropdownItem} ${styles.disabled}`}
-                          aria-disabled="true"
-                        >
-                          Select ingredient
-                        </li>
-                        {filtered.map((ing) => (
-                          <li
-                            key={ing._id}
-                            className={styles.dropdownItem}
-                            onClick={() => {
-                              setIngredientName(ing.name);
-                              setIngredientId(ing._id);
-                              setShowList(false);
-                            }}
-                          >
-                            {ing.name}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
                   </div>
+                  {errors.ingredients && touched.ingredients && (
+                    <div className={styles.error}>{errors.ingredients}</div>
+                  )}
                 </div>
 
                 {/* Ingredient Amount */}
