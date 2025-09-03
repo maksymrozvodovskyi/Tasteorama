@@ -91,6 +91,7 @@
     cursor: pointer;
     text-align: center;
     align-content: center;
+    transition: background-color 0.3s;
 }
 
 .moreBtnFull {
@@ -101,6 +102,7 @@
 .saveBtn,
 .removeBtn {
     color: #000000;
+    transition: background-color 0.3s;
     cursor: pointer;
 }
 
@@ -147,8 +149,7 @@
 }
 
 .saveBtn.active:hover {
-    background-color: #C80000;
-    border-color: #C80000;
+    background-color: #b9916d;
 }
 
 

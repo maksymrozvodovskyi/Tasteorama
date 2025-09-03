@@ -101,11 +101,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
               className={`${css.saveBtn} ${isFavorite ? css.active : ""}`}
             >
               <svg width="24" height="24" className={css.icon}>
-                <use
-                  xlinkHref={
-                    isFavorite ? "/icons.svg#icon-flag" : "/icons.svg#icon-flag"
-                  }
-                />
+                <use xlinkHref="/icons.svg#icon-flag" />
               </svg>
             </button>
           )}
