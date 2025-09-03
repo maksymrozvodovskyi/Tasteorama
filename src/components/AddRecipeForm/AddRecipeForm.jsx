@@ -51,7 +51,7 @@ const customStyles = {
     border: "1px solid #d9d9d9",
     borderRadius: "4px",
     padding: "4px 8px",
-    minHeight: "33px", // замість height краще minHeight для адаптивності
+    minHeight: "46px", // замість height краще minHeight для адаптивності
     backgroundColor: "#fff",
     boxShadow: state.isFocused ? "0 0 0 1px #d9d9d9" : "none", // тінь при фокусі
     "&:hover": {
