@@ -15,6 +15,13 @@
 /* 📱 Mobile styles (base) */
 /* ======================= */
 
+.option {
+  color: black;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
 .form {
   display: flex;
   flex-direction: column;

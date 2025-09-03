@@ -5,12 +5,17 @@ import { useDispatch } from "react-redux";
 import { addRecipe } from "../../redux/addRecipe/operations";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
+import { useField, useFormikContext } from "formik";
+
+const animatedComponents = makeAnimated();
 
 const AddRecipeSchema = Yup.object().shape({
   title: Yup.string()
     .min(3)
     .max(64)
-    .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]+$/, "Use only letters ")
+    .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]+$/, "Use only letters")
     .required("Recipe Title"),
   description: Yup.string()
     .max(200)
@@ -36,6 +41,45 @@ const AddRecipeSchema = Yup.object().shape({
     .required("Enter the instruction"),
   ingredients: Yup.array().min(2, "Add at least two ingredient"),
 });
+
+const customStyles = {
+  container: (provided) => ({
+    ...provided,
+    cursor: "pointer",
+  }),
+  control: (provided, state) => ({
+    ...provided,
+    border: "1px solid #d9d9d9",
+    borderRadius: "4px",
+    padding: "4px 8px",
+    minHeight: "33px", // замість height краще minHeight для адаптивності
+    backgroundColor: "#fff",
+    boxShadow: state.isFocused ? "0 0 0 1px #d9d9d9" : "none", // тінь при фокусі
+    "&:hover": {
+      borderColor: "#bdbdbd", // колір рамки при hover
+    },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    cursor: "pointer",
+    backgroundColor: state.isSelected
+      ? "#d3d3d3"
+      : state.isFocused
+      ? "#d3d3d3"
+      : "#fff",
+    color: "#333",
+    outline: "none",
+    boxShadow: "none",
+    userSelect: "none", // прибирає виділення тексту при натисканні
+    WebkitTapHighlightColor: "transparent", // прибирає синій фон на мобільних
+    ":active": {
+      backgroundColor: state.isSelected ? "#d3d3d3" : "#d3d3d3",
+    },
+  }),
+  indicatorSeparator: () => ({
+    display: "none",
+  }),
+};
 
 const AddRecipeForm = () => {
   const dispatch = useDispatch();
@@ -160,6 +204,8 @@ const AddRecipeForm = () => {
           {/* General Information */}
           <div className={styles.fieldForm}>
             <h3 className={styles.titleSection}>General Information</h3>
+
+            {/* Recipe Title */}
             <h4 className={styles.titlePart}>Recipe Title</h4>
             <Field
               name="title"
@@ -175,6 +221,7 @@ const AddRecipeForm = () => {
               className={styles.error}
             />
 
+            {/* Recipe Description */}
             <h4 className={styles.titlePart}>Recipe Description</h4>
             <Field
               as="textarea"
@@ -190,6 +237,7 @@ const AddRecipeForm = () => {
               className={styles.error}
             />
 
+            {/* Cooking Time */}
             <h4 className={styles.titlePart}>Cooking time in minutes</h4>
             <Field
               name="time"
@@ -206,6 +254,7 @@ const AddRecipeForm = () => {
             />
 
             <div className={styles.fieldGroup}>
+              {/* Calories */}
               <div className={styles.fieldItem}>
                 <h4 className={styles.titlePart}>Calories</h4>
                 <div className={styles.inputWrapper}>
@@ -225,35 +274,56 @@ const AddRecipeForm = () => {
                 />
               </div>
 
+              {/* Category */}
               <div className={styles.fieldItem}>
                 <h4 className={styles.titlePart}>Category</h4>
                 <div className={styles.selectWrapper}>
-                  <Field
-                    as="select"
+                  <Select
                     name="category"
-                    className={`${styles.input} ${
-                      errors.category && touched.category ? styles.invalid : ""
-                    }`}
-                  >
-                    <option value="">Category</option>
-                    {categories
+                    components={animatedComponents}
+                    options={categories
                       .slice()
                       .sort((a, b) => a.name.localeCompare(b.name))
-                      .map((cat) => (
-                        <option key={cat._id} value={cat.name}>
-                          {cat.name}
-                        </option>
-                      ))}
-                  </Field>
-                  <svg className={styles.icon}>
-                    <use href="/icons.svg#icon-arrow-down"></use>
-                  </svg>
+                      .map((cat) => ({
+                        value: cat.name,
+                        label: cat.name,
+                      }))}
+                    value={
+                      categories
+                        .map((cat) => ({ value: cat.name, label: cat.name }))
+                        .find((option) => option.value === values.category) ||
+                      null
+                    }
+                    onChange={(option) =>
+                      setFieldValue("category", option ? option.value : "")
+                    }
+                    placeholder="Category"
+                    isClearable
+                    styles={{
+                      ...customStyles,
+                      control: (provided, state) => ({
+                        ...customStyles.control(provided, state),
+                        borderColor:
+                          errors.category && touched.category
+                            ? "red"
+                            : provided.borderColor,
+                        boxShadow:
+                          errors.category && touched.category
+                            ? "0 0 0 1px red"
+                            : provided.boxShadow,
+                        "&:hover": {
+                          borderColor:
+                            errors.category && touched.category
+                              ? "red"
+                              : provided.borderColor,
+                        },
+                      }),
+                    }}
+                  />
                 </div>
-                <ErrorMessage
-                  name="category"
-                  component="div"
-                  className={styles.error}
-                />
+                {errors.category && touched.category && (
+                  <div className={styles.error}>{errors.category}</div>
+                )}
               </div>
             </div>
 
@@ -261,6 +331,7 @@ const AddRecipeForm = () => {
             <h3 className={styles.titleSection}>Ingredients</h3>
             <div className={styles.ingredients}>
               <div className={styles.inputsRow}>
+                {/* Ingredient Name */}
                 <div className={styles.fieldItem}>
                   <h4 className={styles.titlePart}>Name</h4>
                   <div className={styles.selectWrapper}>
@@ -285,7 +356,6 @@ const AddRecipeForm = () => {
                                 .includes(value.toLowerCase())
                             )
                             .sort((a, b) => a.name.localeCompare(b.name));
-
                           setFiltered(results);
                           setShowList(true);
                         } else {
@@ -323,14 +393,12 @@ const AddRecipeForm = () => {
 
                     {showList && filtered.length > 0 && (
                       <ul className={styles.dropdown}>
-                        {/* заголовок списку */}
                         <li
                           className={`${styles.dropdownItem} ${styles.disabled}`}
                           aria-disabled="true"
                         >
                           Select ingredient
                         </li>
-
                         {filtered.map((ing) => (
                           <li
                             key={ing._id}
@@ -349,6 +417,7 @@ const AddRecipeForm = () => {
                   </div>
                 </div>
 
+                {/* Ingredient Amount */}
                 <div className={styles.fieldItem}>
                   <h4 className={styles.titlePart}>Amount</h4>
                   <input
@@ -397,7 +466,6 @@ const AddRecipeForm = () => {
                     <th></th>
                   </tr>
                 </thead>
-
                 {values.ingredients.length > 0 && (
                   <tbody>
                     {values.ingredients.map((ing, i) => (
@@ -427,7 +495,6 @@ const AddRecipeForm = () => {
                   </tbody>
                 )}
               </table>
-
               <ErrorMessage
                 name="ingredients"
                 component="div"
