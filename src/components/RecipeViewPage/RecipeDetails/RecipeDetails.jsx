@@ -15,6 +15,18 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { setAuthToken } from "../../../services/favoritesAPI.js";
 
+const getImageUrl = (thumb) => {
+  if (!thumb) {
+    return null;
+  }
+
+  if (thumb.includes("/preview/")) {
+    return thumb.replace("/preview/", "/preview/large/");
+  }
+
+  return thumb;
+};
+
 const RecipeDetails = () => {
   const [showModal, setShowModal] = useState(false);
 
@@ -58,20 +70,14 @@ const RecipeDetails = () => {
     }
   };
 
-  let url = recipe.thumb;
-
-  let newUrl = url.replace("/preview/", "/preview/large/");
+  const imageUrl = getImageUrl(recipe.thumb);
 
   return (
     <div className={styles.container}>
       {/* Заголовок + картинка */}
       <div className={styles.wrapperImg}>
         <div className={styles.containerImg}>
-          <img
-            src={newUrl}
-            alt={recipe.title || "Recipe image"}
-            loading="lazy"
-          />
+          <img src={imageUrl} alt={"Recipe image"} loading="lazy" />
         </div>
         <h1 className={styles.title}>{recipe.title || "Untitled"}</h1>
       </div>

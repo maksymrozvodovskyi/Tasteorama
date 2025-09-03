@@ -72,6 +72,9 @@ h2 {
 }
 
 .flagIconSave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 24px;
   height: 24px;
   stroke: #ffffff;
@@ -192,7 +195,7 @@ h2 {
 
   .saveButton {
     border-radius: 8px;
-    padding: 17px 83px;
+    padding: 17px;
     min-width: 249px;
     height: 56px;
     flex: 2;
