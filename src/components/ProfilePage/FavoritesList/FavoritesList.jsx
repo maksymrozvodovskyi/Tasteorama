@@ -11,15 +11,14 @@ import {
 } from "../../../redux/recipesList/selectors.js";
 import { nextPageFavorite } from "../../../redux/recipesList/slice";
 import { selectRecipesIsLoadingFavoriteRecipes } from "../../../redux/recipesList/selectors.js";
-import Loader from "../../Loader/Loader";
 import { clearFavitems, clearitems } from "../../../redux/recipesList/slice";
 
 const FavoritesList = () => {
   const dispatch = useDispatch();
   const recipes = useSelector(selectFavoriteRecipes);
   const total = useSelector(selectTotalFavoritesRecipes);
-  const currentPage = useSelector(selectCurrentPageFavorite); //
-  const totalPages = useSelector(selectTotalPagesFavorites); //
+  const currentPage = useSelector(selectCurrentPageFavorite);
+  const totalPages = useSelector(selectTotalPagesFavorites);
   const isLoadingFavoriteRecipes = useSelector(
     selectRecipesIsLoadingFavoriteRecipes
   );
