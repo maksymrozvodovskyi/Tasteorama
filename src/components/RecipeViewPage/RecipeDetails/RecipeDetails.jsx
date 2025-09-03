@@ -17,7 +17,7 @@ import { setAuthToken } from "../../../services/favoritesAPI.js";
 
 const getImageUrl = (thumb) => {
   if (!thumb) {
-    return "";
+    return null;
   }
 
   if (thumb.includes("/preview/")) {
