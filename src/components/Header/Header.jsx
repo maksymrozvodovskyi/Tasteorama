@@ -10,8 +10,7 @@ import { selectAuthIsLoggedIn } from "../../redux/auth/selectors.js";
 import { logoutUserThunk } from "../../redux/auth/operations.js";
 import { fetchRecipes } from "../../redux/recipesList/operations.js";
 import { clearitems, clearFavitems } from "../../redux/recipesList/slice.js";
-import { resetFilters, setTitleFilter } from "../../redux/filters/slice.js";
-import { selectSearchQuery } from "../../redux/filters/selectors.js";
+import { resetFilters } from "../../redux/filters/slice.js";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);

@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import eyeOpenSvg from "../../assets/Icons/eye.svg";
 import eyeClosedSvg from "../../assets/Icons/eye-crossed.svg";
+import { resetFilters } from "../../redux/filters/slice";
 
 const PasswordField = ({ field, form }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -70,6 +71,8 @@ export const RegistrationForm = () => {
         loginUserThunk({ email: values.email, password: values.password })
       ).unwrap();
       toast.success("Login successful!");
+      await dispatch(resetFilters());
+
       navigate("/");
     } catch (error) {
       toast.error(error.response.data.data.message || "Registration failed");

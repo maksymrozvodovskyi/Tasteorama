@@ -8,6 +8,7 @@ import eyeOpenSvg from "../../assets/Icons/eye.svg";
 import eyeClosedSvg from "../../assets/Icons/eye-crossed.svg";
 import { loginUserThunk, fetchCurrentUser } from "../../redux/auth/operations";
 import { loginSchema } from "../../formSchema";
+import { resetFilters } from "../../redux/filters/slice";
 
 const PasswordField = ({ field, form }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -62,6 +63,7 @@ export const LoginForm = () => {
 
       await dispatch(fetchCurrentUser()).unwrap();
 
+      await dispatch(resetFilters());
       navigate("/");
     } catch {
       toast.error("Incorrect email or password");

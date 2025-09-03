@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import css from "./ConfirmLogoutModal.module.css";
 
 export default function ConfirmLogoutModal({ onClose, onConfirm }) {
-  
   useEffect(() => {
     const handleEsc = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", handleEsc);
@@ -13,7 +12,6 @@ export default function ConfirmLogoutModal({ onClose, onConfirm }) {
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) onClose();
   };
-  
 
   return createPortal(
     <div className={css.overlay} onClick={handleOverlayClick}>
