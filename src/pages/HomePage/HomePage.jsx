@@ -1,22 +1,22 @@
-import Hero from "../../components/Hero/Hero.jsx";
-import { useDispatch } from "react-redux";
-import Filters from "../../components/Filters/Filters";
-import RecipesList from "../../components/RecipeList/RecipeList";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { fetchRecipes } from "../../redux/recipesList/operations";
 import { setTitleFilter } from "../../redux/filters/slice";
-import { useSelector } from "react-redux";
-import {
-  selectRecipes,
-  selectTotalPages,
-  selectCurrentPage,
-} from "../../redux/recipesList/selectors";
-import { useEffect } from "react";
 import { nextPage } from "../../redux/recipesList/slice";
 import { setAuthToken } from "../../services/favoritesAPI";
 import { fetchFavoriteRecipes } from "../../redux/recipes/operations.js";
 import { clearitems } from "../../redux/recipesList/slice";
-import { selectRecipesIsLoadingOwnRecipes } from "../../redux/recipesList/selectors";
+import {
+  selectRecipes,
+  selectTotalPages,
+  selectCurrentPage,
+  selectRecipesIsLoadingOwnRecipes,
+} from "../../redux/recipesList/selectors";
 import css from "../../styles/container.module.css";
+
+import Hero from "../../components/Hero/Hero.jsx";
+import Filters from "../../components/Filters/Filters";
+import RecipesList from "../../components/RecipeList/RecipeList";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -44,10 +44,12 @@ export default function HomePage() {
   };
 
   return (
-    <div>
+    <section>
       <Hero onSearch={handleSearch} />
+
       <div className={css.containerFilterRecList}>
         <Filters />
+
         {!loader && (
           <RecipesList
             recipes={recipes}
@@ -59,6 +61,6 @@ export default function HomePage() {
           />
         )}
       </div>
-    </div>
+    </section>
   );
 }

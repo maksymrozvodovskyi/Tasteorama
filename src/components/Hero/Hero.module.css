@@ -61,17 +61,15 @@
   }
 
   .content {
-    /* padding: 0 16px;     */
     margin: 0 auto;
     width: 329px;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
   .hero {
     background-image: url("../../img/HeroSearchBox/banner-desktop.jpg");
     background-size: contain;
-    /* max-width: 1440px; */
     margin: 0 auto;
     background-size: cover;
   }
@@ -165,6 +163,5 @@
   .content {
     width: 1440px;
     padding: 0 108px;
-    /* margin: 0 auto; */
   }
 }

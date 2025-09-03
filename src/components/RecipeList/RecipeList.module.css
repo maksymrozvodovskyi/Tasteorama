@@ -9,7 +9,7 @@
 
 @media (min-width: 768px) {
     .list {
-        max-width: 702px;
+        max-width: 704px;
 
         grid-template-columns: repeat(2, 1fr);
     }

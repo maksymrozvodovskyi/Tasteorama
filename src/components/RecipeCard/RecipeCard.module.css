@@ -236,4 +236,8 @@
     .moreBtn {
         width: 216px;
     }
+
+    .saveBtn {
+        cursor: pointer;
+    }
 }
