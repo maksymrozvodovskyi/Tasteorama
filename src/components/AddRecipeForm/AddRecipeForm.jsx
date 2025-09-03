@@ -236,11 +236,14 @@ const AddRecipeForm = () => {
                     }`}
                   >
                     <option value="">Category</option>
-                    {categories.map((cat) => (
-                      <option key={cat._id} value={cat.name}>
-                        {cat.name}
-                      </option>
-                    ))}
+                    {categories
+                      .slice()
+                      .sort((a, b) => a.name.localeCompare(b.name))
+                      .map((cat) => (
+                        <option key={cat._id} value={cat.name}>
+                          {cat.name}
+                        </option>
+                      ))}
                   </Field>
                   <svg className={styles.icon}>
                     <use href="/icons.svg#icon-arrow-down"></use>
@@ -275,13 +278,21 @@ const AddRecipeForm = () => {
                         setIngredientName(value);
 
                         if (value.trim().length > 0) {
-                          const results = ingredients.filter((ing) =>
-                            ing.name.toLowerCase().includes(value.toLowerCase())
-                          );
+                          const results = ingredients
+                            .filter((ing) =>
+                              ing.name
+                                .toLowerCase()
+                                .includes(value.toLowerCase())
+                            )
+                            .sort((a, b) => a.name.localeCompare(b.name));
+
                           setFiltered(results);
                           setShowList(true);
                         } else {
-                          setFiltered([]);
+                          const allSorted = [...ingredients].sort((a, b) =>
+                            a.name.localeCompare(b.name)
+                          );
+                          setFiltered(allSorted);
                           setShowList(false);
                         }
                       }}
@@ -293,8 +304,33 @@ const AddRecipeForm = () => {
                       }}
                     />
 
+                    <svg
+                      className={styles.icon}
+                      onClick={() => {
+                        if (!showList) {
+                          const allSorted = [...ingredients].sort((a, b) =>
+                            a.name.localeCompare(b.name)
+                          );
+                          setFiltered(allSorted);
+                          setShowList(true);
+                        } else {
+                          setShowList(false);
+                        }
+                      }}
+                    >
+                      <use href="/icons.svg#icon-arrow-down"></use>
+                    </svg>
+
                     {showList && filtered.length > 0 && (
                       <ul className={styles.dropdown}>
+                        {/* заголовок списку */}
+                        <li
+                          className={`${styles.dropdownItem} ${styles.disabled}`}
+                          aria-disabled="true"
+                        >
+                          Select ingredient
+                        </li>
+
                         {filtered.map((ing) => (
                           <li
                             key={ing._id}
