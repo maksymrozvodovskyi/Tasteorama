@@ -1,7 +1,7 @@
-.burgerBtn, 
+.burgerBtn,
 .closeBtn {
     display: block;
-} 
+}
 
 .burgerBtn {
     background: none;
@@ -46,6 +46,7 @@
 }
 
 @media (min-width: 768px) {
+
     .burgerBtn,
     .closeBtn {
         display: none;
