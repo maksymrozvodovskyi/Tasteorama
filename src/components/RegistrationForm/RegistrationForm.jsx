@@ -56,7 +56,6 @@ export const RegistrationForm = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      console.log("Submitting", values);
       await dispatch(
         registerUserThunk({
           name: values.name.trim(),

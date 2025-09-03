@@ -34,7 +34,7 @@
     justify-content: center;
     justify-self: flex-end;
     gap: 4px;
-    background: #fff;
+    background: inherit;
     border: none;
     cursor: pointer;
     font-size: 12px;
@@ -46,7 +46,7 @@
 .filtersIcon {
     width: 24px;
     height: 24px;
-    fill: white;
+    fill: none;
     stroke: black;
     display: flex;
     align-items: center;
@@ -55,7 +55,7 @@
 
 .resetButton {
     border: none;
-    background-color: white;
+    background-color: inherit;
     cursor: pointer;
     font-weight: 600;
     font-size: 12px;

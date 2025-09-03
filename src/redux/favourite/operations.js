@@ -5,7 +5,6 @@ import {
   getFavorites,
 } from "../../services/favoritesAPI";
 
-// Додати улюблене
 export const addFavorite = createAsyncThunk(
   "favorites/add",
   async (id, thunkAPI) => {
@@ -23,7 +22,6 @@ export const addFavorite = createAsyncThunk(
   }
 );
 
-// Видалити з улюблених
 export const removeFavorite = createAsyncThunk(
   "favorites/remove",
   async (id, thunkAPI) => {
@@ -36,13 +34,11 @@ export const removeFavorite = createAsyncThunk(
   }
 );
 
-// Отримати всі улюблені рецепти
 export const fetchFavorites = createAsyncThunk(
   "favorites/fetchAll",
   async (_, thunkAPI) => {
     try {
       const res = await getFavorites();
-      console.log(res);
       return res.data.data.recipes;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || "Unknown error");
