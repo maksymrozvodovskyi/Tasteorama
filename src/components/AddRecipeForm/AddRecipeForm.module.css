@@ -552,18 +552,9 @@
   .ingredientsTable td {
     width: 332px;
   }
-
 }
 
-
-.ingredientsTable {
-  width: 332px;
-}
-
-.ingredientsTable th,
-.ingredientsTable td {
-  width: 332px;
-}
+/**/
 
 .ingredientsTable tr :first-child,
 .ingredientsTable tr :first-child {

@@ -427,51 +427,55 @@ const AddRecipeForm = () => {
               >
                 Add new Ingredient
               </button>
-
-              {values.ingredients.length > 0 && (
-                <p className={styles.ingredientsHeader}>
-                  <span>Name:</span>
-                  <span>Amount:</span>
-                  <span></span>
-                </p>
-              )}
-              <table className={styles.ingredientsTable}>
-                <thead>
-                  <tr>
-                    <th>Name:</th>
-                    <th>Amount:</th>
-                    <th></th>
-                  </tr>
-                </thead>
+              <div>
                 {values.ingredients.length > 0 && (
-                  <tbody>
-                    {values.ingredients.map((ing, i) => (
-                      <tr key={i}>
-                        <td>{ing.name}</td>
-                        <td>{ing.amount}</td>
-                        <td>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setFieldValue(
-                                "ingredients",
-                                values.ingredients.filter((_, idx) => idx !== i)
-                              )
-                            }
-                          >
-                            <svg
-                              className={styles.deleteImage}
-                              aria-hidden="true"
-                            >
-                              <use href="/icons.svg#icon-delete" />
-                            </svg>
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
+                  <p className={styles.ingredientsHeader}>
+                    <span>Name:</span>
+                    <span>Amount:</span>
+                    <span></span>
+                  </p>
                 )}
-              </table>
+                <table className={styles.ingredientsTable}>
+                  <thead>
+                    <tr>
+                      <th>Name:</th>
+                      <th>Amount:</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  {values.ingredients.length > 0 && (
+                    <tbody>
+                      {values.ingredients.map((ing, i) => (
+                        <tr key={i}>
+                          <td>{ing.name}</td>
+                          <td>{ing.amount}</td>
+                          <td>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setFieldValue(
+                                  "ingredients",
+                                  values.ingredients.filter(
+                                    (_, idx) => idx !== i
+                                  )
+                                )
+                              }
+                              className={styles.delBtn}
+                            >
+                              <svg
+                                className={styles.deleteImage}
+                                aria-hidden="true"
+                              >
+                                <use href="/icons.svg#icon-delete" />
+                              </svg>
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  )}
+                </table>
+              </div>
               <ErrorMessage
                 name="ingredients"
                 component="div"
