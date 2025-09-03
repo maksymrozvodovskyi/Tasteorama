@@ -58,7 +58,6 @@ const customSelectStyles = {
     background: "#fff",
     outline: "none !important",
     boxShadow: state.isFocused ? "0 0 0 4px rgba(78, 70, 180, 0.2)" : "none",
-
     "&:hover": {
       borderColor: state.isFocused ? "#9b6c43" : "#999",
     },

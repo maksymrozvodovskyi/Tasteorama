@@ -12,7 +12,7 @@ import {
 import { nextPageFavorite } from "../../../redux/recipesList/slice";
 import { selectRecipesIsLoadingFavoriteRecipes } from "../../../redux/recipesList/selectors.js";
 import Loader from "../../Loader/Loader";
-import { clearFavitems,clearitems } from "../../../redux/recipesList/slice";
+import { clearFavitems, clearitems } from "../../../redux/recipesList/slice";
 
 const FavoritesList = () => {
   const dispatch = useDispatch();
@@ -25,9 +25,9 @@ const FavoritesList = () => {
   );
 
   useEffect(() => {
-      dispatch(clearitems());
-      dispatch(clearFavitems());
-      dispatch(fetchFavoriteRecipes());
+    dispatch(clearitems());
+    dispatch(clearFavitems());
+    dispatch(fetchFavoriteRecipes());
   }, [dispatch]);
 
   return (
@@ -40,7 +40,7 @@ const FavoritesList = () => {
         currentPage={currentPage}
         nextPage={nextPageFavorite}
         fetchRecipes={fetchFavoriteRecipes}
-        mode={"default"}
+        mode={"favorites"}
       />
     </div>
   );

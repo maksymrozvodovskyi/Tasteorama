@@ -45,6 +45,7 @@
   right: 16px;
   background: none;
   border: none;
+  cursor: pointer;
 }
 
 .closeIcon {
@@ -79,6 +80,8 @@
   font-size: 18px;
   max-width: 320px;
   width: 100%;
+  transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .registerBtn {
@@ -94,11 +97,13 @@
   font-size: 18px;
   max-width: 320px;
   width: 100%;
+  transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .registerBtn:hover,
 .registerBtn:focus {
-  background-color: #9b6c43;
+  background-color: #6d554b;
   color: #fff;
   border: none;
 }
@@ -135,13 +140,15 @@
     height: 36px;
   }
 
-  .closeBtn {
-    right: 32px;
-  }
+
 
   .title {
     width: 356px;
   }
 }
 
-@media (min-width: 1440px) {}
+@media (min-width: 1440px) {
+  .modal {
+    width: 420px;
+  }
+}

@@ -147,6 +147,7 @@
 
 .input {
   width: 100%;
+  height: 46px;
   padding: 12px;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
@@ -448,6 +449,8 @@
     gap: 24px;
   }
 
+
+
   .inputsRow {
     flex-direction: row;
     display: flex;
@@ -525,6 +528,10 @@
   .fieldForm {
     max-width: 809px;
     flex: 2;
+  }
+
+  .input {
+    height: 48px;
   }
 
   .inputsRow {

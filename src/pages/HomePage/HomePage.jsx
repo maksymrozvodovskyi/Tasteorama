@@ -17,6 +17,7 @@ import css from "../../styles/container.module.css";
 import Hero from "../../components/Hero/Hero.jsx";
 import Filters from "../../components/Filters/Filters";
 import RecipesList from "../../components/RecipeList/RecipeList";
+import { clearFavitems } from "../../redux/recipesList/slice";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(clearitems());
+      // await dispatch(clearFavitems());
       await dispatch(fetchRecipes());
       if (token) {
         await setAuthToken(token);
