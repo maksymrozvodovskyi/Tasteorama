@@ -42,31 +42,37 @@ const AddRecipeSchema = Yup.object().shape({
 });
 
 const customSelectStyles = {
-  control: (provided, state) => ({
-    ...provided,
-    width: "100%",
-    padding: "12px",
-    border: state.isFocused ? "1.5px solid #9b6c43" : "1px solid #d9d9d9",
-    borderRadius: "8px",
-    fontWeight: 400,
-    boxSizing: "border-box",
-    cursor: "pointer",
-    fontFamily: "Montserrat, sans-serif",
-    fontSize: "16px",
-    lineHeight: 1.55,
-    color: "#000",
-    background: "#fff",
-    outline: "none !important",
-    boxShadow: state.isFocused ? "0 0 0 4px rgba(78, 70, 180, 0.2)" : "none",
-    "&:hover": {
-      borderColor: state.isFocused ? "#9b6c43" : "#999",
-    },
-    minHeight: "unset",
-    height: "auto",
-  }),
+  control: (provided, state) => {
+    const width = window.innerWidth;
+    const isTabletOrMobile = width <= 1440;
+    return {
+      ...provided,
+      display: "flex",
+      width: "100%",
+      padding: "0 12px",
+      border: state.isFocused ? "1.5px solid #9b6c43" : "1px solid #d9d9d9",
+      borderRadius: "8px",
+      fontWeight: 400,
+      boxSizing: "border-box",
+      cursor: "pointer",
+      fontFamily: "Montserrat, sans-serif",
+      fontSize: "16px",
+      lineHeight: 1.55,
+      color: "#000",
+      background: "#fff",
+      outline: "none !important",
+      boxShadow: "none",
+      "&:hover": {
+        borderColor: "#9b6c43",
+      },
+      height: isTabletOrMobile ? 46 : 48,
+    };
+  },
   valueContainer: (provided) => ({
     ...provided,
     padding: 0,
+    // display: "flex",
+    // alignItems: "center",
   }),
   input: (provided) => ({
     ...provided,
@@ -297,7 +303,10 @@ const AddRecipeForm = () => {
                 <div className={styles.selectWrapper}>
                   <Select
                     name="category"
-                    components={animatedComponents}
+                    components={{
+                      ...animatedComponents,
+                      IndicatorSeparator: () => null,
+                    }}
                     options={categories
                       .slice()
                       .sort((a, b) => a.name.localeCompare(b.name))
@@ -314,7 +323,7 @@ const AddRecipeForm = () => {
                     onChange={(option) =>
                       setFieldValue("category", option ? option.value : "")
                     }
-                    placeholder="Category"
+                    placeholder="Soup"
                     isClearable
                     styles={{
                       ...customSelectStyles,
@@ -354,7 +363,10 @@ const AddRecipeForm = () => {
                   <div className={styles.selectWrapper}>
                     <Select
                       name="selectedIngredient"
-                      components={animatedComponents}
+                      components={{
+                        ...animatedComponents,
+                        IndicatorSeparator: () => null,
+                      }}
                       options={ingredients
                         .slice()
                         .sort((a, b) => a.name.localeCompare(b.name))
@@ -375,12 +387,30 @@ const AddRecipeForm = () => {
                           "selectedIngredient",
                           option ? option.value : ""
                         );
-                        console.log(option);
                       }}
-                      placeholder="Select ingredient"
+                      placeholder="Broccoli"
                       isClearable
                       isSearchable
-                      styles={customSelectStyles}
+                      styles={{
+                        ...customSelectStyles,
+                        control: (provided, state) => ({
+                          ...customSelectStyles.control(provided, state),
+                          borderColor:
+                            errors.category && touched.category
+                              ? "red"
+                              : provided.borderColor,
+                          boxShadow:
+                            errors.category && touched.category
+                              ? "0 0 0 1px red"
+                              : provided.boxShadow,
+                          "&:hover": {
+                            borderColor:
+                              errors.category && touched.category
+                                ? "red"
+                                : provided.borderColor,
+                          },
+                        }),
+                      }}
                     />
                   </div>
                   {errors.ingredients && touched.ingredients && (
@@ -419,8 +449,8 @@ const AddRecipeForm = () => {
                       },
                     ]);
 
-                    setFieldValue("selectedIngredient", ""); // очистили селект
-                    setIngredientAmount(""); // очистили кількість
+                    setFieldValue("selectedIngredient", "");
+                    setIngredientAmount("");
                   }
                 }}
               >

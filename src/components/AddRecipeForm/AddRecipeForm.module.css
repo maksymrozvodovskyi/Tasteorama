@@ -173,6 +173,7 @@
 
 .inputTitle {
   width: 100%;
+  height: 46px;
   padding: 12px;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
@@ -193,7 +194,6 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.55;
-  color: #9f9f9f;
 }
 
 .inputSuffix {
@@ -228,11 +228,17 @@
   .ingredients {
     width: 704px;
   }
+
+
 }
 
 @media only screen and (min-width: 1440px) {
   .ingredients {
     width: 809px;
+  }
+
+  .inputTitle {
+    height: 48px;
   }
 }
 
