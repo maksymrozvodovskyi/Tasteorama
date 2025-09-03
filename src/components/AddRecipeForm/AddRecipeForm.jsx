@@ -95,6 +95,7 @@ const AddRecipeForm = () => {
       validationSchema={AddRecipeSchema}
       onSubmit={async (values, { resetForm }) => {
         const formData = new FormData();
+
         Object.keys(values).forEach((key) => {
           if (key === "ingredients") {
             formData.append(key, JSON.stringify(values[key]));
@@ -234,13 +235,19 @@ const AddRecipeForm = () => {
                       errors.category && touched.category ? styles.invalid : ""
                     }`}
                   >
-                    <option value="">Select category</option>
-                    {categories.map((cat) => (
-                      <option key={cat._id} value={cat.name}>
-                        {cat.name}
-                      </option>
-                    ))}
+                    <option value="">Category</option>
+                    {categories
+                      .slice()
+                      .sort((a, b) => a.name.localeCompare(b.name))
+                      .map((cat) => (
+                        <option key={cat._id} value={cat.name}>
+                          {cat.name}
+                        </option>
+                      ))}
                   </Field>
+                  <svg className={styles.icon}>
+                    <use href="/icons.svg#icon-arrow-down"></use>
+                  </svg>
                 </div>
                 <ErrorMessage
                   name="category"
@@ -264,20 +271,28 @@ const AddRecipeForm = () => {
                           ? styles.invalid
                           : ""
                       }`}
-                      placeholder="Search ingredient..."
+                      placeholder="Ingredient"
                       value={ingredientName}
                       onChange={(e) => {
                         const value = e.target.value;
                         setIngredientName(value);
 
                         if (value.trim().length > 0) {
-                          const results = ingredients.filter((ing) =>
-                            ing.name.toLowerCase().includes(value.toLowerCase())
-                          );
+                          const results = ingredients
+                            .filter((ing) =>
+                              ing.name
+                                .toLowerCase()
+                                .includes(value.toLowerCase())
+                            )
+                            .sort((a, b) => a.name.localeCompare(b.name));
+
                           setFiltered(results);
                           setShowList(true);
                         } else {
-                          setFiltered([]);
+                          const allSorted = [...ingredients].sort((a, b) =>
+                            a.name.localeCompare(b.name)
+                          );
+                          setFiltered(allSorted);
                           setShowList(false);
                         }
                       }}
@@ -289,8 +304,33 @@ const AddRecipeForm = () => {
                       }}
                     />
 
+                    <svg
+                      className={styles.icon}
+                      onClick={() => {
+                        if (!showList) {
+                          const allSorted = [...ingredients].sort((a, b) =>
+                            a.name.localeCompare(b.name)
+                          );
+                          setFiltered(allSorted);
+                          setShowList(true);
+                        } else {
+                          setShowList(false);
+                        }
+                      }}
+                    >
+                      <use href="/icons.svg#icon-arrow-down"></use>
+                    </svg>
+
                     {showList && filtered.length > 0 && (
                       <ul className={styles.dropdown}>
+                        {/* заголовок списку */}
+                        <li
+                          className={`${styles.dropdownItem} ${styles.disabled}`}
+                          aria-disabled="true"
+                        >
+                          Select ingredient
+                        </li>
+
                         {filtered.map((ing) => (
                           <li
                             key={ing._id}
@@ -343,14 +383,22 @@ const AddRecipeForm = () => {
               </button>
 
               {values.ingredients.length > 0 && (
-                <table className={styles.ingredientsTable}>
-                  <thead>
-                    <tr>
-                      <th>Name:</th>
-                      <th>Amount:</th>
-                      <th></th>
-                    </tr>
-                  </thead>
+                <p className={styles.ingredientsHeader}>
+                  <span>Name:</span>
+                  <span>Amount:</span>
+                  <span></span>
+                </p>
+              )}
+              <table className={styles.ingredientsTable}>
+                <thead>
+                  <tr>
+                    <th>Name:</th>
+                    <th>Amount:</th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                {values.ingredients.length > 0 && (
                   <tbody>
                     {values.ingredients.map((ing, i) => (
                       <tr key={i}>
@@ -367,9 +415,7 @@ const AddRecipeForm = () => {
                             }
                           >
                             <svg
-                              width="24"
-                              height="24"
-                              className={styles.uploadImage}
+                              className={styles.deleteImage}
                               aria-hidden="true"
                             >
                               <use href="/icons.svg#icon-delete" />
@@ -379,8 +425,9 @@ const AddRecipeForm = () => {
                       </tr>
                     ))}
                   </tbody>
-                </table>
-              )}
+                )}
+              </table>
+
               <ErrorMessage
                 name="ingredients"
                 component="div"
