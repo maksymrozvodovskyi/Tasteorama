@@ -354,7 +354,7 @@ const AddRecipeForm = () => {
                   <h4 className={styles.titlePart}>Name</h4>
                   <div className={styles.selectWrapper}>
                     <Select
-                      name="ingredients"
+                      name="selectedIngredient"
                       components={animatedComponents}
                       options={ingredients
                         .slice()
@@ -367,35 +367,21 @@ const AddRecipeForm = () => {
                         ingredients
                           .map((ing) => ({ value: ing._id, label: ing.name }))
                           .find(
-                            (option) => option.value === values.ingredients
+                            (option) =>
+                              option.value === values.selectedIngredient
                           ) || null
                       }
-                      onChange={(option) =>
-                        setFieldValue("ingredients", option ? option.value : "")
-                      }
+                      onChange={(option) => {
+                        setFieldValue(
+                          "selectedIngredient",
+                          option ? option.value : ""
+                        );
+                        console.log(option);
+                      }}
                       placeholder="Select ingredient"
                       isClearable
                       isSearchable
-                      styles={{
-                        ...customSelectStyles,
-                        control: (provided, state) => ({
-                          ...customSelectStyles.control(provided, state),
-                          borderColor:
-                            errors.ingredients && touched.ingredients
-                              ? "red"
-                              : provided.borderColor,
-                          boxShadow:
-                            errors.ingredients && touched.ingredients
-                              ? "0 0 0 1px red"
-                              : provided.boxShadow,
-                          "&:hover": {
-                            borderColor:
-                              errors.ingredients && touched.ingredients
-                                ? "red"
-                                : provided.borderColor,
-                          },
-                        }),
-                      }}
+                      styles={customSelectStyles}
                     />
                   </div>
                   {errors.ingredients && touched.ingredients && (
@@ -420,17 +406,22 @@ const AddRecipeForm = () => {
                 type="button"
                 className={styles.addBtn}
                 onClick={() => {
-                  if (ingredientName.trim() && ingredientAmount.trim()) {
+                  if (values.selectedIngredient && ingredientAmount.trim()) {
+                    const selectedObj = ingredients.find(
+                      (ing) => ing._id === values.selectedIngredient
+                    );
+
                     setFieldValue("ingredients", [
                       ...values.ingredients,
                       {
-                        name: ingredientName.trim(),
+                        id: values.selectedIngredient,
+                        name: selectedObj ? selectedObj.name : "",
                         amount: ingredientAmount.trim(),
-                        id: ingredientId,
                       },
                     ]);
-                    setIngredientName("");
-                    setIngredientAmount("");
+
+                    setFieldValue("selectedIngredient", ""); // очистили селект
+                    setIngredientAmount(""); // очистили кількість
                   }
                 }}
               >

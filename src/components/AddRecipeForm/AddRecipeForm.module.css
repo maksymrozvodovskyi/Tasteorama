@@ -476,7 +476,6 @@
   .ingredientsTable th,
   .ingredientsTable td {
     padding: 8px 0px;
-    width: 431px;
     text-align: left;
   }
 
@@ -564,4 +563,69 @@
 .ingredientsTable th,
 .ingredientsTable td {
   width: 332px;
+}
+
+.ingredientsTable tr :first-child,
+.ingredientsTable tr :first-child {
+  text-align: left;
+}
+
+.ingredientsTable tr :last-child,
+.ingredientsTable tr :last-child {
+  text-align: right;
+}
+
+@media only screen and (min-width: 768px) {
+
+  .ingredientsTable tr :first-child,
+  .ingredientsTable tr :first-child {
+    width: 175px;
+  }
+
+  .ingredientsTable tr :nth-child(2),
+  .ingredientsTable tr :nth-child(2) {
+    width: 150px;
+    text-align: left;
+  }
+
+  .ingredientsTable tr :last-child,
+  .ingredientsTable tr :last-child {
+    width: 106px;
+    text-align: left;
+  }
+
+  .ingredientsTable tr :last-child .delBtn,
+  .ingredientsTable tr :last-child .deleteImage {
+    width: 24px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+
+  .ingredientsTable tr :last-child,
+  .ingredientsTable tr :last-child {
+    width: 32px;
+    text-align: left;
+  }
+}
+
+.ingredientsTable th,
+.ingredientsTable td {
+  padding: 16px 0 19px 0;
+}
+
+@media only screen and (min-width: 768px) {
+
+  .ingredientsTable th,
+  .ingredientsTable td {
+    padding: 8px 0 11px 0;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+
+  .ingredientsTable th,
+  .ingredientsTable td {
+    padding: 4px 0 3px 0;
+  }
 }

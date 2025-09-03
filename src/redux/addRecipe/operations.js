@@ -8,12 +8,15 @@ const formDataToObject = (formData) => {
       const parsed = JSON.parse(value);
       obj[key] = parsed.map(({ name, amount, ...rest }) => ({
         ...rest,
-        measure: amount,
+        measure: amount, // перейменували amount → measure
       }));
     } else if (key === "thumb") {
       if (value instanceof File && value.size > 0) {
         obj["thumb"] = value;
       }
+    } else if (key === "selectedIngredient") {
+      // ❌ пропускаємо, нічого не додаємо
+      continue;
     } else {
       obj[key] = value;
     }
