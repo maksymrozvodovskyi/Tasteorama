@@ -465,7 +465,6 @@
     gap: 24px;
     display: grid;
     grid-template-columns: 431px 249px;
-    cursor: pointer;
   }
 
   .addBtn {
