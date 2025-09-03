@@ -200,6 +200,12 @@
   gap: 16px;
 }
 
+@media only screen and (min-width: 768px) {
+  .ingredients {
+    width: 704px;
+  }
+}
+
 .disabled {
   color: #aaa;
   pointer-events: none;
