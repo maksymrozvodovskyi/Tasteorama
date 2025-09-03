@@ -45,6 +45,10 @@ const slice = createSlice({
         state.isLoading = false;
         state.error = payload.response.data;
       })
+      .addCase(logoutUserThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
       .addCase(logoutUserThunk.fulfilled, (state, { payload }) => {
         state.accessToken = null;
         state.userName = null;
