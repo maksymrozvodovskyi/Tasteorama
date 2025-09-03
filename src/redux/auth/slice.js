@@ -49,7 +49,7 @@ const slice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(logoutUserThunk.fulfilled, (state, { payload }) => {
+      .addCase(logoutUserThunk.fulfilled, (state) => {
         state.accessToken = null;
         state.userName = null;
         state.hasAvatar = false;
