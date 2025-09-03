@@ -413,9 +413,6 @@ const AddRecipeForm = () => {
                       }}
                     />
                   </div>
-                  {errors.ingredients && touched.ingredients && (
-                    <div className={styles.error}>{errors.ingredients}</div>
-                  )}
                 </div>
 
                 {/* Ingredient Amount */}
@@ -430,7 +427,11 @@ const AddRecipeForm = () => {
                   />
                 </div>
               </div>
-
+              <ErrorMessage
+                name="ingredients"
+                component="div"
+                className={styles.error}
+              />
               <button
                 type="button"
                 className={styles.addBtn}
@@ -505,11 +506,6 @@ const AddRecipeForm = () => {
                   )}
                 </table>
               </div>
-              <ErrorMessage
-                name="ingredients"
-                component="div"
-                className={styles.error}
-              />
             </div>
 
             {/* Instructions */}

@@ -221,7 +221,6 @@
 .ingredients {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -269,6 +268,7 @@
   transition: background 0.2s ease;
   font-family: "Montserrat", sans-serif;
   margin-bottom: 16px;
+  margin-top: 16px;
 }
 
 .addBtn:hover,
@@ -474,6 +474,7 @@
     border-radius: 8px;
     padding: 8px;
     height: 36px;
+    margin-bottom: 32px;
   }
 
   .ingredientsTable {
