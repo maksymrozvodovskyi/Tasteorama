@@ -5,12 +5,16 @@ import { useDispatch } from "react-redux";
 import { addRecipe } from "../../redux/addRecipe/operations";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
+
+const animatedComponents = makeAnimated();
 
 const AddRecipeSchema = Yup.object().shape({
   title: Yup.string()
     .min(3)
     .max(64)
-    .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]+$/, "Use only letters ")
+    .matches(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]+$/, "Use only letters")
     .required("Recipe Title"),
   description: Yup.string()
     .max(200)
@@ -37,6 +41,65 @@ const AddRecipeSchema = Yup.object().shape({
   ingredients: Yup.array().min(2, "Add at least two ingredient"),
 });
 
+const customSelectStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    width: "100%",
+    padding: "12px",
+    border: state.isFocused ? "1.5px solid #9b6c43" : "1px solid #d9d9d9",
+    borderRadius: "8px",
+    fontWeight: 400,
+    boxSizing: "border-box",
+    cursor: "pointer",
+    fontFamily: "Montserrat, sans-serif",
+    fontSize: "16px",
+    lineHeight: 1.55,
+    color: "#000",
+    background: "#fff",
+    outline: "none !important",
+    boxShadow: state.isFocused ? "0 0 0 4px rgba(78, 70, 180, 0.2)" : "none",
+
+    "&:hover": {
+      borderColor: state.isFocused ? "#9b6c43" : "#999",
+    },
+    minHeight: "unset",
+    height: "auto",
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    padding: 0,
+  }),
+  input: (provided) => ({
+    ...provided,
+    margin: 0,
+    padding: 0,
+  }),
+  indicatorsContainer: (provided) => ({
+    ...provided,
+    height: "auto",
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: "8px",
+    padding: "8px",
+    boxShadow:
+      "0 0 1px 0 rgba(0, 0, 0, 0.4), 0 8px 24px -6px rgba(0, 0, 0, 0.16)",
+    background: "#fff",
+    marginTop: "4px",
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    padding: "10px 12px",
+    borderRadius: "4px",
+    backgroundColor: state.isFocused ? "#f5f5f5" : "#fff",
+    color: "#000",
+    cursor: "pointer",
+    "&:active": {
+      backgroundColor: "#e6e6e6",
+    },
+  }),
+};
+
 const AddRecipeForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,10 +108,8 @@ const AddRecipeForm = () => {
   const [ingredientAmount, setIngredientAmount] = useState("");
   const [categories, setCategories] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  const [filtered, setFiltered] = useState([]);
-  const [showList, setShowList] = useState(false);
   const [preview, setPreview] = useState(null);
-  const [ingredientId, setIngredientId] = useState("");
+  const [ingredientId] = useState("");
 
   useEffect(() => {
     async function fetchCategories() {
@@ -89,6 +150,7 @@ const AddRecipeForm = () => {
         calories: "",
         category: "",
         instructions: "",
+        selectedIngredient: "",
         ingredients: [],
         thumb: null,
       }}
@@ -160,6 +222,8 @@ const AddRecipeForm = () => {
           {/* General Information */}
           <div className={styles.fieldForm}>
             <h3 className={styles.titleSection}>General Information</h3>
+
+            {/* Recipe Title */}
             <h4 className={styles.titlePart}>Recipe Title</h4>
             <Field
               name="title"
@@ -175,6 +239,7 @@ const AddRecipeForm = () => {
               className={styles.error}
             />
 
+            {/* Recipe Description */}
             <h4 className={styles.titlePart}>Recipe Description</h4>
             <Field
               as="textarea"
@@ -190,6 +255,7 @@ const AddRecipeForm = () => {
               className={styles.error}
             />
 
+            {/* Cooking Time */}
             <h4 className={styles.titlePart}>Cooking time in minutes</h4>
             <Field
               name="time"
@@ -206,6 +272,7 @@ const AddRecipeForm = () => {
             />
 
             <div className={styles.fieldGroup}>
+              {/* Calories */}
               <div className={styles.fieldItem}>
                 <h4 className={styles.titlePart}>Calories</h4>
                 <div className={styles.inputWrapper}>
@@ -225,32 +292,56 @@ const AddRecipeForm = () => {
                 />
               </div>
 
+              {/* Category */}
               <div className={styles.fieldItem}>
                 <h4 className={styles.titlePart}>Category</h4>
                 <div className={styles.selectWrapper}>
-                  <Field
-                    as="select"
+                  <Select
                     name="category"
-                    className={`${styles.input} ${
-                      errors.category && touched.category ? styles.invalid : ""
-                    }`}
-                  >
-                    <option value="">Category</option>
-                    {categories.map((cat) => (
-                      <option key={cat._id} value={cat.name}>
-                        {cat.name}
-                      </option>
-                    ))}
-                  </Field>
-                  <svg className={styles.icon}>
-                    <use href="/icons.svg#icon-arrow-down"></use>
-                  </svg>
+                    components={animatedComponents}
+                    options={categories
+                      .slice()
+                      .sort((a, b) => a.name.localeCompare(b.name))
+                      .map((cat) => ({
+                        value: cat.name,
+                        label: cat.name,
+                      }))}
+                    value={
+                      categories
+                        .map((cat) => ({ value: cat.name, label: cat.name }))
+                        .find((option) => option.value === values.category) ||
+                      null
+                    }
+                    onChange={(option) =>
+                      setFieldValue("category", option ? option.value : "")
+                    }
+                    placeholder="Category"
+                    isClearable
+                    styles={{
+                      ...customSelectStyles,
+                      control: (provided, state) => ({
+                        ...customSelectStyles.control(provided, state),
+                        borderColor:
+                          errors.category && touched.category
+                            ? "red"
+                            : provided.borderColor,
+                        boxShadow:
+                          errors.category && touched.category
+                            ? "0 0 0 1px red"
+                            : provided.boxShadow,
+                        "&:hover": {
+                          borderColor:
+                            errors.category && touched.category
+                              ? "red"
+                              : provided.borderColor,
+                        },
+                      }),
+                    }}
+                  />
                 </div>
-                <ErrorMessage
-                  name="category"
-                  component="div"
-                  className={styles.error}
-                />
+                {errors.category && touched.category && (
+                  <div className={styles.error}>{errors.category}</div>
+                )}
               </div>
             </div>
 
@@ -258,61 +349,61 @@ const AddRecipeForm = () => {
             <h3 className={styles.titleSection}>Ingredients</h3>
             <div className={styles.ingredients}>
               <div className={styles.inputsRow}>
+                {/* Ingredient Name */}
                 <div className={styles.fieldItem}>
                   <h4 className={styles.titlePart}>Name</h4>
                   <div className={styles.selectWrapper}>
-                    <input
-                      type="text"
-                      className={`${styles.inputTitle} ${
-                        errors.ingredients && touched.ingredients
-                          ? styles.invalid
-                          : ""
-                      }`}
-                      placeholder="Ingredient"
-                      value={ingredientName}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        setIngredientName(value);
-
-                        if (value.trim().length > 0) {
-                          const results = ingredients.filter((ing) =>
-                            ing.name.toLowerCase().includes(value.toLowerCase())
-                          );
-                          setFiltered(results);
-                          setShowList(true);
-                        } else {
-                          setFiltered([]);
-                          setShowList(false);
-                        }
-                      }}
-                      onFocus={() => {
-                        if (ingredientName.trim().length > 0) setShowList(true);
-                      }}
-                      onBlur={() => {
-                        setTimeout(() => setShowList(false), 250);
+                    <Select
+                      name="ingredients"
+                      components={animatedComponents}
+                      options={ingredients
+                        .slice()
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .map((ing) => ({
+                          value: ing._id,
+                          label: ing.name,
+                        }))}
+                      value={
+                        ingredients
+                          .map((ing) => ({ value: ing._id, label: ing.name }))
+                          .find(
+                            (option) => option.value === values.ingredients
+                          ) || null
+                      }
+                      onChange={(option) =>
+                        setFieldValue("ingredients", option ? option.value : "")
+                      }
+                      placeholder="Select ingredient"
+                      isClearable
+                      isSearchable
+                      styles={{
+                        ...customSelectStyles,
+                        control: (provided, state) => ({
+                          ...customSelectStyles.control(provided, state),
+                          borderColor:
+                            errors.ingredients && touched.ingredients
+                              ? "red"
+                              : provided.borderColor,
+                          boxShadow:
+                            errors.ingredients && touched.ingredients
+                              ? "0 0 0 1px red"
+                              : provided.boxShadow,
+                          "&:hover": {
+                            borderColor:
+                              errors.ingredients && touched.ingredients
+                                ? "red"
+                                : provided.borderColor,
+                          },
+                        }),
                       }}
                     />
-
-                    {showList && filtered.length > 0 && (
-                      <ul className={styles.dropdown}>
-                        {filtered.map((ing) => (
-                          <li
-                            key={ing._id}
-                            className={styles.dropdownItem}
-                            onClick={() => {
-                              setIngredientName(ing.name);
-                              setIngredientId(ing._id);
-                              setShowList(false);
-                            }}
-                          >
-                            {ing.name}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
                   </div>
+                  {errors.ingredients && touched.ingredients && (
+                    <div className={styles.error}>{errors.ingredients}</div>
+                  )}
                 </div>
 
+                {/* Ingredient Amount */}
                 <div className={styles.fieldItem}>
                   <h4 className={styles.titlePart}>Amount</h4>
                   <input
@@ -361,7 +452,6 @@ const AddRecipeForm = () => {
                     <th></th>
                   </tr>
                 </thead>
-
                 {values.ingredients.length > 0 && (
                   <tbody>
                     {values.ingredients.map((ing, i) => (
@@ -391,7 +481,6 @@ const AddRecipeForm = () => {
                   </tbody>
                 )}
               </table>
-
               <ErrorMessage
                 name="ingredients"
                 component="div"

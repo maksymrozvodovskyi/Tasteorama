@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import css from "./Navigation.module.css";
 import UserInfo from "../UserInfo/UserInfo.jsx";
 
@@ -9,10 +9,15 @@ export default function Navigation({
   onLogout = () => {},
   isMobile = false,
 }) {
+  const location = useLocation();
+
+  const isProfileActive = location.pathname.startsWith("/profile");
+
   return (
     <nav className={css.navGroup}>
       <NavLink
         to="/"
+        end
         className={({ isActive }) =>
           `${css.link} ${css.recipes} ${isActive ? css.active : ""}`
         }
@@ -25,6 +30,7 @@ export default function Navigation({
         <>
           <NavLink
             to="/login"
+            end
             className={({ isActive }) =>
               `${css.link} ${css.login} ${isActive ? css.active : ""}`
             }
@@ -34,6 +40,7 @@ export default function Navigation({
           </NavLink>
           <NavLink
             to="/register"
+            end
             className={({ isActive }) =>
               `${css.linkBtn} ${css.register} ${isActive ? css.active : ""}`
             }
@@ -45,13 +52,25 @@ export default function Navigation({
       ) : (
         <>
           <NavLink
-            to="/my-recipes"
+            to="/profile/own"
             className={({ isActive }) =>
-              `${css.link} ${css.profile} ${isActive ? css.active : ""}`
+              `${css.link} ${css.profile} ${
+                isActive || isProfileActive ? css.active : ""
+              }`
             }
             onClick={closeMenu}
           >
             My Profile
+          </NavLink>
+          <NavLink
+            to="/add-recipe"
+            end
+            className={({ isActive }) =>
+              `${css.linkBtn} ${css.addRecipe} ${isActive ? css.active : ""}`
+            }
+            onClick={closeMenu}
+          >
+            Add Recipe
           </NavLink>
           <div className={css.userInfo}>
             <UserInfo
@@ -60,13 +79,6 @@ export default function Navigation({
               isMobile={isMobile}
             />
           </div>
-          <NavLink
-            to="/add-recipe"
-            className={`${css.linkBtn} ${css.addRecipe}`}
-            onClick={closeMenu}
-          >
-            Add Recipe
-          </NavLink>
         </>
       )}
     </nav>

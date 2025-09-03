@@ -10,7 +10,6 @@
    flex-direction: column;
  }
 
-
  /* Styles for Mobile devices */
  * {
    box-sizing: border-box;
@@ -28,8 +27,7 @@
  .containerFilterRecList {
    margin: 48px auto;
 
-   /* padding: 0 16px; */
-   /* / width: 393px; / */
+   padding: 0 16px;
  }
 
 

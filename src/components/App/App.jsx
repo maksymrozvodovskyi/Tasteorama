@@ -38,7 +38,7 @@ function App() {
             <Route path="/recipes/:id" element={<RecipeViewPage />} />
 
             {/* приватні роути */}
-            <Route path="/my-recipes" element={<ProfilePage />} />
+            {/* <Route path="/my-recipes" element={<ProfilePage />} /> */}
             <Route path="/add-recipe" element={<AddRecipePage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/profile/:recipeType" element={<ProfileTabs />} />

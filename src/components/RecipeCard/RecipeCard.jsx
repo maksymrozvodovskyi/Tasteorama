@@ -103,9 +103,7 @@ export default function RecipeCard({ recipe, mode = "default" }) {
               <svg width="24" height="24" className={css.icon}>
                 <use
                   xlinkHref={
-                    isFavorite
-                      ? "/icons.svg#icon-delete"
-                      : "/icons.svg#icon-flag"
+                    isFavorite ? "/icons.svg#icon-flag" : "/icons.svg#icon-flag"
                   }
                 />
               </svg>

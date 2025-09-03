@@ -3,6 +3,25 @@
   color: #c80000;
 }
 
+.error {
+  font-size: 12px;
+  font-weight: 600;
+  color: #c80000;
+  margin-top: 4px;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* ======================= */
+/* 📱 Mobile styles (base) */
+/* ======================= */
+
+.option {
+  color: black;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -22,7 +41,32 @@
   height: 383px;
 }
 
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
 .uploadLabel {
+  position: relative;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,16 +107,16 @@
 .titleSection {
   font-size: 24px;
   font-weight: 600;
-  padding-top: 24px;
-  padding-bottom: 16px;
+  margin-top: 24px;
   justify-content: left;
+  margin-bottom: 16px;
 }
 
 .titlePart {
   font-size: 18px;
   font-weight: 400;
-  padding-top: 16px;
-  padding-bottom: 8px;
+  margin-top: 16px;
+  margin-bottom: 8px;
 }
 
 .fieldForm {
@@ -120,9 +164,6 @@
 .textarea:focus {
   border: 1.5px solid #9b6c43;
   border-radius: 8px;
-  padding: 8px;
-  width: 100%;
-  height: 41px;
   box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
   background: #fff;
   cursor: text;
@@ -180,6 +221,26 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+  .ingredients {
+    width: 704px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .ingredients {
+    width: 809px;
+  }
+}
+
+.disabled {
+  color: #aaa;
+  pointer-events: none;
+  /* вимикає кліки і hover */
+  cursor: default;
+  background: transparent !important;
 }
 
 .inputsRow {
@@ -245,7 +306,6 @@
 
 .ingredientsHeader {
   display: grid;
-  /* сітка як у таблиці */
   grid-template-columns: 1fr 1fr;
   border-bottom: 1px solid #c5c5c5;
   padding: 16px 0;
@@ -277,8 +337,14 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   width: 100%;
-  padding-right: 40px;
+  padding: 10px 40px 10px 12px;
   color: #595d62;
+  background-color: #fff;
+  /* фон основного select */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .selectWrapper::after {
@@ -298,7 +364,6 @@
   width: 16px;
   height: 16px;
   pointer-events: none;
-  /* щоб не заважала клікам */
   stroke-width: 1px;
   stroke: #000;
   fill: transparent;
@@ -336,7 +401,7 @@
   right: 0;
   background: #fff;
   border: 1px solid #ccc;
-  max-height: 200px;
+  max-height: 262px;
   overflow-y: auto;
   z-index: 10;
   list-style: none;
@@ -345,22 +410,29 @@
 }
 
 .dropdownItem {
-  padding: 8px;
+  border-radius: 4px;
+  padding: 8px 8px 8px 12px;
   cursor: pointer;
+}
+
+.dropdownItem:first-child {
+  background-color: #d3d3d3;
+  font-weight: 400;
 }
 
 .dropdownItem:hover {
   background: #f0f0f0;
+  /* або твій колір з макету */
 }
 
 @media only screen and (min-width: 768px) {
   .titleSection {
     font-size: 32px;
-    padding-top: 16px;
+    margin-top: 24px;
   }
 
   .upload {
-    padding-top: 4px;
+    margin-top: 12px;
     max-width: 704px;
   }
 
@@ -368,12 +440,8 @@
     aspect-ratio: 2 / 1;
   }
 
-  .titleSection {
-    padding-top: 24px;
-  }
-
   .titlePart {
-    padding-top: 32px;
+    margin-top: 32px;
   }
 
   .fieldGroup {
@@ -428,8 +496,7 @@
   }
 
   .titleSection {
-    padding-top: 40px;
-    padding-bottom: 0;
+    margin-top: 40px;
   }
 
   .upload {
@@ -465,10 +532,6 @@
     grid-template-columns: 497px 288px;
   }
 
-  .textarea {
-    margin-top: 16px;
-  }
-
   .submitBtn {
     margin-top: 72px;
   }
@@ -490,4 +553,15 @@
   .ingredientsTable td {
     width: 332px;
   }
+
+}
+
+
+.ingredientsTable {
+  width: 332px;
+}
+
+.ingredientsTable th,
+.ingredientsTable td {
+  width: 332px;
 }

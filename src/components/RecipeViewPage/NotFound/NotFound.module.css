@@ -1,11 +1,12 @@
 .notFoundContainer {
+  padding: 0 16px;
   width: 100%;
   margin: 0 auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 134px 0;
+  margin: 79px 0;
   gap: 32px;
 }
 
@@ -15,6 +16,7 @@
 
 .imgcontainer img {
   object-fit: contain;
+  border-radius: 8px;
 }
 
 .textContainer {
@@ -26,6 +28,7 @@
 .notfoundtitle {
   font-size: 48px;
   font-weight: 600;
+  line-height: 1.1;
   color: #000000;
   text-align: center;
   animation: fadeIn 0.6s ease-in-out;
@@ -40,17 +43,25 @@
 
 .backButton {
   display: flex;
-  width: 361px;
+  gap: 16px;
+  width: 100%;
   padding-top: 16px;
   padding-bottom: 16px;
   background-color: #9b6c43;
   color: #ffffff;
-  border-radius: 16px;
+  border-radius: 8px;
   text-decoration: none;
   text-align: center;
   transition: background 0.3s;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (min-width: 393px) {
+  .backButton {
+    width: 361px;
+  }
+
 }
 
 .backButton:hover,
@@ -91,8 +102,8 @@
 
 @media screen and (min-width: 768px) {
   .notFoundContainer {
-    margin: 208px 0;
-    padding: 0;
+    margin: 133px 0;
+    padding: 0 84px;
   }
 
   .backButton {
@@ -104,8 +115,9 @@
 
 @media screen and (min-width: 1440px) {
   .notFoundContainer {
-    margin: 38px 108px;
+    margin: 38px 0;
     gap: 32px;
+    padding: 0 107px;
   }
 
   .backButton {
