@@ -18,18 +18,20 @@ const RecipesList = ({
     selectRecipesIsLoadingFavoriteRecipes
   );
   const listRef = useRef(null);
+  const prevLengthRef = useRef(0);
 
   useEffect(() => {
     if (currentPage > 1 && listRef.current) {
-      const firstItem = listRef.current.firstElementChild;
-      if (firstItem) {
-        const { height } = firstItem.getBoundingClientRect();
-        window.scrollBy({
-          top: height * 2.8,
-          behavior: "smooth",
-        });
+      const listItems = listRef.current.querySelectorAll("li");
+      const firstNewItem = listItems[prevLengthRef.current];
+
+      if (firstNewItem) {
+        setTimeout(() => {
+          firstNewItem.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
       }
     }
+    prevLengthRef.current = recipes.length;
   }, [recipes, currentPage]);
   return (
     <>
