@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import css from "./RecipeCard.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite } from "../../redux/favourite/operations";
@@ -13,7 +13,6 @@ export default function RecipeCard({ recipe, mode = "default" }) {
   const { _id, title, thumb, time, description = "", calories } = recipe;
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const favorites = useSelector((state) => state.recipes.favoriteItems) || [];
   const isFavorite = favorites.some((item) => String(item._id) === String(_id));
@@ -38,8 +37,6 @@ export default function RecipeCard({ recipe, mode = "default" }) {
         });
       } else {
         await dispatch(addFavorite(_id)).unwrap();
-
-        navigate(`/recipes/${_id}`);
       }
     } catch {
       iziToast.error({
