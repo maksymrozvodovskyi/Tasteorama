@@ -12,7 +12,7 @@ import { fetchIngredients } from "../../../redux/ingredients/operations";
 import { selectIngredients } from "../../../redux/ingredients/selectors";
 import ErrorWhileSaving from "../../ErrorWhileSaving/ErrorWhileSaving.jsx";
 import "react-toastify/dist/ReactToastify.css";
-import { toast } from "react-toastify";
+import iziToast from "izitoast";
 import { setAuthToken } from "../../../services/favoritesAPI.js";
 
 const getImageUrl = (thumb) => {
@@ -20,7 +20,6 @@ const getImageUrl = (thumb) => {
 
   if (thumb.includes("/preview/")) {
     const largeUrl = thumb.replace("/preview/", "/preview/large/");
-    // Фолбек: якщо бекенд не має large, повертаємо оригінал
     return largeUrl || thumb;
   }
 
@@ -60,13 +59,23 @@ const RecipeDetails = () => {
       setAuthToken(token);
       if (isFavorite) {
         dispatch(removeFavorite(recipe._id)).unwrap();
-        toast.success("Recipe removed from favorites ✅");
+        iziToast.success({
+          message: "Recipe removed from favorites",
+          position: "topRight",
+        });
       } else {
         dispatch(addFavorite(recipe._id)).unwrap();
-        toast.success("Recipe added to favorites ❤️");
+        iziToast.success({
+          message: "Recipe add to favorites",
+          position: "topRight",
+        });
       }
     } catch {
-      toast.error("Something went wrong while saving ❌");
+      iziToast.error({
+        title: "Error",
+        message: "Failed to update favorites",
+        position: "topRight",
+      });
     }
   };
 
