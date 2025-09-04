@@ -31,12 +31,16 @@ export default function RecipeCard({ recipe, mode = "default" }) {
 
       if (isFavorite) {
         await dispatch(removeFavorite(_id)).unwrap();
-        iziToast.info({
+        iziToast.success({
           message: "Recipe removed from favorites",
           position: "topRight",
         });
       } else {
         await dispatch(addFavorite(_id)).unwrap();
+        iziToast.success({
+          message: "Recipe add to favorites",
+          position: "topRight",
+        });
       }
     } catch {
       iziToast.error({
