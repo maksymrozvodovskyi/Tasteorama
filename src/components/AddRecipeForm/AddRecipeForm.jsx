@@ -185,7 +185,7 @@ const AddRecipeForm = () => {
         }
       }}
     >
-      {({ values, setFieldValue, errors, touched }) => (
+      {({ values, setFieldValue, errors, touched, isSubmitting }) => (
         <Form className={styles.form}>
           {/* Upload Photo */}
           <div className={styles.fieldPhoto}>
@@ -527,8 +527,12 @@ const AddRecipeForm = () => {
             />
 
             {/* Submit */}
-            <button type="submit" className={styles.submitBtn}>
-              Publish Recipe
+            <button
+              type="submit"
+              className={styles.submitBtn}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Publishing..." : "Publish Recipe"}
             </button>
           </div>
         </Form>
