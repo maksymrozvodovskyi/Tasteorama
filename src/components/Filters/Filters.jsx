@@ -130,9 +130,9 @@ const Filters = () => {
             Filters
             <svg className={css.filtersIcon}>
               {isFilterOpen ? (
-                <use href="/public/icons.svg#icon-close" />
+                <use href="/icons.svg#icon-close" />
               ) : (
-                <use href="/public/icons.svg#icon-filter" />
+                <use href="/icons.svg#icon-filter" />
               )}
             </svg>
           </button>
