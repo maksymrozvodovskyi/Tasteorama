@@ -22,12 +22,15 @@ const FavoritesList = () => {
   const isLoadingFavoriteRecipes = useSelector(
     selectRecipesIsLoadingFavoriteRecipes
   );
+  const token = useSelector((state) => state.auth.accessToken);
 
   useEffect(() => {
     dispatch(clearitems());
     dispatch(clearFavitems());
-    dispatch(fetchFavoriteRecipes());
-  }, [dispatch]);
+    if (token) {
+      dispatch(fetchFavoriteRecipes());
+    }
+  }, [dispatch, token]);
 
   return (
     <div>

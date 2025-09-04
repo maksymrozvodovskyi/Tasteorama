@@ -16,12 +16,12 @@ import { toast } from "react-toastify";
 import { setAuthToken } from "../../../services/favoritesAPI.js";
 
 const getImageUrl = (thumb) => {
-  if (!thumb) {
-    return null;
-  }
+  if (!thumb) return null;
 
   if (thumb.includes("/preview/")) {
-    return thumb.replace("/preview/", "/preview/large/");
+    const largeUrl = thumb.replace("/preview/", "/preview/large/");
+    // Фолбек: якщо бекенд не має large, повертаємо оригінал
+    return largeUrl || thumb;
   }
 
   return thumb;
