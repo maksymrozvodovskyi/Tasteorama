@@ -3,7 +3,6 @@ import { lazy, Suspense } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Loader from "../Loader/Loader";
-import ProfileTabs from "../../components/ProfilePage/PrifileTabs/ProfileTabs";
 import css from "../../styles/container.module.css";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
@@ -14,10 +13,7 @@ const RegisterPage = lazy(() =>
 const RecipeViewPage = lazy(() =>
   import("../../pages/RecipeViewPage/RecipeViewPage")
 );
-const FavoritesPage = lazy(() =>
-  import("../../pages/FavoritesPage/FavoritesPage")
-);
-const ProfilePage = lazy(() =>
+const MyRecipesPage = lazy(() =>
   import("../../pages/MyRecipesPage/MyRecipesPage")
 );
 const AddRecipePage = lazy(() =>
@@ -38,10 +34,8 @@ function App() {
             <Route path="/recipes/:id" element={<RecipeViewPage />} />
 
             {/* приватні роути */}
-            {/* <Route path="/my-recipes" element={<ProfilePage />} /> */}
             <Route path="/add-recipe" element={<AddRecipePage />} />
-            <Route path="/favorites" element={<FavoritesPage />} />
-            <Route path="/profile/:recipeType" element={<ProfileTabs />} />
+            <Route path="/profile/:recipeType" element={<MyRecipesPage />} />
 
             {/* ерор пейдж 404 */}
             <Route path="*" element={<NotFound />} />
