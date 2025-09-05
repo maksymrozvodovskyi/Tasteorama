@@ -1,15 +1,13 @@
 .scrollToTop {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
+    bottom: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
     background-color: #9B6C43;
     color: white;
     border: none;
     border-radius: 50%;
-    font-size: 20px;
-    font-weight: bold;
     cursor: pointer;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -20,7 +18,6 @@
 }
 
 .scrollToTop:hover {
-    background-color: #9B6C43;
     transform: scale(1.1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
@@ -30,17 +27,36 @@
 }
 
 .arrowIcon {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     stroke: white;
 }
 
-@media (max-width: 768px) {
+@media only screen and (min-width: 768px) {
     .scrollToTop {
-        width: 45px;
-        height: 45px;
-        bottom: 15px;
-        right: 15px;
-        font-size: 18px;
+        width: 55px;
+        height: 55px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .arrowIcon {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+
+@media only screen and (min-width: 1440px) {
+    .scrollToTop {
+        width: 65px;
+        height: 65px;
+        bottom: 30px;
+        right: 30px;
+    }
+
+    .arrowIcon {
+        width: 26px;
+        height: 26px;
     }
 }
