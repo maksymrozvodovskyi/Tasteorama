@@ -17,7 +17,7 @@ import css from "../../styles/container.module.css";
 import Hero from "../../components/Hero/Hero.jsx";
 import Filters from "../../components/Filters/Filters";
 import RecipesList from "../../components/RecipeList/RecipeList";
-import { clearFavitems } from "../../redux/recipesList/slice";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop.jsx";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -46,23 +46,26 @@ export default function HomePage() {
   };
 
   return (
-    <section>
-      <Hero onSearch={handleSearch} />
+    <>
+      <section>
+        <Hero onSearch={handleSearch} />
 
-      <div className={css.containerFilterRecList}>
-        <Filters />
+        <div className={css.containerFilterRecList}>
+          <Filters />
 
-        {!loader && (
-          <RecipesList
-            recipes={recipes}
-            totalPages={totalPages}
-            currentPage={currentPage}
-            nextPage={nextPage}
-            fetchRecipes={fetchRecipes}
-            mode={"default"}
-          />
-        )}
-      </div>
-    </section>
+          {!loader && (
+            <RecipesList
+              recipes={recipes}
+              totalPages={totalPages}
+              currentPage={currentPage}
+              nextPage={nextPage}
+              fetchRecipes={fetchRecipes}
+              mode={"default"}
+            />
+          )}
+        </div>
+      </section>
+      <ScrollToTop />
+    </>
   );
 }
